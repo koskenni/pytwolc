@@ -55,7 +55,7 @@ The sets are printed if they contain more than one element.
     #print("labelsym: ", labelsym) ##
     return(labelsym, pairsymbols_for_transition_sets)
 
-def printfst(fst, print_equiv_classes):
+def ppfst(fst, print_equiv_classes):
     """Pretty-prints a HfstTransducer or a HfstBasicTransducer.
 
 fst -- the transducer to be pretty-printed
@@ -64,7 +64,7 @@ print_equiv_classes -- if True, then print also
 
 If the transducer has a name, it is printed as a heading.
 
->>> twbt.printfst(hfst.regex("a* [b:p|c] [c|b:p]"), True)
+>>> twbt.ppfst(hfst.regex("a* [b:p|c] [c|b:p]"), True)
 
   0 . -> 0  a ; -> 1  b:p ; 
   1 . -> 2  b ; 
@@ -74,7 +74,7 @@ Classes of equivalent symbols:
 
 """
     name = fst.get_name()
-    print(name)
+    print("\n" + name)
     bfst = hfst.HfstBasicTransducer(fst)
     labsy, transy = equivpairs(bfst)
     for state in bfst.states():
@@ -85,15 +85,78 @@ Classes of equivalent symbols:
             prnm = pairname(arc.get_input_symbol(),
                             arc.get_output_symbol())
             d[target].append(prnm)
-        print(" ", state, (": " if bfst.is_final_state(state) else ". "), end="")
+        print(" ", state, (": " if bfst.is_final_state(state) else ". "),
+              end="")
         for st, plist in d.items():
             ls = [p for p in plist if p == labsy[p]]
-            print("-> " + str(st) + "  " + (" ".join(ls)), end=" ; " )
+            print( " " + (" ".join(ls)) + " -> " + str(st), end=" ;" )
         print()
     #print(transy) ##
     if print_equiv_classes:
-        print("Classes of equivalent symbols:")
+        all_short = True
         for ss, pl in transy.items():
             if len(pl) > 1:
-                print(" ", " ".join(sorted(pl)))
-    
+                all_short = False
+                break
+        if not all_short:
+            print("Classes of equivalent symbols:")
+            for ss, pl in transy.items():
+                if len(pl) > 1:
+                    print(" ", " ".join(sorted(pl)))
+    return
+
+def ppdef(XRC, name):
+    FST = hfst.HfstBasicTransducer(XRC.compile(name + "*"))
+    alph = [pairname(insym, outsym) for insym, outsym
+            in FST.get_transition_pairs()]
+    print(name, '=',', '.join(sorted(alph)))
+    return
+
+def paths1(BT, state, str, limit):
+    global results
+    # print(str) ##
+    if limit<0: return
+    if BT.is_final_state(state):
+        results.append(str)
+        return
+    for arc in BT.transitions(state):
+        paths1(BT, arc.get_target_state(),
+               str + " " + pairname(arc.get_input_symbol(),
+                                    arc.get_output_symbol()),
+               limit-1)
+    return
+
+def paths(TR, limit=30):
+    global results
+    results = []
+    BT = hfst.HfstBasicTransducer(TR)
+    lst = []
+    paths1(BT, 0, "", limit)
+    return(results)
+
+def pppaths(TR, heading, limit=30):
+    results = paths(TR, limit)
+    print(heading, end="")
+    if len(results) == 0:
+        print("  None")
+    else:
+        print()
+        for line in results:
+            print(line)
+
+def expanded_examples(TR, insyms, symbol_pair_set):
+    # print("symbol_pair_set =", symbol_pair_set) ##
+    BT = hfst.HfstBasicTransducer(TR)
+    # print("BT.get_transition_pairs() =", BT.get_transition_pairs()) ##
+    for insym in insyms:
+        lst = [(ins, outs) for ins, outs in symbol_pair_set if ins == insym]
+        for sympair in lst:
+            # print("sympair, lst =", sympair, lst) ##
+            BT.substitute(sympair, tuple(lst))
+    T = hfst.HfstTransducer(BT)
+    T.set_name("negative and positive together")
+    T.minimize()
+    # ppfst(T, True) ##
+    #T.minus(TR)
+    #T.minimize()
+    return(T)
