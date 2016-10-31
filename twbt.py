@@ -112,29 +112,7 @@ def ppdef(XRC, name):
     print(name, '=',', '.join(sorted(alph)))
     return
 
-def paths1(BT, state, str, limit):
-    global results
-    # print(str) ##
-    if limit<0: return
-    if BT.is_final_state(state):
-        results.append(str)
-        return
-    for arc in BT.transitions(state):
-        paths1(BT, arc.get_target_state(),
-               str + " " + pairname(arc.get_input_symbol(),
-                                    arc.get_output_symbol()),
-               limit-1)
-    return
-
-def paths(TR, limit=30):
-    global results
-    results = []
-    BT = hfst.HfstBasicTransducer(TR)
-    lst = []
-    paths1(BT, 0, "", limit)
-    return(results)
-
-def pppaths(TR, heading, limit=30):
+def pp_paths(TR, heading, limit=30):
     results = paths(TR, limit)
     print(heading, end="")
     if len(results) == 0:
@@ -143,6 +121,15 @@ def pppaths(TR, heading, limit=30):
         print()
         for line in results:
             print(line)
+
+def paths(TR, limit=30):
+    path_tuple = TR.extract_paths(output='raw', max_number=limit)
+    results = []
+    for weight, path in path_tuple:
+        lst = [pairname(insym, outsym) for insym, outsym in path]
+        str = " ".join(lst)
+        results.append(str)
+    return(results)
 
 def expanded_examples(TR, insyms, symbol_pair_set):
     # print("symbol_pair_set =", symbol_pair_set) ##
