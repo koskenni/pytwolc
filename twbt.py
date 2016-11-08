@@ -55,10 +55,11 @@ The sets are printed if they contain more than one element.
     #print("labelsym: ", labelsym) ##
     return(labelsym, pairsymbols_for_transition_sets)
 
-def ppfst(fst, print_equiv_classes):
+
+def ppfst(FST, print_equiv_classes):
     """Pretty-prints a HfstTransducer or a HfstBasicTransducer.
 
-fst -- the transducer to be pretty-printed
+FST -- the transducer to be pretty-printed
 print_equiv_classes -- if True, then print also
                        the equivalence classes
 
@@ -73,19 +74,19 @@ Classes of equivalent symbols:
   b:p c
 
 """
-    name = fst.get_name()
+    name = FST.get_name()
     print("\n" + name)
-    bfst = hfst.HfstBasicTransducer(fst)
-    labsy, transy = equivpairs(bfst)
-    for state in bfst.states():
+    BFST = hfst.HfstBasicTransducer(FST)
+    labsy, transy = equivpairs(BFST)
+    for state in BFST.states():
         d = {}
-        for arc in bfst.transitions(state):
+        for arc in BFST.transitions(state):
             target = arc.get_target_state()
             if target not in d: d[target] = []
             prnm = pairname(arc.get_input_symbol(),
                             arc.get_output_symbol())
             d[target].append(prnm)
-        print(" ", state, (": " if bfst.is_final_state(state) else ". "),
+        print(" ", state, (": " if BFST.is_final_state(state) else ". "),
               end="")
         for st, plist in d.items():
             ls = [p for p in plist if p == labsy[p]]
@@ -105,11 +106,15 @@ Classes of equivalent symbols:
                     print(" ", " ".join(sorted(pl)))
     return
 
-def ppdef(XRC, name):
-    FST = hfst.HfstBasicTransducer(XRC.compile(name + "*"))
-    alph = [pairname(insym, outsym) for insym, outsym
-            in FST.get_transition_pairs()]
-    print(name, '=',', '.join(sorted(alph)))
+def ppdef(XRC, name, displayed_formula):
+    FST = XRC.compile(name)
+    BFST = hfst.HfstBasicTransducer(FST)
+    FST = hfst.HfstTransducer(BFST)
+    FST.set_name(name + " = " + displayed_formula)
+    ppfst(FST, True)
+    #alph = [pairname(insym, outsym) for insym, outsym
+    #        in FST.get_transition_pairs()]
+    #print(name, '=',', '.join(sorted(alph)))
     return
 
 def pp_paths(TR, heading, limit=30):
