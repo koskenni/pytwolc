@@ -4,9 +4,14 @@ import re, hfst
 import twbt, twex
 from twex import label2pair
 
+XRC = hfst.XreCompiler()
 
-def init():
-    global in_symbol_set, out_symbol_set, pair_symbol_set, XRC, alphabet
+verboxity_level = 0
+
+def init(verbosity):
+    global in_symbol_set, out_symbol_set, pair_symbol_set
+    global XRC, alphabet, verbosity_level
+    verbosity_level = verbosity
     in_symbol_set = set() # The set of all input symbols used in the examples
     out_symbol_set = set()
     pair_symbol_set = set()
@@ -17,11 +22,13 @@ def init():
                             else insym + ':' + outsym)
     alphabet = tuple(sorted(twex.symbol_pair_set | {('§', '§')}))
 
-    XRC = hfst.XreCompiler()
+    if not XRC:
+        XRC = hfst.XreCompiler()
     XRC.set_expand_definitions(True)
     PI_re = quote(" | ".join(sorted(pair_symbol_set | {'§'})))
     XRC.define_xre("PI", PI_re)
-    # twbt.ppdef(XRC, "PI")
+    if verbosity_level >= 1:
+        twbt.ppdef(XRC, "PI", PI_re) ##
 
 
 def quote(str):
@@ -45,18 +52,17 @@ def e(str):
 str -- a string containing a (two-level) regular expression
 
 Returns a HfstTransducer which performs the mapping 
-corresponding to the expression.  In particular, certain
-wild-card pair symbols are expanded so that they represent 
-only pairs in the global set of pairs (so called PI).
+corresponding to the expression. 
 """
-    global XRC
+    global XRC, verbosity_level
     # print("Regex string:", str) ##
     if str == "":
         return(XRC.compile("[]"))
     F = XRC.compile(str)
     F.minimize()
     F.set_name(str)
-    # twbt.ppfst(F, True) ##
+    if verbosity_level >= 5:
+        twbt.ppfst(F, True) ##
     return(F)
 
 def rule_name(x, op, *contexts):

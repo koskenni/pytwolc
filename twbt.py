@@ -55,6 +55,18 @@ The sets are printed if they contain more than one element.
     #print("labelsym: ", labelsym) ##
     return(labelsym, pairsymbols_for_transition_sets)
 
+def fst2dirfst(FST):
+    BFST = hfst.HfstBasicTransducer(FST)
+    dirfst = {}
+    for state in BFST.states():
+        tdir = {}
+        for arc in BFST.transitions(state):
+            prnm = pairname(arc.get_input_symbol(),
+                            arc.get_output_symbol())
+            tdir[prnm] = arc.get_target_state()
+        dirfst[state] = (BFST.is_final_state(state), tdir)
+    return(dirfst)
+
 
 def ppfst(FST, print_equiv_classes):
     """Pretty-prints a HfstTransducer or a HfstBasicTransducer.
@@ -141,7 +153,9 @@ def expanded_examples(TR, insyms, symbol_pair_set):
     BT = hfst.HfstBasicTransducer(TR)
     # print("BT.get_transition_pairs() =", BT.get_transition_pairs()) ##
     for insym in insyms:
-        lst = [(ins, outs) for ins, outs in symbol_pair_set if ins == insym]
+        lst = [(ins, outs)
+               for ins, outs
+               in symbol_pair_set if ins == insym]
         for sympair in lst:
             # print("sympair, lst =", sympair, lst) ##
             BT.substitute(sympair, tuple(lst))

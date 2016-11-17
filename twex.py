@@ -27,20 +27,23 @@ pair_symbols_for_input = {}
 pair_symbols_for_output = {}
 
 example_set = set()
+example_list = []
 EXAMPLES_FST = hfst.HfstTransducer()
+EXAMPLE_FST_LIST = []
 
 def read_examples(filename="test.pairstr"):
     """Reads the examples from the file whose name is 'filename'.
 
 Use help(twex) in order to get more information.
 """
-    global symbol_pair_set, EXAMPLES_FST, pair_symbols_for_input
+    global symbol_pair_set, EXAMPLES_FST, pair_symbols_for_input, example_list
     EXAMPLES_FST.set_name(filename)
     exfile = open(filename,"r")
     for line in exfile:
-        lin = line.strip()
+        lin = "§ " + line.strip() + " §"
         lst = re.split(" +", lin)
         example_set.add(" ".join(lst)) # spaces normalized
+        example_list.append(" ".join(lst))
         line_tok = [label2pair(label) for label in lst ]
         # print(line_tok) ##
         line_fst = hfst.tokenized_fst(line_tok)
@@ -50,6 +53,7 @@ Use help(twex) in order to get more information.
             # print(insym, outsym, end="") ##
             symbol_pair_set.add((insym, outsym))
     exfile.close()
+    # symbol_pair_set.add(('Ø', 'Ø')) ### ?
     #print("List of alphabet symbols:", sorted(symbol_pair_set)) ##
     EXAMPLES_FST.minimize()
     # twbt.printfst(EXAMPLES_FST, False) ##
