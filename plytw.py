@@ -248,7 +248,7 @@ def p_expression4_concat(p):
          str1, nam1 = p[1]
          str2, nam2 = p[2]
          p[0] = ("[{} {}]".format(str1, str2),
-                 "[{} {}]".format(nam1, nam2))
+                 "{} {}".format(nam1, nam2))
 
 def p_expression5_ignore(p):
     '''expression5 : SLASH expression6
@@ -257,7 +257,7 @@ def p_expression5_ignore(p):
          p[0] = p[1]
     else:
          str, nam = p[2]
-         p[0] = ("[PI-[{}]]".format(str), "\\[{}]".format(nam))
+         p[0] = ("[PI-[{}]]".format(str), "\\{}".format(nam))
 
 def p_expression6_suffix(p):
     '''expression6 : expression6 STAR
@@ -277,7 +277,7 @@ def p_expression7_group(p):
     '''expression7 : LBRACKET expression RBRACKET
                    | LPAREN expression RPAREN'''
     str, nam = p[2]
-    p[0] = ("[{}]".format(str), "[{}]".format(nam))
+    p[0] = ("{}{}{}".format(p[1],str,p[3]), "{}{}{}".format(p[1],nam,p[3]))
 
 def p_expression7_term(p):
     '''expression7 : BACKSLASH expression7
@@ -285,7 +285,11 @@ def p_expression7_term(p):
                    | term'''
     if len(p) == 2:
          p[0] = p[1]
-    else:
+    elif p[1] == '\\':
+         str, nam = p[2]
+         p[0] = ("[PI-[{}]]".format(str),
+                 "\\{}".format(nam))
+    elif p[1] == '$':
          str, nam = p[2]
          p[0] = ("[{}[{}] & PI]".format(p[1], str),
                  "[{}{}]".format(p[1], nam))
@@ -320,7 +324,7 @@ def p_term_single_symbol(p):
             raise SyntaxError
     elif colo == "":
         if ins in definitions and outs == "":
-            str = "{}".format(ins)
+            str = "[{}]".format(ins)
         elif ins in input_symbols and ins in output_symbols:
             str = inq
         else:

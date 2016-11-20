@@ -55,17 +55,17 @@ The sets are printed if they contain more than one element.
     #print("labelsym: ", labelsym) ##
     return(labelsym, pairsymbols_for_transition_sets)
 
-def fst2dirfst(FST):
+def fst2dicfst(FST):
     BFST = hfst.HfstBasicTransducer(FST)
-    dirfst = {}
+    dicfst = {}
     for state in BFST.states():
         tdir = {}
         for arc in BFST.transitions(state):
             prnm = pairname(arc.get_input_symbol(),
                             arc.get_output_symbol())
             tdir[prnm] = arc.get_target_state()
-        dirfst[state] = (BFST.is_final_state(state), tdir)
-    return(dirfst)
+        dicfst[state] = (BFST.is_final_state(state), tdir)
+    return(dicfst)
 
 
 def ppfst(FST, print_equiv_classes):

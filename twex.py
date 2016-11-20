@@ -28,34 +28,45 @@ pair_symbols_for_output = {}
 
 example_set = set()
 example_list = []
-EXAMPLES_FST = hfst.HfstTransducer()
-EXAMPLE_FST_LIST = []
+###EXAMPLES_FST = hfst.HfstTransducer()
+###EXAMPLE_FST_LIST = []
+
+def pair2psym(insym, outsym):
+    if insym == outsym:
+        return(insym)
+    else:
+        return(insym + ':' + outsym)
 
 def read_examples(filename="test.pairstr"):
     """Reads the examples from the file whose name is 'filename'.
 
 Use help(twex) in order to get more information.
 """
-    global symbol_pair_set, EXAMPLES_FST, pair_symbols_for_input, example_list
-    EXAMPLES_FST.set_name(filename)
+    global symbol_pair_set, EXAMPLES_FST, pair_symbols_for_input, example_list, example_set, example_list
+    ###EXAMPLES_FST.set_name(filename)
     exfile = open(filename,"r")
     for line in exfile:
         lin = "§ " + line.strip() + " §"
         lst = re.split(" +", lin)
-        example_set.add(" ".join(lst)) # spaces normalized
-        example_list.append(" ".join(lst))
-        line_tok = [label2pair(label) for label in lst ]
+        line_tok = [label2pair(label) for label in lst]
+        # print("line_tok:", line_tok) ##
+        psymlst = " ".join([pair2psym(insym, outsym)
+                            for insym,outsym
+                            in line_tok])
+        # print("psymlst:", psymlst) ##
+        example_set.add(psymlst) # spaces normalized
+        example_list.append(psymlst)
         # print(line_tok) ##
-        line_fst = hfst.tokenized_fst(line_tok)
+        ###line_fst = hfst.tokenized_fst(line_tok)
         # twbt.printfst(line_fst, True) ##
-        EXAMPLES_FST.disjunct(line_fst)
+        ###EXAMPLES_FST.disjunct(line_fst)
         for insym, outsym in line_tok:
             # print(insym, outsym, end="") ##
             symbol_pair_set.add((insym, outsym))
     exfile.close()
     # symbol_pair_set.add(('Ø', 'Ø')) ### ?
     #print("List of alphabet symbols:", sorted(symbol_pair_set)) ##
-    EXAMPLES_FST.minimize()
+    ###EXAMPLES_FST.minimize()
     # twbt.printfst(EXAMPLES_FST, False) ##
     for insym, outsym in symbol_pair_set:
         input_symbol_set.add(insym)
@@ -70,7 +81,7 @@ Use help(twex) in order to get more information.
         pair_symbols_for_output[outsym].add(pair_symbol)
 
 def positive_examples(input_symbols):
-    global pair_symbols_for_input
+    global pair_symbols_for_input, example_set
     result = set()
     insyms = set()
     for insym in input_symbols:
@@ -79,10 +90,13 @@ def positive_examples(input_symbols):
     pairsymlist = [re.sub(r'([}{])', r'\\\1', psym)
                    for psym
                    in insyms]
+    # print("pairsymlist:", pairsymlist)
     pattern = re.compile("|".join(pairsymlist))
+    # print("pattern:", "|".join(pairsymlist)) ##
     for example in example_set:
         if pattern.search(example):
             result.add(example)
+    # print("positive_examples returns:", result) ##
     return(result)
 
 negative_example_set = set()
