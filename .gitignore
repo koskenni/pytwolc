@@ -1,0 +1,10 @@
+*~
+__*__
+alpha.twolc
+*BAK*
+*.bak.*
+*.fst
+*.log
+parser.out
+parsetab.py
+plycalc.py
