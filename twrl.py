@@ -11,6 +11,7 @@ verboxity_level = 0
 def init(verbosity):
     global in_symbol_set, out_symbol_set, pair_symbol_set
     global XRC, alphabet, verbosity_level
+    global PISTAR, diamond, DIAMOND
     verbosity_level = verbosity
     in_symbol_set = set() # The set of all input symbols used in the examples
     out_symbol_set = set()
@@ -21,14 +22,18 @@ def init(verbosity):
         pair_symbol_set.add(insym if insym == outsym
                             else insym + ':' + outsym)
     alphabet = tuple(sorted(twex.symbol_pair_set | {('§', '§')}))
-
     if not XRC:
+        print('*** not XRC - why? ***') ##
         XRC = hfst.XreCompiler()
     XRC.set_expand_definitions(True)
     PI_re = quote(" | ".join(sorted(pair_symbol_set | {'§'})))
     XRC.define_xre("PI", PI_re)
     if verbosity_level >= 1:
         twbt.ppdef(XRC, "PI", PI_re) ##
+    diamond = '¤'
+    DIAMOND = hfst.regex(diamond)
+    PISTAR = XRC.compile("PI*")    
+    return
 
 
 def quote(str):
@@ -69,31 +74,106 @@ def rule_name(x, op, *contexts):
     return(x + " " +op + " " +
            " ; ".join([lc + " _ " + rc for lc, rc in contexts]))
 
-def rightarrow(x, *ctx):
-    ctx_tuple = tuple([(e(l),e(r)) for (l,r) in ctx])
-    R = hfst.rules.restriction(ctx_tuple, e(x), alphabet)
-    R.minimize()
-    R.set_name(rule_name(x, "=>", *ctx))
-    # twbt.ppfst(R, True) ##
-    return(R)
+def generalized_restriction(PRECONDITION, POSTCONDITION):
+    global PISTAR, diamond
+    WW = hfst.HfstTransducer(PRECONDITION)
+    WW.subtract(POSTCONDITION)
+    WW.minimize()
+    WW.set_name("PRECOND-POSTCOND")
+    # twbt.ppfst(WW, True) ##
+    WW.substitute(diamond, "@_EPSILON_SYMBOL_@")
+    # WW.substitute(diamond, "@0@")
+    # print(WW.get_properties().items()) ##
+    WW.minimize()
+    WW.set_name("Diamonds removed")
+    # twbt.ppfst(WW, True) ##
+    FST = hfst.HfstTransducer(PISTAR)
+    FST.minus(WW)
+    FST.minimize()
+    FST.set_name("Doubly negated")
+    # twbt.ppfst(FST, True) ##
+    return(FST)
 
-def leftarrow(x, *ctx):
-    ctx_tuple = tuple([(e(l),e(r)) for (l,r) in ctx])
-    R = hfst.rules.surface_coercion(ctx_tuple, e(x), alphabet)
-    R.set_name(rule_name(x, "<=", *ctx))
-    R.minimize()
-    # twbt.ppfst(R, True) ##
-    return(R)
+def x_to_condition(X):
+    global PISTAR, DIAMOND
+    RES = hfst.HfstTransducer(PISTAR)
+    RES.concatenate(DIAMOND)
+    RES.concatenate(X)
+    RES.concatenate(DIAMOND)
+    RES.concatenate(PISTAR)
+    RES.minimize()
+    RES.set_name("PISTAR ¤ X ¤ PISTAR")
+    # twbt.ppfst(RES, True) ##
+    return(RES)
 
-def doublearrow(x, *ctx):
-    # print(x, *ctx) ##
-    R = leftarrow(x, *ctx)
-    RAR = rightarrow(x, *ctx)
-    R.intersect(RAR)
-    R.minimize()
-    R.set_name(rule_name(x, "<=>", *ctx))
-    # twbt.ppfst(R, True) ##
-    return(R)
+def context_to_condition(leftc, rightc):
+    global PISTAR, DIAMOND
+    CTX = hfst.HfstTransducer(PISTAR)
+    LC = e(leftc)
+    CTX.concatenate(LC)
+    CTX.concatenate(DIAMOND)
+    CTX.concatenate(PISTAR)
+    CTX.concatenate(DIAMOND)
+    RC = e(rightc)
+    CTX.concatenate(RC)
+    CTX.concatenate(PISTAR)
+    CTX.minimize()
+    return(CTX)
+
+def contexts_to_condition(*contexts):
+    global PISTAR
+    RES = hfst.HfstTransducer()
+    for leftc, rightc in contexts:
+        CTX = context_to_condition(leftc, rightc)
+        # twbt.ppfst(CTX, True) ##
+        RES.disjunct(CTX)
+        RES.minimize()
+        RES.set_name(leftc + '_' + rightc)
+        # twbt.ppfst(RES, True) ##
+    return(RES)
+
+def rightarrow(x, *contexts):
+    X = e(x)
+    PRECOND = x_to_condition(X)
+    POSTCOND = contexts_to_condition(*contexts)
+    RULE = generalized_restriction(PRECOND, POSTCOND)
+    RULE.set_name(rule_name(x, '=>', *contexts))
+    # twbt.ppfst(RULE, True) ##
+    return RULE
+
+def leftarrow(x, *contexts):
+    global PISTAR
+    X = e(x)
+    POSTCOND = x_to_condition(X)
+    XALL = e(x)
+    XALL.input_project()
+    XALL.compose(PISTAR)
+    PRECOND = x_to_condition(XALL)
+    CC = contexts_to_condition(*contexts)
+    PRECOND.intersect(CC)
+    RULE = generalized_restriction(PRECOND, POSTCOND)
+    RULE.set_name(rule_name(x, '<=', *contexts))
+    # twbt.ppfst(RULE, True) ##
+    return RULE
+
+def doublearrow(x, *contexts):
+    RULE = rightarrow(x, *contexts)
+    R2 = leftarrow(x, *contexts)
+    RULE.intersect(R2)
+    RULE.set_name(rule_name(x, '<=>', *contexts))
+    # twbt.ppfst(RULE, True) ##
+    return RULE
+
+def center_exclusion(x, *contexts):
+    CC = contexts_to_condition(*contexts)
+    X = e(x)
+    XX = x_to_condition(X)
+    CC.intersect(XX)
+    NULL = hfst.HfstTransducer()
+    RULE = generalized_restriction(CC, NULL)
+    RULE.set_name(rule_name(x, '/<=', *contexts))
+    # twbt.ppfst(RULE, True) ##
+    return(RULE)
 
 if __name__ == "__main__":
     twex.read_examples()

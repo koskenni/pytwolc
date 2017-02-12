@@ -79,7 +79,35 @@ Use help(twex) in order to get more information.
         pair_symbol = insym if insym == outsym else insym + ":" + outsym
         pair_symbols_for_input[insym].add(pair_symbol)
         pair_symbols_for_output[outsym].add(pair_symbol)
+    return
 
+def relevant_contexts(pair_symbol):
+    global pair_symbols_for_input, example_set
+    input_symbol, output_symbol = label2pair(pair_symbol)
+    positive_context_set = set()
+    negative_context_set = set()
+    pairsymlist = [re.sub(r'([}{])', r'\\\1', psym)
+                   for psym
+                   in pair_symbols_for_input[input_symbol]]
+    # print("pairsymlist:", pairsymlist) ##
+    pattern = re.compile("|".join(pairsymlist))
+    for example in example_set:
+        for m in pattern.finditer(example):
+            i1 = m.start()
+            i2 = m.end()
+            # print(i1, i2, example) ##
+            left_context = example[0:i1-1]
+            centre = example[i1:i2]
+            right_context = example[i2+1:]
+            context = (left_context, right_context)
+            # print(centre, context) ##
+            if centre == pair_symbol:
+                positive_context_set.add(context)
+            else:
+                negative_context_set.add(context)
+    negative_context_set = negative_context_set - positive_context_set
+    return(positive_context_set, negative_context_set)
+    
 def positive_examples(input_symbols):
     global pair_symbols_for_input, example_set
     result = set()

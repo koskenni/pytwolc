@@ -4,24 +4,18 @@
 import re
 
 tokens = (
-     # 'DEFINE',
-     'NAME','SYMBOL','BOUND',
-     # 'LCURL','RCURL','COLON'
-     'BACKSLASH','SLASH','DOLLAR',
-     'PLUS','STAR','OR','AND','MINUS',
-     'UPPER', 'LOWER', 'INVERSE', 'COMPOSE',
-     'LPAREN','RPAREN',
-     'LBRACKET','RBRACKET',
-     'EQUALS','LEFTARROW','RIGHTARROW','DOUBLEARROW',
-     'UNDERSCORE','SEMICOLON', 'COMMA'
+    'NAME', 'SYMBOL', 'BOUND',
+    'BACKSLASH', 'SLASH', 'DOLLAR',
+    'PLUS', 'STAR', 'OR', 'AND', 'MINUS',
+    'UPPER', 'LOWER', 'INVERSE', 'COMPOSE',
+    'LPAREN', 'RPAREN',
+    'LBRACKET', 'RBRACKET',
+    'EQUALS', 'LEFTARROW', 'RIGHTARROW', 'DOUBLEARROW', 'EXCLUSION',
+    'UNDERSCORE', 'SEMICOLON', 'COMMA'
 )
 
 # Tokens
 
-# t_DEFINE   = r'DEFINE'
-#t_COLON   = r'\:'
-#t_LCURL   = r'\{'
-#t_RCURL   = r'\}'
 #t_BOUND     = r'[.][#][.]'
 t_BOUND     = r'§'
 t_BACKSLASH = r'\\'
@@ -44,6 +38,7 @@ t_EQUALS  = r'='
 t_LEFTARROW  = r'<='
 t_RIGHTARROW  = r'=>'
 t_DOUBLEARROW = r'<=>'
+t_EXCLUSION = r'/<='
 t_UNDERSCORE = r'\_'
 t_SEMICOLON = r';'
 t_COMMA = r','
@@ -88,14 +83,13 @@ lexer = lex.lex()
 precedence = (
     ('left', 'SEMICOLON'),
     ('left', 'COMMA'),
-    ('left', 'UNDERSCORE'),
+    ('nonassoc', 'UNDERSCORE'),
     ('left', 'COMPOSE'),
     ('left', 'OR','MINUS'),
     ('left', 'AND'),
     ('left', 'CONCAT'),
     ('left', 'STAR','PLUS','UPPER','LOWER','INVERSE'),
-    ('left', 'SLASH', 'BACKSLASH')
-    #('right', 'DEFINE')
+    ('right', 'SLASH', 'BACKSLASH')
 )
 
 import twrl, twbt, twex
@@ -166,6 +160,19 @@ def p_statement_double_arrow_rule(p):
     p[0] = ("<=>", p[1], p[3])
     if verbosity_level >= 2: print(p[0]) ##
 
+def p_statement_exclusion_rule(p):
+    'statement : expression EXCLUSION contexts SEMICOLON'
+    global twol_rules
+    x_expr, x_orig = p[1]
+    ctx_expr_lst, ctx_orig_lst = p[3]
+    R = twrl.center_exclusion(x_expr, *ctx_expr_lst)
+    name = twrl.rule_name(x_orig, "/<=", *ctx_orig_lst)
+    R.set_name(name)
+    if verbosity_level >= 1: twbt.ppfst(R, True) ##
+    twol_rules[name] = R
+    p[0] = ("/<=", p[1], p[3])
+    if verbosity_level >= 2: print(p[0]) ##
+
 def p_contexts_contexts(p):
     '''contexts : contexts COMMA context
                 | context'''
@@ -180,6 +187,10 @@ def p_contexts_contexts(p):
     elif len(p) == 2:
         p[0] = ([s1], [n1])
     if verbosity_level >= 3: print(p[0]) ##
+
+def p_empty(p):
+    'empty :'
+    pass
 
 def p_context_lcontext_rcontext(p):
     'context : expression UNDERSCORE expression'
@@ -396,5 +407,5 @@ if __name__ == "__main__":
     args = arpar.parse_args()
     twex.read_examples(args.examples) ## read here if not already read
     # print(twex.symbol_pair_set) ##
-    twrl.init()
+    twrl.init(args.debug)
     run(args.rules, args.verbosity, args.debug)
