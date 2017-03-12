@@ -4,7 +4,7 @@
 import re
 
 tokens = (
-    'NAME', 'SYMBOL', 'BOUND',
+    'SYMBOL', 'BEGIN', 'END',
     'BACKSLASH', 'SLASH', 'DOLLAR',
     'PLUS', 'STAR', 'OR', 'AND', 'MINUS',
     'UPPER', 'LOWER', 'INVERSE', 'COMPOSE',
@@ -17,7 +17,8 @@ tokens = (
 # Tokens
 
 #t_BOUND     = r'[.][#][.]'
-t_BOUND     = r'§'
+t_BEGIN   = r'BEGIN'
+t_END     = r'END' 
 t_BACKSLASH = r'\\'
 t_DOLLAR  = r'[$]'
 t_SLASH   = r'/'
@@ -43,7 +44,7 @@ t_UNDERSCORE = r'\_'
 t_SEMICOLON = r';'
 t_COMMA = r','
 
-t_NAME = r'<[A-ZÅÄÖa-zåäöØ][A-ZÅÄÖa-zåäØö0-9]*>'
+# t_NAME = r'<[A-ZÅÄÖa-zåäöØ][A-ZÅÄÖa-zåäØö0-9]*>'
 
 def t_SYMBOL(t):
      r'[{a-zåäöA-ZÅÄÖØ:{}][a-zåäöA-ZÅÄÖ0-9Ø:{}]*'
@@ -63,20 +64,14 @@ def t_newline(t):
     t.lexer.lineno += t.value.count("\n")
     
 def t_error(t):
-    print("Illegal character '%s'" % t.value[0])
+    #print("Illegal character '%s'" % t.value[0])
+    print(input_line)
+    print(" "*(t.lexpos-1), "*", "Illegal token",  t.value)
     t.lexer.skip(1)
     
 # Build the lexer
 import ply.lex as lex
 lexer = lex.lex()
-
-#lex.input("{ij}:j <=> :V :Ø* _ :Ø* :V")
-#while True:
-#    tok = lex.token()
-#    if not tok: break
-#    print(tok)
-
-
 
 # Parsing rules
 
@@ -92,72 +87,57 @@ precedence = (
     ('right', 'SLASH', 'BACKSLASH')
 )
 
-import twrl, twbt, twex
-from twrl import XRC
+import twex
 
 verbosity_level = 0
 definitions = {'PI': ':' }
 twol_rules = {}
 
-input_symbols = {'§'}
-output_symbols = {'§'}
+input_symbols = {'BEGIN', 'END'}
+output_symbols = {'BEGIN', 'END'}
 
-for insym, outsym in twex.symbol_pair_set:
-    input_symbols.add(insym)
-    output_symbols.add(outsym)
+def rule_name(x, op, *contexts):
+    return(x + " " +op + " " +
+           " ; ".join([lc + " _ " + rc for lc, rc in contexts]))
 
 def p_grammar_statement(p):
     '''grammar : grammar statement
                | statement'''
+    p[0] = p[1]
 
 def p_statement_definition(p):
-    '''statement : NAME EQUALS expression SEMICOLON'''
-    global definitions, XRC
-    name = p[1][1:-1] # remove the enclosing < >
-    str3, nam3 = p[3]
-    definitions[name] = nam3 # store for display purposes and testing
-    twrl.define(name, str3)
-    if verbosity_level >= 1: twbt.ppdef(XRC, name, nam3)
-    p[0] = ("DEFINE", name, p[3])
-    if verbosity_level >= 2: print(p[0]) ##
+    '''statement : SYMBOL EQUALS expression SEMICOLON'''
+    global definitions
+    defined_name = p[1]
+    if not re.fullmatch(r'[a-zåäöA-ZÅÄÖ][a-zåäöA-ZÅÄÖ0-9]*', defined_name):
+        print_error(p, "Incorrect name for a defined expression: ", p[1])
+    rexp3, orig3 = p[3]
+    definitions[defined_name] = orig3 # store for display purposes and testing
+    p[0] = ("=", defined_name, rexp3, defined_name + " = " + orig3)
 
 def p_statement_left_arrow_rule(p):
     'statement : expression LEFTARROW contexts SEMICOLON'
     global twol_rules
     x_expr, x_orig = p[1]
     ctx_expr_lst, ctx_orig_lst = p[3]
-    R = twrl.leftarrow(x_expr, *ctx_expr_lst)
-    name = twrl.rule_name(x_orig, "<=", *ctx_orig_lst)
-    R.set_name(name)
-    if verbosity_level >= 1: twbt.ppfst(R, True) ##
-    twol_rules[name] = R
-    p[0] = ("<=", p[1], tuple(p[3]))
-    if verbosity_level >= 2: print(p[0]) ##
+    name = rule_name(x_orig, "<=", *ctx_orig_lst)
+    p[0] = ("<=", x_expr, ctx_expr_lst, name)
 
 def p_statement_right_arrow_rule(p):
     'statement : expression RIGHTARROW contexts SEMICOLON'
     global twol_rules
     x_expr, x_orig = p[1]
     ctx_expr_lst, ctx_orig_lst = p[3]
-    R = twrl.rightarrow(x_expr, *ctx_expr_lst)
-    name = twrl.rule_name(x_orig, "=>", *ctx_orig_lst)
-    R.set_name(name)
-    if verbosity_level >= 1: twbt.ppfst(R, True) ##
-    twol_rules[name] = R
-    p[0] = ("=>", p[1], p[3])
-    if verbosity_level >= 2: print(p[0]) ##
+    name = rule_name(x_orig, "=>", *ctx_orig_lst)
+    p[0] = ("=>", x_expr, ctx_expr_lst, name)
 
 def p_statement_double_arrow_rule(p):
     'statement : expression DOUBLEARROW contexts SEMICOLON'
     global twol_rules
     x_expr, x_orig = p[1]
     ctx_expr_lst, ctx_orig_lst = p[3]
-    R = twrl.doublearrow(x_expr, *ctx_expr_lst)
-    name = twrl.rule_name(x_orig, "<=>", *ctx_orig_lst)
-    R.set_name(name)
-    if verbosity_level >= 1: twbt.ppfst(R, True) ##
-    twol_rules[name] = R
-    p[0] = ("<=>", p[1], p[3])
+    name = rule_name(x_orig, "<=>", *ctx_orig_lst)
+    p[0] = ("<=>", x_expr, ctx_expr_lst, name)
     if verbosity_level >= 2: print(p[0]) ##
 
 def p_statement_exclusion_rule(p):
@@ -165,13 +145,9 @@ def p_statement_exclusion_rule(p):
     global twol_rules
     x_expr, x_orig = p[1]
     ctx_expr_lst, ctx_orig_lst = p[3]
-    R = twrl.center_exclusion(x_expr, *ctx_expr_lst)
-    name = twrl.rule_name(x_orig, "/<=", *ctx_orig_lst)
-    R.set_name(name)
-    if verbosity_level >= 1: twbt.ppfst(R, True) ##
-    twol_rules[name] = R
-    p[0] = ("/<=", p[1], p[3])
-    if verbosity_level >= 2: print(p[0]) ##
+    name = rule_name(x_orig, "/<=", *ctx_orig_lst)
+    p[0] = ("/<=", x_expr, ctx_expr_lst, name)
+
 
 def p_contexts_contexts(p):
     '''contexts : contexts COMMA context
@@ -194,21 +170,21 @@ def p_empty(p):
 
 def p_context_lcontext_rcontext(p):
     'context : expression UNDERSCORE expression'
-    str1, nam1 = p[1]
-    str3, nam3 = p[3]
-    p[0] = ((str1, str3), (nam1, nam3))
+    rexp1, orig1 = p[1]
+    rexp3, orig3 = p[3]
+    p[0] = ((rexp1, rexp3), (orig1, orig3))
     if verbosity_level >= 3: print(p[0]) ##
 
 def p_context_rcontext(p):
     'context : UNDERSCORE expression'
-    str2, nam2 = p[2]
-    p[0] = (("[]", str2), ("", nam2))
+    rexp2, orig2 = p[2]
+    p[0] = (("[]", rexp2), ("", orig2))
     if verbosity_level >= 3: print(p[0]) ##
 
 def p_context_lcontext(p):
     'context : expression UNDERSCORE'
-    str1, nam1 = p[1]
-    p[0] = ((str1, "[]"), (nam1, ""))
+    rexp1, orig1 = p[1]
+    p[0] = ((rexp1, "[]"), (orig1, ""))
     if verbosity_level >= 3: print(p[0]) ##
 
 def p_context_none(p):
@@ -222,10 +198,10 @@ def p_expression_compose(p):
     if len(p) == 2:
          p[0] = p[1]
     else:
-         str1, nam1 = p[1]
-         str3, nam3 = p[3]
-         p[0] = ("[{} {} {}]".format(str1, p[2], str3),
-                 "[{} {} {}]".format(nam1, p[2], nam3))
+         rexp1, orig1 = p[1]
+         rexp3, orig3 = p[3]
+         p[0] = ("[{} {} {}]".format(rexp1, p[2], rexp3),
+                 "{} {} {}".format(orig1, p[2], orig3))
 
 def p_expression2_or(p):
     '''expression2 : expression2 OR expression3
@@ -234,10 +210,10 @@ def p_expression2_or(p):
     if len(p) == 2:
          p[0] = p[1]
     else:
-         str1, nam1 = p[1]
-         str3, nam3 = p[3]
-         p[0] = ("[{} {} {}]".format(str1, p[2], str3),
-                 "[{} {} {}]".format(nam1, p[2], nam3))
+         rexp1, orig1 = p[1]
+         rexp3, orig3 = p[3]
+         p[0] = ("[{} {} {}]".format(rexp1, p[2], rexp3),
+                 "{}{}{}".format(orig1, p[2], orig3))
 
 def p_expression3_and(p):
     '''expression3 : expression3 AND expression4
@@ -245,10 +221,10 @@ def p_expression3_and(p):
     if len(p) == 2:
          p[0] = p[1]
     else:
-         str1, nam1 = p[1]
-         str3, nam3 = p[3]
-         p[0] = ("[{} {} {}]".format(str1, p[2], str3),
-                 "[{} {} {}]".format(nam1, p[2], nam3))
+         rexp1, orig1 = p[1]
+         rexp3, orig3 = p[3]
+         p[0] = ("[{} {} {}]".format(rexp1, p[2], rexp3),
+                 "{}{}{}".format(orig1, p[2], orig3))
 
 def p_expression4_concat(p):
     '''expression4 : expression4 expression5 %prec CONCAT
@@ -256,10 +232,10 @@ def p_expression4_concat(p):
     if len(p) == 2:
          p[0] = p[1]
     else:
-         str1, nam1 = p[1]
-         str2, nam2 = p[2]
-         p[0] = ("[{} {}]".format(str1, str2),
-                 "{} {}".format(nam1, nam2))
+         rexp1, orig1 = p[1]
+         rexp2, orig2 = p[2]
+         p[0] = ("[{} {}]".format(rexp1, rexp2),
+                 "{} {}".format(orig1, orig2))
 
 def p_expression5_ignore(p):
     '''expression5 : SLASH expression6
@@ -267,8 +243,8 @@ def p_expression5_ignore(p):
     if len(p) == 2:
          p[0] = p[1]
     else:
-         str, nam = p[2]
-         p[0] = ("[PI-[{}]]".format(str), "\\{}".format(nam))
+         rexp, orig = p[2]
+         p[0] = ("[PI-[{}]]".format(rexp), "\\{}".format(orig))
 
 def p_expression6_suffix(p):
     '''expression6 : expression6 STAR
@@ -280,15 +256,15 @@ def p_expression6_suffix(p):
     if len(p) == 2:
          p[0] = p[1]
     else:
-         str, nam = p[1]
-         p[0] = ("[{}{}]".format(str, p[2]),
-                 "[{}{}]".format(nam, p[2]))
+         rexp, orig = p[1]
+         p[0] = ("[{}{}]".format(rexp, p[2]),
+                 "{}{}".format(orig, p[2]))
 
 def p_expression7_group(p):
     '''expression7 : LBRACKET expression RBRACKET
                    | LPAREN expression RPAREN'''
-    str, nam = p[2]
-    p[0] = ("{}{}{}".format(p[1],str,p[3]), "{}{}{}".format(p[1],nam,p[3]))
+    rexp, orig = p[2]
+    p[0] = ("{}{}{}".format(p[1],rexp,p[3]), "{}{}{}".format(p[1],orig,p[3]))
 
 def p_expression7_term(p):
     '''expression7 : BACKSLASH expression7
@@ -297,17 +273,21 @@ def p_expression7_term(p):
     if len(p) == 2:
          p[0] = p[1]
     elif p[1] == '\\':
-         str, nam = p[2]
-         p[0] = ("[PI-[{}]]".format(str),
-                 "\\{}".format(nam))
+         rexp, orig = p[2]
+         p[0] = ("[PI-[{}]]".format(rexp),
+                 "\\{}".format(orig))
     elif p[1] == '$':
-         str, nam = p[2]
-         p[0] = ("[{}[{}] & PI]".format(p[1], str),
-                 "[{}{}]".format(p[1], nam))
+         rexp, orig = p[2]
+         p[0] = ("[{}[{}] & PI]".format(p[1], rexp),
+                 "{}{}".format(p[1], orig))
+
+def p_term_begin(p):
+    '''term : BEGIN'''
+    p[0] = ("BEGIN", "BEGIN")
 
 def p_term_end(p):
-    '''term : BOUND'''
-    p[0] = ("§", "§")
+    '''term : END'''
+    p[0] = ("END", "END")
 
 def p_term_single_symbol(p):
     '''term : SYMBOL'''
@@ -315,81 +295,71 @@ def p_term_single_symbol(p):
     m = re.match(r"^([{}a-zåäöA-ZÅÄÖØ]*)([:]?)([a-zåäöA-ZÅÄÖØ]*)$",
                  p[1])
     if not m:
+        print_error(p, "Incorrectly formed token", p[1])
         raise SyntaxError
     ins, colo, outs = m.groups()
     inq = re.sub(r"([{}])", r"%\1", ins)
     outq = re.sub(r"([{}])", r"%\1", outs)
     if colo == ":":
         if ins == "" and outs == "":
-            str = "PI"
+            rexp = "PI"
         elif ins in input_symbols and outs in output_symbols:
             if (ins, outs) not in twex.symbol_pair_set:
-                   print("Warning: {} is an undeclared pair".format(p[1]))
-            str = "{}:{}".format(inq, outq)
+                print_error(p, "Warning: invalid pair of valid input and output symbols", p[1])
+            rexp = "{}:{}".format(inq, outq)
         elif ins == "" and outs in output_symbols:
-            str = "[PI .o. {}]".format(outq)
+            rexp = "[PI .o. {}]".format(outq)
         elif outs == "" and ins in input_symbols:
-            str = "[{} .o. PI]".format(inq)
+            rexp = "[{} .o. PI]".format(inq)
         else:
-            print(p[1], "is an undeclared symbol")
-            raise SyntaxError
+            rexp = inq
+            print_error(p, "Warning: an undeclared symbol pair", p[1])
+            ### raise SyntaxError
     elif colo == "":
         if ins in definitions and outs == "":
-            str = "[{}]".format(ins)
+            rexp = "[{}]".format(ins)
         elif ins in input_symbols and ins in output_symbols:
-            str = inq
+            rexp = inq
         else:
-            str = inq 
-            print(p[1], "Warning: is an undeclared symbol")
+            rexp = inq 
+            print_error(p, "Warning: symbol not valid both for input and output", p[1])
             ### raise SyntaxError
     else:
-        raise SyntaxError
-    p[0] = (str, p[1])
+        print_error(p, "Error: unrecognized symbol", p[1])
+        ### raise SyntaxError
+    p[0] = (rexp, p[1])
 
-input_lines = ""
-input_list = []
+input_line = []
+
+def print_error(p, explanation, sym):
+    print(input_line)
+    print(" "*(p.lexpos(0)-1), "*", explanation, sym)
 
 def p_error(t):
-    global parser, input_lines, input_list
+    global parser, input_line
     if not t:
         # print('EOF') ##
         return
-    # if verbosity_level >= 5: print("input_lines:", input_lines) ##
-    # print("lexpos:", t.lexpos) ##
-    # print("lineno:", t.lineno) ##
-    i = 0
-    for j in range (0,t.lineno-1):
-        i += len(input_list[j])
-    print(input_list[t.lineno-1].strip())
-    print(" "*(t.lexpos-i), "*",
+    print(input_line)
+    print(" "*(t.lexpos-1), "*",
           "Syntax error at '{}' in line {}".format(t.value, t.lineno))
 
-# twrl.init() # init here if not already initialized
-# print("input_symbols:", input_symbols) ##
-# print("output_symbols:", output_symbols) ##
-# twbt.ppdef(twrl.XRC, "PI") ##
-
 import ply.yacc as yacc
+
+def parse_rule(line, debugging=False):
+    global parser, input_line
+    input_line = line.strip()
+    result = parser.parse(input_line, debug=debugging, tracking=True)
+    return(result)
     
-def run(rule_file_name, verbosity, debugging):
-    global input_lines, input_list, verbosity_level
+def init(verbosity):
+    global parser, verbosity_level, input_symbols, output_symbols
     for insym, outsym in twex.symbol_pair_set:
         input_symbols.add(insym)
         output_symbols.add(outsym)
-    rulefile = open(rule_file_name, "r")
     parser = yacc.yacc()
     verbosity_level = verbosity
-    input_lines = ""
-    input_list = []
-    for line in rulefile:
-        input_lines += line
-        input_list.append(line)
-    if verbosity_level >= 5: print("input lines", input_lines) ##
-    parser.parse(input_lines, debug=debugging, tracking=True)
-
-    # print('all definitions:', definitions) ##
-    # print('all rules:', twol_rules) ##
-    return
+    return(parser)
 
 if __name__ == "__main__":
     import argparse
@@ -405,7 +375,12 @@ if __name__ == "__main__":
                        help="level of PLY debugging output",
                        type=int, default=0)
     args = arpar.parse_args()
+
     twex.read_examples(args.examples) ## read here if not already read
     # print(twex.symbol_pair_set) ##
-    twrl.init(args.debug)
-    run(args.rules, args.verbosity, args.debug)
+
+    init(args.verbosity)
+    rule_file = open(args.rules, 'r')
+    for line in rule_file:
+        res = parse_rule(line, debugging=args.debug)
+        print(res)

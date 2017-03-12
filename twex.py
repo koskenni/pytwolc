@@ -5,20 +5,13 @@ representation and they are compiled into a single automaton.
 At the same time, the alphabet used in the examples is 
 collected in several forms.
 
-    EXAMPLES_FST -- the transducer which accepts exactly the examples
+    EXAMPLES -- the transducer which accepts exactly the examples
 
     symbol_pair_set -- a tuple of string pairs suitable for
         e.g. hfst.rules.restriction
 
 """
 import hfst, re, twbt
-
-def label2pair(label):
-    m = re.match(r"^([^:]*):([^:]*)$", label)
-    if m:
-        return(m.group(1), m.group(2))
-    else:
-        return(label, label)
 
 symbol_pair_set = set()
 input_symbol_set = set()
@@ -28,8 +21,14 @@ pair_symbols_for_output = {}
 
 example_set = set()
 example_list = []
-###EXAMPLES_FST = hfst.HfstTransducer()
-###EXAMPLE_FST_LIST = []
+EXAMPLES = hfst.HfstTransducer()
+
+def label2pair(label):
+    m = re.match(r"^([^:]*):([^:]*)$", label)
+    if m:
+        return(m.group(1), m.group(2))
+    else:
+        return(label, label)
 
 def pair2psym(insym, outsym):
     if insym == outsym:
@@ -42,11 +41,11 @@ def read_examples(filename="test.pairstr"):
 
 Use help(twex) in order to get more information.
 """
-    global symbol_pair_set, EXAMPLES_FST, pair_symbols_for_input, example_list, example_set, example_list
-    ###EXAMPLES_FST.set_name(filename)
+    global symbol_pair_set, EXAMPLES, pair_symbols_for_input, example_list, example_set
+    EXAMPLES.set_name(filename)
     exfile = open(filename,"r")
     for line in exfile:
-        lin = "§ " + line.strip() + " §"
+        lin = line.strip()
         lst = re.split(" +", lin)
         line_tok = [label2pair(label) for label in lst]
         # print("line_tok:", line_tok) ##
@@ -57,17 +56,17 @@ Use help(twex) in order to get more information.
         example_set.add(psymlst) # spaces normalized
         example_list.append(psymlst)
         # print(line_tok) ##
-        ###line_fst = hfst.tokenized_fst(line_tok)
-        # twbt.printfst(line_fst, True) ##
-        ###EXAMPLES_FST.disjunct(line_fst)
+        LINE_FST = hfst.tokenized_fst(line_tok)
+        # twbt.printfst(LINE_FST, True) ##
+        EXAMPLES.disjunct(LINE_FST)
         for insym, outsym in line_tok:
             # print(insym, outsym, end="") ##
             symbol_pair_set.add((insym, outsym))
     exfile.close()
     # symbol_pair_set.add(('Ø', 'Ø')) ### ?
-    #print("List of alphabet symbols:", sorted(symbol_pair_set)) ##
-    ###EXAMPLES_FST.minimize()
-    # twbt.printfst(EXAMPLES_FST, False) ##
+    # print("List of alphabet symbols:", sorted(symbol_pair_set)) ##
+    EXAMPLES.minimize()
+    # twbt.printfst(EXAMPLES, False) ##
     for insym, outsym in symbol_pair_set:
         input_symbol_set.add(insym)
         output_symbol_set.add(outsym)

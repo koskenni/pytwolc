@@ -10,8 +10,8 @@ verboxity_level = 0
 
 def init(verbosity):
     global in_symbol_set, out_symbol_set, pair_symbol_set
-    global XRC, alphabet, verbosity_level
-    global PISTAR, diamond, DIAMOND
+    global XRC, verbosity_level
+    global PISTAR, PISTAR_FSA, diamond, DIAMOND
     verbosity_level = verbosity
     in_symbol_set = set() # The set of all input symbols used in the examples
     out_symbol_set = set()
@@ -21,18 +21,18 @@ def init(verbosity):
         out_symbol_set.add(outsym)
         pair_symbol_set.add(insym if insym == outsym
                             else insym + ':' + outsym)
-    alphabet = tuple(sorted(twex.symbol_pair_set | {('§', '§')}))
     if not XRC:
         print('*** not XRC - why? ***') ##
         XRC = hfst.XreCompiler()
     XRC.set_expand_definitions(True)
-    PI_re = quote(" | ".join(sorted(pair_symbol_set | {'§'})))
+    PI_re = quote(" | ".join(sorted(pair_symbol_set)))
     XRC.define_xre("PI", PI_re)
     if verbosity_level >= 1:
         twbt.ppdef(XRC, "PI", PI_re) ##
-    diamond = '¤'
+    diamond = 'DIAMOND'
     DIAMOND = hfst.regex(diamond)
-    PISTAR = XRC.compile("PI*")    
+    PISTAR = XRC.compile("PI*")
+    PISTAR_FSA = twbt.fst_to_fsa(PISTAR)
     return
 
 
@@ -50,6 +50,7 @@ def define(name, rex):
     global XRC        
     defined_symbols.add(name)
     XRC.define_xre(name, rex)
+    return
 
 def e(str):
     """Convert a two-level component expression into a FST.
@@ -69,10 +70,6 @@ corresponding to the expression.
     if verbosity_level >= 5:
         twbt.ppfst(F, True) ##
     return(F)
-
-def rule_name(x, op, *contexts):
-    return(x + " " +op + " " +
-           " ; ".join([lc + " _ " + rc for lc, rc in contexts]))
 
 def generalized_restriction(PRECONDITION, POSTCONDITION):
     global PISTAR, diamond
@@ -132,16 +129,54 @@ def contexts_to_condition(*contexts):
         # twbt.ppfst(RES, True) ##
     return(RES)
 
-def rightarrow(x, *contexts):
+def mix(x):
+    X1 = e("[[" + x + "].u .o. PI+]")
+    X1.minimize()
+    Xe = twbt.fst_to_fsa(X1)
+    # twbt.ppfst(Xe, True) ##
+    return Xe
+
+def correct_to_incorrect(x, X):
+    global PISTAR, PISTAR_FSA
+    X1 = twbt.fst_to_fsa(X)
+    Xe = mix(x)
+    X1.cross_product(Xe)
+    # twbt.ppfst(X1, True) ##
+    MIXe = PISTAR_FSA.copy()
+    MIXe.concatenate(X1)
+    MIXe.concatenate(PISTAR_FSA)
+    MIXe.minimize()
+    MIXe.set_name("Correct to incorrect ")
+    SEL = e("[PI* [[[" + x + "].u .o. [PI*]] - [" + x + "]] PI*]")
+    SEL.set_name("Select other than " + x)
+    return SEL, MIXe
+
+def incorrect_to_correct(x, X):
+    global PISTAR, PISTAR_FSA
+    X1 = twbt.fst_to_fsa(X)
+    X2 = mix(x)
+    X2.cross_product(X1)
+    MIXe = PISTAR_FSA.copy()
+    MIXe.concatenate(X2)
+    MIXe.concatenate(PISTAR_FSA)
+    MIXe.minimize()
+    MIXe.set_name("Incorrect to correct ")
+    SEL = e("[PI* [" + x + "] PI*]")
+    SEL.set_name("Select " + x)
+    return SEL, MIXe
+
+def rightarrow(name, x, *contexts):
     X = e(x)
     PRECOND = x_to_condition(X)
     POSTCOND = contexts_to_condition(*contexts)
     RULE = generalized_restriction(PRECOND, POSTCOND)
-    RULE.set_name(rule_name(x, '=>', *contexts))
+    RULE.set_name(name)
     # twbt.ppfst(RULE, True) ##
-    return RULE
+    SEL, MIXe = incorrect_to_correct(x, X)
+    # twbt.ppfst(MIXe, True) ##
+    return RULE, SEL, MIXe
 
-def leftarrow(x, *contexts):
+def leftarrow(name, x, *contexts):
     global PISTAR
     X = e(x)
     POSTCOND = x_to_condition(X)
@@ -152,37 +187,51 @@ def leftarrow(x, *contexts):
     CC = contexts_to_condition(*contexts)
     PRECOND.intersect(CC)
     RULE = generalized_restriction(PRECOND, POSTCOND)
-    RULE.set_name(rule_name(x, '<=', *contexts))
+    RULE.set_name(name)
     # twbt.ppfst(RULE, True) ##
-    return RULE
+    SEL, MIXe = correct_to_incorrect(x, X)
+    return RULE, SEL, MIXe
 
-def doublearrow(x, *contexts):
-    RULE = rightarrow(x, *contexts)
-    R2 = leftarrow(x, *contexts)
+def doublearrow(name, x, *contexts):
+    RULE, SEL, MIXe = rightarrow(name, x, *contexts)
+    R2, S2, M2 = leftarrow(name, x, *contexts)
     RULE.intersect(R2)
-    RULE.set_name(rule_name(x, '<=>', *contexts))
+    RULE.minimize()
+    RULE.set_name(name)
+    MIXe.disjunct(M2)
+    MIXe.minimize()
+    SEL.disjunct(S2)
+    SEL.minimize()
     # twbt.ppfst(RULE, True) ##
-    return RULE
+    return RULE, SEL, MIXe
 
-def center_exclusion(x, *contexts):
+def center_exclusion(name, x, *contexts):
     CC = contexts_to_condition(*contexts)
     X = e(x)
     XX = x_to_condition(X)
     CC.intersect(XX)
     NULL = hfst.HfstTransducer()
     RULE = generalized_restriction(CC, NULL)
-    RULE.set_name(rule_name(x, '/<=', *contexts))
+    RULE.set_name(name)
     # twbt.ppfst(RULE, True) ##
-    return(RULE)
+    SEL = e("[PI* [" + x + "] PI*]")
+    MIXe = hfst.empty_fst()
+    return RULE, SEL, MIXe
 
 if __name__ == "__main__":
     twex.read_examples()
-    init()
+    init(1)
     define("V", "PI .o.[a|e|i|o|ä|ö]")
     define("C", "[PI .o. [h|l|n|s|t|v]] | %{ij%}:j")
-    R1 = doublearrow("%{ao%}:o", ("[]", "[%{ij%} .o. PI]"))
+    R1 = doublearrow("{ao}:o <=> _ {ij}:",
+                     "%{ao%}:o",
+                     ("[]", "[%{ij%} .o. PI]"))
     twbt.ppfst(R1, True)
-    R2 = doublearrow("%{ij%}:j",("V [PI .o. Ø]*", "[PI .o. Ø]* V"))
+    R2 = doublearrow("{ij}:j <=> V :Ø* _ :Ø* V",
+                     "%{ij%}:j",
+                     ("V [PI .o. Ø]*", "[PI .o. Ø]* V"))
     twbt.ppfst(R2, True)
-    R3 = doublearrow("%{tl%}:l", ("[]", "V %{ij%}:i* C [C | [PI .o. Ø]* §]"))
+    R3 = doublearrow("{tl}:l <=> _ CLOSED",
+                     "%{tl%}:l",
+                     ("[]", "V %{ij%}:i* C [C | [PI .o. Ø]* END]"))
     twbt.ppfst(R3, True)

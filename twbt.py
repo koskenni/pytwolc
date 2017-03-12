@@ -67,8 +67,33 @@ def fst2dicfst(FST):
         dicfst[state] = (BFST.is_final_state(state), tdir)
     return(dicfst)
 
+def fst_to_fsa(FST, separator='^'):
+    """Converts FST into an FSA by joining input and output symbols with separator"""
+    FB = hfst.HfstBasicTransducer(FST)
+    sym_pairs = FB.get_transition_pairs()
+    dict = {}
+    for sym_pair in sym_pairs:
+        in_sym, out_sym = sym_pair
+        joint_sym = in_sym + separator + out_sym
+        dict[sym_pair] = (joint_sym, joint_sym)
+    FB.substitute(dict)
+    FSA = hfst.HfstTransducer(FB)
+    # print("fst_to_fsa:\n", FSA) ##
+    return FSA
 
-def ppfst(FST, print_equiv_classes):
+def fsa_to_fst(FSA, separator='^'):
+    BFSA = hfst.HfstBasicTransducer(FSA)
+    sym_pairs = BFSA.get_transition_pairs()
+    dic = {}
+    for sym_pair in sym_pairs:
+        insym, outsym = sym_pair
+        in_sym, out_sym = outsym.split(separator)
+        dic[sym_pair] = (in_sym, out_sym)
+    BFSA.substitute(dic)
+    FST = hfst.HfstTransducer(BFSA)
+    return FST
+
+def ppfst(FST, print_equiv_classes=True):
     """Pretty-prints a HfstTransducer or a HfstBasicTransducer.
 
 FST -- the transducer to be pretty-printed
