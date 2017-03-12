@@ -92,7 +92,7 @@ for line in rule_file:
         print("Error: not a valid type of a rule", op)
         continue
     print("\nPositive examples")
-    # twbt.ppfst(R) ##
+    twbt.ppfst(R) ##
     # twbt.ppfst(SEL, True) ##
     SEL.intersect(twex.EXAMPLES)
     # twbt.ppfst(SEL, True) ##

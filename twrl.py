@@ -12,6 +12,7 @@ def init(verbosity):
     global in_symbol_set, out_symbol_set, pair_symbol_set
     global XRC, verbosity_level
     global PISTAR, PISTAR_FSA, diamond, DIAMOND
+    global PRE, POST
     verbosity_level = verbosity
     in_symbol_set = set() # The set of all input symbols used in the examples
     out_symbol_set = set()
@@ -33,7 +34,22 @@ def init(verbosity):
     DIAMOND = hfst.regex(diamond)
     PISTAR = XRC.compile("PI*")
     PISTAR_FSA = twbt.fst_to_fsa(PISTAR)
+    PRE =  XRC.compile("[[ZERO .x. [PI].u]* ZERO:BEGIN]* [[PI].u]* [ZERO:END [ZERO .x. [PI].u]*]*")
+    POST = XRC.compile("[[[PI].l .x. ZERO]* BEGIN:ZERO]* [[PI].l]* [END:ZERO [[PI].l .x. ZERO]*]*")
+    # twbt.ppfst(PRE, True) ##
     return
+
+def begin_end(FST):
+    global PRE, POST
+    RES = PRE.copy()
+    RES.compose(FST)
+    # twbt.ppfst(RES, True) ##
+    RES.compose(POST)
+    # twbt.ppfst(RES, True) ##
+    RES.substitute('ZERO', "@_EPSILON_SYMBOL_@")
+    RES.minimize()
+    # twbt.ppfst(RES, True) ##
+    return(RES)
 
 
 def quote(str):
@@ -87,6 +103,7 @@ def generalized_restriction(PRECONDITION, POSTCONDITION):
     FST = hfst.HfstTransducer(PISTAR)
     FST.minus(WW)
     FST.minimize()
+    # twbt.ppfst(FST, True) ##
     FST.set_name("Doubly negated")
     # twbt.ppfst(FST, True) ##
     return(FST)
@@ -108,14 +125,18 @@ def context_to_condition(leftc, rightc):
     CTX = hfst.HfstTransducer(PISTAR)
     LC = e(leftc)
     CTX.concatenate(LC)
-    CTX.concatenate(DIAMOND)
-    CTX.concatenate(PISTAR)
-    CTX.concatenate(DIAMOND)
-    RC = e(rightc)
-    CTX.concatenate(RC)
-    CTX.concatenate(PISTAR)
     CTX.minimize()
-    return(CTX)
+    CTX1 = begin_end(CTX)
+    CTX1.concatenate(DIAMOND)
+    CTX1.concatenate(PISTAR)
+    CTX1.concatenate(DIAMOND)
+    RC = e(rightc)
+    RC.concatenate(PISTAR)
+    RC.minimize()
+    CTX2 = begin_end(RC)
+    CTX1.concatenate(CTX2)
+    CTX1.minimize()
+    return(CTX1)
 
 def contexts_to_condition(*contexts):
     global PISTAR

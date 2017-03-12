@@ -109,7 +109,7 @@ def p_statement_definition(p):
     '''statement : SYMBOL EQUALS expression SEMICOLON'''
     global definitions
     defined_name = p[1]
-    if not re.fullmatch(r'[a-zåäöA-ZÅÄÖ][a-zåäöA-ZÅÄÖ0-9]*', defined_name):
+    if not re.fullmatch(r'[a-zåäöA-ZÅÄÖØ][a-zåäöA-ZÅÄÖØ0-9]*', defined_name):
         print_error(p, "Incorrect name for a defined expression: ", p[1])
     rexp3, orig3 = p[3]
     definitions[defined_name] = orig3 # store for display purposes and testing
