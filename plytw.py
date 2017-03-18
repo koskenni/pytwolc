@@ -47,7 +47,7 @@ t_COMMA = r','
 # t_NAME = r'<[A-ZÅÄÖa-zåäöØ][A-ZÅÄÖa-zåäØö0-9]*>'
 
 def t_SYMBOL(t):
-     r'[{a-zåäöA-ZÅÄÖØ:{}][a-zåäöA-ZÅÄÖ0-9Ø:{}]*'
+     r"[{a-zåäöA-ZÅÄÖØ:{'}][a-zåäöA-ZÅÄÖ0-9Ø:{'}]*"
      #print("t.value =", t.value)
      return(t)
 
@@ -292,14 +292,14 @@ def p_term_end(p):
 def p_term_single_symbol(p):
     '''term : SYMBOL'''
     global input_symbols, output_symbols
-    m = re.match(r"^([{}a-zåäöA-ZÅÄÖØ]*)([:]?)([a-zåäöA-ZÅÄÖØ]*)$",
+    m = re.match(r"^([{'}a-zåäöA-ZÅÄÖØ]*)([:]?)([a-zåäöA-ZÅÄÖØ']*)$",
                  p[1])
     if not m:
         print_error(p, "Incorrectly formed token", p[1])
         raise SyntaxError
     ins, colo, outs = m.groups()
-    inq = re.sub(r"([{}])", r"%\1", ins)
-    outq = re.sub(r"([{}])", r"%\1", outs)
+    inq = re.sub(r"([{'}])", r"%\1", ins)
+    outq = re.sub(r"([{'}])", r"%\1", outs)
     if colo == ":":
         if ins == "" and outs == "":
             rexp = "PI"

@@ -46,6 +46,7 @@ Use help(twex) in order to get more information.
     exfile = open(filename,"r")
     for line in exfile:
         lin = line.strip()
+        if lin == "" or lin[0] == '!': continue
         lst = re.split(" +", lin)
         line_tok = [label2pair(label) for label in lst]
         # print("line_tok:", line_tok) ##

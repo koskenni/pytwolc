@@ -46,7 +46,7 @@ def begin_end(FST):
     # twbt.ppfst(RES, True) ##
     RES.compose(POST)
     # twbt.ppfst(RES, True) ##
-    RES.substitute('ZERO', "@_EPSILON_SYMBOL_@")
+    RES.substitute('ZERO', hfst.EPSILON)
     RES.minimize()
     # twbt.ppfst(RES, True) ##
     return(RES)
@@ -58,7 +58,7 @@ def quote(str):
 >>> quote('a {ij}:j [a:c | b]')
 'a %{ij%}:j [a:c | b]'
 """
-    return(re.sub(r"([{}])", r"%\1", str))
+    return(re.sub(r"([{'}])", r"%\1", str))
 
 defined_symbols = {'PI'}
 
@@ -94,7 +94,7 @@ def generalized_restriction(PRECONDITION, POSTCONDITION):
     WW.minimize()
     WW.set_name("PRECOND-POSTCOND")
     # twbt.ppfst(WW, True) ##
-    WW.substitute(diamond, "@_EPSILON_SYMBOL_@")
+    WW.substitute(diamond, hfst.EPSILON)
     # WW.substitute(diamond, "@0@")
     # print(WW.get_properties().items()) ##
     WW.minimize()

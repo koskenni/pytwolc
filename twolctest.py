@@ -64,7 +64,9 @@ plytw.init(args.verbosity)
 rule_file = open(args.rules, 'r')
 for line in rule_file:
     line = line.strip()
-    if line[0] == '!' or line == "":
+    if line == "STOP":
+        break
+    if line == "" or line[0] == '!':
         continue
     result = plytw.parse_rule(line)
     if not result:
@@ -91,8 +93,8 @@ for line in rule_file:
     else:
         print("Error: not a valid type of a rule", op)
         continue
-    print("\nPositive examples")
-    twbt.ppfst(R) ##
+    ## print("\nPositive examples")
+    # twbt.ppfst(R) ##
     # twbt.ppfst(SEL, True) ##
     SEL.intersect(twex.EXAMPLES)
     # twbt.ppfst(SEL, True) ##
@@ -111,11 +113,11 @@ for line in rule_file:
         DIFF = SEL.copy()
         DIFF.minus(TEST)
         DIFF.minimize()
-        print("** Rejected positive examples:")
+        print("** Some positive examples were rejected:")
         paths = DIFF.extract_paths(output='raw')
         print_raw_paths(paths)
 
-    print("\nNegative examples")
+    ## print("\nNegative examples")
     # twbt.ppfst(MIXe) ##
     NEGe = EXAMP_FSA.copy()
     NEGe.compose(MIXe)
