@@ -3,7 +3,7 @@ Possible things to do
 
 - Compiling each context separately so that one may use expressions combining contexts and their negations. (Straight forward)
 
-- Writing the compiled rules as HFST sequence of transducers. (Trivial)
+- Writing the compiled rules into a file as HFST sequence of transducers. (Trivial)
 
 - Testing rules stepping one character at time in order to be able to report an exact location of a failure. (Straight forward using the HfstBasicTransducer representation)
 
@@ -20,7 +20,7 @@ Already done
 
 - Parsing two-level grammars using the PLY parser generator. Expressions are parsed and syntax checked which provides better diagnostics of syntax errors. Syntactically correct expressions are compiled with hfst.regex() and the compiled FSTs are combined into rule FSTs via hfst.rules.restriction() and hfst.rules.surface_coercion(). (Nov 2016)
 
-- Creating the set of negative examples out of the positive examples, and testing the rules against them. (Nov 2016)
+- Creating the set of negative examples out of the positive examples, and testing the rules against them. (Nov 2016, revised Mar 2017)
 
 - Testing the compiled rules against the set of positive examples (Oct 2016)
 
