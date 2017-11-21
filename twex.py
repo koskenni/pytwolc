@@ -95,10 +95,13 @@ def relevant_contexts(pair_symbol):
         for m in pattern.finditer(example):
             i1 = m.start()
             i2 = m.end()
-            # print(i1, i2, example) ##
-            left_context = example[0:i1-1]
+            # print('"' + example[0:i1] +'"', '"' + example[i2:] + '"') ##
+            left_context = ".#. " + example[0:i1-1]
             centre = example[i1:i2]
-            right_context = example[i2+1:]
+            if i2 >= len(example):
+                right_context = ".#."
+            else:
+                right_context = example[i2+1:] + " .#."
             context = (left_context, right_context)
             # print(centre, context) ##
             if centre == pair_symbol:
