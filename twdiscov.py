@@ -1,5 +1,5 @@
-import sys, re, hfst
-import twbt, twex, twrl, plytw
+import sys, re
+import twex
 
 import argparse
 arpar = argparse.ArgumentParser("python3 plytw.py")
