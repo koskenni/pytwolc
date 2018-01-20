@@ -18,9 +18,9 @@ Already done
 
 - Implementing the rule which forbids occurrences (/<=) was missing in the Python HFST library. (Feb 2017)
 
-- Parsing two-level grammars using the PLY parser generator. Expressions are parsed and syntax checked which provides better diagnostics of syntax errors. Syntactically correct expressions are compiled with hfst.regex() and the compiled FSTs are combined into rule FSTs via hfst.rules.restriction() and hfst.rules.surface_coercion(). (Nov 2016)
+- Parsing two-level grammars using the PLY parser generator. Expressions are parsed and syntax checked which provides better diagnostics of syntax errors. Syntactically correct expressions are compiled with hfst.regex() and the compiled FSTs are combined into rule FSTs via hfst.rules.restriction() and hfst.rules.surface_coercion() (Nov 2016).  Revised version where the compilation is done using elementary operations and Anssi Yli-Jyrä's formulae (Feb 2017).
 
-- Creating the set of negative examples out of the positive examples, and testing the rules against them. (Nov 2016, revised Mar 2017)
+- Creating the set of negative examples out of the positive examples, and testing the rules against them.  First solution by treating contexts as sets of string pairs (Nov 2016). A revised and a more general and precise version where contexts were treated as FSTs (Mar 2017)
 
 - Testing the compiled rules against the set of positive examples (Oct 2016)
 

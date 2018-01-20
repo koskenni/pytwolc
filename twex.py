@@ -36,6 +36,18 @@ def pair2psym(insym, outsym):
     else:
         return(insym + ':' + outsym)
 
+def read_fst(filename="examples.fst"):
+    global EXAMPLES, symbol_pair_set
+    exfile = hfst.HfstInputStream(filename)
+    EXAMPLES = exfile.read()
+    symbol_pairs = EXAMPLES.get_property("x-symbol_pairs")
+    # print("symbol_pairs", symbol_pairs) ##
+    spairlst = re.split(r" +", symbol_pairs)
+    for pair in spairlst:
+        (insym, outsym) = re.match(r"^(.*):(.*)", pair).groups()
+        symbol_pair_set.add((insym, outsym))
+    return
+    
 def read_examples(filename="test.pairstr"):
     """Reads the examples from the file whose name is 'filename'.
 
@@ -79,6 +91,10 @@ Use help(twex) in order to get more information.
         pair_symbol = insym if insym == outsym else insym + ":" + outsym
         pair_symbols_for_input[insym].add(pair_symbol)
         pair_symbols_for_output[outsym].add(pair_symbol)
+    spairlst = [insym+':'+outsym for insym, outsym in symbol_pair_set]
+    symbol_pairs = " ".join(sorted(spairlst))
+    # print("symbol pairs:", symbol_pairs) ##
+    EXAMPLES.set_property("x-symbol_pairs", symbol_pairs)
     return
 
 def relevant_contexts(pair_symbol):

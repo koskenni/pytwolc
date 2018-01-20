@@ -6,7 +6,7 @@ from twex import label2pair
 
 XRC = hfst.XreCompiler()
 
-verboxity_level = 0
+verbosity_level = 0
 
 def init(verbosity):
     global in_symbol_set, out_symbol_set, pair_symbol_set
@@ -28,7 +28,7 @@ def init(verbosity):
     XRC.set_expand_definitions(True)
     PI_re = quote(" | ".join(sorted(pair_symbol_set)))
     XRC.define_xre("PI", PI_re)
-    if verbosity_level >= 1:
+    if verbosity_level >= 2:
         twbt.ppdef(XRC, "PI", PI_re) ##
     diamond = 'DIAMOND'
     DIAMOND = hfst.regex(diamond)

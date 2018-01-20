@@ -47,7 +47,7 @@ t_COMMA = r','
 # t_NAME = r'<[A-ZÅÄÖa-zåäöØ][A-ZÅÄÖa-zåäØö0-9]*>'
 
 def t_SYMBOL(t):
-     r"[{a-zåäöA-ZÅÄÖØ:{'}][a-zåäöA-ZÅÄÖ0-9Ø:{'}]*"
+     r"[{a-zåäöáâA-ZÅÄÖØ:{'´`}][a-zåäöáâA-ZÅÄÖ0-9Ø:{'´`}]*"
      #print("t.value =", t.value)
      return(t)
 
@@ -292,7 +292,7 @@ def p_term_end(p):
 def p_term_single_symbol(p):
     '''term : SYMBOL'''
     global input_symbols, output_symbols
-    m = re.match(r"^([{'}a-zåäöA-ZÅÄÖØ]*)([:]?)([a-zåäöA-ZÅÄÖØ']*)$",
+    m = re.match(r"^([{'}a-zåäöáâA-ZÅÄÖØ´`]*)([:]?)([a-zåäöáâA-ZÅÄÖØ'´`]*)$",
                  p[1])
     if not m:
         print_error(p, "Incorrectly formed token", p[1])
