@@ -1,5 +1,6 @@
 import sys, re, hfst
-import twbt, twex, twrl, plytw
+import twbt, twex, twrl
+
 import argparse
 
 def apply_rule(psymlist, dicrule):
@@ -38,19 +39,19 @@ def print_raw_paths(paths):
         print(' '.join(sym_list))
     return
 
-arpar = argparse.ArgumentParser("python3 plytw.py")
+arpar = argparse.ArgumentParser("python3 twolcomp.py")
 arpar.add_argument("-e", "--examples", help="name of the examples fst",
                    default="examples.fst")
 arpar.add_argument("-r", "--rules", help="name of the rule file",
                    default="test.rules")
 arpar.add_argument("-l", "--lost",
-                    help="examples not accepted by all rules",
+                    help="file to which write the examples not accepted by all rules",
                     default="")
 arpar.add_argument("-w", "--wrong",
-                    help="wrong strings accepted by all rules",
+                    help="file to which write the wrong strings accepted by all rules as a fst",
                     default="")
 arpar.add_argument("-t", "--thorough",
-                   help="test each rule separately",
+                   help="test each rule separately, values: 0, 1 or 2",
                    type=int, default=0)
 arpar.add_argument("-v", "--verbosity",
                    help="level of  diagnostic output",
@@ -58,6 +59,8 @@ arpar.add_argument("-v", "--verbosity",
 arpar.add_argument("-d", "--debug",
                    help="level of PLY debugging output",
                    type=int, default=0)
+arpar.add_argument("-p", "--parser",
+                    help="which parser to use: ply or tatsu", default="ply")
 args = arpar.parse_args()
 
 print('Reading examples from:', args.examples)
@@ -69,7 +72,14 @@ EXAMP_IN.input_project()
 
 twrl.init(args.verbosity)
 
-plytw.init(args.verbosity)
+if args.parser == "ply":
+    import plytw
+    plytw.init(args.verbosity)
+elif args.parser == "tatsu":
+    import twolcsyntax
+    twolcsyntax.init()
+else:
+    print("--parser must be either 'tatsu' or 'ply', not", args.parser)
 
 if args.lost or args.wrong:
     ALLR = []
@@ -80,12 +90,14 @@ for line in rule_file:
         break
     if line == "" or line[0] == '!':
         continue
-    result = plytw.parse_rule(line)
+    if args.parser == "ply":
+        result = plytw.parse_rule(line)
+    elif args.parser == "tatsu":
+        result = twolcsyntax.parse_rule(line)
     if not result:
-        print("ERROR")
+        print("ERROR:", line)
         continue
     op = result[0]
-    # print(result) ##
     if op == "=":
         op, id, expr, clean = result
         print(clean)
@@ -95,6 +107,7 @@ for line in rule_file:
     if args.thorough > 0:
         print("\n--------------------\n")
     print(clean)
+    #print(result) ##
     if op == "=>":
         R, SEL, MIXe = twrl.rightarrow(clean, x_expr, *ctx_expr_list)
     elif op == "<=":

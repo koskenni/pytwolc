@@ -11,48 +11,48 @@ from tatsu.walkers import NodeWalker
 
 from tatsu.exceptions import ParseException, FailedParse, ParseError, FailedSemantics
 
-definitions = {"PAIRS": "PAIRS", "PI": "PAIRS"}
 import twex
-twex.read_examples("nounex.pairstr")
+
+definitions = {"PAIRS": "PAIRS", "PI": "PAIRS"}
 
 error_message = ""
 
-class TwolcsyntaxSemantics(object):
+class TwolcRegexSemantics(object):
 
     def define(self, ast):
         global definitions
         definitions[ast.left] = ast.right
-        return "{} = {} ;".format(ast.left, ast.right)
+        return ("=", ast.left, ast.right)
     
     def identifier(self, ast):
         string = ast.token.strip()
         return string
 
     def right_arrow_rule(self, ast):
-        string = "{} => {} ;".format(ast.left, ast.right)
-        return string
+        result = ("=>", ast.left, ast.right)
+        return result
 
     def left_arrow_rule(self, ast):
-        string = "{} <= {} ;".format(ast.left, ast.right)
-        return string
+        result = ("<=", ast.left, ast.right)
+        return result
 
     def double_arrow_rule(self, ast):
-        string = "{} <=> {} ;".format(ast.left, ast.right)
-        return string
+        result = ("<=>", ast.left, ast.right)
+        return result
 
     def exclusion_rule(self, ast):
-        string = "{} /<= {} ;".format(ast.left, ast.right)
-        return string
+        result = ("/<=", ast.left, ast.right)
+        return result
 
     def context(self, ast):
         lc = ast.left if ast.left else ""
         rc = ast.right if ast.right else ""
-        string = "?:?* {} _ {} ?:?*".format(lc, rc)
-        return string
+        result = [(lc, rc)]
+        return result
 
     def context_lst(self, ast):
-        string = "{} , {}".format(ast.left, ast.right)
-        return string
+        result = ast.left.extend(ast.right)
+        return result
 
     def symbol_or_pair(self, ast):
         global error_message, definitions
@@ -68,6 +68,7 @@ class TwolcsyntaxSemantics(object):
         m = re.match(pat, string)
         if m:                       # it is a pair with a colon
             up = m.group("up")
+            up_quoted = re.sub(r"([{}])", r"%\1", up)
             lo = m.group("lo")
             if up and (up not in twex.input_symbol_set):
                 failmsg.append("input symbol '{}'".format(up))
@@ -78,18 +79,22 @@ class TwolcsyntaxSemantics(object):
             if failmsg:
                 error_message = " and ".join(failmsg) + " not in alphabet"
                 raise FailedSemantics(error_message)
+            elif up and lo:         # it is a valid pair with a colon
+                return "{}:{}".format(up_quoted, lo)
+            elif up and (not lo):
+                return "[{} .o. PI]".format(up_quoted)
+            elif (not up) and lo:
+                return "[PI .o. {}]".format(lo)
             else:
-                up = up if up else "?"
-                lo = lo if lo else "?"
-                return "{}:{}".format(up, lo)
+                return "PI"
         m = re.fullmatch(r"[a-zåäöüõA-ZÅÄÖØ]+", string)
         if m:                       # its either a defined sym or a surf ch
             if string in definitions:
-                return "<{}>".format(string)
+                return "{}".format(string)
             elif (string in twex.output_symbol_set) and (string in twex.input_symbol_set):
                 return "{}:{}".format(string, string)
             elif string in {'BEGIN', 'END'}:
-                return "<"+string+">"
+                return string
         error_message = "'" + string + "' is an invalid pair/definend symbol"
         raise FailedSemantics(error_message)
 
@@ -97,7 +102,7 @@ class TwolcsyntaxSemantics(object):
         return "({})".format(ast.expr)
 
     def subexpression(self, ast):
-        return ast.expr
+        return "[{}]".format(ast.expr)
 
     def Kleene_star(self, ast):
         return "[{}]*".format(ast.expr)
@@ -112,7 +117,7 @@ class TwolcsyntaxSemantics(object):
         return "[{}].l".format(ast.expr)
 
     def One_but_not(self, ast):
-        return "\\[{}]".format(ast.expr)
+        return r"[PI - [{}]]".format(ast.expr)
 
     def concatenation(self, ast):
         return "[{} {}]".format(ast.left, ast.right)
@@ -132,46 +137,58 @@ class TwolcsyntaxSemantics(object):
     def difference(self, ast):
         return "[{} - {}]".format(ast.left, ast.right)
 
-def main():
-    global error_message
-    grammar = open('twolcsyntax.ebnf').read()
+def init(grammar_file='twolcsyntax.ebnf'):
+    global parser, error_message
+    grammar = open(grammar_file).read()
     parser = tatsu.compile(grammar)
+    error_message = ''
+    return
+
+def parse_rule(line):
+    global parser, error_message
+    stripped_line = line.strip()
+    #print("line:", stripped_line)
+    if (not stripped_line) or stripped_line[0] == '!':
+        return False                # it was a comment or an empty line
     rulepat = r"^.* +(=|<=|=>|<=>|/<=) +.*$"
-    for line in sys.stdin:
-        if line.lstrip() and line.lstrip()[0] == "!":
-            continue
-        try:
-            m = re.match(rulepat, line)
-            if m:
-                #print(m.groups())###
-                if m.group(1) == '=':
-                    ast = parser.parse(line, start='def_start',
-                                           semantics=TwolcsyntaxSemantics())
-                    #print("{} {} {} ;".format(ast.left, ast.op, ast.right))
-                    print(ast)
-                elif m.group(1) in {'=>', '<=', '<=>', '/<='}:
-                    ast = parser.parse(line, start='rul_start',
-                                           semantics=TwolcsyntaxSemantics())
-                    #print("{} {} {} ;".format(ast.left, ast.op, ast.right))
-                    print(ast)
-                else:
-                    print("????", line)
-                    continue
-                print()
-                #print("definitons:", definitions)###
-        except ParseException as e:
-            msg = str(e)
-            #print("str(e):", msg)
-            lst = msg.split("\n")
-            if len(lst) >= 3:
-                print(lst[1])
-                print(lst[2], "<---", e.__class__.__name__, "ERROR HERE")
-                if error_message:
-                    print("    ", error_message)
-                    error_message = ""
-            else:
-                print(str(e))
+    try:
+        m = re.match(rulepat, stripped_line)
+        if m:
+            #print("groups:", m.groups())###
+            if m.group(1) == '=':
+                ast = parser.parse(stripped_line, start='def_start',
+                                   semantics=TwolcRegexSemantics())
+                #print(ast)###
+            elif m.group(1) in {'=>', '<=', '<=>', '/<='}:
+                ast = parser.parse(stripped_line, start='rul_start',
+                                       semantics=TwolcRegexSemantics())
+                #print(ast)###
+        else:
+            print("????", line)
+            return False
+    except ParseException as e:
+        msg = str(e)
+        lst = msg.split("\n")
+        if len(lst) >= 3:
+            print(lst[1])
+            print(lst[2], "<---", e.__class__.__name__, "ERROR HERE")
+            if error_message:
+                print("    ", error_message)
+                error_message = ""
+                return False
+        else:
+            print(str(e))
+            return False
+    
+    ast_lst = list(ast)
+    #print("ast_lst", ast_lst)###
+    ast_lst.append(line)
+    #print("result_lst", ast_lst)###
+    return tuple(ast_lst)
 
 if __name__ == '__main__':
-    main()
+    twex.read_fst("nounex.fst")
+    init(grammar_file='twolcsyntax.ebnf')
+    for line in sys.stdin:
+        parse_rule(line)
     

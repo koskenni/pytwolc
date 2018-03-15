@@ -46,6 +46,8 @@ def read_fst(filename="examples.fst"):
     for pair in spairlst:
         (insym, outsym) = re.match(r"^(.*):(.*)", pair).groups()
         symbol_pair_set.add((insym, outsym))
+        input_symbol_set.add(insym)
+        output_symbol_set.add(outsym)
     return
     
 def read_examples(filename="test.pairstr"):
