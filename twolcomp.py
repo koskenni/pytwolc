@@ -1,8 +1,6 @@
 import sys, re, hfst
 import twbt, twex, twrl
 
-import argparse
-
 def apply_rule(psymlist, dicrule):
     # print(rule_name) ##
     state = 0
@@ -39,6 +37,8 @@ def print_raw_paths(paths):
         print(' '.join(sym_list))
     return
 
+import argparse
+
 arpar = argparse.ArgumentParser("python3 twolcomp.py")
 arpar.add_argument("-e", "--examples", help="name of the examples fst",
                    default="examples.fst")
@@ -66,9 +66,11 @@ args = arpar.parse_args()
 print('Reading examples from:', args.examples)
 twex.read_fst(args.examples)
 
-EXAMP_FSA = twbt.fst_to_fsa(twex.EXAMPLES)
-EXAMP_IN = twex.EXAMPLES.copy()
-EXAMP_IN.input_project()
+examples_fsa = twex.EXAMPLES.copy()
+examples_fsa = hfst.fst_to_fsa(examples_fsa, separator="^")
+
+examples_up_fsa = twex.EXAMPLES.copy()
+examples_up_fsa.input_project()
 
 twrl.init(args.verbosity)
 
@@ -82,7 +84,7 @@ else:
     print("--parser must be either 'tatsu' or 'ply', not", args.parser)
 
 if args.lost or args.wrong:
-    ALLR = []
+    all_rules_fst_lst = []
 rule_file = open(args.rules, 'r')
 for line in rule_file:
     line = line.strip()
@@ -99,28 +101,28 @@ for line in rule_file:
         continue
     op = result[0]
     if op == "=":
-        op, id, expr, clean = result
-        print(clean)
+        op, id, expr, title = result
+        print(title)
         twrl.define(id, expr)
         continue
-    op, x_expr, ctx_expr_list, clean = result
+    op, x_expr, ctx_expr_list, title = result
     if args.thorough > 0:
         print("\n--------------------\n")
-    print(clean)
+    print(title)
     #print(result) ##
     if op == "=>":
-        R, SEL, MIXe = twrl.rightarrow(clean, x_expr, *ctx_expr_list)
+        R, SEL, MIXe = twrl.rightarrow(title, x_expr, *ctx_expr_list)
     elif op == "<=":
-        R, SEL, MIXe = twrl.leftarrow(clean, x_expr, *ctx_expr_list)
+        R, SEL, MIXe = twrl.leftarrow(title, x_expr, *ctx_expr_list)
     elif op == "<=>":
-        R, SEL, MIXe = twrl.doublearrow(clean, x_expr, *ctx_expr_list)
+        R, SEL, MIXe = twrl.doublearrow(title, x_expr, *ctx_expr_list)
     elif op == "/<=":
-        R, SEL, MIXe = twrl.center_exclusion(clean, x_expr, *ctx_expr_list)
+        R, SEL, MIXe = twrl.center_exclusion(title, x_expr, *ctx_expr_list)
     else:
         print("Error: not a valid type of a rule", op)
         continue
     if args.lost or args.wrong:
-        ALLR.append(R)
+        all_rules_fst_lst.append(R)
     if args.thorough > 0:
         SEL.intersect(twex.EXAMPLES)
         # SEL.n_best(5)
@@ -128,49 +130,49 @@ for line in rule_file:
         if args.verbosity > 1:
             paths = SEL.extract_paths(output='raw')
             print_raw_paths(paths[0:20])
-        TEST = SEL.copy()
-        TEST.intersect(R)
+        passed_pos_examples_fst = SEL.copy()
+        passed_pos_examples_fst.intersect(R)
         if args.thorough > 0:
-            if TEST.compare(SEL):
+            if passed_pos_examples_fst.compare(SEL):
                 print("All positive examples accepted")
             else:
-                DIFF = SEL.copy()
-                DIFF.minus(TEST)
-                DIFF.minimize()
+                lost_examples_fst = SEL.copy()
+                lost_examples_fst.minus(passed_pos_examples_fst)
+                lost_examples_fst.minimize()
                 print("** Some positive examples were rejected:")
-                paths = DIFF.extract_paths(output='raw')
-                print_raw_paths(paths)
+                lost_paths = lost_examples_fst.extract_paths(output='raw')
+                print_raw_paths(lost_paths)
     if args.thorough > 1:
-        NEGe = EXAMP_FSA.copy()
-        NEGe.compose(MIXe)
-        NEGe.output_project()
-        NEG = twbt.fsa_to_fst(NEGe)
-        NEG.minus(twex.EXAMPLES)
-        NG = EXAMP_IN.copy()
-        NG.compose(NEG)
+        neg_examples_fsa = examples_fsa.copy()
+        neg_examples_fsa.compose(MIXe)
+        neg_examples_fsa.output_project()
+        neg_examples_fst = hfst.fsa_to_fst(neg_examples_fsa, separator="^")
+        neg_examples_fst.minus(twex.EXAMPLES)
+        NG = examples_up_fsa.copy()
+        NG.compose(neg_examples_fst)
         npaths = NG.extract_paths(output='raw')
         print_raw_paths(npaths)
-        TEST = NG.copy()
-        TEST.intersect(R)
+        passed_neg_examples_fst = NG.copy()
+        passed_neg_examples_fst.intersect(R)
         if args.verbosity > 0:
-            if TEST.compare(hfst.empty_fst()):
+            if passed_neg_examples_fst.compare(hfst.empty_fst()):
                 print("All negative examples rejected")
             else:
                 print("Some negative examples accepted:")
-                npaths = TEST.extract_paths(output='raw')
+                npaths = passed_neg_examples_fst.extract_paths(output='raw')
                 print_raw_paths(npaths)
 
 if args.lost or args.wrong:
-    RESU = EXAMP_IN.copy()
+    RESU = examples_up_fsa.copy()
     print(RESU.number_of_arcs(), "arcs in RESU")
-    RESU.compose_intersect(tuple(ALLR))
+    RESU.compose_intersect(tuple(all_rules_fst_lst))
     RESU.minimize()
 if args.lost:
-    LOST = twex.EXAMPLES.copy()
-    LOST.minus(RESU)
-    LOST.minimize()
+    lost_positive_examples_fst = twex.EXAMPLES.copy()
+    lost_positive_examples_fst.minus(RESU)
+    lost_positive_examples_fst.minimize()
     lost_stream = hfst.HfstOutputStream(filename=args.lost)
-    lost_stream.write(LOST)
+    lost_stream.write(lost_positive_examples_fst)
     lost_stream.flush()
     lost_stream.close()
     print("wrote lost examples to", args.lost)

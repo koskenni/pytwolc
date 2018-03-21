@@ -1,6 +1,8 @@
 @@grammar::TwolCSyntax
 @@left_recursion :: False
 
+expr_start = expression $ ;
+
 rul_start = rule $ ;
 
 def_start = define $ ;
@@ -69,5 +71,5 @@ subexpression = expr:expression ;
 
 optexpression = expr:expression ;
 
-symbol_or_pair = token:/[a-zåäöšžA-ZØ:{}]+/ ;
+symbol_or_pair = token:/[a-zåäöšžA-ZØ:{}'´`]+/ ;
 

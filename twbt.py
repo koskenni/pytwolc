@@ -93,7 +93,7 @@ def fsa_to_fst(FSA, separator='^'):
     FST = hfst.HfstTransducer(BFSA)
     return FST
 
-def ppfst(FST, print_equiv_classes=True):
+def ppfst(FST, print_equiv_classes=True, title=""):
     """Pretty-prints a HfstTransducer or a HfstBasicTransducer.
 
 FST -- the transducer to be pretty-printed
@@ -112,7 +112,10 @@ Classes of equivalent symbols:
 
 """
     name = FST.get_name()
-    print("\n" + name)
+    if name:
+        print("\n" + name)
+    if title:
+        print("\n" + title)
     BFST = hfst.HfstBasicTransducer(FST)
     labsy, transy = equivpairs(BFST)
     for state in BFST.states():

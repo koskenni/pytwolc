@@ -2,7 +2,6 @@
 """
 import re, hfst
 import twbt, twex
-from twex import label2pair
 
 XRC = hfst.XreCompiler()
 
@@ -168,7 +167,8 @@ def correct_to_incorrect(x, X):
     MIXe.concatenate(PISTAR_FSA)
     MIXe.minimize()
     MIXe.set_name("Correct to incorrect ")
-    SEL = e("[PI* [[[" + x + "].u .o. [PI*]] - [" + x + "]] PI*]")
+    ###SEL = e("[PI* [[[" + x + "].u .o. [PI*]] - [" + x + "]] PI*]")
+    SEL = e("[PI* [[" + x + "].u .o. [PI*]] PI*]")
     SEL.set_name("Select other than " + x)
     return SEL, MIXe
 

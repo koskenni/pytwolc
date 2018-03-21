@@ -11,40 +11,27 @@ collected in several forms.
         e.g. hfst.rules.restriction
 
 """
-import hfst, re, twbt
+import hfst, re, twbt, cfg
 
-symbol_pair_set = set()
-input_symbol_set = set()
-output_symbol_set = set()
-pair_symbols_for_input = {}
+symbol_pair_set = set() # (insym,outsym) symbol pairs in the examples
+input_symbol_set = set() # input (upper) symbols in the examples
+output_symbol_set = set() # output (lower) symbols in the  examples
+pair_symbols_for_input = {} # key: input symbol, value: set of pair symbols
 pair_symbols_for_output = {}
 
 example_set = set()
 example_list = []
 EXAMPLES = hfst.HfstTransducer()
 
-def label2pair(label):
-    m = re.match(r"^([^:]*):([^:]*)$", label)
-    if m:
-        return(m.group(1), m.group(2))
-    else:
-        return(label, label)
-
-def pair2psym(insym, outsym):
-    if insym == outsym:
-        return(insym)
-    else:
-        return(insym + ':' + outsym)
-
 def read_fst(filename="examples.fst"):
-    global EXAMPLES, symbol_pair_set
+    global EXAMPLES, symbol_pair_set, input_symbol_set, output_symbol_set
     exfile = hfst.HfstInputStream(filename)
     EXAMPLES = exfile.read()
-    symbol_pairs = EXAMPLES.get_property("x-symbol_pairs")
-    # print("symbol_pairs", symbol_pairs) ##
-    spairlst = re.split(r" +", symbol_pairs)
-    for pair in spairlst:
-        (insym, outsym) = re.match(r"^(.*):(.*)", pair).groups()
+    pair_symbols = EXAMPLES.get_property("x-pair_symbols")
+    # print("pair_symbols", pair_symbols) ##
+    pair_symbol_lst = re.split(r" +", pair_symbols)
+    for pair in pair_symbol_lst:
+        (insym, outsym) = re.match(r"^([^:]+):([^:]+)$", pair).groups()
         symbol_pair_set.add((insym, outsym))
         input_symbol_set.add(insym)
         output_symbol_set.add(outsym)
@@ -62,9 +49,9 @@ Use help(twex) in order to get more information.
         lin = line.strip()
         if lin == "" or lin[0] == '!': continue
         lst = re.split(" +", lin)
-        line_tok = [label2pair(label) for label in lst]
+        line_tok = [cfg.pairsym2sympair(pairsym) for pairsym in lst]
         # print("line_tok:", line_tok) ##
-        psymlst = " ".join([pair2psym(insym, outsym)
+        psymlst = " ".join([cfg.sympair2pairsym(insym, outsym)
                             for insym,outsym
                             in line_tok])
         # print("psymlst:", psymlst) ##
@@ -93,15 +80,15 @@ Use help(twex) in order to get more information.
         pair_symbol = insym if insym == outsym else insym + ":" + outsym
         pair_symbols_for_input[insym].add(pair_symbol)
         pair_symbols_for_output[outsym].add(pair_symbol)
-    spairlst = [insym+':'+outsym for insym, outsym in symbol_pair_set]
-    symbol_pairs = " ".join(sorted(spairlst))
-    # print("symbol pairs:", symbol_pairs) ##
-    EXAMPLES.set_property("x-symbol_pairs", symbol_pairs)
+    pair_symbol_lst = [insym+':'+outsym for insym, outsym in symbol_pair_set]
+    pair_symbols = " ".join(sorted(pair_symbol_lst))
+    # print("symbol pairs:", pair_symbols) ##
+    EXAMPLES.set_property("x-pair_symbols", pair_symbols)
     return
 
 def relevant_contexts(pair_symbol):
     global pair_symbols_for_input, example_set
-    input_symbol, output_symbol = label2pair(pair_symbol)
+    input_symbol, output_symbol = cfg.pairsym2sympair(pair_symbol)
     positive_context_set = set()
     negative_context_set = set()
     pairsymlist = [re.sub(r'([}{])', r'\\\1', psym)
@@ -160,7 +147,7 @@ def blur_output_symbol(input_symbols, result_list, remaining_list):
         resl = result_list.copy()
         reml = remaining_list.copy()
         pairsym = reml[0]
-        insym, outsym = label2pair(pairsym)
+        insym, outsym = cfg.pairsym2sympair(pairsym)
         if insym not in input_symbols:
             resl.append(pairsym)
             # print("res, remain:", resl, reml) ##
