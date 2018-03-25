@@ -1,0 +1,23 @@
+Multichar_Symbols
+ {kg} {kj} {kv} {kØ} {kØ'} {pm} {pv} {pØ} {td} {tl} {tn} {tr} {tØ} {aä}
+
+LEXICON Root
+kan{kg}i Aff;
+ar{kj}i Aff;
+pu{kv}u Aff;
+pa{kØ}o Aff;
+vaa{kØ'}a Aff;
+kam{pm}a Aff;
+ar{pv}a Aff;
+pap{pØ}i Aff;
+ka{td}u Aff;
+val{tl}a Aff;
+kan{tn}o Aff;
+par{tr}a Aff;
+kat{tØ}o Aff;
+LEXICON Aff
+ #;
+n #;
+na #;
+sta #;
+lla #;
