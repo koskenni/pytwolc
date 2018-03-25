@@ -51,8 +51,11 @@ class TwolcRegexSemantics(object):
         return result
 
     def context_lst(self, ast):
-        result = ast.left.extend(ast.right)
-        return result
+        #result = ast.left.extend(ast.right)
+        left = ast.left.copy()
+        right = ast.right.copy()
+        right[0:0] = left 
+        return right
 
     def symbol_or_pair(self, ast):
         global error_message, definitions
@@ -144,23 +147,22 @@ def init(grammar_file='twolcsyntax.ebnf'):
     error_message = ''
     return
 
-def parse_rule(line):
+def parse_rule(line_nl):
     global parser, error_message
-    stripped_line = line.strip()
-    #print("line:", stripped_line)
-    if (not stripped_line) or stripped_line[0] == '!':
+    line = line_nl.strip()
+    if (not line) or line[0] == '!':
         return False                # it was a comment or an empty line
     rulepat = r"^.* +(=|<=|=>|<=>|/<=) +.*$"
     try:
-        m = re.match(rulepat, stripped_line)
+        m = re.match(rulepat, line)
         if m:
             #print("groups:", m.groups())###
             if m.group(1) == '=':
-                ast = parser.parse(stripped_line, start='def_start',
+                ast = parser.parse(line, start='def_start',
                                    semantics=TwolcRegexSemantics())
                 #print(ast)###
             elif m.group(1) in {'=>', '<=', '<=>', '/<='}:
-                ast = parser.parse(stripped_line, start='rul_start',
+                ast = parser.parse(line, start='rul_start',
                                        semantics=TwolcRegexSemantics())
                 #print(ast)###
         else:
@@ -181,14 +183,13 @@ def parse_rule(line):
             return False
     
     ast_lst = list(ast)
-    #print("ast_lst", ast_lst)###
     ast_lst.append(line)
-    #print("result_lst", ast_lst)###
     return tuple(ast_lst)
 
 if __name__ == '__main__':
     twex.read_fst("nounex.fst")
     init(grammar_file='twolcsyntax.ebnf')
     for line in sys.stdin:
-        parse_rule(line)
-    
+        res = parse_rule(line)
+        print(res)
+

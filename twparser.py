@@ -164,8 +164,7 @@ class TwolFstSemantics(object):
         left_lst = ast.left.copy()
         right_lst = ast.right.copy()
         result = left_lst.copy()
-        result.extend(right_lst) ## why this does not work?
-        #result[len(result):len(result)] = right_lst
+        result.extend(right_lst)
         return result
 
     def context(self, ast):
@@ -177,62 +176,89 @@ class TwolFstSemantics(object):
         return result
 
     def union(self, ast):
-        result = ast.left.copy()
-        result.disjunct(ast.right)
-        result.minimize()
-        return result
+        name = "[{} | {}]".format(ast.left.get_name(), ast.right.get_name())
+        result_fst = ast.left.copy()
+        result_fst.disjunct(ast.right)
+        result_fst.minimize()
+        result_fst.set_name(name)
+        return result_fst
 
     def intersection(self, ast):
-        result = ast.left.copy()
-        result.conjunct(ast.right)
-        return result
+        name = "[{} & {}]".format(ast.left.get_name(), ast.right.get_name())
+        result_fst = ast.left.copy()
+        result_fst.conjunct(ast.right)
+        result_fst.minimize()
+        result_fst.set_name(name)
+        return result_fst
 
     def difference(self, ast):
-        result = ast.left.copy()
-        result.minus(ast.right)
-        return result
+        name = "[{} - {}]".format(ast.left.get_name(), ast.right.get_name())
+        result_fst = ast.left.copy()
+        result_fst.minus(ast.right)
+        result_fst.minimize()
+        result_fst.set_name(name)
+        return result_fst
 
     def concatenation(self, ast):
-        result = ast.left.copy()
-        result.concatenate(ast.right)
-        result.minimize()
-        return result
+        name = "[{} {}]".format(ast.left.get_name(), ast.right.get_name())
+        result_fst = ast.left.copy()
+        result_fst.concatenate(ast.right)
+        result_fst.minimize()
+        result_fst.set_name(name)
+        return result_fst
 
     def composition(self, ast):
-        result = ast.left.copy()
-        result.compose(ast.right)
-        return result
+        name = "[{} .o. {}]".format(ast.left.get_name(), ast.right.get_name())
+        result_fst = ast.left.copy()
+        result_fst.compose(ast.right)
+        result_fst.minimize()
+        result_fst.set_name(name)
+        return result_fst
 
     def crossproduct(self, ast):
-        result = ast.left.copy()
-        result.cross_product(ast.right)
-        return result
+        name = "[{} .x. {}]".format(ast.left.get_name(), ast.right.get_name())
+        result_fst = ast.left.copy()
+        result_fst.cross_product(ast.right)
+        result_fst.set_name(name)
+        return result_fst
 
     def Kleene_star(self, ast):
-        result = ast.expr.copy()
-        result.repeat_star()
-        result.minimize()
-        return result
+        name = "[{}]*".format(ast.expr.get_name())
+        result_fst = ast.expr.copy()
+        result_fst.repeat_star()
+        result_fst.minimize()
+        result_fst.set_name(name)
+        return result_fst
 
     def Kleene_plus(self, ast):
-        result = ast.expr.copy()
-        result.repeat_plus()
-        result.minimize()
-        return result
+        name = "[{}]+".format(ast.expr.get_name())
+        result_fst = ast.expr.copy()
+        result_fst.repeat_plus()
+        result_fst.minimize()
+        result_fst.set_name(name)
+        return result_fst
 
     def Upper(self, ast):
-        result = ast.expr.copy()
-        result.input_project()
-        return result
+        name = "[{}].u".format(ast.expr.get_name())
+        result_fst = ast.expr.copy()
+        result_fst.input_project()
+        result_fst.set_name(name)
+        return result_fst
 
     def Lower(self, ast):
-        result = ast.expr.copy()
-        result.output.project()
-        return result
+        name = "[{}].l".format(ast.expr.get_name())
+        result_fst = ast.expr.copy()
+        result_fst.output_project()
+        result_fst.minimize()
+        result_fst.set_name(name)
+        return result_fst
 
     def One_but_not(self, ast):
+        name = r"\[{}]".format(ast.expr.get_name())
         result_fst = cfg.all_pairs_fst.copy()
         result_fst.minus(ast.expr)
+        result_fst.minimize()
+        result_fst.set_name(name)
         return result_fst
 
     def optexpression(self, ast):
@@ -244,7 +270,10 @@ class TwolFstSemantics(object):
         return result_fst
 
     def subexpression(self, ast):
-        return ast.expr.copy()
+        name = "[{}]".format(ast.expr.get_name())
+        result_fst = ast.expr.copy()
+        result_fst.set_name(name)
+        return result_fst
 
     def symbol_or_pair(self, ast):
         string = ast.token.strip()
@@ -289,7 +318,7 @@ class TwolFstSemantics(object):
                 result_fst = cfg.all_pairs_fst.copy()
                 result_fst.set_name("PI")
                 return result_fst
-        m = re.fullmatch(r"[a-zåäöüõA-ZÅÄÖØ]+", string)
+        m = re.fullmatch(r"[a-zåäöšžüõA-ZÅÄÖØ'´`]+", string)
         if m:                       # its either a defined sym or a surf ch
             if string in cfg.definitions:
                 result_fst = cfg.definitions[string].copy()
@@ -347,32 +376,33 @@ def parse_rule(parser, line_nl, start="expr_start"):
             return "?", None, None, line
 
 if __name__ == '__main__':
-    import hfst
+    import hfst, argparse, twbt, cfg, twexamp
+    arpar = argparse.ArgumentParser(description="A compiler and tester for two-level rules")
+    arpar.add_argument("start",
+                        help="start parseing from",
+                        default="expr_start")
+    args = arpar.parse_args()
+    twexamp.read_fst(filename="nounex.fst")
     parser = init()
     for line_nl in sys.stdin:
         line = line_nl.strip()
         #print(line)
-        op, left, right, source = parse_rule(line)
-        #result = parser.parse(line, start='expr_start', semantics=TwolRegexSemantics())
-        #result = parser.parse(line, start='rul_start', semantics=TwolFstSemantics())
-        #result = parser.parse(line, start='expr_start')
-        if op == "=":
-            print(left, op)
-            print(right)
-        elif op in {"=>", "<=", "<=>", "/<="}:
-            print("left context:")
-            print(left)
+        result = parser.parse(line, start=args.start,
+                              semantics=TwolFstSemantics())
+        if args.start == "def_start":
+            op, left, right, source = result
+            print(left, "=")
+            twbt.ppfst(right)
+        elif args.start == "rul_start":
+            op, left, right, source = result
+            twbt.ppfst(left)
             print(op)
-            #print(right)###
             for lc, rc in right:
-                print("left context:")
-                print(lc)
-                print("right context:")
-                print(rc)
-        elif op == "!":
-            print("Comment: " + line)
+                twbt.ppfst(lc, title="left context")
+                twbt.ppfst(rc, title="right context")
+        elif args.start == "expr_start":
+            fst = result
+            #print(fst)
+            twbt.ppfst(fst, True)
         elif op == "?":
             print("Incorrect: " + line)
-
-            
-    

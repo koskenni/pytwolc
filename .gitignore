@@ -5,6 +5,7 @@ alpha.twolc
 *.bak.*
 *.fst
 *.log
+history*
 parser.out
 parsetab.py
 plycalc.py

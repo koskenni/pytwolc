@@ -50,11 +50,6 @@ arpar.add_argument("-t", "--thorough",
 arpar.add_argument("-v", "--verbosity",
                    help="level of  diagnostic output",
                    type=int, default=0)
-#arpar.add_argument("-d", "--debug",
-#                   help="level of PLY debugging output",
-#                   type=int, default=0)
-#arpar.add_argument("-p", "--parser", choices=['ply', 'tatsu'],
-#                    help="which parser to use", default="tatsu")
 arpar.add_argument("examples", help="name of the examples fst",
                    default="examples.fst")
 arpar.add_argument("rules", help="name of the rule file",
@@ -86,22 +81,22 @@ for line_nl in rule_file:
         break
     if line == "" or line[0] == '!':
         continue
-    #if args.parser == "ply":
-    #    result = plytw.parse_rule(line)
-    #elif args.parser == "tatsu":
+    if args.thorough > 0:
+        print("\n--------------------\n")
     op, left, right, title = twparser.parse_rule(parser, line)
     if not (left and right):
         print("ERROR:", line)
         continue
     if op == "=":
         print(title)
-        #####twrule.define(id, expr)
+        if cfg.verbosity_level >= 10:
+            print(left, op)
+            twbt.ppfst(right)
         continue
     x_expr = left
     ctx_expr_list = right
     if args.thorough > 0:
-        print("\n--------------------\n")
-    print(title)
+        print(title)
     if op == "=>":
         R, selector_fst, MIXe = twrule.rightarrow(title, x_expr, *ctx_expr_list)
     elif op == "<=":
@@ -121,7 +116,7 @@ for line_nl in rule_file:
         selector_fst.intersect(cfg.examples_fst)
         # selector_fst.n_best(5)
         selector_fst.minimize()
-        if cfg.verbosity_level > 10:
+        if cfg.verbosity_level >= 20:
             paths = selector_fst.extract_paths(output='raw')
             print_raw_paths(paths[0:20])
         passed_pos_examples_fst = selector_fst.copy()

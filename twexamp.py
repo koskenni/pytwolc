@@ -31,6 +31,15 @@ def read_fst(filename="examples.fst"):
         cfg.symbol_pair_set.add((insym, outsym))
         cfg.input_symbol_set.add(insym)
         cfg.output_symbol_set.add(outsym)
+    cfg.all_pairs_fst = hfst.empty_fst()
+    for insym, outsym in cfg.symbol_pair_set:
+        in_quoted = re.sub(r"([{}])", r"%\1", insym)
+        pair_fst = hfst.regex(in_quoted + ':' + outsym)
+        cfg.all_pairs_fst.disjunct(pair_fst)
+    cfg.all_pairs_fst.remove_epsilons()
+    cfg.all_pairs_fst.minimize()
+    if cfg.verbosity_level >= 30:
+        twbt.ppfst(cfg.all_pairs_fst, title="cfg.all_pairs_fst")
     return
     
 def read_examples(filename="test.pairstr"):
