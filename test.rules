@@ -1,9 +1,0 @@
-C = [[PI .o. [d|h|k|l|m|n|p|r|s|t|v]].u .o. PI] | j ;
-V = PI .o. [a | e | i | o | u | y | ä | ö] ;
-CLOSED = V {ij}:i* C (:Ø) [C | END] ;
-{ØeØØ}:Ø => _ END | {Øt}:t ;
-{ao}:o => _ {ij}: ;
-{ao}:o <= _ {ij}: ;
-{ij}:j <=> V :Ø* _ :Ø* V ;
-{tl}:l <=> _ CLOSED ;
-:a :a :a /<=  _  ;
