@@ -2,7 +2,7 @@
 Simplified two-level morphological model
 ========================================
 
-.. warning:: The PYTWOL program is still under development
+.. warning:: The PYTWOL program is still under development and so is this documentation
 
 ------------------------
 Changes since hfst-twolc

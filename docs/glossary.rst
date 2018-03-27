@@ -1,9 +1,9 @@
 
 .. _pytwol-glossary:
 
---------
+========
 Glossary
---------
+========
 
 .. glossary::
 
