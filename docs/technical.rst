@@ -2,6 +2,8 @@
 How the two-level rule compilation and testing was implemented
 ==============================================================
 
+See also :ref:`pytwol-glossary` and [karttunen1987]_.
+
 ---------------------------
 Parsing the two-level rules
 ---------------------------
@@ -42,22 +44,3 @@ In order to make such changes, the original examples are encoded as FSAs where t
 
 Such sequences can be converted with appropriate FSTs if its input symbols are pairs (such as ``k^k`` or ``{ao}^a``).  In order not to lose information, the output symbols have to be similar pairs.
 
-
-
-
---------
-Glossary
---------
-
-.. _glossary:
-
-.. glossary::
-
-   symbol_pair
-     A tuple consisting of an input and an output symbol, e.g. ``({aä}, a)``
-
-   pair_symbol
-     A string consisting either of an output symbol, e.g. ``a``, or an input symbol followed by a colon followed by an output symbol, e.g. ``{aä}:a``
-
-   encoded FST
-     A FST can be converted into an equivalent FSA by changing all its transition labels so that the new labels are combinations of the original input and output labels using functions *fst_to_fsa*.  If the original FST contained a transition ``{aä}:a`` then the encoded FSA will have a transition ``{aä}^a:{aä}^a``.  An encoded FSA can be made back to a normal FST by the function *fsa_to_fst*.  See the HFST documentation 

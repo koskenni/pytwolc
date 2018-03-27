@@ -1,13 +1,19 @@
-==========================
-Simplified two-level model
-==========================
+========================================
+Simplified two-level morphological model
+========================================
+
+.. warning:: The PYTWOL program is still under development
 
 ------------------------
 Changes since hfst-twolc
 ------------------------
 
 The simplified two-level morphology differs in a few respects from the standard model as described in publications and as implemented in the
-TWOLC compiler by Karttunen and Beesley and later on in the HFST finite-state transducer tools, see e.g.  [karttunen1987]_ The differences consist of:
+TWOLC compiler by Karttunen and Beesley and later on in the HFST finite-state transducer tools, see e.g.  [karttunen1987]_.
+
+.. note:: If you are not familiar with those earlier versions, you may skip this section and continue from :ref:`examples`.
+
+The simplified two-level model differs from the standard model in the follwing respects:
 
 1. The *lexical* (or morphophonemic or upper) *level* consists of phonemes and morphophonemes.  By convention, morphophonemes clearly indicate what phonemes are alternating in that position and by convention, they are denoted by symbols in braces, e.g. ``{aä}`` stands for a morphophoneme which can be realized on the *surface level* either as an ``a`` or as an ``ä``.
 
@@ -26,7 +32,6 @@ TWOLC compiler by Karttunen and Beesley and later on in the HFST finite-state tr
    
    .. index:: alphabet
    
-
   a. *Alphabet* is not declared in the grammar.  The set of lexical and surface symbols and the set of feasible pairs is extracted from the examples.
      
      .. index:: sets
@@ -60,13 +65,51 @@ TWOLC compiler by Karttunen and Beesley and later on in the HFST finite-state tr
        
        {ij}:i => SurfCons _ , _ SurfCons ;
        
-       
+
+
+.. _examples:
+
+-----------------------------------
+Examples as strings of pair symbols
+-----------------------------------
+
+The simplified two-level model is heavily based on examples which are selected and edited before any rules are considered and before one starts to write the first rule.  The set of examples defines the possible correspondences or possible phoneme alternations; even the possible surface symbols and the set of morphophonemes is defined implicitly by the set of examples.
+
+The examples are given as a file where each line is a string of *pair symbols*, e.g.::
+
+  k a t {tØ}:Ø o l l {aä}:a
+
+Here we have eight pair symbols, six of them are abbreviations, e.g. ``k`` stands for ``k:k`` and ``a`` for ``a:a``.  The remaining two pair symbols consist each of two symbols: a morphophonemic symbol ``{tØ}`` or ``{aä}`` combined with a surface symbol ``Ø`` or ``a``.  Another way of representing the examples would be them on two rows::
+
+  k  a  t {tØ} o  l  l  {aä}
+  k  a  t   Ø  o  l  l   a
+
+The upper line is the morphophonemic representation of the example word form, and the lower line is the surface representation of it.  Note that in the examples, the two representations always are of the same length and a zero symbol (Ø) is inserted when necessary.  In the above example, the ultimate surface form consists of only seven sybols: ``k a t o l l a``.  Within the examples and in the rules, these zeros always expliciltly present.
+
+There is yet another form in which the examples are represented, i.e. as a pair of strings and then the strings are given without spaces, e.g.::
+
+  ka{tØ}oll{aä}:katØolla
+
+One can readily see that the three ways to represent examples are equivalent.
+
+.. _rule-formalism:
 
 ------------------------------------------------
 Rule formalism in the simplified two-level model
 ------------------------------------------------
 
-The simplified two-level grammar consists of one or more lines where a line may be either a definition or a rule.  In addition there may be comment lines or empty lines neither of which are ignored when the grammar is compiled.
+The simplified two-level grammar consists of one or more lines where each line may be either a *definition*, a *rule* or just a *comment*.  Definitions and rules are made out of *regular two-level expressions*.  Comment lines or empty lines are ignored when the grammar is compiled into finite-state transducers (FSTs).  Comment lines start with an exclamation mark (!) at the first non-blank column, e.g.::
+
+  ! trisyllabic word structure
+
+Regular two-level expressions
+=============================
+
+The set of possible symbol pairs comes from the set of previously edited examples.  The rules and the two-level regular expressions introduce no correspondences beyond those which occur in the examples.
+
+The two-level regular expressions (TLREs) can be:
+
+
 
 Definitions
 ===========
@@ -76,41 +119,6 @@ A definition assigns a name for a regular two-level expressionn.
 .. warning:: The program may tilt!
 	     But it was ignored
 
-.. note:: this was different in hfst-twolc
-	  at least probably so.
-
-
---------
-Glossary
---------
-
-.. _glossary:
-
-.. glossary::
-
-   morph
-     A part of the surface form which is said to correspond to a morpheme, e.g. in ``kadulla`` the part ``kadu`` (street) and the part ``lla`` (on) are morphs.
-
-   morphophoneme
-     An abstract symbol which denotes the alternation of surface characters in a position within a morpheme. E.g. ``{td}`` could denote the alternation between ``t`` and ``d``.  The names of the morphophonemes are chosen by the linguist who writes a two-level grammar.
-
-   zero
-     A placeholder which indicates that in other allomorphs there is some phoneme in this position.  By inserting zeros, one makes the allomorphs same length.  Zero is not a morphophoneme and it never occurs in morphophonemic representations.
-
-   morphophomenic representation
-     An abtract representation which is a kind of summary of the concrete surface morphs.  Two-level rules describe the relation between the lexical and the surface level.  Corresponds to the *lexical level* of two-level rules.
-
-   surface representation
-     The concrete representation of of word forms as a sequence of phonemes or letters (possibly with some zeros inserted).
-
-   alignment
-     The process of making allomorphs equal length and make them to correspond each other phoneme by phoneme.  Alignment consists of adding zero symbols as needed so that the phonemes in the same position are phonologically similar.
-
-   deletion
-     Deletion is said to occur when a phoneme in a in a morph corresponds to zero in another morph of the same morpheme.  Cf. epenthesis.
-
-   epenthesis
-     Epenthesis is said to occur when a zero in a morph corresponds to a phoneme in another morphp of the same morpheme.  In the simplified two-level framework, epenthesis and deletion are equivalent. 
 
 ----------
 References

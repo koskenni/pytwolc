@@ -13,6 +13,7 @@ Welcome to twol's documentation!
 
    intro
    technical
+   glossary
 
 Indices and tables
 ==================
