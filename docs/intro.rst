@@ -90,7 +90,7 @@ There is yet another form in which the examples are represented, i.e. as a pair 
 
   ka{tØ}oll{aä}:katØolla
 
-One can readily see that the three ways to represent examples are equivalent.  Examples are edited as a text file, but for further processing, they are compiled into a FST using the :mod:``ex2fst``.
+One can readily see that the three ways to represent examples are equivalent.  Examples are edited as a text file, but for further processing, they are compiled into a FST using the :module:ex2fst .
 
 .. _rule-formalism:
 

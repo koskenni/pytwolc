@@ -7,9 +7,10 @@ Welcome to twol's documentation!
 ================================
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 4
    :caption: Contents:
    :numbered:
+   :includehidden:
 
    intro
    technical
