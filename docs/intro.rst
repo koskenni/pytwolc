@@ -6,7 +6,8 @@ Simplified two-level model
 Changes since hfst-twolc
 ------------------------
 
-The simplified two-level morphology differs in a few respects from the standard model as described in publications and as implemented in the TWOLC compiler by Karttunen and Beesley and later on in the HFST finite-state transducer tools, see e.g.  :cite:`karttunen1987` The differences consist of:
+The simplified two-level morphology differs in a few respects from the standard model as described in publications and as implemented in the
+TWOLC compiler by Karttunen and Beesley and later on in the HFST finite-state transducer tools, see e.g.  [karttunen1987]_ The differences consist of:
 
 1. The *lexical* (or morphophonemic or upper) *level* consists of phonemes and morphophonemes.  By convention, morphophonemes clearly indicate what phonemes are alternating in that position and by convention, they are denoted by symbols in braces, e.g. ``{aä}`` stands for a morphophoneme which can be realized on the *surface level* either as an ``a`` or as an ``ä``.
 
@@ -115,4 +116,8 @@ Glossary
 References
 ----------
 
-.. bibliography:: kmkbib.bib
+.. [karttunen1987] Lauri Karttunen and Kimmo Koskenniemi and Ronald M. Kaplan, 1987: "A compiler for two-level phonological rules", in M. Dalrymple, R. Kaplan, L. Karttunen, K. Koskenniemi, S. Shaio and M. Wescoat, editors, *Tools for Morphological Analysis*, pp. 1-61, Center for the Study of Language and Information, Stanford University, Vol. 87-108, CSLI Reports, Palo Alto, California, USA
+
+
+..
+    bibliography:: kmkbib.bib
