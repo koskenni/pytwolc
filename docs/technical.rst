@@ -2,7 +2,7 @@
 How the two-level rule compilation and testing was implemented
 ==============================================================
 
-See also :ref:`pytwol-glossary` and [karttunen1987]_.
+See also  :ref:`pytwol-glossary` and [karttunen1987]_.
 
 ---------------------------
 Parsing the two-level rules
