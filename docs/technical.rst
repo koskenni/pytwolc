@@ -1,6 +1,6 @@
-==============================================================
-How the two-level rule compilation and testing was implemented
-==============================================================
+============================
+Rule compilation and testing
+============================
 
 See also  :ref:`pytwol-glossary` and [karttunen1987]_.
 

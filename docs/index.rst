@@ -7,22 +7,27 @@ Welcome to twol's documentation!
 ================================
 
 .. toctree::
+   :numbered:
    :maxdepth: 3
    :caption: Contents:
-   :numbered:
+   :includehidden:
 
    intro
    technical
+   twrule
    glossary
+   genindex
+
 
 Indices and tables
 ==================
 
-* :ref:`genindex`
+..
+   * :ref:`genindex`
+
 * :ref:`modindex`
 * :ref:`search`
 
   
 ..
-    :includehidden:
 

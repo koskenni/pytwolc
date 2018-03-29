@@ -1,8 +1,17 @@
-========================================
-Simplified two-level morphological model
-========================================
+==========================
+Simplified two-level model
+==========================
 
 .. warning:: The PYTWOL program is still under development and so is this documentation
+
+The morphological two-level model dates back to [koskenniemi1983]_ and
+is characterized by the descritpion of phonological or
+morphophonological alternations as a direct relation between the
+surface forms and their underlying lexical or morphophonemic forms.
+It differs from the classical generative phonology by explaining the
+alternations using parallel rules rather than as a cascade of
+successive rules, see [karttunen1993]_ for a demonstration of this
+difference. 
 
 ------------------------
 Changes since hfst-twolc
@@ -90,7 +99,8 @@ There is yet another form in which the examples are represented, i.e. as a pair 
 
   ka{tØ}oll{aä}:katØolla
 
-One can readily see that the three ways to represent examples are equivalent.  Examples are edited as a text file, but for further processing, they are compiled into a FST using the :module:ex2fst .
+One can readily see that the three ways to represent examples are equivalent.  Examples are edited as a text file, but for further processing, they are compiled into a FST using the ``ex2fst`` module.
+
 
 .. _rule-formalism:
 
@@ -124,8 +134,27 @@ A definition assigns a name for a regular two-level expressionn.
 References
 ----------
 
-.. [karttunen1987] Lauri Karttunen and Kimmo Koskenniemi and Ronald M. Kaplan, 1987: "A compiler for two-level phonological rules", in M. Dalrymple, R. Kaplan, L. Karttunen, K. Koskenniemi, S. Shaio and M. Wescoat, editors, *Tools for Morphological Analysis*, pp. 1-61, Center for the Study of Language and Information, Stanford University, Vol. 87-108, CSLI Reports, Palo Alto, California, USA
+.. [koskenniemi1983] Kimmo Koskenniemi, 1983,
+		     *Two-level Morphology: A General Computational
+		     Model for Word-Form Recognition and Production*,
+		     University of Helsinki, Department of General Linguistics,
+		     Publications, Number 11.  160 pages.
 
+.. [karttunen1987] Lauri Karttunen and Kimmo Koskenniemi and
+		   Ronald M. Kaplan, 1987:
+		   "A compiler for two-level phonological rules",
+		   in M. Dalrymple, R. Kaplan, L. Karttunen,
+		   K. Koskenniemi, S. Shaio and M. Wescoat, editors,
+		   *Tools for Morphological Analysis*, pp. 1-61,
+		   Center for the Study of Language and Information,
+		   Stanford University, Vol. 87-108, CSLI Reports,
+		   Palo Alto, California, USA.
+
+.. [karttunen1993] Lauri Karttunen, 1993: "Finite-state Constraints",
+		   in *Proceedings of the International Conference on Current
+                   Issues in Computational Linguistics*, June 10-14, 1991. 
+                   Universiti Sains Malaysia, Penang, Malaysia},
+		   pp. 173-194.
 
 ..
     bibliography:: kmkbib.bib
