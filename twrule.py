@@ -1,10 +1,15 @@
-"""Module for building two-level rule components and rules.
+"""Module for compiling two-level rules out of FSTs for the components.
 """
-import re, hfst, cfg, fs
+import re
+import hfst
+import cfg, fs
 import twbt, twexamp
 
 def init():
-    """Assumes that twexamp.read_fst() has read in cfg.example_fst """
+    """Initializes the module by computing several common FSTs
+    
+    Assumes that twexamp.read_fst() has read in cfg.example_fst.
+    """
     global pistar_fst, pistar_fsa, diamond_sym, diamond_fst
     global trim_pre_fst, trim_post_fst
 
@@ -40,9 +45,11 @@ def init():
                                                   pi_in_fst))))
     trim_pre_fst = fs.concat(fst3, fst4)
     trim_pre_fst.set_name("trim_pre_fst")
-    #trim_pre_fst =  XRC.compile("[[ZERO .x. [PI].u]* ZERO:BEGIN]* " \
-    #                    "[[PI].u]* " \
-    #                    "[ZERO:END [ZERO .x. [PI].u]*]*")
+    #trim_pre_fst =  XRC.compile(
+    #    "[[ZERO .x. [PI].u]* ZERO:BEGIN]* " \
+    #    "[[PI].u]* " \
+    #    "[ZERO:END [ZERO .x. [PI].u]*]*"
+    #)
 
     fst1 = fs.star(fs.crossprod(pi_out_fst, fs.expr('ZERO')))
     fst2 = fs.star(fs.concat(fst1, fs.expr('BEGIN:ZERO')))
@@ -52,9 +59,11 @@ def init():
                                                   fs.expr('ZERO')))))
     trim_post_fst = fs.concat(fst3, fst4)
     trim_post_fst.set_name("trim_post_fst")
-    #trim_post_fst = XRC.compile("[[[PI].l .x. ZERO]* BEGIN:ZERO]* " \
-    #                    "[[PI].l]* " \
-    #                    "[END:ZERO [[PI].l .x. ZERO]*]*")
+    #trim_post_fst = XRC.compile(
+    #    "[[[PI].l .x. ZERO]* BEGIN:ZERO]* " \
+    #    "[[PI].l]* " \
+    #    "[END:ZERO [[PI].l .x. ZERO]*]*"
+    #)
     if cfg.verbosity_level >= 20:
         twbt.ppfst(trim_pre_fst)
         twbt.ppfst(trim_post_fst)
@@ -69,22 +78,13 @@ def quote(str):
 """
     return(re.sub(r"([{'}])", r"%\1", str))
 
-#defined_symbols = {'PI'}
-
-#def define(name, rex):
-#    global XRC        
-#    defined_symbols.add(name)
-#    XRC.define_xre(name, rex)
-#    return
-
 def e(str):
     """Convert a two-level component expression into a FST.
-
-str -- a string containing a (two-level) regular expression
-
-Returns a HfstTransducer which performs the mapping 
-corresponding to the expression. 
-"""
+    
+    str -- a string containing a (two-level) regular expression
+    Returns an FST which performs the mapping represented by str 
+    corresponding to the expression. 
+    """
     global XRC
     # print("Regex string:", str) ##
     if str == "":
@@ -97,6 +97,12 @@ corresponding to the expression.
     return(F)
 
 def generalized_restriction(precondition_fst, postcondition_fst):
+    """Combines the precondition FST and the postcondition FST into a rule FST.
+
+    Conditions are formed out of the center/contexts of a rule.
+    Each condition contains exactly two diamond symbols.
+    Returns the generalized restriction as an FST.
+    """
     global pistar_fst, diamond_sym
     temp_fst = precondition_fst.copy()
     temp_fst.subtract(postcondition_fst)
@@ -117,7 +123,12 @@ def generalized_restriction(precondition_fst, postcondition_fst):
     return(result_fst)
 
 def x_to_condition(x_fst):
-    """Returns PI* ¤ X ¤ PI*"""
+    """Computes and returns a condition FST out of the center FST of a rule.
+
+    x_fst -- the center or X-part of a rule (located in front of the operator)
+
+    returns [PI* ¤ X ¤ PI*] where ¤ is the diamond (not in PI) as an FST
+    """
     global pistar_fst, diamond_fst
     result_fst = pistar_fst.copy()
     result_fst.concatenate(diamond_fst)
@@ -130,7 +141,14 @@ def x_to_condition(x_fst):
     return(result_fst)
 
 def begin_end(expr_fst):
-    """Removes everything before BEGIN and after END from expr_fst"""
+    """Removes everything before BEGIN and after END from expr_fst
+
+    expr_fst -- an FST representing a set of pair strings str
+
+    Returns an FST which represents pair strings which are maximal
+    substrings of the above which do not contain any BEGIN or END
+    symbols.
+    """
     global trim_pre_fst, trim_post_fst
     result_fst = trim_pre_fst.copy()
     result_fst.compose(expr_fst)
@@ -143,7 +161,12 @@ def begin_end(expr_fst):
     return(result_fst)
 
 def context_to_condition(left_context_fst, right_context_fst):
-    """Return PI* LC ¤ PI* ¤ RC PI*"""
+    """Convert one context into a condition (for the generalized restriction)
+    
+    left_context_fst -- the left context as an FST
+    right_context_fst -- the right context as an FST
+    returns [PI* LC ¤ PI* ¤ RC PI*] as an FST
+    """
     global pistar_fst, diamond_fst
     leftc_fst = pistar_fst.copy()
     leftc_fst.concatenate(left_context_fst)
@@ -161,6 +184,11 @@ def context_to_condition(left_context_fst, right_context_fst):
     return(result_fst)
 
 def contexts_to_condition(*contexts):
+    """A list of contexsts is converted into a condition.
+    
+    Each context in the list is converted separately and
+    the result is the union of these and is returned as an FST.
+    """
     global pistar_fst
     result_fst = hfst.HfstTransducer()
     for leftc, rightc in contexts:
@@ -176,7 +204,16 @@ def contexts_to_condition(*contexts):
     return(result_fst)
 
 def mix(x_fst):
-    """Returns [X.u .o. PI*] encoded as a FSA"""
+    """Computes an FSA that is used when creating negative examples
+    
+    First, it computes an expression Y which represent all possible
+    (correct and incorrect) realizations of the input side of X.  Then,
+    Y is transformed into an encoded FSA which can be a component of the
+    transformation of correct examples into incorrect ones.
+    
+    x_fst -- the center FST (X part) of a rule
+    Returns [X.u .o. PI*] encoded as an FSA (i.e. maps pairs to themselves)
+    """
     global pistar_fst
     result_fst = x_fst.copy()
     result_fst.input_project()
@@ -186,11 +223,26 @@ def mix(x_fst):
     # twbt.ppfst(result_fsa, True) ##
     return result_encod_fsa
 
+def selector_from_x(x_fst):
+    """Compute and return [PI* X PI*]"""
+    selector_fst = pistar_fst.copy() # starting to build it
+    selector_fst.concatenate(x_fst)
+    selector_fst.concatenate(pistar_fst) # now complete
+    selector_fst.set_name("Selector " + x_fst.get_name())
+    return selector_fst
+
 def correct_to_incorrect(x_fst):
     """used for creating negative examples for <= rules
+    
+    In order to make negative examples for <= rules we need to transform
+    the examples so that correct some correct input:output pairs are
+    changed so that the output part becomes different.  The computed
+    encoded FST maps correct inputs to any possible outputs (correct or
+    incorrect).
 
-    returns: (1) a selector fst (to be intersected with EXAMPLES) and
-    (2) fst (encoded as a fsa) which maps correct examples into incorrect exs
+    x_fst -- the FST for the X part of the rule
+
+    returns: an fst (encoded as a fsa) which maps correct examples into incorrect exs
     """
     global pistar_fst, pistar_fsa
     mixed_fsa = mix(x_fst)
@@ -202,17 +254,23 @@ def correct_to_incorrect(x_fst):
     corr_to_incorr_encod_fst.concatenate(pistar_fsa)
     corr_to_incorr_encod_fst.minimize() # now complete
     corr_to_incorr_encod_fst.set_name("Correct to incorrect ")
-    x_any_fst = x_fst.copy()
-    x_any_fst.input_project()
-    x_any_fst.compose(pistar_fst)
-    ###x_any_fst.minus(x_fst)
-    selector_fst = pistar_fst.copy() # starting to build it
-    selector_fst.concatenate(x_any_fst)
-    selector_fst.concatenate(pistar_fst) # now complete
-    selector_fst.set_name("Selector " + x_fst.get_name())
-    return selector_fst, corr_to_incorr_encod_fst
+    return corr_to_incorr_encod_fst
 
 def incorrect_to_correct(x_fst):
+    """Compute a transformation for right-arrow (=>) rules
+    
+    In order to make negative examples for the => rules we need to
+    modify the examples so that some correct occurrences of X are
+    modified so that the output part of X becomes something else,
+    i.e. incorrect because it is in an unexpected context.
+    
+    x_fst -- FST for the center part (X) of a rule
+    
+    Returns: scrambler_fst -- an encoded FST which maps encoded
+    instances of X into all possible correct and incorrect pairs (where
+    the input symbol is the same but the output symbol perhaps
+    different).
+    """
     global pistar_fst, pistar_fsa
     x_encod_fsa = hfst.fst_to_fsa(x_fst, separator='^')
     mix_fst = mix(x_fst) # still an encoded fsa
@@ -222,23 +280,42 @@ def incorrect_to_correct(x_fst):
     scrambler_fst.concatenate(pistar_fsa)
     scrambler_fst.minimize() # now complete
     scrambler_fst.set_name("Scrambler " + x_fst.get_name())
-    selector_fst = pistar_fst.copy()
-    selector_fst.concatenate(x_fst)
-    selector_fst.concatenate(pistar_fst) # now complete
-    selector_fst.set_name("Selector " + x_fst.get_name())
-    return selector_fst, scrambler_fst
+    return scrambler_fst
 
 def rightarrow(name, x_fst, *contexts):
+    """Compiles rules like X => [LC1,RC1),...(LCk,RCk)]
+    
+    name -- name to be given to the rule FST
+    x_fst -- the center (X) of the rule
+    *contents -- list of contexts, i.e. pairs of left and right context
+    
+    Returns a triple:
+    rule_fst -- the compiled rule
+    selector_fst -- FST which selects examples which are relevant for this rule
+    scrambler_fst -- an encoded FST which produces negative examples
+    """
     precondition_fst = x_to_condition(x_fst)
     postcondition_fst = contexts_to_condition(*contexts)
     rule_fst = generalized_restriction(precondition_fst, postcondition_fst)
     rule_fst.set_name(name)
     # twbt.ppfst(rule_fst, True) ##
-    selector_fst, scrambler_fst = incorrect_to_correct(x_fst)
+    selector_fst = selector_from_x(x_fst)
+    scrambler_fst = incorrect_to_correct(x_fst)
     # twbt.ppfst(scrambler_fst, True) ##
     return rule_fst, selector_fst, scrambler_fst
 
 def leftarrow(name, x_fst, *contexts):
+    """Compiles rules like X <= [LC1,RC1),...(LCk,RCk)]
+    
+    name -- name to be given to the rule FST
+    x_fst -- the center (X) of the rule
+    *contents -- list of contexts, i.e. pairs of left and right context
+    
+    Returns a triple:
+    rule_fst -- the compiled rule
+    selector_fst -- FST which selects examples which are relevant for this rule
+    scrambler_fst -- an encoded FST which produces negative examples
+    """
     global pistar_fst
     postcondition_fst = x_to_condition(x_fst)
     x_all_fst = x_fst.copy()
@@ -250,10 +327,26 @@ def leftarrow(name, x_fst, *contexts):
     rule_fst = generalized_restriction(precondition_fst, postcondition_fst)
     rule_fst.set_name(name)
     # twbt.ppfst(rule_fst, True) ##
-    selector_fst, scrambler_fst = correct_to_incorrect(x_fst)
+    x_any_fst = x_fst.copy()
+    x_any_fst.input_project()
+    x_any_fst.compose(pistar_fst)
+    ###x_any_fst.minus(x_fst)
+    selector_fst = selector_from_x(x_any_fst)
+    scrambler_fst = correct_to_incorrect(x_fst)
     return rule_fst, selector_fst, scrambler_fst
 
 def doublearrow(name, x_fst, *contexts):
+    """Compiles rules like X <=> [LC1,RC1),...(LCk,RCk)]
+    
+    name -- name to be given to the rule FST
+    x_fst -- the center (X) of the rule
+    *contents -- list of contexts, i.e. pairs of left and right context
+    
+    Returns a triple:
+    rule_fst -- the compiled rule
+    selector_fst -- FST which selects examples which are relevant for this rule
+    scrambler_fst -- an encoded FST which produces negative examples
+    """
     rule_fst, selector_fst, scrambler_fst = rightarrow(name, x_fst, *contexts)
     rule2_fst, selector2_fst, scrambler2_fst = leftarrow(name, x_fst, *contexts)
     rule_fst.intersect(rule2_fst)
@@ -267,6 +360,17 @@ def doublearrow(name, x_fst, *contexts):
     return rule_fst, selector_fst, scrambler_fst
 
 def center_exclusion(name, x_fst, *contexts):
+    """Compiles rules like X /<= [LC1,RC1),...(LCk,RCk)]
+    
+    name -- name to be given to the rule FST
+    x_fst -- the center (X) of the rule
+    *contents -- list of contexts, i.e. pairs of left and right context
+    
+    Returns a triple:
+    rule_fst -- the compiled rule
+    selector_fst -- FST which selects examples which are relevant for this rule
+    scrambler_fst -- empty_fst (negative examples not relevant for these rules)
+    """
     context_condition_fst = contexts_to_condition(*contexts)
     x_condition_fst = x_to_condition(x_fst)
     context_condition_fst.intersect(x_condition_fst)
@@ -274,10 +378,7 @@ def center_exclusion(name, x_fst, *contexts):
     rule_fst = generalized_restriction(context_condition_fst, null_fst)
     rule_fst.set_name(name)
     # twbt.ppfst(rule_fst, True) ##
-    selector_fst = pistar_fst.copy()
-    selector_fst.concatenate(x_fst)
-    selector_fst.concatenate(pistar_fst)
-    ##selector_fst = e("[PI* [" + x + "] PI*]")
+    selector_fst = selector_from_x(x_fst)
     scrambler_fst = hfst.empty_fst()
     return rule_fst, selector_fst, scrambler_fst
 

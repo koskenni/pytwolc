@@ -336,12 +336,22 @@ class TwolFstSemantics(object):
         raise FailedSemantics(cfg.error_message)
 
 def init(grammar_file='/Users/koskenni/github/pytwolc/twolcsyntax.ebnf'):
+    """Initializes the module and compiles and returns a tatsu parser
+
+    grammar_file -- the name of the file containing the EBNF grammar for rules
+"""
     grammar = open(grammar_file).read()
     parser = tatsu.compile(grammar)
     return parser
 
 def parse_rule(parser, line_nl, start="expr_start"):
-    """"Parse one rule or definiton or any constituent given as start
+    """Parse one rule or definiton or any constituent given as start
+
+    parser -- a tatsu parser which parses the EBNF grammar for two-level rules
+    line_nl -- the string that contains the rule or definition to be parsed
+
+    keyword arguments:
+    start -- the element in the EBNF grammar where to start the parsing
 """
     line = line_nl.strip()
     if (not line) or line[0] == '!':

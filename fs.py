@@ -72,7 +72,7 @@ def upper(f):
     return res
 
 def lower(f):
-    """Return the output projectio of an FST"""
+    """Return the output projection of an FST"""
     res = f.copy()
     res.output_project()
     res.minimize()
