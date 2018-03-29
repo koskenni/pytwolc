@@ -22,12 +22,8 @@ Welcome to twol's documentation!
 Indices and tables
 ==================
 
-..
-   * :ref:`genindex`
-
+* :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
 
-  
-..
 
