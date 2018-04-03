@@ -1,28 +1,8 @@
 #!/Library/Frameworks/Python.framework/Versions/3.6/bin/python3
-import sys, re, hfst, cfg
+import sys, re
+import hfst, cfg
 import twbt, twexamp, twrule
 import twparser
-
-def apply_rule(psymlist, dicrule):
-    # print(rule_name) ##
-    state = 0
-    state_seq = []
-    final, dtrans = drule[state]
-    for psym in psymlist:
-        if psym in dtrans:
-            state = dtrans[psym]
-            final, dtrans = drule[state]
-            state_seq.append("{} -> {}{}".
-                             format(psym, state,(':' if final else '.')))
-        else:
-            state_seq.append("{} -> ??".
-                             format(psym))
-
-            return(False, state_seq)
-    if not final:
-        return(False, state_seq)
-    else:
-        return(True, state_seq)
 
 def print_raw_paths(paths):
     for path in paths:
@@ -33,13 +13,12 @@ def print_raw_paths(paths):
     return
 
 import argparse
-
 arpar = argparse.ArgumentParser(description="A compiler and tester for two-level rules")
 arpar.add_argument("-o", "--output",
-                    help="file to which write the compiled rules",
+                    help="File to which write the compiled rules if a name is given",
                     default="")
 arpar.add_argument("-l", "--lost",
-                    help="file to which write the examples not accepted by all rules",
+                    help="File to which write the examples not accepted by all rules",
                     default="")
 arpar.add_argument("-w", "--wrong",
                     help="file to which write the wrong strings accepted by all rules as a fst",
@@ -56,10 +35,10 @@ arpar.add_argument("rules", help="name of the rule file",
                    default="test.rules")
 args = arpar.parse_args()
 
-cfg.verbosity_level = args.verbosity
+cfg.verbosity = args.verbosity
 
 twexamp.read_fst(args.examples)
-if cfg.verbosity_level >= 30:
+if cfg.verbosity >= 30:
     twbt.ppfst(cfg.examples_fst, title="examples_fst")
 
 parser = twparser.init()
@@ -68,7 +47,7 @@ examples_fsa = hfst.fst_to_fsa(cfg.examples_fst, separator="^")
 
 examples_up_fsa = cfg.examples_fst.copy()
 examples_up_fsa.input_project()
-if cfg.verbosity_level >= 30:
+if cfg.verbosity >= 30:
     twbt.ppfst(examples_up_fsa, title="examples_up_fsa")
 
 twrule.init()
@@ -79,7 +58,7 @@ for line_nl in rule_file:
     line = line_nl.split('!', maxsplit=1)[0].strip()
     if line == "STOP":
         break
-    if line == "" or line[0] == '!':
+    if (not line) or line.startswith("!"):
         continue
     if args.thorough > 0:
         print("\n--------------------\n")
@@ -89,7 +68,7 @@ for line_nl in rule_file:
         continue
     if op == "=":
         print(title)
-        if cfg.verbosity_level >= 10:
+        if cfg.verbosity >= 10:
             print(left, op)
             twbt.ppfst(right)
         continue
@@ -108,7 +87,7 @@ for line_nl in rule_file:
     else:
         print("Error: not a valid type of a rule", op)
         continue
-    if cfg.verbosity_level >= 10:
+    if cfg.verbosity >= 10:
         twbt.ppfst(R)
     if args.lost or args.wrong or args.output:
         all_rules_fst_lst.append(R)
@@ -116,7 +95,7 @@ for line_nl in rule_file:
         selector_fst.intersect(cfg.examples_fst)
         # selector_fst.n_best(5)
         selector_fst.minimize()
-        if cfg.verbosity_level >= 20:
+        if cfg.verbosity >= 20:
             paths = selector_fst.extract_paths(output='raw')
             print_raw_paths(paths[0:20])
         passed_pos_examples_fst = selector_fst.copy()
@@ -143,7 +122,7 @@ for line_nl in rule_file:
         #print_raw_paths(npaths)
         passed_neg_examples_fst = NG.copy()
         passed_neg_examples_fst.intersect(R)
-        if cfg.verbosity_level > 0:
+        if cfg.verbosity > 0:
             if passed_neg_examples_fst.compare(hfst.empty_fst()):
                 print("All negative examples rejected")
             else:

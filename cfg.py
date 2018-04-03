@@ -1,8 +1,9 @@
-
+"""Global values for twol modules.
+"""
 import hfst, re
 hfst.set_default_fst_type(hfst.ImplementationType.FOMA_TYPE)
 
-verbosity_level = 0
+verbosity = 0
 definitions = {}
 
 error_message = ""

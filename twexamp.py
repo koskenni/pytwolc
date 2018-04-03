@@ -13,7 +13,7 @@ collected in several forms.
 """
 import hfst, re, twbt, cfg
 
-pair_symbols_for_input = {} # key: input symbol, value: set of pair symbols
+pair_symbols_for_input = {}   # key: input symbol, value: set of pair symbols
 pair_symbols_for_output = {}
 
 example_set = set()
@@ -38,7 +38,7 @@ def read_fst(filename="examples.fst"):
         cfg.all_pairs_fst.disjunct(pair_fst)
     cfg.all_pairs_fst.remove_epsilons()
     cfg.all_pairs_fst.minimize()
-    if cfg.verbosity_level >= 30:
+    if cfg.verbosity >= 30:
         twbt.ppfst(cfg.all_pairs_fst, title="cfg.all_pairs_fst")
     return
     
