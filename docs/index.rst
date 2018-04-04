@@ -15,6 +15,10 @@ Welcome to twol's documentation!
    intro
    technical
    twrule
+   cfg
+   fs
+   twexamp
+   twdiscov
    glossary
    genindex
 
