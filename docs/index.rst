@@ -19,6 +19,7 @@ Welcome to twol's documentation!
    fs
    twexamp
    twdiscov
+   twparsere
    glossary
    genindex
 
