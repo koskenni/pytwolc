@@ -79,7 +79,7 @@ def shorten_contexts(contexts, left_length, right_length):
         new_contexts.add((new_lc, new_rc))
     return(new_contexts)
 
-def minimal_contexts(pair_symbol):
+def minimal_contexts(pair_symbol, pos_contexts, neg_contexts):
     """Shortens the left and right contexts step by step
     
     Finds shortest contexts which accept correct occurrences of
@@ -88,9 +88,10 @@ def minimal_contexts(pair_symbol):
     pair_symbol -- a pair-symbol, e.g. '{aä}:a' for which the optimal
     contexts are computed
     
-    returns a tuple: (positive_context, negative_contexts)
+    pos_context, neg_contexts -- selected from the examples
+    
+    returns a tuple: (positive_contexts, negative_contexts)
     """
-    pos_contexts, neg_contexts = relevant_contexts(pair_symbol)
     if cfg.verbosity >= 25:
         ppcontexts(pos_contexts, "positive contexts for " + pair_symbol)
         ppcontexts(neg_contexts, "negative contexts for " + pair_symbol)
@@ -153,6 +154,13 @@ def print_rule(pair_symbol, operator, contexts):
     print(pair_symbol, operator)
     for lc, rc in contexts:
         print("   ", lc, "_", rc, ";")
+    return
+
+def context_to_output_str(pairsym_str):
+    pairsym_lst = pairsym_str.split(" ")
+    sympair_lst = [cfg.pairsym2sympair(psym) for psym in pairsym_lst]
+    outsym_lst = [outsym for insym, outsym in sympair_lst]
+    return "".join(outsym_lst)
 
 if __name__ == "__main__":
     import argparse
@@ -193,8 +201,16 @@ if __name__ == "__main__":
         if len(pair_symbols_for_input[insym]) <= 1:
             continue
         pair_symbol = cfg.sympair2pairsym(insym, outsym)
-        pos_contexts, neg_contexts = minimal_contexts(pair_symbol)
+        posi_contexts, nega_contexts = relevant_contexts(pair_symbol)
+        pos_contexts, neg_contexts = minimal_contexts(pair_symbol,
+                                                      posi_contexts.copy(),
+                                                      nega_contexts.copy())
         if len(pos_contexts) <= len(neg_contexts):
             print_rule(pair_symbol, "=>", pos_contexts)
         else:
             print_rule(pair_symbol, "/<=", neg_contexts)
+        if args.verbosity >= 1:
+            for lc, rc in posi_contexts:
+                l_str = context_to_output_str(lc)
+                r_str = context_to_output_str(rc)
+                print("{:>30}<{}>{}".format(l_str, outsym, r_str))
