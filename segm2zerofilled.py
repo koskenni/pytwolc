@@ -134,7 +134,7 @@ print("-- STEP 3 COMPLETED (aligned_morphs done) --")
 
 out_file = open(args.output, "w", newline="")
 writer = csv.DictWriter(out_file,
-                        ["MORPHEMES","MORPHS","ALIGNED"],
+                        ["MORPHEMES","MORPHS","ZEROFILLED"],
                         delimiter=args.csv_delimiter)
 forms_of_morphs = {}
 
@@ -149,7 +149,7 @@ for seg_example in seg_example_list:
                               for (morpheme, morph) in seg_example]
     d["MORPHEMES"] = " ".join(morpheme_lst)
     d["MORPHS"] = args.morph_separator.join(morph_lst)
-    d["ALIGNED"] = args.morph_separator.join(zero_filled_morph_lst)
+    d["ZEROFILLED"] = args.morph_separator.join(zero_filled_morph_lst)
     writer.writerow(d)
     if morph_lst[0] not in forms_of_morphs:
         forms_of_morphs[morph_lst[0]] = set()
