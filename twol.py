@@ -52,17 +52,28 @@ if cfg.verbosity >= 30:
 
 twrule.init()
 
+skip = False
 all_rules_fst_lst = []
 rule_file = open(args.rules, 'r')
+line_lst = []
 for line_nl in rule_file:
     line = line_nl.split('!', maxsplit=1)[0].strip()
-    if line == "STOP":
-        break
-    if (not line) or line.startswith("!"):
+    if line == "START":
+        skip = False
         continue
+    elif line == "STOP":
+        skip = True
+    if skip or (not line) or line.startswith("!"):
+        continue
+    line_lst.append(line)
+    if not line.endswith(";"):
+        continue
+    else:
+        rule_str = " ".join(line_lst)
+        line_lst = []
     if args.thorough > 0:
         print("\n--------------------\n")
-    op, left, right, title = twparser.parse_rule(parser, line)
+    op, left, right, title = twparser.parse_rule(parser, rule_str)
     if not (left and right):
         print("ERROR:", line)
         continue
@@ -126,7 +137,7 @@ for line_nl in rule_file:
             if passed_neg_examples_fst.compare(hfst.empty_fst()):
                 print("All negative examples rejected")
             else:
-                print("Some negative examples accepted:")
+                print("** Some negative examples accepted:")
                 npaths = passed_neg_examples_fst.extract_paths(output='raw')
                 print_raw_paths(npaths[0:20])
 

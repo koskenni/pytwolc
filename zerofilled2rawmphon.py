@@ -31,7 +31,7 @@ feat2mphons = {
     'GENien': 'e n',
     'GENin': 'i n',
     'ILL': '{Øh} {V} n',
-    'ILLseen': 's e {eØ} n',
+    'ILLseen': 's e {Øe} n',
     'ILLsiin': 's i {iØ} n',
     'INE': 's s {aä}',
     'PL': '{ij}',

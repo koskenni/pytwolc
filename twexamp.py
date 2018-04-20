@@ -33,6 +33,7 @@ def read_fst(filename="examples.fst"):
     cfg.all_pairs_fst = hfst.empty_fst()
     for insym, outsym in cfg.symbol_pair_set:
         in_quoted = re.sub(r"([{}])", r"%\1", insym)
+        #print(in_quoted, outsym)### tilts if insym contains bad chars
         pair_fst = hfst.regex(in_quoted + ':' + outsym)
         cfg.all_pairs_fst.disjunct(pair_fst)
     cfg.all_pairs_fst.remove_epsilons()
@@ -95,11 +96,12 @@ def read_examples(filename="test.pstr", build_fsts=True):
 
 
 if __name__ == "__main__":
+    import hfst
     import argparse
     arpar = argparse.ArgumentParser("python3 twexamp.py")
     arpar.add_argument("examples", help="example pair strings file",
                        default="examples.pstr")
-    arpar.add_argument("-o", "--output", help="file to which write the example FST",
+    arpar.add_argument("output", help="file to which write the example FST",
                        default="")
     arpar.add_argument("-v", "--verbosity",
                        help="level of  diagnostic output",
