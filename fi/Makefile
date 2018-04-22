@@ -3,8 +3,8 @@
 ksk-renam-examp.fst: ksk-renam-examp.pstr
 	python3 ../twexamp.py $< $@
 
-ksk-renam-examp.pstr: ksk-raw-examp.csv raw_mphons.csv ../raw2named.py
-	python3 ../raw2named.py $< $@ raw_mphons.csv
+ksk-renam-examp.pstr: ksk-raw-examp.csv ksk-raw2named.csv ../raw2named.py
+	python3 ../raw2named.py $< $@ ksk-raw2named.csv
 
 ksk-raw-examp.csv: ksk-zerofilled.csv ../zerofilled2rawmphon.py
 	python3 ../zerofilled2rawmphon.py $< $@

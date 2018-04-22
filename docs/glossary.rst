@@ -8,15 +8,14 @@ Glossary
 
 .. glossary::
 
-  morph
-    A part of the surface form which is said to correspond to a morpheme, e.g. in ``kadulla`` the part ``kadu`` (street) and the part ``lla`` (on) are morphs.
+   morph
+     A part of the surface form which is said to correspond to a morpheme, e.g. in ``kadulla`` the part ``kadu`` (street) and the part ``lla`` (on) are morphs.
 
-
-  input-symbol
-    A symbol which is input to a FST.  In Xerox XFST jargon, input-symbols are the *upper symbols* and sometimes the *lexical symbols*.
+   input-symbol
+     A symbol which is input to a FST.  In Xerox XFST jargon, input-symbols are the *upper symbols* and sometimes the *lexical symbols*.
 
    output-symbol
-     A symbol which a FST is said to output.  In Xerox XFST jargon, output-symbols are *lower symbols* or *surface symbols*.
+    A symbol which a FST is said to output.  In Xerox XFST jargon, output-symbols are *lower symbols* or *surface symbols*.
 
    morphophoneme
      An abstract symbol which denotes the alternation of surface characters in a position within a morpheme. E.g. ``{td}`` could denote the alternation between ``t`` and ``d``.  The names of the morphophonemes are chosen by the linguist who writes a two-level grammar.  Morphophonemes are always input-symbols to the two-level rules.

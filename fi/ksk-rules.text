@@ -97,7 +97,7 @@ OPEN = Vo ((VØ) {ij}:i|{ØiØ}:) [Ci Vo|:Ø* END] ;
 
 {ØhØtØØ}:h /<= _ ;
 {ØhØtØØ}:t => {ØeØeØ}:Ø {Øt}:t {aä}: _ ;
-{ØhØtØØ}:Ø => _ :{ØeØeØ}:Ø END|{ØeØeØ}:e|{ØeØeØ}:Ø {ij}:
+{ØhØtØØ}:Ø => _ {ØeØeØ}:Ø END|{ØeØeØ}:e|{ØeØeØ}:Ø {ij}:
     ! askele<> askele<t>ta askele<>na askele<>ita
 
 {iieØ}:Ø <=> _ {ij}: e ;
