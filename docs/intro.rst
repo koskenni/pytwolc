@@ -126,8 +126,7 @@ Definitions
 
 A definition assigns a name for a regular two-level expressionn.
 
-.. warning:: The program may tilt!
-	     But it was ignored
+.. warning:: The program is under development and it may tilt!
 
 
 ----------
