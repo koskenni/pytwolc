@@ -5,6 +5,8 @@ alpha.twolc
 *.bak.*
 *.fst
 *.log
+docs/_*
+docs/Makefile
 history*
 parser.out
 parsetab.py

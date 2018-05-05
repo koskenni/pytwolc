@@ -38,6 +38,9 @@ Glossary
    alignment
      The process of making allomorphs equal length and make them to correspond each other phoneme by phoneme.  Alignment consists of adding zero symbols as needed so that the phonemes in the same position are phonologically similar.  Onc could align, e.g. ``
 
+   raw morphophoneme
+     A combination of phonemes which correspond to each other as a result of alignment, e.g. if ``käsi``, ``käde``, ``käte``, ``käs`` and ``kät`` are aligned, we get raw morphophonemes such as ``kkkk`` or ``sdtst``.  Raw morhpphonemes are usually renamed to morphophonemes, e.g. ``k`` or ``{tds}``
+
    deletion
      Deletion is said to occur when a phoneme in a in a morph corresponds to zero in another morph of the same morpheme.  Cf. epenthesis.
 

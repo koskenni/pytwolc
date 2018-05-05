@@ -111,7 +111,7 @@ Rule formalism in the simplified two-level model
 The simplified two-level grammar consists of one or more lines where each line may be either a *definition*, a *rule* or just a *comment*.  Definitions and rules are made out of *regular two-level expressions*.  Comment lines or empty lines are ignored when the grammar is compiled into finite-state transducers (FSTs).  Comment lines start with an exclamation mark (!) at the first non-blank column, e.g.::
 
   ! trisyllabic word structure
-
+ 
 Regular two-level expressions
 =============================
 
@@ -150,10 +150,27 @@ References
 		   Palo Alto, California, USA.
 
 .. [karttunen1993] Lauri Karttunen, 1993: "Finite-state Constraints",
-		   in *Proceedings of the International Conference on Current
-                   Issues in Computational Linguistics*, June 10-14, 1991. 
-                   Universiti Sains Malaysia, Penang, Malaysia},
-		   pp. 173-194.
+		   in *Proceedings of the International Conference on
+		   Current Issues in Computational Linguistics*, June
+		   10-14, 1991.  Universiti Sains Malaysia, Penang,
+		   Malaysia, pp. 173-194.
+
+.. [koskenniemi2013b] Kimmo Koskenniemi, 2013: "Finite-state relations
+		      between two historically closely related
+		      languages" in *Proceedings of the workshop on
+		      computational historical linguistics at NODALIDA
+		      2013*, May 22-24, 2013, Oslo, Norway, NEALT
+		      Proceedings Series 18, number 87, pages 53-53,
+		      Linköping University Electronic Press, ISSN
+		      1650-3740,
+		      http://www.ep.liu.se/ecp/article.asp?issue=087\&article=004
+
+.. [koskenniemi2017] Kimmo Koskenniemi, 2017: "Aligning phonemes using
+                  finte-state methods", in *Proceedings of the 21st
+                  Nordic Conference on Computational Linguistics*,
+                  May, 2017, Gothenburg, Sweden, Association for
+                  Computational Linguistics, pages 56-64,
+                  http://www.aclweb.org/anthology/W17-0207
 
 ..
     bibliography:: kmkbib.bib

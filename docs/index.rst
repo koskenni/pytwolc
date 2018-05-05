@@ -13,15 +13,16 @@ Welcome to twol's documentation!
    :includehidden:
 
    intro
+   alignment
+   twdiscov
    technical
+   glossary
+   genindex
    twrule
    cfg
    fs
    twexamp
-   twdiscov
    twparsere
-   glossary
-   genindex
 
 
 Indices and tables
