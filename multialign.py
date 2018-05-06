@@ -1,6 +1,10 @@
-import re, sys, hfst
+"""Aligns multiple morphs according to phonological features
+by adding zero symbols.
+"""
 
-verbosity = 0
+import re, sys
+import hfst
+import cfg
 
 vowel_features = {
     'j':('Semivowel','Front','Unrounded'),
@@ -17,6 +21,9 @@ vowel_features = {
     "´":('Length','Length','Length'),
     'Ø':('Zero','Zero','Zero')
     }
+
+"""Phonological distinctive features of vowels which can be used of
+estimating similarities between phonemes."""
 
 #cmo = {'Semivowel':0.0, 'Close':1.0, 'Mid':2.0, 'Open':3.0}
 #fb = {'Front':1, 'Back':2}
@@ -69,12 +76,16 @@ consonant_features = {
     'Ø':('Zero', 'Zero', 'Zero')
 }
 
+"""Phonological distinctive features of consonants to be used when
+estimating similarities between phonemes.  """
+
 pos = {'Bilab':0.0, 'Labdent':1.0, 'Alveolar':2.0,
         'Postalveolar':2.5, 'Palatal':3.0, 'Velar':3.0, 'Glottal':4.0}
 voic = {'Unvoiced':1, 'Voiced':2}
 consonants = set(consonant_features.keys())
 
 def cons_set_weight(subset):
+    """Computes a weight for a subset of consonants."""
     w = 0.0
     pmin, pmax = 100.0, 0.0
     vmin, vmax = 100.0, 0.0
@@ -100,37 +111,43 @@ def cons_set_weight(subset):
     return w
 
 mphon_separator = ''
+"""Separator used when forming names of raw morphophonemes"""
+
 weight_cache = {}
 
 def mphon_weight(mphon):
+    """Computes a weight for a raw morphophoneme"""
     global  vowels, consonants, mphon_separator, weight_cache
     if mphon in weight_cache:
         return weight_cache[mphon]
     if mphon_separator == '':
         phon_list = list(mphon)
-    else: phon_list = mphon.split(mphon_separator)
+    else:
+        phon_list = mphon.split(mphon_separator)
     phon_set = set(phon_list)
-    if len(phon_set) == 1 and 'Ø' in phon_set:
-        weight = 100.0
+    if phon_set == {'Ø'}:
+        weight = 100.0        # all-zero morphophonemes must be allowed
     elif len(phon_set) == 1:
         weight = 0.0
     elif phon_set <= consonants:
-        # return float(len(phon_set))
         weight = cons_set_weight(phon_set)
     elif phon_set <= vowels:
-        # return float(len(phon_set))
         weight = vowel_set_weight(phon_set)
     else:
         #weight = float('Infinity')
         weight = 1000000.0
     weight_cache[mphon] = weight
+    if cfg.verbosity >= 35:
+        print("mphon:", mphon, "weight:", weight)
     return weight
 
 def mphon_is_valid(mphon):
+    """Tests if a raw morphophoneme is all consonants or all vowels"""
     global  vowels, consonants, mphon_separator
     if mphon_separator == '':
         phon_list = list(mphon)
-    else: phon_list = mphon.split(mphon_separator)
+    else:
+        phon_list = mphon.split(mphon_separator)
     phon_set = set(phon_list)
     if phon_set <= vowels:
         return True
@@ -152,65 +169,89 @@ def fst_to_fsa(FST):
     RES = hfst.HfstTransducer(FB)
     return RES
 
-def remove_bad_transitions(FST, weighting, max_weight_allowed):
-    OLD = hfst.HfstBasicTransducer(FST)
-    NEW = hfst.HfstBasicTransducer()
-    for state in OLD.states():
-        NEW.add_state(state)
-        if OLD.is_final_state(state):
-            NEW.set_final_weight(state, 0.0)
-        for arc in OLD.transitions(state):
+def remove_bad_transitions(fsa):
+    """Copy the FSA excluding transitions with consonants and vowels"""
+    old_bfsa = hfst.HfstBasicTransducer(fsa)
+    new_bfsa = hfst.HfstBasicTransducer()
+    for state in old_bfsa.states():
+        new_bfsa.add_state(state)
+        if old_bfsa.is_final_state(state):
+            new_bfsa.set_final_weight(state, 0.0)
+        for arc in old_bfsa.transitions(state):
             in_sym = arc.get_input_symbol()
             if mphon_is_valid(in_sym):
                 target_st = arc.get_target_state()
-                NEW.add_transition(state, target_st, in_sym, in_sym, 0)
-    RES = hfst.HfstTransducer(NEW)
-    RES.minimize()
-    return RES
+                new_bfsa.add_transition(state, target_st, in_sym, in_sym, 0)
+    result_fsa = hfst.HfstTransducer(new_bfsa)
+    result_fsa.minimize()
+    if cfg.verbosity >= 20:
+        print("remove_bad_transitions:")
+        print(result_fsa)
+    return result_fsa
 
 def shuffle_with_zeros(string, target_length):
-    S = hfst.fst(string)
+    """Return a fsa where zeros are inserted in all possible ways
+    
+    string -- the string to which zero symbols are inserted
+
+    target_length -- how long the strings after insertions must be
+
+    Returns a fsa which accepts all the strings with the inserted zeros.
+    All strings have exactly target_length symbols.
+    """
+    result_fsa = hfst.fst(string)
     l = len(string)
     if l < target_length:
         n = target_length - l
-        Z = hfst.regex(' '.join(n * 'Ø'))
-        S.shuffle(Z)
-    S.minimize()
-    S.set_name(string)
-    return S
+        n_zeros_fsa = hfst.regex(' '.join(n * 'Ø'))
+        result_fsa.shuffle(n_zeros_fsa)
+    result_fsa.minimize()
+    result_fsa.set_name(string)
+    if cfg.verbosity >= 30:
+        print("shuffle_with_zeros:")
+        print(result_fsa)
+    return result_fsa
 
-def set_weights(FST, weighting):
-    global verbosity
-    B = hfst.HfstBasicTransducer(FST)
-    for state in B.states():
-        for arc in B.transitions(state):
+def set_weights(fsa):
+    """Sets weights to transitions using mphon_weight()
+    """
+    bfsa = hfst.HfstBasicTransducer(fsa)
+    for state in bfsa.states():
+        for arc in bfsa.transitions(state):
             tostate = arc.get_target_state()
             insym = arc.get_input_symbol()
             outsym = arc.get_output_symbol()
-            w = weighting(insym)
+            w = mphon_weight(insym)
             arc.set_weight(w)
-    RES = hfst.HfstTransducer(B)
-    if verbosity >=20:
-        print("set_weights:\n", RES)
-    return RES
+    weighted_fsa = hfst.HfstTransducer(bfsa)
+    if cfg.verbosity >=20:
+        print("set_weights:\n", weighted_fsa)
+    return weighted_fsa
 
-def multialign(strings, target_length, max_weight_allowed=1000.0):
-    global verbosity
+def multialign(strings, target_length):
+    """Align a list of strings by making them target_lenght long
+    
+    Zero symbols are added optimally so that the sets of corresponding
+    phonemes are similar.  Note that the alignment need not be feasible
+    if the target lenght is too small and also that there may be
+    all-zero correspondences if the target length is too long.
+    """
     s1 = strings[0]
-    R = shuffle_with_zeros(s1, target_length)
+    fsa = shuffle_with_zeros(s1, target_length)
     for string in strings[1:]:
-        S = shuffle_with_zeros(string, target_length)
-        R.cross_product(S)
-        T = fst_to_fsa(R)
-        R = remove_bad_transitions(T, mphon_weight, max_weight_allowed)
-        R.minimize()
-    RES = set_weights(R, mphon_weight)
-    if verbosity >=20:
-        print("multialign:\n", RES)
-    return RES
+        suf_fsa = shuffle_with_zeros(string, target_length)
+        fsa.cross_product(suf_fsa)      # results in a transducer
+        prod_fsa = fst_to_fsa(fsa)      # encodes the fst as a fsa
+        fsa = remove_bad_transitions(prod_fsa)
+        fsa.minimize()
+    wfsa = set_weights(fsa)
+    if cfg.verbosity >=20:
+        print("multialign:\n", wfsa)
+    return wfsa
 
 def list_of_aligned_words(sym_lst):
-    if not sym_lst: return ''
+    if not sym_lst:
+        return []
     l = len(sym_lst[0])
     res = []
     for i in range(l):
@@ -218,11 +259,19 @@ def list_of_aligned_words(sym_lst):
         res.append(''.join(syms))
     return res
 
-def prefer_final_zeros(results):
-    best_weight = results[0][0]
+def prefer_final_zeros(sym_lst_lst):
+    """Select the symbol pair sequence where the zeros are near the end
+
+    sym_lst_lst -- a list of results, each consisting of a list
+    of symbols (already selected according to other criteria)
+
+    Returns a sequence of (single) symbols where the zeros occur near
+    the end.  This normalizes gemination and lengthening so that the
+    latter component is the one which alternates with a zero.
+    """
     best_bias = -1
-    for sym_pair_seq in results:
-        lst = [isym for isym in sym_pair_seq]
+    for sym_lst in sym_lst_lst:
+        lst = [isym for isym in sym_lst]
         bias = 0
         i = 0
         for isym in lst:
@@ -231,8 +280,8 @@ def prefer_final_zeros(results):
         #print('  '.join(lst), w, bias) ##
         if bias > best_bias:
             best_bias = bias
-            best = lst
-    return best
+            best_sym_lst = lst
+    return best_sym_lst
 
 def classify_sym(sym):
     char_set = set(sym)
@@ -250,6 +299,17 @@ consonant_re = '(' + '|'.join(consonant_lst) + ')'
 vowel_re = '(' + '|'.join(vowel_lst) + ')'
 
 def prefer_syl_struct(results):
+    """Selects alignments according to syllable structure and zero count
+
+    results -- list of tuples (weight, sym_pair_seq) (out of which the
+    result list is chosen).  The sym_pair_seq is in the format that
+    hfst.extract_paths() produces.
+
+    Returns a list the best alternatives, i.e. those getting the lowest
+    scores of the sum of syllable count and the number of instances
+    where the former component of a CC or VV corresponds to zero.
+    Elements in the returned list are sequences of symbols.
+    """
     best_weight = results[0][0]
     best_bias = 99999
     best_lst = []
@@ -271,24 +331,34 @@ def prefer_syl_struct(results):
     #print('best:', best, '\n')####
     return best_lst
 
-def aligner(words, max_zeros_in_longest, line, verbosity=0,
-                max_weight_allowed=1000.0):
+def aligner(words, max_zeros_in_longest, line):
+    """Aligns a list of words according to similarity of their phonemes
+
+    words -- a list of words (or morphs) to be aligned
+
+    max_zeros_in_longest -- maximum number of zeros to be inserted into
+    the longest word
+
+    line -- the input line (used only in warning messages)
+
+    Returns the best alignment as a list of raw morphophoneme.
+    """
     max_length = max([len(x) for x in words])
-    RES = hfst.empty_fst()
-    for m in range(max_length, max_length + max_zeros_in_longest):
+    weighted_fsa = hfst.empty_fst()
+    for m in range(max_length, max_length + max_zeros_in_longest + 1):
         R = multialign(words, m)
         if R.compare(hfst.empty_fst()):
-            if verbosity > 1:
+            if cfg.verbosity > 1:
                 print("target length", m, "failed")
             continue
-        RES.disjunct(R)
-        RES.minimize()
-    RES.n_best(10)
-    RES.minimize() # accepts 10 best results
-    results = RES.extract_paths(output='raw')
-    for w, sym_pair_seq in results:
-        lst = [isym for isym, outsym in sym_pair_seq]
-        if verbosity >= 5:
+        weighted_fsa.disjunct(R)
+        weighted_fsa.minimize()
+    weighted_fsa.n_best(10)
+    weighted_fsa.minimize() # accepts 10 best results
+    results = weighted_fsa.extract_paths(output='raw')
+    if cfg.verbosity >= 5:
+        for w, sym_pair_seq in results:
+            lst = [isym for isym, outsym in sym_pair_seq]
             mpw = ["{}::{:.2f}".format(x, mphon_weight(x)) for x in lst]
             print(" ".join(mpw), "total weight = {:.3f}".format(w))
     if len(results) < 1:
@@ -302,25 +372,26 @@ if __name__ == "__main__":
     import argparse
     arpar = argparse.ArgumentParser("python3 multialign.py")
     arpar.add_argument("-l", "--layout",
-                       choices=['vertical','list','horizontal'],
-                       help="output layout",
-                       default="vertical")
+        choices=['vertical','list','horizontal'],
+        help="output layout",
+        default="vertical")
     arpar.add_argument("-v", "--verbosity",
-                       help="level of diagnostic output",
-                       type=int, default=0)
+        help="level of diagnostic output",
+        type=int, default=0)
     arpar.add_argument("-z", "--zeros",
-                       help="number of extra zeros beyond the minimum",
-                       type=int, default=1)
+        help="number of extra zeros beyond the minimum",
+        type=int, default=1)
     args = arpar.parse_args()
-    verbosity = args.verbosity
+    cfg.verbosity = args.verbosity
     
     for line in sys.stdin:
         words = line.strip().split(sep=' ')
         ##words = sorted(words, key=lambda w: -len(w))
 
-        best = aligner(words, args.zeros, line, args.verbosity)
+        best = aligner(words, args.zeros, line)
 
-        best2 = [re.sub(r'^([a-zšžŋđüõåäöáâ`´])\1\1*$', r'\1', cc) for cc in best]
+        best2 = [re.sub(r'^([a-zšžŋđüõåäöáâ`´])\1\1*$', r'\1', cc)
+                 for cc in best]
         # print('best =', best2, "\n", ' '.join(best2)) ##
         if args.layout == "horizontal":
             print(' '.join(best2))

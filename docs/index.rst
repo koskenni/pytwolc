@@ -18,19 +18,20 @@ Welcome to twol's documentation!
    technical
    glossary
    genindex
-   twrule
+   py-modindex
+   twparsere
    cfg
    fs
    twexamp
-   twparsere
+   twrule
 
 
 Indices and tables
 ==================
 
-* :ref:`modindex`
 * :ref:`search`
 
 ..
+   * :ref:`modindex`
    * :ref:`genindex`
 
