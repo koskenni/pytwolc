@@ -5,6 +5,8 @@ alpha.twolc
 *.bak.*
 *.fst
 *.log
+*#*
+.DS_Store
 docs/_*
 docs/Makefile
 history*
