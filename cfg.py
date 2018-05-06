@@ -3,7 +3,7 @@
 __author__ = """© Kimmo Koskenniemi, 2018"""
 
 import hfst, re
-hfst.set_default_fst_type(hfst.ImplementationType.FOMA_TYPE)
+#hfst.set_default_fst_type(hfst.ImplementationType.FOMA_TYPE)
 
 verbosity = 0
 definitions = {}
@@ -63,3 +63,6 @@ def sympair2pairsym(insym, outsym):
         return(insym)
     else:
         return(insym + ':' + outsym)
+
+if __name__ == "__main__":
+    print("cgf module is noe meant to be used as a script")
