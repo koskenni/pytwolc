@@ -1,6 +1,6 @@
-==
-fs
-==
+=====
+fs.py
+=====
 
 Functions of the ``fs`` module
 

@@ -1,20 +1,25 @@
 import re
 import csv
 import argparse
-argparser = argparse.ArgumentParser("python3 raw2named.py",
-                                    description="joins and renames raw morphophonemes")
-argparser.add_argument("input",
-                        default="ksk-raw-examp.csv",
-                        help="aligned examples as a CSV file")
-argparser.add_argument("output",
-                        default="ksk-renam-examp.pstr",
-                        help="renamed examples as a space separated pair symbol strings")
-argparser.add_argument("names",
-                        default="raw_mphons.csv",
-                        help="mapping from raw to neat morphophonemes as a CSV file")
-argparser.add_argument("-d", "--delimiter",
-                        default=",",
-                        help="delimiter between the two fields")
+argparser = argparse.ArgumentParser(
+    "python3 raw2named.py",
+    description="joins and renames raw morphophonemes")
+argparser.add_argument(
+    "input",
+    default="ksk-raw-examp.csv",
+    help="aligned examples as a CSV file")
+argparser.add_argument(
+    "output",
+    default="ksk-renam-examp.pstr",
+    help="renamed examples as a space separated pair symbol strings")
+argparser.add_argument(
+    "names",
+    default="raw_mphons.csv",
+    help="mapping from raw to neat morphophonemes as a CSV file")
+argparser.add_argument(
+    "-d", "--delimiter",
+    default=",",
+    help="delimiter between raw name and new name fields")
 args = argparser.parse_args()
 
 mphon_name = { }

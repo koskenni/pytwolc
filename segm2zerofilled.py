@@ -4,35 +4,42 @@
 """
 
 import argparse
-argparser = argparse.ArgumentParser("python3 parad2zerofilled.py",
-                        description="Aligns a set of word forms with morph boundaries")
-argparser.add_argument("input",
-                        default="ksk-seg-examp.csv",
-                        help="moprheme names and segmented example words as a CSV file")
-argparser.add_argument("output",
-                        default="ksk-alig-examp.csv",
-                        help="example words plus zero-filled aligned forms as a CSV file")
-argparser.add_argument("-s", "--morph-separator",
-                        default=".",
-                        help="separator between morphs in the word form")
-argparser.add_argument("-d", "--csv-delimiter",
-                        default=",",
-                        help="delimiter between the fields")
-argparser.add_argument("-n", "--name-separator",
-                        default=" ",
-                        help="separator between morpheme names in the morpheme list")
-argparser.add_argument("-z", "--zero-symbol",
-                        default="Ø",
-                           help="symbol to be inserted in word forms to align them")
-argparser.add_argument("-v", "--verbosity", default=0, type=int,
-                        help="level of diagnostic and debugging output")
+argparser = argparse.ArgumentParser(
+    "python3 parad2zerofilled.py",
+    description="Aligns a set of word forms with morph boundaries")
+argparser.add_argument(
+    "input",
+    default="ksk-seg-examp.csv",
+    help="moprheme names and segmented example words as a CSV file")
+argparser.add_argument(
+    "output",
+    default="ksk-alig-examp.csv",
+    help="example words plus zero-filled aligned forms as a CSV file")
+argparser.add_argument(
+    "-s", "--morph-separator",
+    default=".",
+    help="separator between morphs in the word form")
+argparser.add_argument(
+    "-d", "--csv-delimiter",
+    default=",",
+    help="delimiter between the fields")
+argparser.add_argument(
+    "-n", "--name-separator",
+    default=" ",
+    help="separator between morpheme names in the morpheme list")
+argparser.add_argument(
+    "-z", "--zero-symbol",
+    default="Ø",
+    help="symbol to be inserted in word forms to align them")
+argparser.add_argument(
+    "-v", "--verbosity", default=0, type=int,
+    help="level of diagnostic and debugging output")
 args = argparser.parse_args()
 
 import re
 import csv
 import collections
 from orderedset import OrderedSet
-import json
 
 # STEP 1:
 # Read in the segmented words and collect the allomorphs of each morpheme

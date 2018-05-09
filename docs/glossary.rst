@@ -23,13 +23,16 @@ Glossary
    surface symbol
      Surface symbols are phonemes or the symbols which are used to write word forms.  For two-level rules, surface symbols are output-symbols.
 
+   phoneme
+     For the purposes of writing two-level rules and analyzers, phonemes often correspond to letters in a near-phonemic writing system.  In linguistics, phonemes are units which represent similar phohes whose differences do not carry any additional information.  The choice of a phone in a phoneme might be irrelevant or sometimes determined by the surrounding context of phones.
+
    morphophoneme
      An abstract symbol which denotes the alternation of surface characters in a position within a morpheme. E.g. ``{td}`` could denote the alternation between ``t`` and ``d``.  The names of the morphophonemes are chosen by the linguist who writes a two-level grammar.  Morphophonemes are always input-symbols to the two-level rules.
 
    zero
      A placeholder which indicates that in some other allomorphs there is some phoneme in this position.  By inserting zeros, one makes the allomorphs same length.  Zero is not a morphophoneme and it never occurs in morphophonemic representations.
 
-   morphophomenic representation
+   morphophonemic representation
      An abtract representation which is a kind of summary of the concrete surface morphs.  Two-level rules describe the relation between the lexical and the surface level.  Corresponds to the sequence of *input symbols* of two-level rules.  The morphophonemic representation is sometimes also called the *lexical level* or the *upper level*.
 
    surface representation

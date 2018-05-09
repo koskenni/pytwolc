@@ -14,6 +14,7 @@ Welcome to twol's documentation!
 
    intro
    alignment
+   morphophon
    twdiscov
    technical
    glossary

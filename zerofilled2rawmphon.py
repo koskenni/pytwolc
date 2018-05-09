@@ -14,9 +14,6 @@ languages).
 © Kimmo Koskenniemi, 2018. This is free software under GPL 3 license.
 """
 
-import re
-import csv
-import collections
 
 principal_set = {"", "GEN", "PTV", "ESS", "PL PTV"}
 """"Set of principal forms or principal parts, i.e. the forms which
@@ -40,28 +37,38 @@ feat2mphons = {
     }
 
 import argparse
-argparser = argparse.ArgumentParser("python3 zerofilled2raw.py",
-                        description="Forms raw morphophonemes out of zero-filled morphs")
-argparser.add_argument("input",
-                       default="ksk-zerofilled.csv",
-                       help="zero-filled example words as a CSV file")
-argparser.add_argument("output",
-                       default="ksk-raw-examp.csv",
-                       help="example word with raw morhpophonemes as a CSV file")
-argparser.add_argument("-s", "--morph-separator",
-                       default=".",
-                       help="separator between morphs in the word form")
-argparser.add_argument("-d", "--csv-delimiter",
-                       default=",",
-                       help="delimiter between the fields")
-argparser.add_argument("-n", "--name-separator",
-                       default=" ",
-                       help="separator between morpheme names in the morpheme list")
-argparser.add_argument("-z", "--zero-symbol",
-                       default="Ø",
-                       help="symbol inserted in word forms to align them")
-argparser.add_argument("-v", "--verbosity", default=0, type=int,
-                       help="level of diagnostic and debugging output")
+argparser = argparse.ArgumentParser(
+    "python3 zerofilled2raw.py",
+    description="Forms raw morphophonemes out of zero-filled morphs")
+argparser.add_argument(
+    "input",
+    default="ksk-zerofilled.csv",
+    help="zero-filled example words as a CSV file")
+argparser.add_argument(
+    "output",
+    default="ksk-raw-examp.csv",
+    help="example word with raw morhpophonemes as a CSV file")
+argparser.add_argument(
+    "-s", "--morph-separator",
+    default=".",
+    help="separator between morphs in the word form")
+argparser.add_argument(
+    "-d", "--csv-delimiter",
+    default=",",
+    help="delimiter between the fields")
+argparser.add_argument(
+    "-n", "--name-separator",
+    default=" ",
+    help="separator between morpheme names in the morpheme list")
+argparser.add_argument(
+    "-z", "--zero-symbol",
+    default="Ø",
+    help="symbol inserted in word forms to align them")
+argparser.add_argument(
+    "-v", "--verbosity",
+    default=0,
+    type=int,
+    help="level of diagnostic and debugging output")
 args = argparser.parse_args()
 
 import re
