@@ -11,7 +11,37 @@ surface forms and their underlying lexical or morphophonemic forms.
 It differs from the classical generative phonology by explaining the
 alternations using parallel rules rather than as a cascade of
 successive rules, see [karttunen1993]_ for a demonstration of this
-difference. 
+difference.
+
+------------
+Overall plan
+------------
+
+Various methods and programs programs have been developed in order to simplify the whole process of creating a morphological two-level grammar.  It can be summarized using the following steps:
+
+1. A linguist selects a representative set of example words.
+
+2. The linguist marks the morph boundaries in the example words.
+
+3. A program aligns the morphs in the examples by adding zero symbols.  The zero-filled morphs are the same length and phonemes in corresponding positions are phonologically similar.
+
+4. A program produces example words as sequences of pair-strings where the left component of each pair is a raw morphophoneme implied by the alignment.  This is the initial version of the example file for designing and testing rules.
+
+5. Using a version of the example file, one selects one morphophoneme at a time and:
+
+   a. Lets a program produce tentative raw two-level rules for the morphophoneme.
+
+   b. The linguists renames the raw morphophoneme and possibly merges it with some similar raw morphophonemes, and thus produces a revised version of the example file.
+
+   c. The linguist tunes the raw two-level rule into a more general version when there appears to be need.
+
+   d. A program compiles the rule and produces a set of positive and a set of negative test cases.  The program checks that all positive examples pass the rule and that all negative examples are rejected.  The program reports any failures.
+
+   e. If all tests passed for this morphophoneme, proceed to the next morphophoneme.  If rejected positive or accepted negative examples were reported, check and revise the rules (or possibly the examples) and repeat from step (c).
+
+When the process is complete, we have a set of two-level rules which accept all our examples and probably a large set of other word forms with similar morphophonemic alternatilns.
+
+
 
 ------------------------
 Changes since hfst-twolc
