@@ -102,8 +102,7 @@ for morpheme in sorted(morphs_of_morpheme.keys()):
         print("words:", words)
     nz = 1 if len(words) > 10 else 2
     aligned_sym_seq = aligner(words,
-                              nz, morpheme, verbosity=1,
-                              max_weight_allowed=10000.0)
+                              nz, morpheme)
     if args.verbosity >= 20:
         print("aligned_sym_seq:", aligned_sym_seq)
     alignments[morpheme] = aligned_sym_seq

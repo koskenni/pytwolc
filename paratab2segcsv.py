@@ -38,13 +38,13 @@ d = {}
 morph_set = {}
 seg_ex_list = []
 with open(args.input, "r") as csvfile:
-    reader = csv.DictReader(csvfile, delimiter=';')
+    reader = csv.DictReader(csvfile, delimiter=args.csv_delimiter)
     for row in reader:
         for column_label, words in row.items(): # process each cell of the row
             #words = row[column_label] # space separated string of words
             if not words or column_label in {"ID", "KSK"}:
                 continue
-            morpheme_list = column_label.split('.')
+            morpheme_list = column_label.split(args.name_separator)
             if morpheme_list[0] == 'STM':
                 morpheme_list[0] = row['ID']
             words_clean = re.sub(r'[][()]', '', words)

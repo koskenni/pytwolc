@@ -15,27 +15,6 @@ languages).
 """
 
 
-principal_set = {"", "GEN", "PTV", "ESS", "PL PTV"}
-""""Set of principal forms or principal parts, i.e. the forms which
-uniquely determine the morphophonemic variations that may occur within
-the stem """
-
-feat2mphons = {
-    '': '',
-    'ESS': '{nrs} {aä}',
-    'GEN': 'n',
-    'GENiden': '{dt} {Øt} e n',
-    'GENien': 'e n',
-    'GENin': 'i n',
-    'ILL': '{Øh} {V} n',
-    'ILLseen': 's e {Øe} n',
-    'ILLsiin': 's i {iØ} n',
-    'INE': 's s {aä}',
-    'PL': '{ij}',
-    'PLGENten': 't e n',
-    'PTV': '{Øt} {aä}',
-    }
-
 import argparse
 argparser = argparse.ArgumentParser(
     "python3 zerofilled2raw.py",
@@ -48,6 +27,10 @@ argparser.add_argument(
     "output",
     default="ksk-raw-examp.csv",
     help="example word with raw morhpophonemes as a CSV file")
+argparser.add_argument(
+    "affix_info",
+    default="demo-affix-info.csv",
+    help="principal forms and morphophonemic affixes as a CSV file")
 argparser.add_argument(
     "-s", "--morph-separator",
     default=".",
@@ -75,7 +58,26 @@ import re
 import csv
 from collections import OrderedDict
 from orderedset import OrderedSet
-    
+
+principal_set = OrderedSet()
+""""Set of principal forms or principal parts, i.e. the forms which
+uniquely determine the morphophonemic variations that may occur within
+the stem """
+
+feat2mphons = {}
+
+# Read in the feature combinations of principal forms and
+# the morphophonemic representations of affix features
+with open(args.affix_info, "r") as afffil:
+    affrdr = csv.reader(afffil, delimiter=args.csv_delimiter)
+    for row in affrdr:
+        if row[1] == '+':
+            principal_set.add(row[0])
+        else:
+            feat2mphons[row[0]] = row[1]
+print("principal_set =", principal_set)
+print("feat2mphons =", feat2mphons)
+
 # Read in the morpheme names and the zero-filled morphs
 
 stem_morpheme_data = OrderedDict()
@@ -93,7 +95,7 @@ with open(args.input, "r") as infil:
             continue
         name_lst = names.split(args.name_separator, maxsplit=1)
         stem_name = name_lst[0]
-        form_name = name_lst[1] if len(name_lst) > 1 else ""
+        form_name = " ".join(name_lst[1:]) if len(name_lst) > 1 else ""
         zerof_morph_lst = zerof_morphs.split(args.morph_separator, maxsplit=1)
         if stem_name not in stem_morpheme_data:
             stem_morpheme_data[stem_name] = []

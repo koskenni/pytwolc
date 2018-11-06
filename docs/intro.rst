@@ -17,6 +17,8 @@ difference.
 Overall plan
 ------------
 
+The present approach bases itself on a *set of carefully selected examples* of word forms.  The set of examples ought to cover the phenomena which the rules are expected to govern.  If so, one may expect that the method described below will first produce *morphophonemic representations* for stems and affix morphemes and then a *two-level rule* for each morphophoneme which dictates in what contexts the morphophoneme may correspond to what surface symbols.  Each morphophoneme may be treated *separately* in an order which the linguist finds convenient.
+
 Various methods and programs programs have been developed in order to simplify the whole process of creating a morphological two-level grammar.  It can be summarized using the following steps:
 
 1. A linguist selects a representative set of example words.

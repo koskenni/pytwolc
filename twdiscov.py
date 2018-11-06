@@ -178,7 +178,8 @@ if __name__ == "__main__":
     cfg.verbosity = args.verbosity
     
     twexamp.read_examples(filename=args.examples, build_fsts=False)
-    print("--- all examples read in ---")
+    if cfg.verbosity > 0:
+        print("--- all examples read in ---")
     
     for insym in cfg.input_symbol_set:
         pair_symbols_for_input[insym] = set()
