@@ -10,14 +10,16 @@ vowel_features = {
     'j':('Semivowel','Front','Unrounded'),
     'i':('Close','Front','Unrounded'),
     'y':('Close','Front','Rounded'),
+    'ü':('Close','Front','Rounded'),      # Estonian, IPA y
     'u':('Close','Back','Rounded'),
+    'õ':('Mid','Back','Unrounded'),       # Estonian - IPA ɤ (Close-Mid, Back, Unrounded)
     'e':('Mid','Front','Unrounded'),
-    'ö':('Mid','Front','Rounded'),
+    'ö':('Mid','Front','Rounded'),        # IPA ø
     'o':('Mid','Back','Rounded'),
-    'á':('Open','Front','Unrounded'),
-    'ä':('Open','Central','Unrounded'),
-    'â':('Open','Central','Unrounded'),
-    'a':('Open','Back','Unrounded'),
+    'á':('Open','Front','Unrounded'),     # Inari Sami, IPA a
+    'ä':('Open','Front','Unrounded'),     # Estonian, æ
+    'â':('Open','Central','Unrounded'),   # Inari Saami, IPA ɐ
+    'a':('Open','Back','Unrounded'),      # Finnish, IPA ɑ
     "´":('Length','Length','Length'),
     'Ø':('Zero','Zero','Zero')
     }
@@ -61,12 +63,12 @@ consonant_features = {
     'š':('Postalveolar','Unvoiced','Fricative'),
     'č':('Postalveolar','Unvoiced','Affricate'),
     's':('Alveolar','Unvoiced','Sibilant'),
-    'š':('Alveolar','Unvoiced','Sibilant'),
+    'š':('Alveolar','Unvoiced','Sibilant'),   # IPA ʃ
     'ž':('Alveolar','Voiced','Sibilant'),
     'l':('Alveolar','Voiced','Lateral'),
     'r':('Alveolar','Voiced','Tremulant'),
     'j':('Palatal','Voiced','Approximant'),
-    'ŋ':("Velar","Voiced","Nasalŋ"),
+    'ŋ':("Velar","Voiced","Nasalŋ"),      # Inari Sami
     'k':('Velar','Unvoiced','Stop'),
     'c':('Velar','Unvoiced','Stop'),
     'x':('Velar','Unvoiced','Stop'), ##

@@ -170,6 +170,7 @@ class TwolFstSemantics(object):
     def context(self, ast):
         lc = ast.left.copy() if ast.left else hfst.epsilon_fst()
         rc = ast.right.copy() if ast.right else hfst.epsilon_fst()
+        lc.substitute("END", "BEGIN")
         #print(lc)###
         #print(rc)###
         result = [(lc, rc)]
@@ -334,6 +335,12 @@ class TwolFstSemantics(object):
                 return result_fst
         cfg.error_message = "'" + string + "' is an invalid pair/definend symbol"
         raise FailedSemantics(cfg.error_message)
+
+    def boundary(self, ast):
+        result_fst = hfst.regex("END")
+        #print(result_fst)####
+        result_fst.set_name(".#.")
+        return result_fst
 
 def init(grammar_file='/Users/koskenni/github/pytwolc/twolcsyntax.ebnf'):
     """Initializes the module and compiles and returns a tatsu parser

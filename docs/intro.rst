@@ -2,22 +2,29 @@
 Simplified two-level model
 ==========================
 
-.. warning:: The PYTWOL program is still under development and so is this documentation
+.. note:: The PYTWOL program is still under development and so is this documentation
 
-The morphological two-level model dates back to [koskenniemi1983]_ and
-is characterized by the descritpion of phonological or
+The morphological two-level model dates back to [koskenniemi1983]_ and is characterized by the descritpion of phonological or
 morphophonological alternations as a direct relation between the
-surface forms and their underlying lexical or morphophonemic forms.
-It differs from the classical generative phonology by explaining the
-alternations using parallel rules rather than as a cascade of
-successive rules, see [karttunen1993]_ for a demonstration of this
-difference.
+surface forms and their underlying lexical or morphophonemic forms. It differs from the classical generative phonology by explaining the alternations using parallel rules rather than as a cascade of successive rules, see [karttunen1993]_ for a demonstration of this difference.
+
+Two-level rules are useful for describing inflected word forms in language which have phonemic alternations.  In such languages, the shapes of stems and affixes vary depending on phonological context.  The two-level model assumes that there is an underlying morphophonemic representation (as in classical generative phonology) but all rules which are needed, operate in parallel rather than in sequence.
+
+To construct a morphophonological description, one has do two important tasks: (1) to establish the underlying *representations* and (2) design *rules* which relate the underlying representations to the surface forms.  In the two-level model the representations are quite different from those in the standard generative phonology, i.e. they do not consist of plain phonemes.
 
 ------------
 Overall plan
 ------------
 
-The present approach bases itself on a *set of carefully selected examples* of word forms.  The set of examples ought to cover the phenomena which the rules are expected to govern.  If so, one may expect that the method described below will first produce *morphophonemic representations* for stems and affix morphemes and then a *two-level rule* for each morphophoneme which dictates in what contexts the morphophoneme may correspond to what surface symbols.  Each morphophoneme may be treated *separately* in an order which the linguist finds convenient.
+The present approach is based on a *set of carefully selected examples* of word forms.  The set of examples ought to cover the phenomena which the rules are expected to govern.  If so, one may expect that the method described below will first produce *morphophonemic representations* for stems and affix morphemes and then a *two-level rule* for each morphophoneme which dictates in what contexts the morphophoneme may correspond to what surface symbols.  Each morphophoneme may be treated *separately* in an order which the linguist finds convenient.
+
+This set of documents demonstrates methods and tools for:
+
+1. Establishing the morphophonemic representations (almost mechanically) out of a table of inflectional paradigms.  The method and the tools are described in a separate part of this documentation: :ref:`representations`.
+
+2. Finding raw candidates for the two-level rules.  The method and the use of the program is described in a separate part of this documentatio: :ref:`discovery`.
+
+3. Authoring a two-level rule and testing it immediately.  The testing is has been improved so that it consists of two phases: (a) the rule is checked against the examples and the program reports any examples not accepted by the rule, and (b) a set of negative examples is generated from the positive ones and the program checks that the rule discards all of them.  The revised rule formalism is described in part :ref:`formalism`, the use of the compiler in part :ref:`compiling`.  For the interested reader, some details of the methods and algorithms of the compilation process are documented separately: :ref:technical.  The compiler can also test the whole rule grammar against examples.  When a rule has been written for all morphophonemes, the program can make a more comprehensive check that the grammar is complete and has all necessary constraints.
 
 Various methods and programs programs have been developed in order to simplify the whole process of creating a morphological two-level grammar.  It can be summarized using the following steps:
 
@@ -168,8 +175,8 @@ References
 .. [koskenniemi1983] Kimmo Koskenniemi, 1983,
 		     *Two-level Morphology: A General Computational
 		     Model for Word-Form Recognition and Production*,
-		     University of Helsinki, Department of General Linguistics,
-		     Publications, Number 11.  160 pages.
+		     University of Helsinki, Department of General
+		     Linguistics, Publications, Number 11.  160 pages.
 
 .. [karttunen1987] Lauri Karttunen and Kimmo Koskenniemi and
 		   Ronald M. Kaplan, 1987:
@@ -203,6 +210,11 @@ References
                   May, 2017, Gothenburg, Sweden, Association for
                   Computational Linguistics, pages 56-64,
                   http://www.aclweb.org/anthology/W17-0207
+
+.. [ylijyrä2006] Anssi Yli-Jyrä and Kimmo Koskenniemi, 2006: "Compiling
+		 Generalized Two-Level Rules and Grammars" in T.
+		 Salakoski et al. (Eds.): *FinTAL 2006*, LNAI 4139,
+		 pp. 174–185.
 
 ..
     bibliography:: kmkbib.bib

@@ -65,11 +65,14 @@ One_but_not = '\\' expr:atom ;
 atom
     = '[' @:subexpression ~ ']'
     | '(' @:optexpression ~ ')'
-    | symbol_or_pair ;
+    | symbol_or_pair
+    | boundary ;
 
 subexpression = expr:expression ;
 
 optexpression = expr:expression ;
 
 symbol_or_pair = token:/[a-zåäöšžA-ZØ:{}'´`]+/ ;
+
+boundary = '.#.' ;
 

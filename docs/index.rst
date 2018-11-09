@@ -13,9 +13,11 @@ Welcome to twol's documentation!
    :includehidden:
 
    intro
-   alignment
    morphophon
+   alignment
+   formalism
    twdiscov
+   compiletest
    technical
    glossary
    genindex
