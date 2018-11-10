@@ -75,8 +75,8 @@ with open(args.affix_info, "r") as afffil:
             principal_set.add(row[0])
         else:
             feat2mphons[row[0]] = row[1]
-print("principal_set =", principal_set)
-print("feat2mphons =", feat2mphons)
+#print("principal_set =", principal_set)####
+#print("feat2mphons =", feat2mphons)####
 
 # Read in the morpheme names and the zero-filled morphs
 
@@ -102,8 +102,7 @@ with open(args.input, "r") as infil:
         stem_morpheme_data[stem_name].append((form_name, orig_morphs, zerof_morph_lst))
 
 ofil = open(args.output, "w")
-writer = csv.DictWriter(ofil, fieldnames=["MORPHEMES", "MORPHS", "ZEROFILLED",
-                                          "RAW", "PAIRSYMS"])
+writer = csv.DictWriter(ofil, fieldnames=["MORPHEMES", "MORPHS", "ZEROFILLED", "RAW"])
 writer.writeheader()
 
 for stem_morpheme, data_lst in stem_morpheme_data.items():
@@ -141,17 +140,4 @@ for stem_morpheme, data_lst in stem_morpheme_data.items():
         for feat in feat_lst:
             raw_lst.append(feat2mphons[feat])
         row["RAW"] = " ".join(raw_lst)
-        zerof_morph_lst = orig_zerof_morphs.split(args.morph_separator)
-        zerof_morph_str = "".join(zerof_morph_lst)
-        raw_str = " ".join(raw_lst).strip()
-        raw_lst = raw_str.split(" ")
-        # print("zerof_output_str:", zerof_output_str)###
-        # print("raw_lst:", raw_lst)###
-        pairsym_lst = []
-        if len(raw_lst) != len(zerof_morph_str):
-            print("***", raw_lst, zerof_morph_str)
-        for insym, outsym in zip(raw_lst, zerof_morph_str):
-            psym = insym if insym == outsym else insym + ":" + outsym
-            pairsym_lst.append(psym)
-        row["PAIRSYMS"] = " ".join(pairsym_lst)
         writer.writerow(row)

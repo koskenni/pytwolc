@@ -8,4 +8,6 @@ In the simplified two-level model, much information is extracted out of the exam
 
   m ä {kØ}:Ø {ieeØ}:e s s {aä}:ä
 
+Note that all letters and morphophonemes which are mentioned in the definitions or the rules must be present in the examples.
+
 The two-level grammar consists of (a) definitions and (b) rules and (c) comments.  Definitions give names for expressions so that these names can be used in subsequent rules and definitions.

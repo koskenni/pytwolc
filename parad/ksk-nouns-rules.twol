@@ -237,12 +237,13 @@ OPEN = Vo ((VØ) {ij}:i|{ØiØ}:) [Ci Vo|:Ø* END] ;
 {tØthn}:h => _ [Vo-{ij}:] ,
              _ VØ {ij}:i [e|:s|:t|e|{Øt}:Ø {aä}:] ;
 {tØthn}:Ø => _ VØ {ij}: , _ Vo ;
-    ! kuollu<t> kuollu<t>ta (kuollu<t>ten) kevä<t>
-    ! (kuollu<n>na) (kevä<n>nä)
-    ! kevä<h>än kuolle<h>en kevä<h>änä (kevä<h>itten) kuolle<h>isin
-    ! kevä<>än kevä<>änä kuolle<>en kuolle<>ena
-    ! kevä<>itä kevä<>isiin kuolle<>ita kuolle<>itten
-    ! airu<h>itten airu<h>ien (airu<h>isin)
+    ! kuollu<t> kuolle<>en kuolle<h>en kuollu<t>ta kuolle<>ena
+    ! kuolle<h>en kuolle<>ita (kuollu<t>ten) kuolle<>isiin kuolle<h>isin
+    ! kevä<t> kevä<>än kevä<h>än kevä<t>tä
+    ! kevä<>änä kevä<h>änä (kevä<n>nä)
+    ! kevä<>itä (kevä<h>itten) kevä<>isiin
+    ! aru<t> airu<>en airu<t>ta airu<>ena airu<>ita
+    ! airu<h>itten airu<h>ien airu<>isiin (airu<h>isin)
     ! äity<h>itten äity<h>ien (äity<h>isin)
 
 {uØ}:Ø <=> _ (o) {ij}: ;
