@@ -10,7 +10,9 @@ The invocation of the program could be e.g.::
 
   $ python3 twexamp.py examples.pstr examples.fst
 
+
 Functions of the ``twexamp`` module
+===================================
 
 .. automodule:: twexamp
    :members:

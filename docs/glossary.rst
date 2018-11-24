@@ -14,6 +14,12 @@ Glossary
    morpheme
      A minimal unit with a meaning and which is manifeseted as morphs, e.g. we may have a morpheme ``KATU`` which has a meaning 'street' and is manifested as two possible morphs ``katu`` and ``kadu``.  E.g. stems of words may be morphemes as well as various affixes for inflection and derivation.  Some stems combine two or more morphemes, e.g. compounds and derived lexemes.
 
+   Finite-state machine (FSM)
+     A finite-state machine.  An abstract device consisting of *states* and *transitions*.  One state is the *initial state* where the FSM is when it starts.  An FSM reads symbols, one at a time and moves into another state if there is a transition from the current state where the transition label is the current input symbol.  If so, the FSM moves into a new state given by the transition.  It continues so, until the last input symbol has been read.  If the FSM is in one of its *final states*, the FSM is said to *accept* the input string.  If the FSM fails to have a matching transition at any step, then the FSM *rejects* the input.  The FSM also rejects the input, if it ends up in a state which is not one of the final states.
+
+   finite-state transducer (FST)
+     An abstract machine like a FST but it operates with two tapes: *input tape* and *output tape*.  Thus, the transitios are labeled with a symbol pair instead of a single symbol.  A transition is applied, if the current input symbol matches the former component of the symbol pair in the transition.  Then, the latter component of the symbol pair is output.  Labels in FST transitions may, in general, also  contain epsilons (null strings) instead of symbols.  In the two-level rules and examples, no epsilons are used.  Two-level FSTs define, thus, *same length relations*, i.e. the relate pairs of strings where both strings are equally long.
+
    input symbol
      In general, input symbols are the symbols that a FST reads in.  In two-level rules and examples, the input symbols belong to the underlying representation and they may be either phonemes or morphophonemes.  The input symbols in two-level rules and examples are sometines also called *lexical characters* or *upper characters*.
 
