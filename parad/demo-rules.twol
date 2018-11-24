@@ -1,0 +1,25 @@
+! demo-rules.text
+VowS = [:a|:e|:i|:ä] ;         ! surface vowels
+VowM = VowS.m ;                ! morphophonemic vowels
+ConL = :k|:l|:m|:n|:s ;        ! surface consonants
+ConM = ConL.m ;                ! morphophonemic consonants
+
+{iiie}:e <=> _ i ;
+    ! las<e>issa la<e>issa
+{ieeØ}:i <=> _ :Ø* .#. ;
+    ! mäk<i> käsi<i>
+{ieeØ}:Ø <=> _ i ;
+    ! mä<>issä käs<>issä
+{kØ}:Ø <=> _ VowM (i) ConM :Ø* .#. ,
+           _ VowM (i) ConM ConM ;
+    ! mä<k>i mä<>essä mä<>issä la<k>i la<>issa la<>eissa 
+{tds}:s <=> _ :Ø* :i ;
+    ! kä<s>i
+{tds}:d => _ VowM ConM :Ø* .#. ,
+           _ VowM ConM ConM ;
+    ! kä<d>essä
+{tds}:t => _ VowS :Ø* .#. ,
+           _ VowS (ConM) VowS ;
+    ! kä<t>enä
+{aä}:a <=> :a :* _ ;
+    ! kädess<ä> käsiss<ä> lasiss<a> 
