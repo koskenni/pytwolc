@@ -1,21 +1,21 @@
 CoS = :b|:d|:h|:k|:l|:m|:n|:p|:r|:s|:t|:v | j ;
     ! all surface consonants (does not contain {ij}:j) 
-CoM = [[CoS].u .o. :] ;
+CoM = CoS.m ;
     ! all morphophonemic consonants
     ! all X:Y where for some Z, X:Z is in CoS
 CoØ = [CoM - CoS] ;
 VoS = :a | :e | :i | :o | :u | :y | :ä | :ö ;
     ! all surface vowels
 Vok = [VoS - {ij}:] ;
-VoM = [[VoS].u .o. :] ;
+VoM = VoS.m ;
 VoØ = [VoM - VoS] ;
-MeSØ = [[:e].u] .o. :Ø ;
+MeSØ = :e.m & :Ø ;
     ! all X:Ø where X:e in :
 VV = [:a  :Ø* :a|:e :Ø* :e|:i :Ø* :i|:o :Ø* :o|:u :Ø* :u|
       :y :Ø* :y|:ä :Ø* :ä|:ö :Ø* :ö] ;
-VVØ = [:a :Ø* [:a & :Ø]] | [:e  :Ø* [:e & :Ø]] | [:i  :Ø* [:i & :Ø]] |
-      [:o  :Ø* [:o & :Ø]] | [:u :Ø* [:u & :Ø]] | [:y :Ø* [:y & :Ø]] |
-      [:ä :Ø* [:ä & :Ø]] | [:ö :Ø* [:ö & :Ø]] ;
+VVØ = [:a :Ø* [:a.m & :Ø]] | [:e  :Ø* [:e.m & :Ø]] | [:i  :Ø* [:i.m & :Ø]] |
+      [:o  :Ø* [:o.m & :Ø]] | [:u :Ø* [:u.m & :Ø]] | [:y :Ø* [:y.m & :Ø]] |
+      [:ä :Ø* [:ä.m & :Ø]] | [:ö :Ø* [:ö.m & :Ø]] ;
 VbV = [:e :a|:e :ä|:i :a|:i :o|:i :ö|:o :a|:u :a|:u (:Ø) :e|:y (:Ø) :e] ;
 CLOSED = VoM ({ij}:i|{ØiØ}:) CoM [(VoØ) CoM |:Ø* .#.] ;
 OPEN = VoS ((VoØ) {ij}:i|{ØiØ}:) [CoM VoS|:Ø* .#.] ;
@@ -38,13 +38,11 @@ OPEN = VoS ((VoØ) {ij}:i|{ØiØ}:) [CoM VoS|:Ø* .#.] ;
 {aä}:a <=> [:a|:o|:u] :* _ ; ! maass<a>, piiss<ä>
 
 {ØaØØØ}:Ø|{ØäØØØ}:Ø =>
-    [:h|:n|:t|{sØh}:|:n {ØpmØ}:Ø] _
-        ({nØØØ}:) [{Øt}:|:t|{nrs}:] ,
-    _ ({nØØØ}:Ø) [{ij}:|.#.] ;
+    [:h|:n|:t|{sØh}:|:n] (CoØ) _ (CoØ) [:t | {nrs}:] ,
+    _  (CoØ) {ij}: | .#. ;
 {ØaØØØ}:a|{ØäØØØ}:ä /<=
-    [:h|:n|:t|{sØh}:|:n {ØpmØ}:Ø] _
-        ({nØØØ}:) [{Øt}:|:t] ,
-    _ ({nØØØ}:Ø) [{ij}:|.#.] ;
+    [:h|:n|:t|{sØh}:|:n] (CoØ) _ (CoØ) :t ,
+    _ (CoØ) [{ij}: | .#.] ;
     ! pahin<> pahimm<a>n pahin<>ta (pahin<>na)
     ! muudan<> muutam<a>n muuat<>ta (muuan<>na)
     ! saapa<>s saappa<a>n saapa<>sta
@@ -174,6 +172,9 @@ OPEN = VoS ((VoØ) {ij}:i|{ØiØ}:) [CoM VoS|:Ø* .#.] ;
     ! ilmet<t>ty ilmet<t>yjä ilmet<>yitä *ilmet<t>yitä
     ! sisäk<k>kö sisäk<>öihin sisäk<k>öihin
 
+{kØk}:Ø <=> _ s VoØ :t ;
+    ! su<k>si su<>sta su<k>sia u<k>si u<>sta u<k>sia
+
 {kh}:k <=> _ :s ;
     ! ka<k>si ka<h>den ka<h>ta
 
@@ -220,10 +221,10 @@ OPEN = VoS ((VoØ) {ij}:i|{ØiØ}:) [CoM VoS|:Ø* .#.] ;
     ! uro<s> uro<>on uro<h>on uro<s>ta uro<>oseen uro<h>osen uro<s>ten
 
 {snt}:s <=> _ (VoØ) [:i | .#.] ;
-    ! kahdeksa<s> kahdeksan<s>ia
 {snt}:n => _ CLOSED ;
+{snt}:t => _ OPEN | VoØ :t ;
+    ! kahdeksa<s> kahdeksan<s>ia
     ! kahdeksan<n>en kahdeksan<n>essa
-{snt}:t => _ OPEN ;
     ! kahdeksan<t>ena kahdeksa<t>ta
 
 {tØ}:Ø <=> _ CLOSED ;
@@ -242,8 +243,9 @@ OPEN = VoS ((VoØ) {ij}:i|{ØiØ}:) [CoM VoS|:Ø* .#.] ;
 {tdsØ}:Ø <=> _ VoØ :t ;
     ! kah<>ta
 
+{ØØthn}:h => _ :e | VoØ :i ;
+{ØØthn}:t <=> _ VoØ :t ;
 {ØØthn}:n => _ VoØ {nrs}: ;
-{ØØthn}:t <=> _ VoØ [:t] ;
     ! terve<> (terve<h>en) (terve<n>nä) terve<t>ä (terve<t>ten)
 
 {tØthn}:t <=> _ VoØ [:t | .#.] ;
@@ -265,6 +267,9 @@ OPEN = VoS ((VoØ) {ij}:i|{ØiØ}:) [CoM VoS|:Ø* .#.] ;
 
 {uØ}:Ø <=> _ (o) {ij}: ;
     ! s<u>o s<>oita tenkkapo<o> tenkkapo<>ita
+
+{yØ}:Ø <=> _ (ö) {ij}: ;
+    ! <y>ö~<>öitä
 
 {ue}:u <=> _ [:t|:n] ;
     ! kuoll<u>t kuoll<u>tta kuoll<u>nna
@@ -396,10 +401,6 @@ STOP
         ! tuha<>t tuha<n>en tuha<>tta tuha<n>tena tuha<n>sia
 	! kahdeksa<>s kahdeksa<n>nen kahdeksa<>tta khdeksa<n>tena
 
-{nØØ}:n <=> _ .#. ; ! hevone<n> hevose<>ssa seitsemä<n> seitsemä<>ssä
-
-{nss}:n <=> _ :e :n ; ! hevo<n>en hevo<s>en hevo<s>ta hevo<s>ia
-
 {ØoØo}:Ø => _ [:t|{ij}:|:i|.#.] ;
 {ØoØo}:o /<= _ [:t|{ij}:|:i|.#.] ;
         ! uro<>s uro<>sta uro<o>n uro<o>na (uroh<o>na)
@@ -407,9 +408,6 @@ STOP
 {Øpm}:Ø <=> _ VoØ [:t | .#.] ;
 {Øpm}:m <=> _ CLOSED ;
         ! vasen<> vasen<>ta vasem<p>ana vasem<p>ia vasem<m>an vasem<m>issa
-
-{ppØ}:p <=> _ s :Ø* VoS ;
-        ! la<p>si la<p>sen la<>sta la<p>sia
 
 {ØpmØ}:Ø <=> _ VoØ [:t | {nrs}: | .#.] ;
 {ØpmØ}:m <=> _ CLOSED ;
@@ -438,10 +436,6 @@ STOP
     ! kandeksan<s>ia kahdeksan<n>en (kahdeksan<n>na) kahdeksan<t>ena
     ! kahdeksan<n>nen (kahdeksan<n>na) kahdeksan<n>en
 
-{ttØ}:Ø <=> _ s VoØ [{Øt}:|:t] ;
-    ! vei<t>si vei<>stä vei<t>senä vei<t>siä
-
-! {yØ}:Ø <=> _ (ö) {ij}: ; ! <y>ö~<>öitä
 
 {äØö}:Ø|{äØö}:ö <=> _ {ij}: ;
         ! leve<ä> leve<>itä leve<ö>iden

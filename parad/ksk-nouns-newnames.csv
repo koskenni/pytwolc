@@ -31,8 +31,8 @@
 {ij},,loh<i>a kalo<j>a
 {iØ},,kauriisii<i>n tienoisi<i>n kaurihisi<>n tienohisi<>n
 {khhhk},{kh},ka<k>si ka<h>den ka<h>ta ka<k>sia
-{kkkØkk},,su<k>si su<k>sen su<k>sea su<>sta su<k>ksea su<k>sena su<k>sia
-{kkØkkk},{kkkØkk},u<k>si u<k>sen u<k>sea u<>sta u<k>sea u<k>sia
+{kkkØkk},{kØk},su<k>si su<k>sen su<k>sea su<>sta su<k>ksea su<k>sena su<k>sia
+{kkØkkk},{kØk},u<k>si u<k>sen u<k>sea u<>sta u<k>sea u<k>sia
 {kØkkk},{kØ},ark<k>u ark<>un pi<k>i pi<>en i<>en i<k>enen hank<>e hank<k>een
 {kØkkkØk},{kØØ},mansik<k>a mansik<>an mansik<k>oihin mansik<>oihin
 {kØkkkØ},{kØØ},sisäk<k>ö sisäk<>ön sisäk<k>öihin sisäk<>öihin
@@ -76,6 +76,7 @@
 {tØtØØh},{tØthn},airu<t> airu<>en airu<t>ta airu<>ena airu<>ita airu<h>ia airu<>isiin airu<h>isin
 {ueeueeuee},{ue},kuoll<u>t kuoll<e>en kuoll<u>tta kuoll<e>ena kuoll<e>hena kuoll<e>isiin kuoll<e>hisin
 {uuuuØ},{uØ},pu<u> pu<u>n pu<>ita
+{yyyyØ},{yØ},<y>ö <y>ön <>öitä
 {ØaaØaØØaØØ},{ØaØØØ},saapas<> saappa<a>n saapas<>ta saappa<a>na saappa<>isiin saapah<>isin
 {ØaØaaaØ},{ØaØØØ},? vasen<> vasemm<a>n vasen<>ta vasemp<a>a vasemp<>ia
 {ØaØaaaØØ},{ØaØØØ},pahin<> pahimm<a>n pahin<>ta pahimp<>ia

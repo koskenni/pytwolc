@@ -254,6 +254,26 @@ class TwolFstSemantics(object):
         result_fst.set_name(name)
         return result_fst
 
+    def Morphophonemic(self, ast):               # Surface completion
+        name = "[{}].m".format(ast.expr.get_name())
+        result_fst = ast.expr.copy()
+        result_fst.input_project()
+        all_pairs_fst = cfg.all_pairs_fst.copy()
+        result_fst.compose(all_pairs_fst)
+        result_fst.minimize()
+        result_fst.set_name(name)
+        return result_fst
+
+    def Surface(self, ast):                      # Morphophonemic completion
+        name = "[{}].s".format(ast.expr.get_name())
+        temp_fst = ast.expr.copy()
+        temp_fst.output_project()
+        result_fst = cfg.all_pairs_fst.copy()
+        result_fst.compose(temp_fst)
+        result_fst.minimize()
+        result_fst.set_name(name)
+        return result_fst
+
     def One_but_not(self, ast):
         name = r"\[{}]".format(ast.expr.get_name())
         result_fst = cfg.all_pairs_fst.copy()

@@ -35,8 +35,8 @@ The input for the first step is a CSV table which one can produce using a spread
    LASI,lasi,lasi.ssa,lasi.na,lase.i.ssa
    LAKI,laki,lai.ssa,laki.na,lae.i.ssa
 
-paratab2segcsv.py
-=================
+parad2words.py
+==============
 
 This script reads in a paradigm table of word forms and writes the data in a format where each word form is on line of its own.  Both the input table and the output file are in the CSV format.  Output contains two fields, e.g.::
 
@@ -58,8 +58,8 @@ This script reads in a paradigm table of word forms and writes the data in a for
      LAKI ESS,laki.na
      LAKI PL INE,lae.i.ssa
 
-segm2zerofilled.py
-==================
+words2zerofilled.py
+===================
 
 This script reads data in the above CSV format produced either by the ``paratab2segcsv.py`` program or directly by the user.  The script aligns the variants of each morpheme and writes a CSV file augmented with the aligned i.e. zero-filled example word forms.  The :doc:`alignment` is accomplished by the ``multialign.py`` module, see :py:mod:`multialign`. The output contains the fields in the input and the zero-filled word forms as the third field, e.g.::
 
@@ -81,8 +81,8 @@ This script reads data in the above CSV format produced either by the ``paratab2
      LAKI ESS,laki.na,laki.na
      LAKI PL INE,lae.i.ssa,laØe.i.ssa
 
-zerofilled2rawmphon.py
-======================
+zerofilled2raw.py
+=================
 
 This script reads in the aligned example words from the preceding step and constructs a raw morphophonemic representation for each example word.  Output contains the three fields in the input and a new one, the raw morphophonemic representation of the word form, e.g.::
 
