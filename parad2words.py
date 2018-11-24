@@ -3,7 +3,6 @@
 © Kimmo Koskenniemi, 2017-2018. This is free software under GPL 3 license.
 """
 import csv, re, sys
-from orderedset import OrderedSet
 
 import argparse
 argparser = argparse.ArgumentParser("python3 paratab2segcsv.py",
