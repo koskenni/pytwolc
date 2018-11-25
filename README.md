@@ -18,7 +18,13 @@ The compiler is normally executed as follows:
 
   $ python3 twol.py examples.fst rules.twolc
 
-One can get more information by using the `--help` parameter.
+One can get more information by using the `--help` parameter.  More documentation on twol.py can be found at https://pytwolc.readthedocs.io/en/latest/compiletest.html
+
+## Converting examples from pair string format into a FST: twexamp.py
+
+The module `twexamp.py` handles various tasks for the compiler during the compilation process.  It is also needed for converting human readable examples into a FST so that ti is not necessary recompile it at every step of testing rules.  A recompilation is only needed when the examples are changed.  In order to convert examples from a pair string format into a fst you can e.g.:
+
+  $ python3 twexamp.py examples.pstr examples.fst
 
 
 ## Morphophonemic representations
