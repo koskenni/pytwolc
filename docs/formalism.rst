@@ -4,7 +4,7 @@
 Rule formalism
 ==============
 
-In the simplified two-level model, much information is extracted out of the examples.  No rules may be compiled without a set of two-level examples in the so called symbol pair string representation.  The examples are in a file consisting of lines like::
+In the simplified two-level model, much information is extracted out of the examples.  No rules may be compiled without a set of two-level examples in the so called :term:`symbol pair` string representation.  The examples are in a file consisting of lines like::
 
   m ä {kØ}:Ø {ieeØ}:e s s {aä}:ä
 
@@ -45,7 +45,7 @@ The following is a simple example of a complete two-level rule grammar::
   {aä}:a <=> :a :* _ ;
       ! kädess<ä> käsiss<ä> lasiss<a> 
 
-A definition ha an *equal sign* (=).  The name before the equal sign is the *name* (e.g. ``VowS``) defined for the *expression* (``[:a|:e|:i|:ä]``) that follows the equal sign (up to the semicolon (;) which terminates the definition).  A definition may extend over several lines if necessary.
+A definition has an *equal sign* (=).  The name before the equal sign is the *name* (e.g. ``VowS``) defined for the *expression* (``[:a|:e|:i|:ä]``) that follows the equal sign (up to the semicolon (;) which terminates the definition).  A definition may extend over several lines if necessary.
 
 Rules have a *rule operator* ``=>``, ``/<=``, or ``<=>`` or ``<=``.  To the left of the operator, there is an expression which is called the *center* of of the rule (e.g. ``{ieeØ}:Ø``), and to the right there must be one or more *context* (e.g. ``_ i``) for the rule.  If there are more than one context, the contexts are separated by a comma from each other.  The rule is terminated by a semicolon.  Each context consists of a *left context* (which may be empty) and a *right context* (e.g. ``i``) which are separated from each other by an underscore (``_``).
 
@@ -53,16 +53,16 @@ Rules have a *rule operator* ``=>``, ``/<=``, or ``<=>`` or ``<=``.  To the left
 Expressions
 -----------
 
-Let us call the set of all pair symbols that occur in the examples *Pairs*. *Two-level expressions* (TLEs) denote sets of strings made out of such pairs.  TLEs use *pair symbols* with a colon (such as ``a:a`` and ``{aä}:a``) to denote pairs (e.g. ``(a, a)`` and ``({aä}, a)``).  Pair symbols with identical components (e.g. ``a:a``) are usually abbreviated as a single symbol (e.g. ``a``).
+Let us call the set of all :term:`symbol pairs <symbol pair>` that occur in the examples *Pairs*. *Two-level expressions* (TLEs) denote sets of strings made out of such pairs.  TLEs use :term:`pair symbols <pair symbol>` with a colon (such as ``a`` and ``{aä}:a``) to denote pairs (e.g. ``('a', 'a')`` and ``('{aä}', 'a')``).  Pair symbols with identical components (e.g. ``a:a``) are usually abbreviated as a single symbol (e.g. ``a``).
 
-TLEs denote sets of pair-symbol strings.  In order to define some operations within TLEs we need to talk about *input (or upper) projections, (X.u),* and *output (or lower) projections, (X.l),* of such strings.  The input projection of a pair-symbol string is a string of the left parts of the symbol pairs, and the output projection of the right parts of the symbol pairs.  For sets the projection is made to each member in the set.  These projections represents sets of strings which are not TLEs but are used as concepts to define some operations within TLEs.
+TLEs denote sets of pair symbol strings.  In order to define some operations within TLEs we need to talk about *input (or upper) projections, (X.u),* and *output (or lower) projections, (X.l),* of such strings.  The input projection of a pair-symbol string is a string of the left parts of the symbol pairs, and the output projection of the right parts of the symbol pairs.  For sets the projection is made to each member in the set.  These projections represents sets of strings which are not TLEs but are used as concepts to define some operations within TLEs.
 
 TLEs may consist of:
 
-*x:y* (a pair-symbol)
+*x:y* (a pair symbol)
     A pair-symbol which occurs in the examples, e.g. ``{aä}:a``, ``{uØ}:Ø``, ``a``, is a valid TLE denoting a string consisting of that pair-symbol.  Note that the simplified two-level model does not use pairs like ``a:ä`` where two distinct surface symbols would be a pair.  Note that a morphophoneme without the colon, e.g. ``{aä}`` as well as a plain zero ``Ø`` is usually an error.
 
-*x:Ø* (deletion, zero)
+*x:Ø* (:term:`deletion`, :term:`zero`)
     Deletion, e.g. ``{kØ}:Ø``, is represented by an arbitrary symbol such as ``Ø`` which is not otherwise used in the language to be described.  The zero is treated as a normal symbol within the rules and examples (thus, not as an epsilon or null string).  Compilation and testing is done with ``Ø`` as a character.  That character is deleted when building a recognizer for analyzing actual word forms in texts.  Note that ``Ø`` is not a valid pair symbol and that morphophonemic representations never contain ``Ø`` as a symbol.  All deletions and ephentheses are treated by using morphophonemes which contain zero as one of its possibilities, e.g. ``{ieØ}``
 
 *:z* (morphophonemic side open)

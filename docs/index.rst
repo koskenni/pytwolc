@@ -22,6 +22,7 @@ Welcome to twol's documentation!
    glossary
    genindex
    py-modindex
+   differences
    twparsere
    cfg
    fs

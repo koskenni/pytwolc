@@ -11,6 +11,10 @@ Glossary
    alignment
      The process of making allomorphs equal length and make them to correspond each other :term:`phoneme` by phoneme.  Alignment consists of adding :term:`zero` symbols as needed so that the phonemes in the same position are phonologically similar.  One could align, e.g. ``mäki`` and ``mäe`` by inserting one zero to the latter morph (``mäØe``) so that the corresponding phonemes would be ``mm``, ``ää``, ``kØ`` and ``ie``.  See :doc:`alignment`.
 
+   comma-separated values
+   CSV
+     A common exchange format for representing tabular data which most spreadsheet programs can import and export.  In CSV table rows are usually lines where fields are separated by a comma.  Instead of a comma, a semicolon is sometimes used.  Values may be enclosed in double quotes if they contain e.g. commas.  For more information, see https://en.wikipedia.org/wiki/Comma-separated_values.
+
    deletion
      Deletion is said to occur when a phoneme in a in a morph corresponds to :term:`zero` in another :term:`morph` of the same :term:`morpheme`.  Cf. :term:`epenthesis`.
 

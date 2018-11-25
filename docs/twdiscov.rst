@@ -4,7 +4,7 @@
 Discovering raw two-level rules
 ===============================
 
-The ``twdiscov.py`` program reads in a set of two-level examples which consist of space-separated pair symbols and the program produces tentative two-level rules for all morphophonemes in the examples or just for a given morphophoneme.  Even when processing raw rules for all morphophonemes, the program proceeds one morphophoneme at a time.
+The ``twdiscov.py`` program reads in a set of two-level examples which consist of space-separated :term:`pair symbols <pair symbol>` and the program produces tentative two-level rules for all :term:`morphophonemes <morphophoneme>` in the examples or just for a given morphophoneme.  Even when processing raw rules for all morphophonemes, the program proceeds one morphophoneme at a time.
 
 The method is based on producing positive and negative examples which are specific to one morphophoneme.  The *positive examples* consist of all examples which contain that morphophoneme.
 

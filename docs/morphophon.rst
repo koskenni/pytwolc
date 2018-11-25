@@ -27,7 +27,7 @@ In the following, a method is presented for constructing such a :term:`morphopho
 
 The process consists of four scripts:
 
-The input for the first step is a CSV table which one can produce using a spreadsheet proghram and by saving the table as CSV file, e.g.::
+The input for the first step is a CSV table which one can produce using a spreadsheet proghram and by saving the table as :term:`CSV` file, e.g.::
 
    ID,STM,STM INE,STM ESS,STM PL INE
    MÄKI,mäki,mäe.ssä,mäke.nä,mä.i.ssä
@@ -124,7 +124,7 @@ The file lists the principal forms in lines where the second field is ``+``.  No
 raw2named.py
 ============
 
-This script renames some raw morphophonemes of the example word forms and writes a file of examples where each example is a line of blank separated string of :term:`pair symbols <pair-symbol>`.  Pair symbols are the newly renamed ones or if the raw symbol is not yet renamed, the pair symbol is the original raw one.  This file is suitable for the twol.py compiler as its example file.
+This script renames some raw morphophonemes of the example word forms and writes a file of examples where each example is a line of blank separated string of :term:`pair symbols <pair symbol>`.  Pair symbols are the newly renamed ones or if the raw symbol is not yet renamed, the pair symbol is the original raw one.  This file is suitable for the twol.py compiler as its example file.
 
 The new names can be determined one by one.  The decisions made so far are stored in a CSV file with three columns:  the first is the inital raw name, the second is the now given new name for the morphophoneme, and the third column is for documentation, e.g.::
 

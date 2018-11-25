@@ -2,7 +2,7 @@
 Alignment
 =========
 
-This module aligns morphs (or words) by inserting zero symbols so that the phonemes of each morph correspond to each other, e.g. three morphs::
+This module aligns :term:`morphs <morph>` (or words) by inserting :term:`zero` symbols so that the phonemes of each morph correspond to each other, e.g. three morphs::
 
  'saapas', 'saappaa', 'saappa'
 
@@ -16,7 +16,7 @@ Thus, some ways to insert zeros result in infeasible alignment and other result 
 
 The algorithm is described in some detail in [koskenniemi2017]_.  The present version proceeds in three steps:
 
-1. Each raw morphophoneme is scored according to the set of phonemes (and the zero) which are present in it.  The score for the alignment is the sum of the scores of all its raw morphophonemes.  Only the candidates with the best score are kept.
+1. Each :term:`raw morphophoneme` is scored according to the set of phonemes (and the zero) which are present in it.  The score for the alignment is the sum of the scores of all its raw morphophonemes.  Only the candidates with the best score are kept.
 
 2. The syllable structure of the alignment is considered.  Those having a smaller number of syllables are preferred and those having a greater number are discarded.
 
