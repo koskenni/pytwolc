@@ -18,13 +18,13 @@ arpar.add_argument("-o", "--output",
                     help="File to which write the compiled rules if a name is given",
                     default="")
 arpar.add_argument("-l", "--lost",
-                    help="File to which write the examples not accepted by all rules",
+                    help="File to which write the examples not accepted by all rules as a fst",
                     default="")
 arpar.add_argument("-w", "--wrong",
                     help="file to which write the wrong strings accepted by all rules as a fst",
                     default="")
 arpar.add_argument("-t", "--thorough",
-                   help="test each rule separately",
+                   help="test each rule separately: 1 only against positive, 2 against both positive and negative examples",
                    type=int, choices=[0, 1, 2], default=0)
 arpar.add_argument("-v", "--verbosity",
                    help="level of  diagnostic output",
@@ -72,7 +72,7 @@ for line_nl in rule_file:
         rule_str = " ".join(line_lst)
         line_lst = []
     if args.thorough > 0:
-        print("\n--------------------\n")
+        print("\n\n")
     op, left, right, title = twparser.parse_rule(parser, rule_str)
     if not (left and right):
         print("ERROR:", line)
@@ -133,13 +133,12 @@ for line_nl in rule_file:
         #print_raw_paths(npaths)
         passed_neg_examples_fst = NG.copy()
         passed_neg_examples_fst.intersect(R)
-        if cfg.verbosity > 0:
-            if passed_neg_examples_fst.compare(hfst.empty_fst()):
-                print("All negative examples rejected")
-            else:
-                print("** Some negative examples accepted:")
-                npaths = passed_neg_examples_fst.extract_paths(output='raw')
-                print_raw_paths(npaths[0:20])
+        if passed_neg_examples_fst.compare(hfst.empty_fst()):
+            print("All negative examples rejected")
+        else:
+            print("** Some negative examples accepted:")
+            npaths = passed_neg_examples_fst.extract_paths(output='raw')
+            print_raw_paths(npaths[0:20])
 
 if args.lost or args.wrong:
     RESU = examples_up_fsa.copy()

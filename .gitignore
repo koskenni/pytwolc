@@ -8,6 +8,7 @@ alpha.twolc
 *#*
 .DS_Store
 docs/_*
+tmp/*
 history*
 parser.out
 parsetab.py
