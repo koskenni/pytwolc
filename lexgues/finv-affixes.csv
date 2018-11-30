@@ -1,0 +1,122 @@
+ID;NEXT;MPHON;FEAT;BASEF;FLAG;COMMENT
+/s;s0123;;N;;;S01 VALO
+/v;v0123;;;{dlnrtØ}{aä};;V01...V27 except V16V23
+lä-hte/v;v0123;h{td}{eiØ};;h{td}{eiØ}{dlnrtØ}{aä};;V16 LÄHTEÄ
+;v12;ks;;h{td}{eiØ}{dlnrtØ}{aä};;
+kä-y/v;v03;y;;y{dlnrtØ}{aä};;V23 KÄYDÄ
+;v12;v;;y{dlnrtØ}{aä};;
+katsel-e/v;v0123;{eØ};;{eØ}{dlnrtØ}{aä};;V28 KATSELE
+;v2;e;;{eØ}{dlnrtØ}{aä}; ;katseleisi
+arva-ile/v;v0123;il{eØ};;il{eØ}{dlnrtØ}{aä};;V29 ARVAILLA
+;v2;ele;;il{eØ}{dlnrtØ}{aä}; ;arvaeleisi
+haravo-i/v;v0123;{iØ};;i{dlnrtØ}{aä};;V30 HARAVOIDA
+;v012;its{eØ};;i{dlnrtØ}{aä};;
+;v3;i{nt};;i{dlnrtØ}{aä};;
+vali-tse/v;v012;ts{eØ};;{nt}{dlnrtØ}{aä};;V31 VALITA
+;v2;tse;;{nt}{dlnrtØ}{aä};;
+;v3;{nt};;{nt}{dlnrtØ}{aä};;
+juo-kse/v;v012;ks{eØ};;s{dlnrtØ}{aä};;V32 JUOSTA
+;v3;s;;s{dlnrtØ}{aä};;
+nä-ke/v;v012;k{eØ};;h{dlnrtØ}{aä};;V33 NÄHDÄ
+;v3;h;;h{dlnrtØ}{aä};;
+ale-ne/v;v012;n{eØ};;{nt}{dlnrtØ}{aä};;V34 ALETA KYETÄ
+;v3;{nt};;{nt}{dlnrtØ}{aä};;
+sala-A/v;v02;{VØ};;{nt}{dlnrtØ}{aä};;V35 SALATA AIDATA
+;v1;s;;{nt}{dlnrtØ}{aä};;
+;v3;{nt};;{nt}{dlnrtØ}{aä};;
+katke-A/v;v02;{aä};;{nt}{dlnrtØ}{aä};;V36 KATKETA NOETA
+;v02;{VØ};;{nt}{dlnrtØ}{aä};;
+;v1;s;;{nt}{dlnrtØ}{aä};;
+;v3;{nt};;{nt}{dlnrtØ}{aä};;
+selvi-A/v;v02;{aä};;{nt}{dlnrtØ}{aä};;V37 SELVITÄ SIITÄ
+;v02;{VØ};;{nt}{dlnrtØ}{aä};;
+;v1;s;;{nt}{dlnrtØ}{aä};;
+;v3;{nt};;{nt}{dlnrtØ}{aä};;
+koho-A/v;v02;{aä};;{nt}{dlnrtØ}{aä};;V38 KOHOTA TAUOTA
+;v02;{VØ};;{nt}{dlnrtØ}{aä};;
+;v1;s;;{nt}{dlnrtØ}{aä};;
+;v3;{nt};;{nt}{dlnrtØ}{aä};;
+halu-A/v;v02;{aä};;{nt}{dlnrtØ}{aä};;V39 HALUTA RYÖPYTÄ
+;v1;s;;{nt}{dlnrtØ}{aä};;
+;v3;{nt};;{nt}{dlnrtØ}{aä};;
+pala-V/v;v02;{VØ};;{nt}{dlnrtØ}{aä};;V40 PALATA KAIVATA
+;v1;s;;{nt}{dlnrtØ}{aä};;
+;v3;{nt};;{nt}{dlnrtØ}{aä};;
+;v02;j{aä};;{nt}{dlnrtØ}{aä};;
+kih-ise/v;v012;is{eØ};;is{dlnrtØ}{aä};;V41 KIHISTÄ
+;v3;is;;is{dlnrtØ}{aä};;
+;v012;aj{aØ};;is{dlnrtØ}{aä};;
+öl-ise/v;v012;is{eØ};;is{dlnrtØ}{aä};;V41 ÖLISTÄ
+;v3;is;;is{dlnrtØ}{aä};;
+;v012;äj{äØ};;is{dlnrtØ}{aä};;
+rake-nTA/v;v023;n{tn}{aäØe};;nt{aä}{dlnrtØ}{aä};;V42n RAKENTAA
+;v1;ns;;nt{aä}{dlnrtØ}{aä};; 
+;v1;nt;;nt{aä}{dlnrtØ}{aä};; 
+;v3;{nt};;nt{aä}{dlnrtØ}{aä};;
+rie-nTA/v;v023;n{tn}{aäØe};;{nt}{aä};;V42 RIETÄ
+;v1;ns;;{nt}{aä};;
+;v1;nt;;{nt}{nt}{aä};;
+;v3;{nt};;{nt}{aä};;
+tai-TA/v;v023;{td}{aäØe};;{nt}{aä}{dlnrtØ}{aä};;V43 TAITAA
+;v1;s;;{nt}{aä}{dlnrtØ}{aä};;
+;v3;{nt};;{nt}{aä}{dlnrtØ}{aä};;
+antau-TU/v;v0123;{td}{uy};;{td}{uy}{dlnrtØ}{aä};;V44 ANTAUTUA
+;v1;s;;{td}{uy}{dlnrtØ}{aä};;imperfekti
+;Person;;;{td}{uy}{dlnrtØ}{aä};;preesens
+;v3;{nt};;{td}{uy}{dlnrtØ}{aä};;nämä menevät väärin!!
+;v2;;;{td}{uy}{dlnrtØ}{aä};;konditionaali
+kaa-TA/v;v02;{td}{aäØ};;{nt}{dlnrtØ}{aä};;V45 KAATA
+;v1;s;;{nt}{dlnrtØ}{aä};;
+;v3;{nt};;{nt}{dlnrtØ}{aä};;
+s0123;s0 s1 s2 s3;;;;;
+s0;Clit;;SG NOM;;;
+s1;Clit;n{aä};SG ESS;!;;
+;Clit;ss{aä};SG INE;!;;
+s2;Clit;{ij}{Øt}{aä};PL PTV;!;;
+s3;Clit;{Øt}{aä};SG PTV;!;;
+v0123;v0 v1 v2 v3;;;;;
+v012;v0 v1 v2;;;;;  
+v023;v0 v2 v3;;;;;
+v02;v0 v2;;;;;
+v03;v0 v3;;;;;
+v12;v1 v2;;;;;
+v13;v1 v3;;;;;
+v0;Person neg;;V PRES ACT;!;;
+;Clit;{C};V IMPV ACT 2SG;!;;
+v1;Person;{i};V PAST ACT;!;;
+v2;Person neg;isi;V COND ACT;!;;
+v3;Person neg;{nlrs}e;V POTN ACT;!;;
+;Clit;k{oö}{oö}n;V IMPV ACT 3SG;!;;
+;Clit;k{aä}{aä}mme;V IMPV ACT 1PL;!;;
+;Clit;k{aä}{aä};V IMPV ACT 2PL;!;;
+;Clit;k{aä}{aä}tte;V IMPV ACT 2PL;!;;
+;Clit;k{oö}{oö}t;V IMPV ACT 3PL;!;;
+;neg4pe;{dlnrtØ}{C}{aä};V PRES PSS;!;;
+;Clit;{Øt}tiin;V PAST PSS 4PE;!;;
+;neg4pe;{Øt}t{aä}isi;V COND PSS;!;;
+;neg4pe;{Øt}t{aä}ne;V POTN PSS;!;;
+;neg4pe;{Øt}t{aä}k{oö};V IMPV PSS;!;;
+;Clit;{dlnrtØ}{aä};V INF1 NOM;!;;
+;!!PossObl;{dlnrtØ}{aä}kse;V INF1 TRA;!;;
+;Poss;{dlnrtØ}ess{aä};V INF2 ACT INE;!;;
+;Clit;{dlnrtØ}en;V INF2 ACT MAN;!;;
+;Clit;{Øt}t{aä}ess{aä};V INF2 PSS INE;!;;
+;Clit;{Øt}t{aä}m{aä}n;V DVMA PSS INS;!;;
+;Clit;{Øt}t{aä}v{aä};V PCP1 PSS POS SG NOM;!;;
+;Clit;{nlrs}{uy}t;V PCP2 ACT POS SG NOM;!;;
+;!!Clit;{dlnrtØ}{tØ}{uy};V PCP2 PSS POS SG NOM;!;;
+;Clit;{Øt}{tØ}{uy};V PCP2 PSS POS SG NOM;!;;
+neg4pe;neg 4pe;;;!;;
+neg;Clit;{C};NEG;!;;
+4pe;Clit;{V}n;4PE;!;;
+Person;Clit;n;1SG;!;;
+;Clit;t;2SG;!;;
+;Clit;{VØ};3SG;!;;
+;Clit;mme;1PL;!;;
+;Clit;tte;2PL;!;;
+;Clit;v{aä}t;3PL;!;;
+Poss;Clit;;;!;;lisää itse possit
+PossObl;Clit;ni;SG1;!;;lisää muut
+Clit;Stop;;;!;;
+Stop;#;;;!;;
+Stop;!WCL;§;;§;;
