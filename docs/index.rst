@@ -18,6 +18,7 @@ Welcome to twol's documentation!
    formalism
    twdiscov
    compiletest
+   lexguessing
    technical
    glossary
    genindex

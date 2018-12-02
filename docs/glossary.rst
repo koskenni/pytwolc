@@ -38,11 +38,24 @@ Glossary
    FST
      An abstract machine like a :term:`FSM` but it operates with two tapes: *input tape* and *output tape*.  Thus, the :term:`transitios <transition>` are labeled with a :term:`symbol pair` instead of a single symbol.  A transition is applied, if the current input symbol matches the former component of the symbol pair in the transition.  Then, the latter component of the symbol pair is output.  Labels in FST transitions may, in general, also  contain :term:`epsilons <epsilon>` instead of symbols.  In the two-level rules and examples, no epsilons are used.  Two-level FSTs define, thus, *same length relations*, i.e. the relate pairs of strings where both strings are equally long.
 
+   inflection
+   conjugation
+   declination
+     A process of producing :term:`word forms <word form>` of a :term:`lexeme`.  Inflecting verbs is often called *conjugation* and inflecting nouns is called *declination*.  Conjugation can also refer to an :term:`inflection class` of verbs and delination to an inflectional class of nouns.
+
+   inflection class
+   inflectional class
+     A set of :term:`lexemes <lexeme>` which are inflected in a similar way.
+
    initial state
      The :term:`state` where an automaton (e.g. :term:`FSM` or :term:`FST`) is when it starts.
 
    input symbol
      In general, input symbols are the symbols that a FST reads in.  In two-level rules and examples, the input symbols belong to the underlying representation and they may be either phonemes or morphophonemes.  The input symbols in two-level rules and examples are sometines also called *lexical characters* or *upper characters*.
+
+   lemma
+   lexeme
+     Lexemes correspond roughly to dictionary entry words.  In morphological analysis, a lexeme can be idientified by its base form and inflectional class.  Two words represent different lexemes if they have an identical base form but are inflected in a different way.  A lexeme may have several *senses*.  A lemma is a label for all inflected forms of a lexeme.  A representation of a lexeme in a lexicon might have more information than just a lemma.
 
    morph
      A part of the surface form which is said to correspond to a :term:`morpheme`, e.g. in ``kadulla`` the part ``kadu`` (street) and the part ``lla`` (on) are morphs.
@@ -83,6 +96,9 @@ Glossary
 
    transition
      :term:`FSMs <FSM>` and :term:`FSTs <FST>` have transitions which tell to which state the machine must move according to the :term:`input symbol` that is currently being processed.  In a :term:`FST`, the transition also gives the possible :term:`output symbol`.
+
+   word form
+     A possibly inflected form of a lexeme.  A word form is a string of phonemes or letters.  A word form might have several occurrences (sometimes called word *tokens*) in a text.  In some statistical contexts, word_forms are called word *types* or just types.
 
    zero
      A placeholder which indicates that in some other allomorphs there is some phoneme in this position.  By inserting zeros, one makes the allomorphs same length.  Zero is not a morphophoneme and it never occurs in morphophonemic representations.  The zero is not an :term:`epsilon`.

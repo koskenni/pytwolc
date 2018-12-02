@@ -25,8 +25,10 @@ Define;Forl;[b|c|d|f|g|q|š|w|x|z|ž];Foreign sounding letter
 Define;Forb;[n j|k l|k r|k v|p r|p s|s m|s p|t l|t r];Foreign bigrams
 Define;Forg;[$[Forl|Forb]];Foreign sounding words
 Define;Coida;[b|d|n d|f|f f|g|h|j|k|l|l l|m|n|n n|p|r|s|š|t|t t|v];For -oida verbs
-/v;V01;<Co* Vo+ (Sy1)* (CCns) [o|ö|u|y] [a:0|ä:0]>;PUNOA
-/v;V01*;<Co* Vo+ (Sy1)* Gs [o|ö|u|y] [a:0|ä:0]>;KUTOA
+/v;V01;<Co* Vo+ CCns [o|ö|u|y] [a:0|ä:0]>;PUNOA
+/v;V01;<Co* Vo+ (Sy1)+ s t [o|ö|u|y] [a:0|ä:0]>; HUOLESTUA
+/v;V01*;<Co* Vo+ Gs [o|ö|u|y] [a:0|ä:0]>;KUTOA
+/v;V01*;<Co* Vo+ (Sy1)+ (t:{td}|h t:{td}|l t:{tl}|n t:{tn}|r t:{tr}|t t:{tØ}) [o|ö|u|y] [a:0|ä:0]>; MUUMIOITUA KUMARTUA
 !!;;;
 /v;V02;<Co* [i u|o|o i|o u|u|u i|u o] CCns a:{aØe} a:0>;MUISTAA
 /v;V02;<Co* [e|e y|i e|i|i i|y|y i|y y|ä|ä i|ä y|ä ä|ö|ö y] CCns ä:{äØe} ä:0>;ELÄÄ
@@ -118,9 +120,9 @@ lä-hte/v;V16;lähteä:lä;LÄHTEÄ
 /v;V18;<(p) u i:{iØ} d:0 a:0>;UIDA PUIDA
 /v;V18;<Co* [Vo+ Cocl]* Vo+ (Co* Coida) (i) [o|ö] i:{iØ} d:0 [a:0|ä:0]>;ABSORBOIDA EMALJOIDA SMIRGELÖIDÄ
 !!/v;V18;<Co* Vo+ Cocl Vo (Coida) i [o|ö] i:{iØ} d:0 [a:0|ä:0]>;VERIFIOIDA
-/v;V19;saada:sa{VØ} 0;SAADA
-/v;V19;jäädä:jä{VØ} 0;JÄÄDÄ
-/v;V20;myydä:my{VØ} 0;MYYDÄ
+/v;V19;saada:sa{aØ} 0;SAADA
+/v;V19;jäädä:jä{äØ} 0;JÄÄDÄ
+/v;V20;myydä:my{yØ} 0;MYYDÄ
 /v;V21;<Co [u:{uØ} o d:0 a:0|y:{yØ} ö d:0 ä:0] >;JUODA SYÖDÄ
 /v;V22;viedä:v{iØ}e;VIEDÄ
 kä-y/v;V23;käydä:kä;KÄYDÄ
@@ -176,10 +178,10 @@ pala-V/v;V40;<v a r a t:0 a:0>;VARATA-VARAJAN pala-V/v V40*
 kih-ise/v;V41;<Co* [a|i|o|u] Co+ i:0 s:0 t:0 [a:0|ä:0]> 5;KIHISTÄ-KIHAJAN kih-ise/v
 kih-ise/v;V41*;<Co* [a|i|o|u] Gw i:0 s:0 t:0 [a:0|ä:0]> 5;RAVISTA-RAPAJAN kih-ise/v
 öl-ise/v;V41;<Co* [e|y|ä|ö] Co+ i:0 s:0 t:0 ä:0> 5;ÖLISTÄ-ÖLÄJÄN öl-ise/v
-rake-nTA/v;V42;<Co* [Vo|VV] (Sy1) n:0 t:0 [a:0 a:0|ä:0 ä:0]>;RAKENTAA rake-nTA/v
-rie-ntA/v;V42;<(Co) [Vo|VV] (Sy1) t:0 [a:0|ä:0]>;RIETÄ rie-ntA/v
+rake-nTA/v;V42;<Co* [Vo|VV] (Sy1) n:0 t:0 [a:0 a:0|ä:0 ä:0] 5>;RAKENTAA rake-nTA/v
+rie-ntA/v;V42;<(Co) [Vo|VV] (Sy1) t:0 [a:0|ä:0]> 5;RIETÄ rie-ntA/v
 tai-TA/v;V43;<t a i t:0 a:0 a:0>;TAITAA tai-TA/v
 tai-TA/v;V43;<t i e t:0 ä:0 ä:0>;TIETAA tai-TA/v 
-antau-TU/v;V44;<Co* [Vo|VV] (Sy1)+ [u t:0 u:0 a:0|y t:0 y:0 ä:0]>;ANTAUTUA antau-TU/v
-antau-TU/v;V44;<Co* [Vo|VV] (Sy1)+ [u t:0 a:0|y t:0 ä:0]>;PYSÄYTÄ antau-TU/v
-kaa-TA/v;V45;<Co VV t:0 [a:0|ä:0]>;KAATA kaa-TA/v
+antau-TU/v;V44;<Co* [Vo|VV] (Sy1)+ [u t:0 u:0 a:0|y t:0 y:0 ä:0]> 5;ANTAUTUA antau-TU/v
+antau-TU/v;V44;<Co* [Vo|VV] (Sy1)+ [u t:0 a:0|y t:0 ä:0]> 5;PYSÄYTÄ antau-TU/v
+kaa-TA/v;V45;<Co VV t:0 [a:0|ä:0]> 5;KAATA kaa-TA/v

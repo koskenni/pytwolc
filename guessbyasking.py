@@ -22,15 +22,22 @@ argparser = argparse.ArgumentParser(
     "python3 gyessbyasking.py",
     description="Guess lexicon entries by asking forms from the user")
 argparser.add_argument(
-    "input", help="Guesser input file FST", default="finv-guesser.fst")
+    "guesser", help="Guesser file FST", default="finv-guess.fst")
+argparser.add_argument(
+    "-r", "--reject", default=1000000, type=int,
+    help="reject candidates which are worse than the best by REJECTION or more")
 argparser.add_argument(
     "-v", "--verbosity", default=0, type=int,
     help="level of diagnostic output")
 args = argparser.parse_args()
 
+guesser_fil = hfst.HfstInputStream(args.guesser)
+guesser_fst = guesser_fil.read()
+guesser_fil.close()
+guesser_fst.invert()
+guesser_fst.minimize()
+guesser_fst.lookup_optimize()
 
-fil = hfst.HfstInputStream(args.input)
-fst = fil.read()
 print("\nENTER FORMS OF A WORD:\n")
 while True:
     remaining = set()
@@ -44,18 +51,21 @@ while True:
             print("GIVING UP THIS WORD\n\n")
             break
         if line[0] == '-':
-            res = fst.lookup(line[1:], output="tuple")
+            res = guesser_fst.lookup(line[1:], output="tuple")
         else:
-            res = fst.lookup(line, output="tuple")
-            if args.verbosity >= 10:
-                print("lookup result =", res)
+            res = guesser_fst.lookup(line, output="tuple")
+        if args.verbosity >= 10:
+            print("lookup result =", res)
+        if len(res) == 0:
+            print("FITS NO PATTERN! INGORED.")
+            continue
         entries = set()
-        for r,w in res:
-            entries.add(r)
-            if r in weight:
-                weight[r] = min(w, weight[r])
+        for entry, w in res:
+            entries.add(entry)
+            if entry in weight:
+                weight[entry] = min(w, weight[entry])
             else:
-                weight[r] = w
+                weight[entry] = w
         if first:
             first = False
             remain = entries
@@ -63,17 +73,22 @@ while True:
             remain = remaining - entries
         else:
             remain = remaining & entries
-        if len(remain) == 1:
+        best_weight = min([weight[e] for e in remain])
+        rema = set()
+        for e in remain:
+            if weight[e] <= best_weight + args.reject:
+                rema.add(e)
+        if len(rema) == 1:
             print("\n" + "="*18)
-            print(list(remain)[0], ";")
+            print(list(rema)[0], ";")
             print("="*18 + "\n")
             break
-        elif len(remain) == 0:
+        elif not rema:
             print("DOES NOT FIT! IGNORED.")
         else:
-            rml = [(e, weight[e]) for e in remain]
+            rml = [(entry, weight[entry]) for entry in rema]
             print("        ", rml)
-            remaining = remain
+            remaining = rema
 
 
 

@@ -96,20 +96,19 @@ def patterns2guesserlex(outfile):
 
 argparser = argparse.ArgumentParser(
     "python3 entry-pattern.py",
-    description="Writes either a LEXC file for a guesser or a converter")
+    description="Writes a LEXC file for either a guesser or a converter")
 argparser.add_argument(
-    "input", help="A csv input file containing the patterns")
+    "input", help="A csv input file containing the patterns as regular expressions")
 argparser.add_argument(
-    "output", help="A LEXC output file for the patterns")
+    "output", help="A LEXC output file.  The patterns are "
+    "converted into appropriate LEX entries.")
 argparser.add_argument(
     "-c", "--classes",
-    help="output file containing inflectional classes found in the patterns as a space-separated string")
+    help="Produce a converter instead of a guesser and "
+    "output a file containing all inflectional classe identifiers "
+    "found in the patterns. Output them as a space-separated string")
 argparser.add_argument("-d", "--delimiter", default=",",
     help="CSV field delimiter (default is ',')")
-#argparser.add_argument(
-#    "-c", "--converter",
-#    help="produce a converter (instead of an entry guesser)",
-#    action="store_true")
 argparser.add_argument(
     "-v", "--verbosity", default=0, type=int,
     help="level of diagnostic output")
