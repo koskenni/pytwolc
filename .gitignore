@@ -8,6 +8,8 @@ alpha.twolc
 *#*
 .DS_Store
 docs/_*
+lexgues/*.lexc
+lexgues/*.text
 tmp/*
 history*
 parser.out

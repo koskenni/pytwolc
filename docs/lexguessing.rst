@@ -16,7 +16,22 @@ Human-readable dictionaries often use quite large numbers of distinct inflection
 Patterns for inflection classes
 ===============================
 
+Each inflection class can be described with one or more *patterns*.  Patterns are written as a CSV file, i.e. a table with a few columns:
 
+    CONT
+        Continuation class from which the affixes can be attached to the stems described by this pattern.  The continuation is the same thing as in LEXC entries.
+
+    ICLASS
+        Inflection class, e.g. the number used in a dictionary.
+
+    MPHON
+        A pattern which describes the lexicon entries may belong to this class (ICLASS).  The pattern resembles LEXC lexicon entries.  The pattern may be either a regular expression ``<...>`` or a single exceptional lexeme.  The regular expressions follow the XFST syntax used in LEXC except that curly braces ``{}`` are reserved for names of morphophonemes where they are not quoted with a percent sign ``%``, thus e.g. ``a:{ao}`` is just a symbol pair.  The input side of regular expressions is the base form of lexemes and the output side is the morphophonemic representation.  Epsilons **0** may be used when something in the base-form corresponds to nothing in the morphophonemic representation and vice versa.  (Be careful not to mix zero symbols ``Ø`` and epsilons **0**.  Remember that the zero symbol occurs olny as a part of morphophonemes, e.g. ``a:{aØ}`` in these patterns, never by itself)
+
+    COMMENT
+        Comments do not affect the results but they are otherwise useful for the developer or maintainer of the patterns.
+
+
+Regular expressions may consist of concatenation, Kleene star and plus, brackets for grouping, parenthesis for optionality, disjunction and intersection.  In particular, one may define expressions and use them in other definitions or patterns.  In the first column of a definition is a keyword ``Define``, in the second column is the name of the defined expression, and in the third column is the expression.
 
 Compiling a guessing FST
 ========================
