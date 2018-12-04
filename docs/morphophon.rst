@@ -6,8 +6,8 @@ Morphophonemic representations
 
 In linguistics, we say that word forms consist of :term:`morphs <morph>`, which are sequences of :term:`phonemes <phoneme>` and which have a meaning.  E.g.: a Finnish word form ``mäki`` consists just of the stem morph, 'a hill', whereas ``mäessä`` could be broken into two morphs::
 
-  mäke - 'a hill' - MÄKI
-  ssa  - inessive
+  mäe  - 'a hill' - MÄKI
+  ssä  - inessive
 
 Another word form ``mäissä`` could be segmented into three morphs::
 
