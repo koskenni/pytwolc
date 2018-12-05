@@ -362,7 +362,7 @@ class TwolFstSemantics(object):
         result_fst.set_name(".#.")
         return result_fst
 
-def init(grammar_file='/Users/koskenni/github/pytwolc/twolcsyntax.ebnf'):
+def init(grammar_file='../twolcsyntax.ebnf'):
     """Initializes the module and compiles and returns a tatsu parser
 
     grammar_file -- the name of the file containing the EBNF grammar for rules
