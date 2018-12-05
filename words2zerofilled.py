@@ -127,11 +127,13 @@ for morpheme, aligned_sym_seq in alignments.items():
                                        for i in range(0,l)]
         original_morphs = [re.sub(r"[Ø ]+", r"", x) for x in zero_filled_morphs]
         for origm, zerofm in zip(original_morphs, zero_filled_morphs):
-            if origm:
-                aligned_morphs[morpheme][origm] = zerofm
+            #if origm:
+            #    aligned_morphs[morpheme][origm] = zerofm
+            aligned_morphs[morpheme][origm] = zerofm
     else:
         aligned_morphs[morpheme] = {"": ""}
-
+if args.verbosity >= 20:
+    print("aligned_morphs", aligned_morphs)
 
 print("-- STEP 3 COMPLETED (aligned_morphs done) --")
 
