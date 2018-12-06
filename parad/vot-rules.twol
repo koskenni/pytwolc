@@ -1,0 +1,15 @@
+! copied from demo-rules.text
+VowS = [ :a|:ä|:e|:i|:u|:ü|:o|:ö|:õ ] ; ! surface vowels
+VowM = VowS.m ;                         ! morphophonemic vowels
+ConL = :k|:l|:m|:n|:s ;                 ! surface consonants
+ConM = ConL.m ;                         ! morphophonemic consonants
+
+
+{sØ}:s <=>  ! /<= & =>
+    _ :e ,
+    _ :õ ;
+
+! tüttö : tütö  või katti : kati
+{tØ}:t /<=
+    _ VowS d ,
+    _ i d ;
