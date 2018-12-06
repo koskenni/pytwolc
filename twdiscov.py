@@ -152,8 +152,8 @@ def minimal_contexts(pair_symbol, pos_contexts, neg_contexts):
 def print_rule(pair_symbol, operator, contexts):
     """Prints one rule"""
     print(pair_symbol, operator)
-    for lc, rc in contexts:
-        print("   ", lc, "_", rc, ";")
+    rule_lst = ["    {} _ {}".format(lc, rc) for lc, rc in contexts]
+    print(",\n".join(rule_lst) + " ;")
     return
 
 def context_to_output_str(pairsym_str):
