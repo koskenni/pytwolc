@@ -78,7 +78,7 @@ subexpression = expr:expression ;
 
 optexpression = expr:expression ;
 
-symbol_or_pair = token:/[a-zåäöšžA-ZØ:{}'´`]+/ ;
+symbol_or_pair = token:/[a-zåüäöõšžA-ZØ:{}'´`]+/ ;
 
 boundary = '.#.' ;
 
