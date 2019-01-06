@@ -5,6 +5,8 @@ The HFST engine used for accomplishing the operations but all functions make cop
 © Kimmo Koskenniemi, 2018. This is free code under the GPL 3 license."""
 
 import hfst
+import grapheme
+import cfg
 
 def expr(e):
     """Return an FST corresponding to a XFST regular expression"""
@@ -77,3 +79,36 @@ def lower(f):
     res.output_project()
     res.minimize()
     return res
+
+def symbol_to_fsa(sym):
+    """Return a FSA which accepts the one letter string 'sym'
+
+The symbol 'sym' may be e.g. a composed Unicode grapheme, i.e. a
+string of two or more Unicode characters.
+"""
+    bfsa = hfst.HfstBasicTransducer()
+    string_pair_path = ((sym, sym))
+    bfsa.disjunct(string_pair_path, 0)
+    fsa = hfst.fst(bfsa)
+    return(fsa)
+
+def symbol_pair_to_fst(insym, outsym):
+    """"Return a FST which accepts one the pair string 'insym:outsym'"""
+    bfst = hfst.HfstBasicTransducer()
+    string_pair_path = ((insym, outsym))
+    bfsa.disjunct(string_pair_path, 0)
+    fst = hfst.fst(bfst)
+    return(fst)
+
+def string_to_fsa(grapheme_string):
+    """Return a FSA which accepts the sequence of graphemes in the string"""
+    bfsa = hfst.HfstBasicTransducer()
+    grapheme_list = list(grapheme.graphemes(grapheme_string))
+    string_pair_path = tuple(zip(grapheme_list, grapheme_list))
+    if cfg.verbosity >= 10:
+        print(grapheme_list)
+        print(string_pair_path)
+    bfsa.disjunct(string_pair_path, 0)
+    fsa = hfst.HfstTransducer(bfsa)
+    return(fsa)
+    
