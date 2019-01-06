@@ -13,26 +13,34 @@ def print_raw_paths(paths):
     return
 
 import argparse
-arpar = argparse.ArgumentParser(description="A compiler and tester for two-level rules")
-arpar.add_argument("-o", "--output",
-                    help="File to which write the compiled rules if a name is given",
-                    default="")
-arpar.add_argument("-l", "--lost",
-                    help="File to which write the examples not accepted by all rules as a fst",
-                    default="")
-arpar.add_argument("-w", "--wrong",
-                    help="file to which write the wrong strings accepted by all rules as a fst",
-                    default="")
-arpar.add_argument("-t", "--thorough",
-                   help="test each rule separately: 1 only against positive, 2 against both positive and negative examples",
-                   type=int, choices=[0, 1, 2], default=0)
-arpar.add_argument("-v", "--verbosity",
-                   help="level of  diagnostic output",
-                   type=int, default=0)
-arpar.add_argument("examples", help="name of the examples fst",
-                   default="examples.fst")
-arpar.add_argument("rules", help="name of the rule file",
-                   default="test.rules")
+arpar = argparse.ArgumentParser(
+    description="A compiler and tester for two-level rules")
+arpar.add_argument(
+    "-o", "--output",
+    help="File to which write the compiled rules if a name is given",
+    default="")
+arpar.add_argument(
+    "-l", "--lost",
+    help="File to which write the examples not accepted by all rules as a fst",
+    default="")
+arpar.add_argument(
+    "-w", "--wrong",
+    help="file to which write the wrong strings accepted by all rules as a fst",
+    default="")
+arpar.add_argument(
+    "-t", "--thorough",
+    help="test each rule separately: 1 only against positive, 2 against both positive and negative examples",
+    type=int, choices=[0, 1, 2], default=0)
+arpar.add_argument(
+    "-v", "--verbosity",
+    help="level of  diagnostic output",
+    type=int, default=0)
+arpar.add_argument(
+    "examples", help="name of the examples fst",
+    default="examples.fst")
+arpar.add_argument(
+    "rules", help="name of the rule file",
+    default="test.rules")
 args = arpar.parse_args()
 
 cfg.verbosity = args.verbosity

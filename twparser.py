@@ -299,12 +299,19 @@ class TwolFstSemantics(object):
     def symbol_or_pair(self, ast):
         string = ast.token.strip()
         failmsg = []
+        #pat = re.compile(r"""^
+        #(?P<up>[a-zšžåäöüõA-ZÅÄÖ0-9'´`]*
+        # |
+        # \{[a-zåäöüõA-ZÅÄÖØ'´`]+\})
+        #:
+        #(?P<lo>[a-zšžåäöüõA-ZÅÄÖØ'´`]*)
+        #$""", re.X)
         pat = re.compile(r"""^
-        (?P<up>[a-zšžåäöüõA-ZÅÄÖ0-9'´`]*
+        (?P<up>[^- \[\]\/<>=_;,.|&*+\\()\{\}]*
          |
          \{[a-zåäöüõA-ZÅÄÖØ'´`]+\})
         :
-        (?P<lo>[a-zšžåäöüõA-ZÅÄÖØ'´`]*)
+        (?P<lo>[^- \[\]\/<>=_;,.|&*+\\()\{\}]*)
         $""", re.X)
         m = re.match(pat, string)
         if m:                       # it is a pair with a colon
