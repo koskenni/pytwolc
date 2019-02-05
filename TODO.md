@@ -1,3 +1,17 @@
+Things to be done soon
+======================
+
+- zerofilled2raw must be careful to check the length of the endings
+
+- twparser.py must have a more general way to locate the file 'twolcsyntax.ebnf'
+
+- make commands to the docs of morphoph.
+
+- mulatialign should have options in deciding whether to favour the left or the right hand component deletion in case of double vowels
+
+- words2zerofilled does not handle combining character unicode symbols at all. Find a way to solve.
+
+
 Possible things to do
 =====================
 

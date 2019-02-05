@@ -18,7 +18,7 @@ rawmphonemes : $(BASE)-rawmphonemes.text
 examples : $(BASE)-examples.fst
 
 compile :
-		python3.5 ../twol.py $(BASE)-examples.fst -t 2 $(BASE)-rules.twol
+	python3.5 ../twol.py $(BASE)-examples.fst -t 2 $(BASE)-rules.twol
 
 clean :
 	rm -f $(BASE)-renamed.pstr $(BASE)-raw.csv $(BASE)-zerofilled.csv $(BASE)-words.csv

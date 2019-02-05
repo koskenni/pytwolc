@@ -53,6 +53,7 @@ consonant_features = {
     'f':('Labdent','Unvoiced','Fricative'),
     'w':('Labdent','Voiced','Fricative'),
     'đ':('Dental','Voiced','Fricative'),
+    'd̕':('Dental','Voiced','Fricative'),
     'n':('Alveolar','Voiced','Nasal'),
     'z':('Alveolar','Voiced','Affricate'),
     'c':('Alveolar','Unvoiced','Affricate'),
@@ -392,7 +393,7 @@ if __name__ == "__main__":
 
         best = aligner(words, args.zeros, line)
 
-        best2 = [re.sub(r'^([a-zšžŋđüõåäöáâ`´])\1\1*$', r'\1', cc)
+        best2 = [re.sub(r'^([a-zšžŋđüd̕õåäöáâ`´])\1\1*$', r'\1', cc)
                  for cc in best]
         # print('best =', best2, "\n", ' '.join(best2)) ##
         if args.layout == "horizontal":
