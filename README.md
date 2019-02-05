@@ -12,6 +12,10 @@ The program twol.py uses and depend on the 'tatsu' Python parser generator by Ju
 
    $ python3 -m pip install tatsu
 
+The program is prepared to handle input in Unicode, including user percieved graphemes which are combined out of two or more Unicode characters (with a so called code point).  In order to recognize such *graphemes*, an additional package has to be installed:
+
+   $ python3 -m pip install grapheme
+
 The compiler needs two files: (1) examples as a FST and (2) a rule file.  The human readable examples must be converted into a FST using `twexamp.py` program.
 
 The compiler is normally executed as follows:
@@ -37,6 +41,11 @@ Some of the programs of this sequence need the package `orderedset` which one ca
 
   $ python3 -m pip install orderedset
 
+Especially the zero-filling program needs the same package for handling combined graphemes as twol.py uses:
+
+   $ python3 -m pip install grapheme
+
+There is a Makefile in the subdirectory `parad` and examples which may help in testing and using the programs.
 
 ## Discovering raw rules: twdiscov.py
 

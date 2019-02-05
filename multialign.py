@@ -4,7 +4,9 @@ by adding zero symbols.
 
 import re, sys
 import hfst
+import grapheme
 import cfg
+import fs
 
 vowel_features = {
     'j':('Semivowel','Front','Unrounded'),
@@ -82,7 +84,7 @@ consonant_features = {
 """Phonological distinctive features of consonants to be used when
 estimating similarities between phonemes.  """
 
-pos = {'Bilab':0.0, 'Labdent':1.0, 'Alveolar':2.0,
+pos = {'Bilab':0.0, 'Labdent':1.0, 'Dental':1.5, 'Alveolar':2.0,
         'Postalveolar':2.5, 'Palatal':3.0, 'Velar':3.0, 'Glottal':4.0}
 voic = {'Unvoiced':1, 'Voiced':2}
 consonants = set(consonant_features.keys())
@@ -124,10 +126,12 @@ def mphon_weight(mphon):
     if mphon in weight_cache:
         return weight_cache[mphon]
     if mphon_separator == '':
-        phon_list = list(mphon)
+        phon_list = grapheme.graphemes(mphon)
     else:
         phon_list = mphon.split(mphon_separator)
     phon_set = set(phon_list)
+    if cfg.verbosity >= 30:
+        print("phon_set =", phon_set)
     if phon_set == {'Ø'}:
         weight = 100.0        # all-zero morphophonemes must be allowed
     elif len(phon_set) == 1:
@@ -148,7 +152,7 @@ def mphon_is_valid(mphon):
     """Tests if a raw morphophoneme is all consonants or all vowels"""
     global  vowels, consonants, mphon_separator
     if mphon_separator == '':
-        phon_list = list(mphon)
+        phon_list = grapheme.graphemes(mphon)
     else:
         phon_list = mphon.split(mphon_separator)
     phon_set = set(phon_list)
@@ -202,8 +206,9 @@ def shuffle_with_zeros(string, target_length):
     Returns a fsa which accepts all the strings with the inserted zeros.
     All strings have exactly target_length symbols.
     """
-    result_fsa = hfst.fst(string)
-    l = len(string)
+    ### result_fsa = hfst.fst(string) # not correct for composed graphemes !!!
+    result_fsa = fs.string_to_fsa(string)
+    l = grapheme.length(string)
     if l < target_length:
         n = target_length - l
         n_zeros_fsa = hfst.regex(' '.join(n * 'Ø'))
@@ -244,6 +249,8 @@ def multialign(strings, target_length):
     for string in strings[1:]:
         suf_fsa = shuffle_with_zeros(string, target_length)
         fsa.cross_product(suf_fsa)      # results in a transducer
+        if cfg.verbosity >=30:
+            print("fsa\n", fsa)
         prod_fsa = fst_to_fsa(fsa)      # encodes the fst as a fsa
         fsa = remove_bad_transitions(prod_fsa)
         fsa.minimize()
@@ -255,10 +262,10 @@ def multialign(strings, target_length):
 def list_of_aligned_words(sym_lst):
     if not sym_lst:
         return []
-    l = len(sym_lst[0])
+    l = grapheme.length(sym_lst[0])
     res = []
     for i in range(l):
-        syms = [itm[i:i+1] for itm in sym_lst]
+        syms = [grapheme.slice(itm,start=i, end=i+1) for itm in sym_lst]
         res.append(''.join(syms))
     return res
 
@@ -346,7 +353,7 @@ def aligner(words, max_zeros_in_longest, line):
 
     Returns the best alignment as a list of raw morphophoneme.
     """
-    max_length = max([len(x) for x in words])
+    max_length = max([grapheme.length(x) for x in words])
     weighted_fsa = hfst.empty_fst()
     for m in range(max_length, max_length + max_zeros_in_longest + 1):
         R = multialign(words, m)
@@ -389,18 +396,20 @@ if __name__ == "__main__":
     
     for line in sys.stdin:
         words = line.strip().split(sep=' ')
-        ##words = sorted(words, key=lambda w: -len(w))
-
         best = aligner(words, args.zeros, line)
 
-        best2 = [re.sub(r'^([a-zšžŋđüd̕õåäöáâ`´])\1\1*$', r'\1', cc)
-                 for cc in best]
-        # print('best =', best2, "\n", ' '.join(best2)) ##
+        #best2 = [re.sub(r'^([a-zšžŋđüõåäöáâ`´])\1\1*$', r'\1', cc)
+        #         for cc in best]
+
         if args.layout == "horizontal":
-            print(' '.join(best2))
+            mphonemic_best = []
+            for cc in best:
+                grapheme_list = list(grapheme.graphemes(cc))
+                lab = grapheme_list[0] if len(set(grapheme_list)) == 1 else cc
+                mphonemic_best.append(lab)
+            print(' '.join(mphonemic_best))
         elif args.layout == "vertical":
             print('\n'.join(list_of_aligned_words(best)))
         elif args.layout == 'list':
             print(' '.join(list_of_aligned_words(best)))
-        # print('  '.join(best2), best_bias)
     

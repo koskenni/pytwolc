@@ -40,6 +40,7 @@ import re
 import csv
 import collections
 from orderedset import OrderedSet
+import grapheme
 
 # STEP 1:
 # Read in the segmented words and collect the allomorphs of each morpheme
@@ -117,13 +118,16 @@ aligned_morphs = {}
 """
 
 for morpheme, aligned_sym_seq in alignments.items():
+    # e.g. "KOTA", ['kkkk', 'oooo', 'tdtd', 'aaØØ']
     if args.verbosity >= 25:
         print("aligned_sym_seq:", aligned_sym_seq)
     if morpheme not in aligned_morphs:
         aligned_morphs[morpheme] = collections.OrderedDict()
     if aligned_sym_seq:
-        l = len(aligned_sym_seq[0])
-        zero_filled_morphs = ["".join([x[i] for x in aligned_sym_seq])
+        aligned_vec_seq = [tuple(grapheme.graphemes(aligned_sym))
+                           for aligned_sym in aligned_sym_seq]
+        l = len(aligned_vec_seq[0])
+        zero_filled_morphs = ["".join([x[i] for x in aligned_vec_seq])
                                        for i in range(0,l)]
         original_morphs = [re.sub(r"[Ø ]+", r"", x) for x in zero_filled_morphs]
         for origm, zerofm in zip(original_morphs, zero_filled_morphs):
