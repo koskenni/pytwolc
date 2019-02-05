@@ -178,7 +178,7 @@ if __name__ == "__main__":
     cfg.verbosity = args.verbosity
     
     twexamp.read_examples(filename=args.examples, build_fsts=False)
-    if cfg.verbosity > 0:
+    if cfg.verbosity >= 5:
         print("--- all examples read in ---")
     
     for insym in cfg.input_symbol_set:
@@ -206,11 +206,11 @@ if __name__ == "__main__":
         pos_contexts, neg_contexts = minimal_contexts(pair_symbol,
                                                       posi_contexts.copy(),
                                                       nega_contexts.copy())
-        if len(pos_contexts) <= len(neg_contexts):
+        if len(pos_contexts) <= len(neg_contexts) or cfg.verbosity > 0:
             print_rule(pair_symbol, "=>", pos_contexts)
         else:
             print_rule(pair_symbol, "/<=", neg_contexts)
-        if args.verbosity >= 1:
+        if args.verbosity >= 5:
             for lc, rc in posi_contexts:
                 l_str = context_to_output_str(lc)
                 r_str = context_to_output_str(rc)
