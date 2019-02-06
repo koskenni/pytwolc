@@ -126,5 +126,5 @@ There are four types of two-level rules:
     Surface coercion rule says that the input side of *X* must correspond to one of the possibilities given in *X* in the contexts given by the rule.  In other words, *X.m - X* may not occur in any of the contexts given by the rule.  Thus *X <= LC _ RC* is equivalent to *X.m - X /<= LC _ RC*
 
 **<=>**
-    Combination of the => and => rules.
+    Combination of the => and <= rules.
 
