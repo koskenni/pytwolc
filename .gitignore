@@ -5,6 +5,7 @@ alpha.twolc
 *.bak.*
 *.fst
 *.log
+*.numbers
 *#*
 .DS_Store
 docs/_*

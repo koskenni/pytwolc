@@ -20,15 +20,15 @@ Welcome to twol's documentation!
    compiletest
    lexguessing
    technical
+   twexamp
+   twrule
+   cfg
+   fs
    glossary
    genindex
    py-modindex
    differences
    twparsere
-   cfg
-   fs
-   twexamp
-   twrule
 
 
 Indices and tables
