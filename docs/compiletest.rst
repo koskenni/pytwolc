@@ -42,7 +42,7 @@ Whatever method you are using when you build your set of examples, you end up wi
   t u o h {ieØeØ}:Ø {ij}:i {Øh}:Ø {V}:i n
   t u o h {ieØeØ}:Ø {ij}:i {Øh}:h {V}:i n
 
-One must convert this file into a FST to be usable by ``twol.py`` by executing the following command::
+One can use this file directly with the ``twol.py`` compiler or convert the file into a FST to be more efficient for the compiler to load in by executing the following command::
 
   python3 twexamp.pl examples.pstr examples.fst
 
@@ -58,7 +58,7 @@ This rule says that the pair ``{ieØeØ}:i`` can only occur at the end of a word
 
 The simple grammar can now be tested against the examples by::
 
-  $ python3 ../twol.py --thorough 2 examples.fst rules.twol 
+  $ python3 ../twol.py --thorough 2 examples.pstr rules.twol 
   
   
   
