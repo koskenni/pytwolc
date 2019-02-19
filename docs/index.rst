@@ -20,6 +20,7 @@ Welcome to twol's documentation!
    compiletest
    lexguessing
    technical
+   ofitwol
    twexamp
    twrule
    cfg

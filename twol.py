@@ -36,7 +36,8 @@ arpar.add_argument(
     help="level of  diagnostic output",
     type=int, default=0)
 arpar.add_argument(
-    "examples", help="name of the examples fst",
+    "examples",
+    help="name of the examples fst or example pair symbol string file",
     default="examples.fst")
 arpar.add_argument(
     "rules", help="name of the rule file",
@@ -45,7 +46,11 @@ args = arpar.parse_args()
 
 cfg.verbosity = args.verbosity
 
-twexamp.read_fst(args.examples)
+if args.examples.endswith(".fst"):
+    twexamp.read_fst(args.examples)
+else:
+    twexamp.read_examples(args.examples)
+
 if cfg.verbosity >= 30:
     twbt.ppfst(cfg.examples_fst, title="examples_fst")
 

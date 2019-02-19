@@ -12,13 +12,24 @@ hfst.rules.restriction
 
 """
 import re
+import hfst
 import cfg
 import twbt
+
+def pairs_to_fst(pair_set):
+    """Converts a seq of symbol pairs into a fst that accepts any of them
+"""
+    pairs_bfst = hfst.HfstBasicTransducer()
+    for pair in pair_set:
+        pairs_bfst.disjunct((pair,), 0)       # arg in tokenized format
+    fst = hfst.HfstTransducer(pairs_bfst)
+    fst.remove_epsilons()
+    fst.minimize()
+    return fst
 
 def read_fst(filename="examples.fst"):
     """Reads in a previously stored example FST file
     """
-    import hfst
     exfile = hfst.HfstInputStream(filename)
     cfg.examples_fst = exfile.read()
     pair_symbols = cfg.examples_fst.get_property("x-pair_symbols")
@@ -30,14 +41,7 @@ def read_fst(filename="examples.fst"):
         cfg.symbol_pair_set.add((insym, outsym))
         cfg.input_symbol_set.add(insym)
         cfg.output_symbol_set.add(outsym)
-    cfg.all_pairs_fst = hfst.empty_fst()
-    for insym, outsym in cfg.symbol_pair_set:
-        in_quoted = re.sub(r"([{}])", r"%\1", insym)
-        #print(in_quoted, outsym)### tilts if insym contains bad chars
-        pair_fst = hfst.regex(in_quoted + ':' + outsym)
-        cfg.all_pairs_fst.disjunct(pair_fst)
-    cfg.all_pairs_fst.remove_epsilons()
-    cfg.all_pairs_fst.minimize()
+    cfg.all_pairs_fst = pairs_to_fst(cfg.symbol_pair_set)
     if cfg.verbosity >= 30:
         twbt.ppfst(cfg.all_pairs_fst, title="cfg.all_pairs_fst")
     return
@@ -76,11 +80,12 @@ def read_examples(filename="test.pstr", build_fsts=True):
         print("List of examples:", cfg.example_lst)
         print("List of alphabet symbol pairs:", sorted(cfg.symbol_pair_set))
     if build_fsts:
+        cfg.all_pairs_fst = pairs_to_fst(cfg.symbol_pair_set)
         cfg.examples_fst = hfst.HfstTransducer(examples_bfst)
         cfg.examples_fst.set_name(filename)
         cfg.examples_fst.minimize()
         if cfg.verbosity >= 30:
-            twbt.ppfst(cfg.examples_fst, False, title="Example file as FST") ##
+            twbt.ppfst(cfg.examples_fst, False, title="Example file as FST")
     for insym, outsym in cfg.symbol_pair_set:
         cfg.input_symbol_set.add(insym)
         cfg.output_symbol_set.add(outsym)

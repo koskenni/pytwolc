@@ -148,6 +148,16 @@ References
                   Computational Linguistics, pages 56-64,
                   http://www.aclweb.org/anthology/W17-0207
 
+.. [KSK] Suomen kielen käänteissanakirja / Reverse dictionary of Modern Standard Finnish.
+	 Compiled by Tuomo Tuomi.  SKS.
+
+.. [NS] Nykysyomen Sanakirja, 1951-1961, Edited by Suomalaisen
+	 Kirjallisuuden Seura, published by WSOY.
+
+.. [NSSL] Kotimaisten kielten keskuksen nykysuomen sanalista.
+	  (A list of headwords and their inflection class numbers.)
+	  http://kaino.kotus.fi/sanat/nykysuomi/
+		  
 .. [ylijyrä2006] Anssi Yli-Jyrä and Kimmo Koskenniemi, 2006: "Compiling
 		 Generalized Two-Level Rules and Grammars" in T.
 		 Salakoski et al. (Eds.): *FinTAL 2006*, LNAI 4139,
