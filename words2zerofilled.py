@@ -57,8 +57,8 @@ stem_name_set = set()
 """Set of stem morphemes i.e. names of stem morphemes.
 """
 csvfile = open(args.input)
-csv.excel.delimiter = args.csv_delimiter
-reader = csv.DictReader(csvfile)
+
+reader = csv.DictReader(csvfile, delimiter=args.csv_delimiter)
 i = 0
 morphs_of_morpheme = {}
 for row in reader:
@@ -99,11 +99,13 @@ Each aligned symbol has as many characters as there are  items in the sequence.
 
 for morpheme in sorted(morphs_of_morpheme.keys()):
     words = list(morphs_of_morpheme[morpheme])
-    if args.verbosity >= 20:
-        print("words:", words)
-    nz = 1 if len(words) > 10 else 2
-    aligned_sym_seq = aligner(words,
-                              nz, morpheme)
+    if len(words) == 1 and len(words[0]) == 0:
+        aligned_sym_seq = ["Ø"]
+    else:
+        if args.verbosity >= 20:
+            print("words:", words)
+        nz = 1 if len(words) > 10 else 2
+        aligned_sym_seq = aligner(words, nz, morpheme)
     if args.verbosity >= 20:
         print("aligned_sym_seq:", aligned_sym_seq)
     alignments[morpheme] = aligned_sym_seq
@@ -129,7 +131,7 @@ for morpheme, aligned_sym_seq in alignments.items():
         l = len(aligned_vec_seq[0])
         zero_filled_morphs = ["".join([x[i] for x in aligned_vec_seq])
                                        for i in range(0,l)]
-        original_morphs = [re.sub(r"[Ø ]+", r"", x) for x in zero_filled_morphs]
+        original_morphs = [x.replace("Ø", "") for x in zero_filled_morphs] ##########
         for origm, zerofm in zip(original_morphs, zero_filled_morphs):
             #if origm:
             #    aligned_morphs[morpheme][origm] = zerofm
@@ -157,7 +159,7 @@ for seg_example in seg_example_list:
         print("seg_example:", seg_example)
     morpheme_lst = [morpheme for morpheme, morph in seg_example]
     morph_lst = [morph for morpheme, morph in seg_example]
-    zero_filled_morph_lst = [aligned_morphs[morpheme].get(morph, "")
+    zero_filled_morph_lst = [aligned_morphs[morpheme].get(morph.replace("Ø", ""), "")
                               for (morpheme, morph) in seg_example]
     d["MORPHEMES"] = " ".join(morpheme_lst)
     d["MORPHS"] = args.morph_separator.join(morph_lst)
