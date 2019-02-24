@@ -49,6 +49,9 @@ with open(args.names) as namefile:
     for row in reader:
         if not row or (not row[0].strip()):
             continue
+        if len(row) < 2:
+            print("*** TOO FEW FIELDS IN:", row)
+            continue
         if row[1].strip():
             mphon_name[row[0].strip()] = row[1].strip()
 
