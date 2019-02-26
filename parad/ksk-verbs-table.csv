@@ -1,5 +1,5 @@
 ID;KSK;STM SG1;STM PAST SG3;STM POTN SG3;STM COND SG3;STM IMPV;STM IMPVSG3;STM PCP2;STM PSSPRES;STM PSSPAST;STM PSSPCP2
-PUNOA;V1;puno.n;puno.i.;puno.ne.e;puno.isi.;puno.;puno.koon;puno.nut;puno.taan;puno.ttiin;puno.ttu
+PUNOA;V1;puno.n;puno.i.;puno.ne.e;puno.isi.;puno.;puno.koon;puno.nut;puno.tØaan;puno.ttiin;puno.ttu
 kutoa;V1;kudo.n;kuto.i.;kuto.ne.e;kuto.isi.;kudo.;kuto.koon;kuto.nut;kudo.taan;kudo.ttiin;kudo.ttu
 MUISTAA;V2;muista.n;muist.i.;muista.ne.e;muista.isi.;muista.;muista.koon;muista.nut;muiste.taan;muiste.ttiin;muiste.ttu
 hätkähtää;V2;hätkähdä.n;hätkäht.i.;hätkähtä.ne.e;hätkähtä.isi.;hätkähdä.;hätkähtä.köön;hätkähtä.nyt;hätkähde.tään;hätkähde.ttiin;hätkähde.tty
@@ -26,7 +26,7 @@ SAADA;V19;saa.n;sa.i.;saa.ne.e;sa.isi.;saa.;saa.koon;saa.nut;saa.daan;saa.tiin;s
 MYYDÄ;V20;myy.n;my.i.;myy.ne.e;my.isi.;myy.;myy.köön;myy.nyt;myy.dään;myy.tiin;myy.ty
 JUODA;V21;juo.n;jo.i.;juo.ne.e;jo.isi.;juo.;juo.koon;juo.nut;juo.daan;juo.tiin;juo.tu
 VIEDÄ;V22;vie.n;ve.i.;vie.ne.e;ve.isi.;vie.;vie.köön;vie.nyt;vie.dään;vie.tiin;vie.ty
-KÄYDÄ;V23;käy.n;käv.i.;käy.ne.e;käv.isi.;käy.;käy.köön;käy.nyt;käy.dään;käy.tiin;käy.ty
+KÄYDÄ;V23;käØy.n;kävØ.i.;käy.ne.e;käv.isi.;käy.;käy.köön;käy.nyt;käy.dään;käy.tiin;käy.ty
 NUOLAISTA;V24;nuolaise.n;nuolais.i.;nuolais.se.e;nuolais.isi.;nuolaise.;nuolais.koon;nuolais.sut;nuolais.taan;nuolais.tiin;nuolais.tu
 TULLA;V25;tule.n;tul.i.;tul.le.e;tul.isi.;tule.;tul.koon;tul.lut;tul.laan;tul.tiin;tul.tu
 PURRA;V26;pure.n;pur.i.;pur.re.e;pur.isi.;pure.;pur.koon;pur.rut;pur.raan;pur.tiin;pur.tu

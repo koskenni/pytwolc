@@ -1,34 +1,34 @@
-{C},,
-{VØ},,
-{aoaaae},{aoe},kaiv<a>n kaiv<o>i kaiv<e>taan
-{aoØaaae},{aoØe},haast<a>n haast<o>i haast<>i haast<e>taan
-{aØaaae},{aØe},maust<a>n muist<>i muist<e>taan
-{aØaaaeØØ},{aØe},taid<a>n tais<>in taid<e>taan
-{aØa},,-- kihaj<a>n
-{aØaØaa},{aØ},sa<a>n sa<>i sa<a>nee sa<>isi 
-{aØoØaaae},{aoØe},saarr<a>n saars<>i saart<o>i saarr<e>taan
-{aØØaaae},,suod<a>n sous<>i sout<>i soud<e>taan
-{aØØaØØ},,halu<a>n halu<>si halun<>nee halu<a>isi halu<>tkoon halu<>ttiin
-{aØØaØØ},,halu<a>n halu<>si halu<a>isi halu<>nnee halu<>taan
-{aØØØØØ},,sala<a>n sala<>si sala<>nnee sala<>isi sala<>ttiin
+{C},,puno<>
+{VØ},,puno<o> punoi<>
+{aoaaae},{aoaae},kaiv<a>n kaiv<o>i kaiv<e>taan
+{aoØaaae},{aoaae},haast<a>n haast<o>i haast<>i haast<e>taan taid<a>n tais<>in taid<e>taan
+{aØaaae},{aØaae},muist<a>n muist<>i muist<e>taan
+{aØaØaa},{aØØaa},sa<a>n sa<>i sa<a>nee sa<>isi 
+{aØoØaaae},{aoØaae},saarr<a>n saars<>i saart<o>i saarr<e>taan
+{aØØaaae},{aØaae},soud<a>n sous<>i sout<>i soud<e>taan
+{aØØaØØ},{aØaØØ},halu<a>n halu<>si halun<>nee halu<a>isi halu<>tkoon halu<>ttiin
+{aØØØØØ},{aØØØØ},sala<a>n sala<>si sala<>nnee sala<>isi sala<>ttiin
 {aä},{aä},punot<a><a>n myyd<ä><ä>n
 {dsnttt},,kaa<d>an kaa<s>i kaa<n>nee kaa<t>koon kaa<t>tu
+{dstttd},,tai<d>an tai<s>i tai<t>anee tai<t>aisi 
 {dstttdnt},,-- ei ole enää
 {dsttttd},,huu<d>an huu<s>i huu<t>anee huu<t>aisi huu<t>akoon huu<d>etaan
 {dtsttstd},,läh<d>en läh<t>i läk<s>i läh<t>enee läh<t>isi läk<s>isi läh<t>eköön läh<d>etty
 {dtstttd},,po<d>en po<t>i po<s>i po<t>enee po<t>isi po<t>ekoon po<d>ettu
 {dttttd},{td},ku<d>on ku<t>oi ku<d>o ku<d>otaan
-{eØeØee},,lask<e>n lask<>i lask<e>nee lask<>isi lask<e> lask<e>koon
-{eØØeØee},,pod<e>n pot<>i pos<>i pot<e>nee pot<>isi pod<e> pot<e>koon
-{eØØeØØee},,lähd<e>n läht<>i läks<>i läht<e>nee läht<>isi lähd<e> läht<e>köön
-{eØØØeØØ},,katsel<e>n katsel<>i katsel<>isi katsel<e>isi katsel<>koon
-{eØØØØØ},,pur<e>n pur<>i pur<>isi pur<e> pur<>koon pur<>rut
+{eØeØee},{eØØee},lask<e>n lask<>i lask<e>nee lask<>isi lask<e> lask<e>koon
+{eØØeØee},{eØØee},pod<e>n pot<>i pos<>i pot<e>nee pot<>isi pod<e> pot<e>koon
+{eØØeØØee},{eØØee},lähd<e>n läht<>i läks<>i läht<e>nee läht<>isi lähd<e> läht<e>köön
+{eØØØeØØ},{eØØØØ},katsel<e>n katsel<>i katsel<>lee katsel<>isi katsel<e>isi katsel<>koon
+{eØØØ},{eØØØØ},-- katke<e>n katkes<>i katke<>isi
+{eØØØØØ},{eØØØØ},pur<e>n pur<>i pur<>isi pur<e> pur<>koon pur<>rut
 {gkkkkg},{kg},on<g>in on<k>i on<g>i on<k>ikoon on<g>ittu
-{hhkhhkhh},,lä<h>den lä<h>ti lä<k>si lä<h>detty
+{hhkhhkhh},{kh},lä<h>den lä<h>ti lä<k>si lä<h>detty
 {iiiieii},,arva<i>len arva<i>li arva<i>lisi arva<e>lisi
 {i},,
 {iØiØii},,sall<i>n sall<>i sall<>isi sall<i>nee sall<i>ttu
-{kkjkjj},,val<k>eni val<j>ennut val<j>etkoon
+{iØØ},,-- selvi<i>n selvis<>i selvin<>nee
+{kkjkjj},{kj},val<k>eni val<j>ennut val<j>etkoon
 {kkØkØØ},{kØ},hyl<k>ään hyl<>ännee juo<k>sen juo<>ssee juo<>skoon juo<k>se 
 {lsttttl},,puol<l>an puol<s>i puol<t>anee puol<t>aisi puol<t>akoon puol<l>ettu
 {nlrs},,puno<n>ee tul<l>lut pur<r>ree nuolais<s>ee
@@ -37,7 +37,8 @@
 {nnØ},,-- rake<n>nan rake<>tkoon rake<>ttu
 {nstttn},,tun<n>ne tun<s>i tun<t>enee tun<t>isi tun<t>ekoon tun<n>ettu
 {nsttttn},,pahen<n>an pahen<s>i pahen<t>i pahen<t>aisi pahen<t>akoon pahen<n>nettu
-{ntt},,-- raken<n>an rake<t>koon rake<t>tu
+{ntt},,-- raken<n>an rake<t>koon rake<t>tu tai<n>ee tai<t>koon
+{oØ},,-- koho<o> koho<>isi
 {oö},{oö},punok<o><o>n syök<ö><ö>n
 {ppmpmm},{pm},läm<p>iän läm<m>innen läm<p>iäisi läm<m>itköön
 {ppvpvv},{pv},vi<p>uan vi<v>unnee vi<p>ua vi<v>uttu
@@ -45,26 +46,22 @@
 {rstttttr},,saar<r>an saar<s>i saar<t>oi saar<t>anee saar<t>aisi saar<r>a saar<t>akoon
 {ssØssØØ},,valit<s>en valit<s>i valin<>nee valit<s>isi valit<s>eisi valit<>koon
 {ssØsØØ},,-- haravoit<s>en haravoit<s>i haravoin<>nee haravoit<>koon
-{tdlrnØ},,puno<t>aan saa<d>aan tul<l>aan pur<r>aan men<n>ään
+{tdlrnØ},{dlnrtØ},puno<>a puno<t>aan saa<d>aan tul<l>aan pur<r>aan men<n>ään
 {ttdtdd},{td},ma<t>elen ma<d>ellut
 {ttntttt},,vali<t>sen vali<n>nee vali<t>koon vali<n>nut vali<t>tu
 {ttnttt},,haravoi<t>sen haravoi<n>nee haravoi<t>se haravoi<n>ut
 {uy},{uy},punott<u> syöt<y>
 {uØuØuu},{uØ},j<u>on j<>oi
 {yØyØyy},{yØ},s<y>ön s<>öi
-{eØØØØØ},,nä<e>n näk<>i näh<>nee näk<>isi näh<>nyt
 {Økhkhh},,nä<>en nä<k>i nä<h>nee nä<k>isi nä<h>nyt
 {ØkkkkØ},{kØ},ko<>en ko<k>i ko<>e
-{ØppppØ},,tap<>an tap<p>oi
-{ØsnØttjj},,-- ei ole enää
-{ØsnØtt},,salaa<>n
-{ØsnØttØsn},,
-{ØsnØttØsnØ},,
-{ØsnØttØØ},,
+{ØppppØ},{pØ},tap<>an tap<p>oi
+{Øsn},,-- selvi<>in 
+{ØsnØtt},,salaa<>n sala<s>i sala<n>nee sala<>isi sala<t>koon
+{ØsnØ},,katke<>en
 {ØsØØØØ},,
 {Øt},,puno<t><t>iin punot<t>u saa<t><>iin saat<>u halut<t><>iin halut<t><>u
-{ØvØvØØ},,
-{äØØØØØ},,hylkä<ä>n hylkä<>si hylkä<>isi hylkä<ä> hylä<>tään
-{äØØäØØiØØ},,
-{äØØäØØ},,lämpi<ä>n lämpis<>i lämmin<>nee lämpi<ä>isi lämmin<>nyt lämmit<>ty
-{äØäääe},,hätkähd<ä>n hätkäht<>i hätkäht<ä>isi hätkähd<e>tty
+{ØvØvØØ},,kä<>yn kä<v>i
+{äØØØØØ},{äØØØØ},hylkä<ä>n hylkä<>si hylkä<>isi hylkä<ä> hylä<>tään
+{äØØäØØ},{äØäØØ},lämpi<ä>n lämpis<>i lämmin<>nee lämpi<ä>isi lämmin<>nyt lämmit<>ty
+{äØäääe},{äØääe},hätkähd<ä>n hätkäht<>i hätkäht<ä>isi hätkähd<e>tty
