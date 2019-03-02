@@ -32,6 +32,9 @@ argparser.add_argument(
     default="Ø",
     help="symbol to be inserted in word forms to align them")
 argparser.add_argument(
+    "-x", "--extra-zeros", default=0, type=int,
+    help="number of extra zeros to be tried in alighnment")
+argparser.add_argument(
     "-v", "--verbosity", default=0, type=int,
     help="level of diagnostic and debugging output")
 args = argparser.parse_args()
@@ -104,7 +107,8 @@ for morpheme in sorted(morphs_of_morpheme.keys()):
     else:
         if args.verbosity >= 20:
             print("words:", words)
-        nz = 1 if len(words) > 10 else 2
+        nz = args.extra_zeros 
+        ####nz = 1 if len(words) > 10 else 2
         aligned_sym_seq = aligner(words, nz, morpheme)
     if args.verbosity >= 20:
         print("aligned_sym_seq:", aligned_sym_seq)

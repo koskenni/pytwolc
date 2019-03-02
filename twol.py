@@ -84,8 +84,6 @@ for line_nl in rule_file:
     else:
         rule_str = " ".join(line_lst)
         line_lst = []
-    if args.thorough > 0:
-        print("\n\n")
     op, left, right, title = twparser.parse_rule(parser, rule_str)
     if not (left and right):
         print("ERROR:", line)
@@ -96,6 +94,8 @@ for line_nl in rule_file:
             print(left, op)
             twbt.ppfst(right)
         continue
+    if args.thorough > 0:
+        print("\n\n")
     x_expr = left
     ctx_expr_list = right
     if args.thorough > 0:
@@ -134,7 +134,7 @@ for line_nl in rule_file:
                 print("** Some positive examples were rejected:")
                 lost_paths = lost_examples_fst.extract_paths(output='raw')
                 print_raw_paths(lost_paths[0:20])
-    if args.thorough > 1:
+    if args.thorough > 1 and op in {"=>", "<=", "<=>"}:
         neg_examples_fsa = examples_fsa.copy()
         neg_examples_fsa.compose(MIXe)
         neg_examples_fsa.output_project()

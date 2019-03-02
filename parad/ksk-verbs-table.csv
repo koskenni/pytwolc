@@ -35,34 +35,34 @@ KATSELLA;V28;katsele.n;katsel.i.;katsel.le.e;katsel.isi. (katsele.isi.);katsele.
 madella;V28;matele.n;matel.i.;madel.le.e;matel.isi.;matele.;madel.koon;madel.lut;madel.laan;madel.tiin;madel.tu
 ARVAILLA;V29;arvaile.n;arvail.i.;arvail.le.e;arvail.isi. (arvaele.isi.);arvaile.;arvail.koon;arvail.lut;arvail.laan;arvail.tiin;arvail.tu
 HARAVOIDA;V30;haravoi.n;haravo.i.;haravoi.ne.e;haravo.isi.;haravoi.;haravoi.koon;haravoi.nut;haravoi.daan;haravoi.tiin;haravoi.tu
-HARAVOITA;V30;haravoitse.n;haravoits.i.;haravoin.ne.e;haravoits.isi.;haravoitse.;(haravoit.koon);(haravoin.nut);haravoit.aan;(haravoit.tiin);(haravoit.tu)
-VALITA;V31;valitse.n;valits.i.;valin.ne.e;valits.isi. (valitse.isi.);valitse.;valit.koon;valin.nut;valit.aan;valit.tiin;valit.tu
+HARAVOITA;V30;haravoitse.n;haravoits.i.;haravoin.ne.e;haravoits.isi.;haravoitse.;(haravoit.koon);(haravoin.nut);haravoit.ØØaan;(haravoit.tiin);(haravoit.tu)
+VALITA;V31;valitse.n;valits.i.;valin.ne.e;valits.isi. (valitse.isi.);valitse.;valit.koon;valin.nut;valit.ØØaan;valit.tiin;valit.tu
 JUOSTA;V32;juokse.n;juoks.i.;juos.se.e;juoks.isi.;juokse.;juos.koon;juos.sut (juos.nut);juos.taan;juos.tiin;juos.tu
 NÄHDÄ;V33;näØe.n;näk.i.;näh.ne.e;näk.isi.;näe.;näh.köön;näh.nyt;näh.dään;näh.tiin;näh.ty
-ALETA;V34;alene.n;alen.i.;alen.ne.e;alen.isi. (alene.isi.);alene.;alet.koon;alen.nut;alet.aan;alet.tiin;alet.tu
-valjeta;V34;valkene.n;valken.i.;valjen.ne.e;valken.isi.;valkene.;valjet.koon;valjen.nut;valjet.aan;valjet.tiin;valjet.tu
-SALATA;V35;salaØa.n;salas.i.;salan.ne.e;sala.isi.;salaa.;salat.koon;salan.nut;salat.aan;salat.tiin;salat.tu
-aidata;V35;aitaØa.n;aitas.i.;aidan.ne.e;aita.isi.;aitaa.;aidat.koon;aidan.nut;aidat.aan;aidat.tiin;aidat.tu
-KATKETA;V36;katkeØa.n;katkes.i.;katken.ne.e;katkea.isi.;katkea.;katket.koon;katken.nut;katket.aan;katket.tiin;katket.tu
-Katketa;V36;(katkeØe.n);[katkes.i.];[katken.ne.e];(katke.isi.);(katkee.);;;;;
+ALETA;V34;alene.n;alen.i.;alen.ne.e;alen.isi. (alene.isi.);alene.;alet.koon;alen.nut;alet.ØØaan;alet.tiin;alet.tu
+valjeta;V34;valkene.n;valken.i.;valjen.ne.e;valken.isi.;valkene.;valjet.koon;valjen.nut;valjet.ØØaan;valjet.tiin;valjet.tu
+SALATA;V35;salaØa.n;salas.i.;salan.ne.e;sala.isi.;salaa.;salat.koon;salan.nut;salat.Øaan;salat.tiin;salat.tu
+aidata;V35;aitaØa.n;aitas.i.;aidan.ne.e;aita.isi.;aitaa.;aidat.koon;aidan.nut;aidat.ØØaan;aidat.tiin;aidat.tu
+KATKETA;V36;katkeØa.n;katkes.i.;katken.ne.e;katkea.isi.;katkea.;katket.koon;katken.nut;katket.ØØaan;katket.tiin;katket.tu
+?Katketa;V36;(katkeØe.n);[katkes.i.];[katken.ne.e];(katke.isi.);(katkee.);;;;;
 herjetä;V36;herkeØä.n;herkes.i.;herjen.ne.e;herkeä.isi.;herkeä.;herjet.köön;herjen.nyt;herjet.ään;herjet.tiin;herjet.ty
 SELVITÄ;V37;selviØä.n;selvis.i.;selvin.ne.e;selviä.isi.;selviä.;selvit.köön;selvin.nyt;selvit.ään;selvit.tiin;selvit.ty
-Selvitä;V38;(selviØi.n);[selvis.i.];[selvin.ne.e];;;;;;;
+?Selvitä;V38;(selviØi.n);[selvis.i.];[selvin.ne.e];;;;;;;
 lämmitä;V37;lämpiØä.n;lämpis.i.;lämmin.ne.e;lämpiä.isi.;lämpiä.;lämmit.köön;lämmin.nyt;lämmit.ään;lämmit.tiin;lämmit.ty
 KOHOTA;V38;kohoØa.n;kohos.i.;kohon.ne.e;kohoa.isi.;kohoa.;kohot.koon;kohon.nut;kohot.aan;kohot.tiin;kohot.tu
-Kohota;V38;(kohoo.n);;;(koho.isi.);(kohoo.);;;;;
+?Kohota;V38;(kohoo.n);;;(koho.isi.);(kohoo.);;;;;
 kimmota;V38;kimpoØa.n;kimpos.i.;kimmon.ne.e;kimpoa.isi.;kimpoa.;kimmot.koon;kimmon.nut;kimmot.aan;kimmot.tiin;kimmot.tu
 HALUTA;V39;haluØa.n;halus.i.;halun.ne.e;halua.isi.;halua.;halut.koon;halun.nut;halut.aan;halut.tiin;halut.tu
 vivuta;V39;vipuØa.n;vipus.i.;vivun.ne.e;vipua.isi.;vipua.;vivut.koon;vivun.nut;vivut.aan;vivut.tiin;vivut.tu
 PALATA;V40;palaØa.n;palas.i.;palan.ne.e;pala.isi.;palaa.;palat.koon;palan.nut;palat.aan;palat.tiin;palat.tu
-Palata;V40;(palaja.n);;;(palaja.isi.);(palaja.);;;;;
+?Palata;V40;(palaja.n);;;(palaja.isi.);(palaja.);;;;;
 hylätä;V40;hylkäØä.n;hylkäs.i.;hylän.ne.e;hylkä.isi.;hylkää.;hylät.köön;hylän.nyt;hylät.ään;hylät.tiin;hylät.ty
 KIHISTÄ;V41;kihise.n;kihis.i.;kihis.se.e;kihis.isi.;kihise.;kihis.köön;kihis.syt;kihis.tään;kihis.tiin;kihis.ty
 KIHAJAA;V41;kihaja.n;(kihaj.i.);[kihaja.ne.e];kihaja.isi.;(kihaja.);[kihaja.koon];[kihaja.nut];kihaje.taan];[kihaje.ttiin];[kihaje.ttu]
 RAKENTAA;V42;rakenna.n;rakens.i.;rakenta.ne.e;rakenta.isi.;rakenna.;rakenta.koon;rakenta.nut;rakenne.taan;rakenne.ttiin;rakenne.ttu
-RAKETA;V42;rakenna.n];(rakent.i.);;;;(raket.koon);;;(raket.tiin);(raket.tu)
-TAITAA;V43;taida.n;tais.i.;taita.ne.e;taita.isi.;taida.;taita.koon;taita.nut;taide.taan;taide.ttiin;taidet.tu
-TAITA;V43;;;tain.ne.e;;;[tait.koon];tain.nut;[tait.aan];tait.tiin;tait.tu
+?RAKETA;V42;rakenna.n];(rakent.i.);;;;(raket.koon);;;(raket.tiin);(raket.tu)
+TAITAA;V43;taida.n;tais.i.;taita.ne.e;taita.isi.;taida.;taita.koon;taita.nut;taide.taan;taide.ttiin;taide.ttu
+?TAITA;V43;;;tain.ne.e;;;[tait.koon];tain.nut;[tait.aan];tait.tiin;tait.tu
 ANTAUTUA;V44;antaudu.n;antautu.i.;antautu.ne.e;antautu.isi.;antaudu.;antautu.koon;antautu.nut;antaudu.taan;antaudu.ttiin;antaudu.ttu
 ANTAUTA;V44;(antau.n);(antaus.i.);(antau.ne.e);(antau.isi.);;(antau.koon);(antau.nut);(antau.taan);(antau.ttiin);(antau.ttu)
 KAATA;V45;kaada.n;kaas.i.;kaan.ne.e;kaata.isi.;kaada.;kaat.koon;kaan.nut;kaat.aan;kaat.tiin;kaat.tu

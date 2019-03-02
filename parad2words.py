@@ -39,6 +39,8 @@ seg_ex_list = []
 with open(args.input, "r") as csvfile:
     reader = csv.DictReader(csvfile, delimiter=args.csv_delimiter)
     for row in reader:
+        if row["ID"].startswith("?"):
+            continue
         for column_label, words in row.items(): # process each cell of the row
             #words = row[column_label] # space separated string of words
             if not words or column_label in {"ID", "KSK"}:
