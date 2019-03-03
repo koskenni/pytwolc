@@ -18,10 +18,10 @@ VVØ = [:a :Ø* [:a.m & :Ø]] | [:e  :Ø* [:e.m & :Ø]] | [:i  :Ø* [:i.m & :Ø]
       [:ä :Ø* [:ä.m & :Ø]] | [:ö :Ø* [:ö.m & :Ø]] ;
 VbV = [:e :a|:e :ä|:i :a|:i :o|:i :ö|:o :a|:u :a|:u (:Ø) :e|:y (:Ø) :e] ;
 
-!!!CLOSED = VoM ({ij}:i|{ØiØ}:) CoM [(VoØ) CoM |:Ø* .#.] ;
 CLOSED = VoM ({ij}:i|{ØiØ}:) CoM (VoØ) [CoM|.#.] ;
-!!!OPEN = VoS ((VoØ) {ij}:i|{ØiØ}:) [CoM VoS|:Ø* .#.] ;
-OPEN = VoM (CoM) VoS ;
+OPEN = VoM (CoM) [VoS|:i] ;
+
+STOP
 
 ! +CONSONANT GRADATION
 
@@ -42,6 +42,10 @@ OPEN = VoM (CoM) VoS ;
 {kØk}:Ø <=> _ s VoØ :t ;
     ! su<k>si su<>sta su<k>sia u<k>si u<>sta u<k>sia
 
+{kg}:g <=> _ CLOSED ;
+
+{kj}:j <=> _ CLOSED ;
+
 {pØ}:Ø|{pm}:m <=> _ CLOSED ;
     ! tup<p>i tup<>en saap<>as saap<p>aan
     ! läm<m>in läm<p>imän läm<m>intä
@@ -55,8 +59,18 @@ OPEN = VoM (CoM) VoS ;
 
 {td}:d <=> _ CLOSED ;
     ! va<t>i va<d>in
+{tdst}:s|{tls}:s|{trs}:s|{tns}:s => _ (VoØ) :i ;
+{tds}:d|{tdst}:d|{tdsØ}:d|{tls}:l|{tns}:n|{trs}:r => _ CLOSED ;
+{tds}:t|{tdst}:t|{tdsØ}:t|{tls}:t|{tns}:t|{trs}:t => _ OPEN ;
+    ! to<s>i kä<s>i kä<s>iä kak<s>i jäl<s>i kan<s>i kahdeksa<s>
+    ! kä<d>en kä<d>essä kah<d>en jäl<l>en kan<n>essa
+    ! kan<s>i kan<s>ia kan<n>en kan<t>ta kan<t>ten kan<s>ia
+    ! hir<s>i hir<t>enä hir<r>essä hir<s>iä
+    ! saar<r>an saar<t>avat saar<r>etaan saar<s>i
+    ! hir<s>i hir<r>en hir<t>tä hir<s>iä
 
-STOP
+{tds}:s => _ (VoØ) [:i | .#.] ;
+    ! huu<d>an huu<t>avat huu<s>i huu<t>aisi huu<d>etaan
 
 ! +VOWEL LENGTHENING
 
@@ -68,6 +82,15 @@ STOP
 {V}:y <=> :y :Ø* ({Øh}:) _ ; ! kyky<y>n
 {V}:ä <=> :ä :Ø* ({Øh}:) _ ; ! pääh<ä>n
 {V}:ö <=> :ö :Ø* ({Øh}:) _ ; ! yöh<ö>n
+
+{VØ}:Ø <=> :i _ ;
+    ! nai<> haravoi<>
+    ! muisti<> muistaisi<>
+
+{VØ}:e => :e _ ; 
+    ! punone<e>
+
+!!! lisää muut vokaalit, kun niitä tulee esimerkkeihin !!!
 
 {eeØ}:Ø <=> _ [{ij}:] ;
     ! leve<e> leve<e>tä leve<>itä
@@ -82,13 +105,13 @@ STOP
 {oØ}:Ø <=> _ {ij}: ;
     ! tieno<o> tieno<o>ta tieno<>ita aino<o>
 
-{uØ}:Ø <=> _ (o) :i ;
+{uØ}:Ø <=> _ (:o) :i ;
     ! s<u>o s<>oita tenkkapo<o> tenkkapo<>ita
-    ! j<u>o j<>oi j<>oisi
+    ! j<u>on j<>oi j<u>onee j<>oisi j<u>onut
 
-{yØ}:Ø <=> _ (ö) :i ;
+{yØ}:Ø <=> _ (:ö) :i ;
+    ! s<y>ön s<>öi s<y>onee s<>öisi s<y>ököön
     ! <y>ö <>öitä
-    ! s<y>ö s<>öi s<>öisi
 
 ! +VOWEL HARMONY
 
@@ -202,8 +225,6 @@ STOP
 
 ! STEM FINAL VOWELS IN VERBS
 
-START
-
 {aoaae}:o <=> _ {i}: ;
     ! kaiv<a>n kaiv<o>i
 {aoØaae}:o|{aoØaae}:Ø <=> _ {i}: ;
@@ -211,12 +232,66 @@ START
 {aoaae}:e|{aoØaae}:e <=> _ :t ;
     ! kaiv<e>taan haast<e>ttu saarr<e>taan
 
-{trs}:r => _ CLOSED ;
-{trs}:t => _ OPEN ;
-{trs}:s => _ :Ø* :i ;
-    ! saar<r>an saar<t>avat saar<r>etaan saar<s>i
-    
+{aØaae}:Ø <=> _ {i}: ;
+{aØaae}:e <=> _ [{dlnrtØ}:|{tttØ}:] ;
+    ! muist<>i muist<a>isi muist<e>ttu
+
+{aØØaa}:Ø <=> _ :i ;
+    ! sa<a>n sa<>i sa<>isi sa<a>tiin sa<a>tu
+
+{aØaØØ}:Ø <=> _ {i}: | {nlrs}: | k | {dlnrtØ}: | {tttØ}: ;
+    ! katke<a> katkes<>i katken<>nee katket<>koon katket<>aan katket<>tiin
+    ! halu<a>n halu<a>isi halu<a>
+
+{aØØØØ}:Ø <=> _ {i}: | i s i | {nlrs}: | k | {dlnrtØ}: | {tttØ}: ;
+    ! sala<a>n salas<>i sala<>isi salat<>koon salat<>tu
+
+{eØØee}:Ø <=> _ {i}: | i s i ;
+    ! lask<e>n lask<>i lask<>isi lask<e>ttu
+    ! lähd<e>n läht<>i läht<>isi läht<e>köön läht<e>nyt
+
+{eØØØØ}:Ø <=> _ {i}: | i s i | {nlrs}: | k | {dlnrtØ}: | {tttØ}: ;
+    ! katsel<e>n katsel<>in katsel<>isi katsel<>lee katsel<>lut
+    ! tul<e>n tul<>i tul<>isi tul<>lee tul<>koon
+
+{eØØØeØØ}:Ø => _ {i}: | i s i | {nlrs}: | k | {dlnrtØ}: | {tttØ}: ;
+{eØØØeØØ}:e /<= _ {i}: | {nlrs}: | k | {dlnrtØ}: | {tttØ}: ;
+    ! katsel<e>n katsel<>in katsel<>isin katsel<e>isi katsel<>lut
+
+{iiiieii}:e => _ l :e i s i ;
+    ! arva<i>len arva<i>li arva<i>lisi arva<e>lisi arva<i>llut
+
+{iØiØii}:Ø <=> _ (e) :i ;
+    ! sall<i>n sall<>i sall<>isi sall<i>nee sall<i>ttu
+    ! na<i> na<>i na<>isi na<i>nee na<i>tu
+
+{äØØØØ}:Ø <=> _ {i}: | i s i | {nlrs}: | k | {dlnrtØ}: | {tttØ}: ;
+    ! hylkä<ä>n hylkäs<>i hylka<>isi hylät<>ään
+
+{äØäØØ}:Ø <=>  _ {i}: | {nlrs}: | k | {dlnrtØ}: | {tttØ}: ;
+    ! selvi<ä>n selvis<>i selvi<ä>isi selvi<>nnee selvi<>tköön
+
+{äØääe}:Ø <=> _ {i}: ;
+{äØääe}:e <=> _ {dlnrtØ}: | {tttØ}: ;
+    ! hätkähd<ä>n hätkäht<>i hätkäht<ä>isi hätkäht<ä>nee
+    ! hätkäht<ä>köön hätkähd<e>tään
+
+! STEM INTERNAL CONSONANTS IN VERBS
+
+{kh}:k <=> _ :s ;
+
+{nt}:t <=> _ VoØ [k | {dlnrtØ}: | {tttØ}:] ;
+    ! ale<n>en ale<n>i ale<n>ne ale<n>isi ale<t>koon ale<t>aan ale<n>nut 
+
+START
+
 STOP
+
+! VERB SUFFIX ALTERNATIONS
+
+{nlrs}:l => :l VoØ _ ;
+{nlrs}:r => :r VoØ _ ;
+{nlrs}:s => :s VoØ _ ;
 
 ! NOUN SUFFIX ALTERNATIONS
 
@@ -401,13 +476,6 @@ s e {Øe}:Ø n => [:a :h (:Ø) :a|:e :h (:Ø) :e|:i :h (:Ø) :i|:o :h (:Ø) :o|
     ! viera<s> viera<>an (viera<h>an) viera<s>ta
     ! viera<>ana (viera<s>na) (viera<h>ana) (viera<h>isin)
     ! uro<s> uro<>on uro<h>on uro<s>ta uro<>oseen uro<h>osen uro<s>ten
-
-{tds}:s|{tdsØ}:s|{tls}:s|{trs}:s|{tns}:s <=> _ (VoØ) [:i|:Ø* .#.] ;
-{tds}:d|{tdsØ}:d|{tls}:l|{tns}:n|{trs}:r <=> _ :e CoM (VoØ) [CoM|:Ø* .#.] ;
-    ! to<s>i kä<s>i kä<s>iä kak<s>i jäl<s>i kan<s>i kahdeksa<s>
-    ! kä<d>en kä<d>essä kah<d>en jäl<l>en kan<n>essa
-    ! kan<s>i kan<s>ia kan<n>en kan<t>ta kan<t>ten kan<s>ia
-    ! hir<s>i hir<t>enä hir<r>essä hir<s>iä
 
 {tdsØ}:Ø <=> _ VoØ :t ;
     ! kah<>ta
