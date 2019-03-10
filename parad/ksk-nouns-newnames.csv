@@ -18,7 +18,7 @@
 {Øe},,+vapaase<e>n vapahase<>n
 {ieeeØ},{ieeeØ},+tupp<i> tup<e>n tupp<e>a tupp<e>na tupp<>ia
 {ieeØeØ},,+suks<i> suks<e>n suks<e>a sus<>ta suks<e>na suks<>ia
-{ieeØeØØØ},{ieØeØØ},+haps<i> haps<e>a has<>ta haps<e>na has<>na has<>sa haps<>ia
+{ieeØeØØØ},{ieeØeØ},+haps<i> haps<e>a has<>ta haps<e>na has<>na has<>sa haps<>ia
 {ieØeeØ},{ieeØeØ},+lum<i> lum<e>n lun<>ta (lum<e>a) lum<e>na lum<>illa
 {ieØeØ},{ieØeØ},+käs<i> käd<e>n kät<>tä kät<e>nä käs<>illä
 {ieØeØØ},{ieØeØØ},+pien<i> pien<e>n pien<>tä pien<e>nä pien<>nä pien<>iä
@@ -28,6 +28,7 @@
 {iiiiiiiiieie},,kaun<i>s kaun<i>in kaun<i>sta kaunai<i>ina kaun<i>hina kaun<e>hia
 {iiiiØ},{iØ},+pi<i> pi<i>n pi<i>tä pi<i>nä pi<>iden
 {iiiØiee},,sankar<i> sankar<i>n sankar<i>a sankar<>ta sankar<i>na sankar<e>ita sankar<e>ja
+{ØiiØiØØiØØØØ},{ØiØiØ},kaunis<> kauni<i>n kaunih<i>sen kauni<>ita
 {ij},,+loh<i>a kalo<j>a
 {iØ},,+kauriisii<i>n tienoisi<i>n kaurihisi<>n tienohisi<>n
 {khhhk},{kh},+ka<k>si ka<h>den ka<h>ta ka<k>sia
@@ -95,10 +96,10 @@
 {Øiiie},{ØieØ},+kalsium<> kalsium<i>n kalsium<e>ja kalsium<>ien
 {ØiiØiiØØ},{ØiØiØ},?? ori<Ø> ori<i>n orit<>ta ori<i>na orih<i>na ori<i>seen orih<i>sen
 {ØiiØiØØiØØ},{ØiØiØ},+kauris<> kauri<i>n kaurih<i>n kauris<>ta kauri<i>na kaurih<i>na kauris<>sa
-{ØiiØiØØiØØØØ},{ØiØiØ},+kaunis<> kauni<i>n kaunis<>ta kauni<i>na kaunih<i>na kaunih<i>sen kaunis<>ten
+{iiiiiiiiieie},{iiiiei},+kaunis<> kauni<i>n kaunis<>ta kauni<i>na kaunih<i>na kaunih<i>sen kaunis<>ten
 {ØiØØiØØiØ},{ØiØ},+onneto<>n onneto<i>n onnet<o>nta onnettom<>ia onneton<>ten
 {ØkØkk},,+vastau<>s vastau<k>sen vastau<>sta vastau<k>sena vastau<k>sia vastau<>sten
-{ØkØkØØkØØhØØhØh},,?? koira<>s koira<>an koira<h>an koira<k>sen koira<>sta koira<k>sena koira<a>na koira<h>ana koira<h>ia koira<>ita koira<k>sia
+{ØkØkØØk},{ØkØkk},+koira<>s koira<>an koira<h>an koira<k>sen koira<>sta koira<k>sena koira<a>na koira<h>ana koira<h>ia koira<>ita koira<k>sia
 {ØmØpppp},,vasen<> vasem<m>an vasen<>ta vasem<p>aa vasem<p>ata vasem<p>ana vasem<p>ia vasen<>ten 
 {ØmØpppØp},{ØpmØ},pahin<> pahim<m>an pahin<>ta pahim<p>aa pahim<p>ana pahim<p>ia pahin<>ten
 {ØnØnn},,? tuha<>t tuha<n>nen tuha<>tta tuha<n>tena tuha<n>sia
@@ -119,4 +120,4 @@
 {ØäØäääØØ},{ØäØØØ},lämmin<> lämpim<ä>n lämmin<>tä lämpim<ä>tä lämpim<>ien lämmin<>ten
 {ØääØäØäØØ},{ØäØØØ},kevät<> kevä<ä>n kevät<>tä kevä<ä>nä kevä<>itä
 {äääØääØØ},{ØäØØØ},seitsem<ä>n seitsem<ä>ä seitsen<>tä seitesem<>iä
-{äääääØö},,leve<ä> leve<ä>nä leve<>itä leve<ö>itä
+{äääääØö},{äØö},leve<ä> leve<ä>nä leve<>itä leve<ö>itä

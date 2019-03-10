@@ -133,7 +133,8 @@ def mphon_weight(mphon):
     if cfg.verbosity >= 30:
         print("phon_set =", phon_set)
     if phon_set == {'Ø'}:
-        weight = 100.0        # all-zero morphophonemes must be allowed
+    #    weight = 100.0        # all-zero morphophonemes must be allowed
+        weight = cfg.all_zero_weight
     elif len(phon_set) == 1:
         weight = 0.0
     elif phon_set <= consonants:
@@ -350,6 +351,8 @@ def aligner(words, max_zeros_in_longest, line):
     the longest word
 
     line -- the input line (used only in warning messages)
+
+    cfg.all_zero_weight -- if phoneme set is {'Ø'} (default 100.0)
 
     Returns the best alignment as a list of raw morphophoneme.
     """

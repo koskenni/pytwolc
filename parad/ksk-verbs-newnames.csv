@@ -12,8 +12,8 @@
 {dsnttt},,kaa<d>an kaa<s>i kaa<n>nee kaa<t>koon kaa<t>tu
 {dstttd},{tds},+tai<d>an tai<s>i tai<t>anee tai<t>aisi 
 {dsttttd},{tdst},+huu<d>an huu<s>i huu<t>anee huu<t>aisi huu<t>akoon huu<d>etaan
-{dtsttstd},{tds},+läh<d>en läh<t>i läk<s>i läh<t>enee läh<t>isi läk<s>isi läh<t>eköön läh<d>etty
-{dtstttd},{tds},+po<d>en po<t>i po<s>i po<t>enee po<t>isi po<t>ekoon po<d>ettu
+{dtsttstd},{tdst},+läh<d>en läh<t>i läk<s>i läh<t>enee läh<t>isi läk<s>isi läh<t>eköön läh<d>etty
+{dtstttd},{tdst},+po<d>en po<t>i po<s>i po<t>enee po<t>isi po<t>ekoon po<d>ettu
 {dttttd},{td},+ku<d>on ku<t>oi ku<d>o ku<d>otaan
 {eØeØee},{eØØee},+lask<e>n lask<>i lask<e>nee lask<>isi lask<e> lask<e>koon
 {eØØeØee},{eØØee},+pod<e>n pot<>i pos<>i pot<e>nee pot<>isi pod<e> pot<e>koon
@@ -27,28 +27,29 @@
 {i},,+
 {iØiØii},,+sall<i>n sall<>i sall<>isi sall<i>nee sall<i>ttu
 {iØØ},,-- selvi<i>n selvis<>i selvin<>nee
+{ØiiØiØØiØØØØ},{ØiØiØ},kaunis<> kauni<i>n kaunih<i>sen kauni<>ita
 {kkjkjj},{kj},+val<k>eni val<j>ennut val<j>etkoon
 {kkØkØØ},{kØ},+hyl<k>ään hyl<>ännee juo<k>sen juo<>ssee juo<>skoon juo<k>se 
-{lsttttl},{tls},+puol<l>an puol<s>i puol<t>anee puol<t>aisi puol<t>akoon puol<l>ettu
+{lsttttl},{tlst},+puol<l>an puol<s>i puol<t>anee puol<t>aisi puol<t>akoon puol<l>ettu
 {nlrs},,+puno<n>ee tul<l>lut pur<r>ree nuolais<s>ee
 {nnnnntt},{nt},+ale<n>en ale<n>isi ale<n>eisi ale<t>koon ale<t>tu
 {nnnntt},{nt},+valke<n>ee valke<n>isi valje<t>koon
 {nnØ},,-- rake<n>nan rake<>tkoon rake<>ttu
-{nstttn},,tun<n>ne tun<s>i tun<t>enee tun<t>isi tun<t>ekoon tun<n>ettu
-{nsttttn},,pahen<n>an pahen<s>i pahen<t>i pahen<t>aisi pahen<t>akoon pahen<n>nettu
+{nstttn},{tns},+tun<n>ne tun<s>i tun<t>enee tun<t>isi tun<t>ekoon tun<n>ettu
+{nsttttn},{tnst},+pahen<n>an pahen<s>i pahen<t>i pahen<t>aisi pahen<t>akoon pahen<n>nettu
 {ntt},,-- raken<n>an rake<t>koon rake<t>tu tai<n>ee tai<t>koon
 {oØ},,-- koho<o> koho<>isi
 {oö},{oö},+punok<o><o>n syök<ö><ö>n
-{ppmpmm},{pm},läm<p>iän läm<m>innen läm<p>iäisi läm<m>itköön
+{ppmpmm},{pm},+läm<p>iän läm<m>innen läm<p>iäisi läm<m>itköön
 {ppvpvv},{pv},vi<p>uan vi<v>unnee vi<p>ua vi<v>uttu
-{rsttttr},{trs},mur<r>an mur<s>i mur<t>i mur<t>anee mur<t>aisi mur<r>ettu
-{rstttttr},{trs},saar<r>an saar<s>i saar<t>oi saar<t>anee saar<t>aisi saar<r>a saar<t>akoon
-{ssØssØØ},,valit<s>en valit<s>i valin<>nee valit<s>isi valit<s>eisi valit<>koon
+{rsttttr},{trst},+mur<r>an mur<s>i mur<t>i mur<t>anee mur<t>aisi mur<r>ettu
+{rstttttr},{trst},+saar<r>an saar<s>i saar<t>oi saar<t>anee saar<t>aisi saar<r>a saar<t>akoon
+{ssØssØØ},{sØ},+valit<s>en valit<s>i valin<>nee valit<s>isi valit<s>eisi valit<>koon
 {ssØsØØ},,-- haravoit<s>en haravoit<s>i haravoin<>nee haravoit<>koon
 {tdlrnØ},{dlnrtØ},puno<>a puno<t>aan saa<d>aan tul<l>aan pur<r>aan men<n>ään
 {ttdtdd},{td},+ma<t>elen ma<d>ellut
-{ttntttt},,vali<t>sen vali<n>nee vali<t>koon vali<n>nut vali<t>tu
-{ttnttt},,haravoi<t>sen haravoi<n>nee haravoi<t>se haravoi<n>ut
+{ttntttt},{tnt},vali<t>sen vali<n>nee vali<t>koon vali<n>nut vali<t>tu
+{ttnttt},{tnt},haravoi<t>sen haravoi<n>nee haravoi<t>se haravoi<n>ut
 {uy},{uy},+punott<u> syöt<y>
 {uØuØuu},{uØ},+j<u>on j<>oi
 {yØyØyy},{yØ},+s<y>ön s<>öi
@@ -56,11 +57,11 @@
 {ØkkkkØ},{kØ},ko<>en ko<k>i ko<>e
 {ØppppØ},{pØ},+tap<>an tap<p>oi
 {Øsn},,-- selvi<>in 
-{ØsnØtt},,salaa<>n sala<s>i sala<n>nee sala<>isi sala<t>koon
+{ØsnØtt},,+salaa<>n sala<s>i sala<n>nee sala<>isi sala<t>koon
 {ØsnØ},,katke<>en
 {ØsØØØØ},,
-{Øt},{tttØ},puno<t><t>iin punot<t>u saa<t><>iin saat<>u halut<t><>iin halut<t><>u
-{ØvØvØØ},,kä<>yn kä<v>i
+{Øt},{tttØ},+puno<t><t>iin punot<t>u saa<t><>iin saat<>u halut<t><>iin halut<t><>u
+{ØvØvØØ},,+kä<>yn kä<v>i
 {äØØØØØ},{äØØØØ},+hylkä<ä>n hylkä<>si hylkä<>isi hylkä<ä> hylä<>tään
 {äØØäØØ},{äØäØØ},+lämpi<ä>n lämpis<>i lämmin<>nee lämpi<ä>isi lämmin<>nyt lämmit<>ty
 {äØäääe},{äØääe},+hätkähd<ä>n hätkäht<>i hätkäht<ä>isi hätkähd<e>tty

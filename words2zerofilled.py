@@ -93,7 +93,9 @@ print("-- STEP 1 COMPLETED (seg_example_list, stem_name_set, morphs_of_morpheme 
 # STEP 2:
 # align the allomorphs of each morpheme
 
+import cfg
 from multialign import aligner
+cfg.all_zero_weight = 1.0
 
 alignments = {}
 """All aligned morphs. index: morpheme name, value: sequence of aligned symbols.

@@ -11,6 +11,12 @@ import hfst, re
 #hfst.set_default_fst_type(hfst.ImplementationType.FOMA_TYPE)
 
 verbosity = 0
+
+all_zero_weight = 100.0
+"""in multialign: the weight for a set {'Ø'} which is normally
+not preferred but sometimes is needed, eg. when using Øs in
+the input words"""
+
 definitions = {}
 
 error_message = ""

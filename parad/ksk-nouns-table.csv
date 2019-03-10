@@ -60,7 +60,8 @@ PEITSI;48;peitsi;peitse.n;peis.tä (peitse.ä);peitse.nä;peitse.en [peitse.hen]
 SUKSI;49;suksi;sukse.n;sukse.a (sus.ta);sukse.na;sukse.en [sukse.hen];;suks.i.ssa;;suks.i.en;(sus.ten);(sukse.in);suks.i.a;suks.i.in [suks.i.hin];;
 UKSI;50;uksi;ukse.n;us.ta (ukse.a);ukse.na;ukse.en [ukse.hen];;uks.i.ssa;;uks.i.en;us.ten;;uks.i.a;uks.i.in [uks.i.hin];;
 KAKSI;51;kaksi;kahde.n;kah.ta;kahte.na;kahte.en [kahte.hen];;kaks.i.ssa;;kaks.i.en;;;kaks.i.a;kaks.i.in [kaks.i.hin];;
-SANKARI;52;sankari;sankari.n;sankari.a [sankar.ta];sankari.na;sankari.in [sankari.hin];;sankare.i.ssa;sankare.i.den sankare.i.tten;sankar.i.en;sankar.ten;(sankare.in);sankare.i.ta sankare.j.a;sankare.i.hin;;
+SANKARI;52;sankari;sankari.n;sankari.a;sankari.na;sankari.in [sankari.hin];;sankare.i.ssa;sankare.i.den sankare.i.tten;sankar.i.en;;(sankare.in);sankare.i.ta sankare.j.a;sankare.i.hin;;
+?Sankar;52;[sankar];;[sankar.ta];;;;;;;sankar.ten;;;;;
 JUMALA;53;jumala;jumala.n;jumala.a (jumala.ta);jumala.na;jumala.an [jumala.han];;jumal.i.ssa;;jumal.i.en;jumal.ten;jumala.in;jumal.i.a;jumal.i.in [jumal.i.hin];;
 SISAR;54;sisar;sisare.n;sisar.ta;sisare.na;sisare.en [sisare.hen];;sisar.i.ssa;;sisar.i.en;sisar.ten;;sisar.i.a;sisar.i.in [sisar.i.hin];;
 AHVEN;55;ahven;ahvene.n;ahven.ta;ahvene.na (ahven.na);ahvene.en [ahvene.hen];;ahven.i.ssa;;ahven.i.en;ahven.ten;;ahven.i.a;ahven.i.in [ahven.i.hin];;
@@ -86,8 +87,8 @@ MIES;72;mies;miehe.n;mies.tä;miehe.nä (mies.nä) (mies.sä);miehe.en;;mieh.i.s
 AIRUT;73;airutØ;airuØe.n;airutØ.ta;airue.na;airue.en [airue.hen];;airu.i.ssa (airuh.i.ssa);airu.i.den airu.i.tten (airuh.i.tten);(airuh.i.en);(airut.ten);;airu.i.ta (airuh.i.a);airu.i.hin;airu.i.siin (airuh.i.sin);
 ÄIDYT;73;äidytØ;äityØe.n;äidytØ.tä;äitye.nä;äitye.en [äitye.hen];;äity.i.ssä (äityh.i.ssä);äity.i.den äity.i.tten (äityh.i.tten);(äityh.i.en);(äidyt.ten);;äity.i.tä (äityh.i.ä);äity.i.hin;äity.i.siin (äityh.i.sin);
 KEVÄT;74;kevät;kevää.n (kevähä.n);kevät.tä;kevää.nä kevän.nä (kevähä.nä);;kevää.seen (kevähä.sen);kevä.i.ssä (keväh.i.ssä);kevä.i.den kevä.i.tten (keväh.i.tten);(keväh.i.en);(kevät.ten);;kevä.i.tä (keväh.i.ä);kevä.i.hin;kevä.i.siin (keväh.i.sin);
-KAHDEKSAS;75;kahdeksas;kahdeksanne.n;kahdeksat.ta;kahdeksante.na (kahdeksan.na);kahdeksante.en [kahdeksante.hen];;kahdeksans.i.ssa;;kahdeksans.i.en;;;kahdeksans.i.a;kahdeksans.i.in [kahdeksans.i.hin];;
-TUHAT;76;tuhat *tuhannen;tuhanne.n;tuhat.ta;tuhante.na;tuhante.en [tuhante.hen];;tuhans.i.ssa;;tuhans.i.en;tuhan.ten;;tuhans.i.a;tuhans.i.in [tuhans.i.hin];;
+?KAHDEKSAS;75;kahdeksas;kahdeksanne.n;kahdeksat.ta;kahdeksante.na (kahdeksan.na);kahdeksante.en [kahdeksante.hen];;kahdeksans.i.ssa;;kahdeksans.i.en;;;kahdeksans.i.a;kahdeksans.i.in [kahdeksans.i.hin];;
+?TUHAT;76;tuhat *tuhannen;tuhanne.n;tuhat.ta;tuhante.na;tuhante.en [tuhante.hen];;tuhans.i.ssa;;tuhans.i.en;tuhan.ten;;tuhans.i.a;tuhans.i.in [tuhans.i.hin];;
 KUOLLUT;77;kuollut;kuollee.n (kuollehe.n);kuollut.ta;kuollee.na (kuollehe.na) (kuollun.na);;kuollee.seen (kuollehe.sen);kuolle.i.ssa (kuolleh.i.ssa);kuolle.i.den kuolle.i.tten (kuolleh.i.tten);(kuolleh.i.en);(kuollut.ten);;kuolle.i.ta (kuolleh.i.a);kuolle.i.hin;kuolle.i.siin (kuolleh.i.sin);
 VAATE;78;vaate;vaattee.n (vaattehe.n);vaatet.ta;vaattee.na (vaattehe.na);;vaattee.seen (vaattehe.sen);vaatte.i.ssa vaatteh.i.ssa;vaatte.i.den vaatte.i.tten;(vaatteh.i.en);(vaatet.ten);;vaatte.i.ta (vaatteh.i.a);vaatte.i.hin;vaatte.i.siin (vaatteh.i.sin);
 TERVE;79;terve;tervee.n (tervehe.n);tervet.tä;tervee.nä (terven.nä) (tervehe.nä);;tervee.seen (tervehe.sen);terve.i.ssä (terveh.i.ssä);terve.i.den terve.i.tten (terveh.i.tten);(terveh.i.en);(tervet.ten);;terve.i.tä (terveh.i.ä);terve.i.hin;terve.i.siin (terveh.i.sin);
