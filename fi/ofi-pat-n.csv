@@ -1,0 +1,257 @@
+CONT,ICLASS,MPHON,COMMENT
+Define,Co,[b|c|d|f|g|h|j|k|l|m|n|p|q|r|s|š|t|v|w|x|z|ž],All consonants
+Define,Gwk,[(l|r|n) k 0:{kØ}|(h|l|r) 0:{kØ}|n g:{kg}],Weak k : morphophoneme
+Define,Gwp,[m m:{pm} | (l|r) v:{pv} | (l|r|m) p 0:{pØ}],Weak p : morphophoneme
+Define,Gwt,[(h) d:{td}|l l:{tl}|n n:{tn}|r r:{tr}|(l|r|n) t 0:{tØ}],Weak t : morphophoneme
+Define,Gw,[Gwk|Gwp|Gwt],Gradating weak cons : morphophoneme
+Define,Gwj,[(h|l|r) j:{kj}],tarjeta-tarkenee
+Define,Gsk,[(l|r|n) k k:{kØ}|(h|l|r) k:{kØ}|n k:{kg}],Strong k : morphophoneme
+Define,Gsk2,[(l|r|n) k k:{kØ}|[h|l|r] k:{kØ}|n k:{kg}],Strong k : morphophoneme except single k:{kØ}
+Define,Gsp,[m p:{pm}|(l|r) p:{pv}|(l|r|m) p p:{pØ}],Strong p : morphophoneme
+Define,Gst,[(h) t:{td}|l t:{tl}|n t:{tn}|r t:{tr}|(l|r|n) t t:{tØ}],Strong t : morphophoneme
+Define,Gs,[Gsk|Gsp|Gst],Gradating strong cons : morphophoneme
+Define,Gs2,[Gsk2|Gsp|Gst],Gradating strong cons : morphophoneme except single k:{kØ}
+Define,CCns,[[[Co+] - Gs.u]|h k],Non-gradating cons clusters
+Define,Gsj,[[h|l|r] k:{kj}],sulkea-suljen  
+Define,Gtds,[l t:{tls}|n t:{tns}|r t:{trs}],Strong t : s
+Define,Cocl,[Co+|'],Cons cluster betw vowels
+!,,,
+Define,Vo,[a|e|i|o|u|y|ä|ö],All vowels
+Define,Vob,[a|o|u],Back vowels
+Define,Vof,[ä|ö|y],Front vowels
+Define,V1V1,[a a|e e|i i|o o|u u|y y|ä ä|ö ö],Long vowels
+Define,Vi,[Vo i],Diphthongs with i
+Define,V1V2,[a u|e u|i e|e u|e y|i e|i u|i y|o u|u o|y ö|ä y|ö y],Diphthongs in first syll
+Define,VV,[V1V1|Vi|V1V2],All diphthongs and long V
+Define,VbV,[[Vo Vo+] - VV],V seq in two or more syll initial
+Define,VcV,[[Vo Vo+] - V1V1 - Vi],V seq in two or more syll not initial
+!Define,VbV,[i a|i (i) a i|i o|i u %' u|u e|u o i|u o %' o|u %' u|ä e],V V+ with boundary
+!,,,
+Define,Sy1,[[Co+|'] Vo+],
+Define,Sy2,Sy1 (Sy1),
+Define,Sy3,Sy2 (Sy1),
+Define,Forl,[b|c|d|f|g|q|š|w|x|z|ž],Foreign sounding letter
+Define,Forb,[n j|k l|k r|k v|p r|p s|s m|s p|t l|t r],Foreign bigrams
+Define,Forg,[$[Forl|Forb]],Foreign sounding words
+Define,Coida,[b|d|n d|f|f f|g|h|j|k|l|l l|m|n|n n|p|r|s|š|t|t t|v],For -oida verbs
+!,,,
+/s,S01,<Co* Vo+ CCns [o|ö|u|y]>,VALO bisyll
+/s,S01,<Co* [Vo+ Co+]* [o|ö|u|y]> 5,KOORDINAATISTO YLEVÄHKÖ VALIMO 2+syll
+/s,S01,<Co [Vo+ Co+]* [o|u|ö|y] t:0> 5,KEMUT-KEMU
+/s,S01*,<Co* Vo+ Gs [o|ö|u|y]> 3,PATO bisyll
+/s,S01*,<Co* Vo+ Sy1+ Gs [o|ö|u|y]> 5,multisyll
+/s,S01*,<Co* Vo+ Sy1* Gw [o|ö|u|y] t:0> 5,PIDOT-PITO
+/s,S01*,<Co* Vo k:{kØ} [o|ö|u|y]> 3,MAKU-MAUN (*SUKU)
+/s,S01*,<Co [a i|a u|e i|e u|i e|i u|o i|o u|u i|u o] k:{kØ} [o|u]> 2,HAIKU-HAIUN bisyll
+/s,S01*,<Co [ä i|ä y|e i|e y|i e|i y|ö i|ö y|y i|y ö] k:{kØ} [ö|y]> 2,HYÖKY-HYÖYN bisyll
+/s,S01*,<Co [u o] k:{kØ'} [o]>,RUOKO-RUO'ON bisyll
+/s,S01*,<Co [a u|e u|i u] k:{kØ'} [u]>,LIUKU-LIU'UN bisyll
+/s,S01*,<Co u k:{kv} u>,SUKU-SUVUN bisyll
+/s,S01*,<Co y k:{kv} y>,KYKY-KYVYN bisyll
+!,,,
+/s,S02,<Co* [Vo+ CCns] Vo+ CCns [o|ö|u|y]>,ARVELU trisyll
+/s,S02,<Co* VbV CCns [o|ö|u|y]>,RUOISTO trisyll
+/s,S02,<Co* [Vo+ Co+]+ [Vo+ Co+] [o|ö|u|y]> 5,TASSUTTELU 3+syll
+/s,S02*,<Co* [Vo+ Co+] Vo+ Gs [o|ö|u|y]>,SAMMAKKO trisyll
+/s,S02*,<Co* VbV Gs [o|ö|u|y]>,RUOIKKO trisyll
+/s,S02*,<Co* [Vo+ Co+]+ Vo+ Gs [o|ö|u|y]> 5,YHDEKSIKKÖ 3+syll
+!,,,
+/s,S03,<Co* [Vo+ Co+]+ [[a|e|i] o|i ö]>,AUTIO AITIO
+!,,,
+/s,S04,<Co* Vo+ CCns i:{iieØ}>,RISTI bisyll
+/s,S04,<Co* [Vo+ Co+]* Vo+ Co+ i:{iieØ}> 5,SENTRIFUGI 2+syll
+/s,S04,<Co* [Vo+ Co+]* Vo+ Co+ i:{iieØ} t:0> 5,KIESIT
+/s,S04*,<Co* Vo+ Gs i:{iieØ}>,LAKKI bisyll
+/s,S04*,<Co* [Vo+ Co+]+ Vo+ Gs i:{iieØ}> 5,MOSAIIKKI other
+/s,S04*,<Co* [Vo+ Co+]* Vo+ Gw i:{iieØ} t:0> 5,TONGIT
+!,,,
+/s,S05,<Co* [Vo+ Co+] Vo+ CCns i:{iieØ}> 1,PAPERI trisyll
+/s,S05,<Co* VbV Co+ i:{iieØ}> 1,KREOLI trisyll
+/s,S05,<Co* [Vo+ Co+]+ [Vo+ Co+] i:{iie̵Ø}>,ARTIKKELI 3+syll
+/s,S05*,<Co* [Vo+ Co+ Vo+|VbV] Gs i:{iieØ}> 2,PYSÄKKI trisyll
+!,,,
+/s,S06,<Co* [Vo+ Co+ Vo+|VbV] CCns i:{iie̵Ø}>,BANAANI trisyll
+/s,S06,<Co* [Vo+ Co+]+ [Vo+ Co+] i:{iie̵Ø}>,MULTIPPELI 3+syll
+/s,S06*,<Co* [Vo+ Co+ Vo+|VbV] Gs i:{iieØ}>,ASUKKI trisyll
+!,,,
+/s,S07,<Co* [Vo+ Co+]* Vo+ Co+ 0:{iieØ}>,KALSIUM
+!,,,
+/s,S08,<Co* Vo+ CCns i:{ieeeØ}>,LOVI bisyll
+/s,S08,<Co* Vo+ Co+ e:{ieeeØ} t:0>,SAKSET
+/s,S08*,<Co* Vo+ Gs i:{ieeeØ}>,JOKI bisyll
+!,,,
+/s,S09,<Co* [Vo+ Co*]+ e>,NALLE
+!,,,
+/s,S10,<Co* [Vo+ - [Vo* [o|u|ö|y] Vo*]] CCns a:{ao}>,KALA bisyll
+/s,S10,<Co* [Vo+ Co+]+ a:{ao}> 5,EVANKELISTA 2+syll
+/s,S10,<Co* [Vo+ Co+]+ a:{ao} t:0> 5,KIHLAT
+/s,S10*,<Co* [Vo+ - [Vo* [o|u|ö|y] Vo*]] Gs a:{ao}>,KITA bisyll
+/s,S10*,<Co* [Vo+ Co+]* Vo+ Gs a:{ao}> 5,KITA bisyll
+!,,,
+/s,S11,<Co* [Vo+ Co+]+ a:{aØ}> 5,KOIRA bisyll
+/s,S11,<Co* [Vo+ Co+]+ ä:{äØ}> 5,ÄIJÄ bisyll
+/s,S11*,<Co* [Vo* [o|u] Vo*] Gs a:{ao}>,KOTA bisyll
+/s,S11*,<Co* [Vo+ Co+]+ Vo+ Gs a:{aØ}> 5,
+/s,S11*,<Co* [e|i|ö|y|ä|ö]+ Gs ä:{äØ}>,REIKÄ bisyll
+/s,S11*,<Co* [Vo+ Co+]+ Vo+ Gs ä:{äØ}> 5,
+!,,,
+/s,S12,<Co* Vo+ Co* Vo+ Co+ [a:{aØo}|ä:{aØö}]>,MATALA trisyll
+/s,S12*,<Co* Vo+ Co* Vo+ Gs [a:{aØo}|ä:{äØö}]>,VIHANTA trisyll
+!,,,
+/s,S13,<Co* Vo+ [Co+ Vo+]+ Co+ [a:{aØ}|ä:{äØ}]>,ASEMA NÄKYMÄ 3+syll
+/s,S13*,emäntä:emän{tn}{äØ},
+!,,,
+/s,S14,<Co* [Vo+ Co+]+ [i|i j|j|Vo+ [l|n|r]] [a:{ao}|ä:{äö}]>,KULKIJA 3+syll
+!,,,
+/s,S15,<Co* [Vo+ Co+]* Vo+ [CCns+|Co+ (e|i)] [a:{ao}|ä:{äö}]>,KARAHKA MANSIKKA
+/s,S16,<Co* [Vo+ Co+]+ [a+|o+|u] [j] a:{aØo}>,KANTAJA ONGELMA MILJOONA JALAVA
+/s,S16,<Co* [Vo+ Co+]+ [ä+|y] j ä:{äØö}>,VENYJÄ PETÄJÄ HYPPÄÄJÄ VÄÄRENTÄJÄ
+/s,S17,<Co* Vo+ Co+ Vo+ [l|m|n|r] [a:{aØo}|ä:{äØö}]>,PERUNA
+/s,S18,<Co* Vo+ Co+ Vo+ [l|m|n|r] [a:{aØo}|ä:{äØö}]>,PASUUNA KIHARA NYSTYRÄ
+!,S19,,"AINOA (S puiroa, ei muita)"
+/s,S20,<(Co) Vo+ Co+ u a:{aØo}>,HERTTUA PORSTUA
+/s,S21,<(Co) Vo+ Co+ e [a:{aØo}|ä:{äØö}]>,KORKEA HOPEA HÄPEÄ
+/s,S21,<(Co) Vo+ Co+ i [a:{ao}|ä:{äö}]>,KORKIA
+!/s,S22,<>,SUUREMPI VANHEMPI
+/s,S23,<Co* Vo+ Co+ a 0:{ØØh} a:{aØ}>,VAPAA SUKLAA
+/s,S24,<Co* Vo+ Co+ [o 0:{ØØh} o:{oØ}|ö 0:{ØØh} ö:{öØ}]>,TIENOO EHTOO MILJÖÖ
+/s,S25,<Co* Vo+ Co+ [u u:{uØ}|y y:{yØ}]>,LEIKKUU SAHUU PALUU VASTUU LYKKYY
+/s,S26,<Co* Vo+ Co+ e e:{eeØ}>,KAMEE APOKOPEE KLIŠEE TEE
+/s,S27,<Co* Vo+ Co+ [i|a|o] i:{iØ}>,PII SAMURAI HELLUNTAI PROSTOI VOI SI TÄI
+/s,S28,<Co* [a a:{aØ}|ä ä:{äØ}]>,MAA VAINAA ŠVAA SÄÄ
+/s,S29,<Co* [u u:{uØ}|y y:{yØ}]>,PUU KUU LUU KYY SYY
+!,,,
+/s,S30,<Co i:{iØ} e>,TIE
+/s,S30,<Co u:{uØ} o>,SUO
+/s,S30,<(Co) y:{yØ} ö>,TYÖ
+/s,S32,<(Co) [VV|u|y] [h|l|n|r] i:{ieØeØ}>,TUOHI
+/s,S32*,neiti:nei{td}{ieØeØ},
+/s,S33,lohi:loh{ieØeØ},
+/s,S33,uuhi:uuh{ieØeØ},
+/s,S34,haahti:haah{td}{ieØeØ},
+/s,S35,liemi:liem{ieØeØ},
+/s,S35,taimi:taim{ieØeØ},
+/s,S35,toimi:toim{ieØeØ},
+/s,S35,lumi:lum{ieØeØ},
+/s,S36,soimi:soi{mn}{ieØeØ},
+/s,S36,luomi:luo{mn}{ieØeØ},
+/s,S36,tuomi:tuo{mn}{ieØeØ},
+/s,S37,niemi:nie{mn}{ieØeØ},
+/s,S37,loimi:loi{mn}{ieØeØ},
+/s,S38,pieni:pien{ieØeØØ},
+/s,S38,juoni:juon{ieØeØØ},
+/s,S38,tyyni:tyyn{ieØeØØ},
+/s,S39,nuori:nuor{ieØeØØ},
+/s,S39,juuri:juur{ieØeØØ},
+/s,S39,suuri:suur{ieØeØØ},
+/s,S40,paasi:paa{tds}{ieØeØ},
+/s,S40,liesi:lie{tds}{ieØeØ},
+/s,S40,kesi:ke{tds}{ieØeØ},
+/s,S40,mesi:me{tds}{ieØeØ},
+/s,S40,vesi:ve{tds}{ieØeØ},
+/s,S40,heisi:hei{tds}{ieØeØ},
+/s,S40,reisi:rei{tds}{ieØeØ},
+/s,S40,hiisi:hii{tds}{ieØeØ},
+/s,S40,riisi:rii{tds}{ieØeØ},
+/s,S40,vuosi:vuo{tds}{ieØeØ},
+/s,S40,kausi:kau{tds}{ieØeØ},
+/s,S40,susi:su{tds}{ieØeØ},
+/s,S40,uusi:uu{tds}{ieØeØ},
+/s,S40,sysi:sy{tds}{ieØeØ},
+/s,S40,köysi:köy{tds}{ieØeØ},
+/s,S40,käsi:kä{tds}{ieØeØ},
+/s,S41,niisi:nii{tds}{ieØeØ},
+/s,S41,tosi:to{tds}{ieØeØ},
+/s,S42,karsi:kar{trs}{ieØeØ},
+/s,S42,parsi:par{trs}{ieØeØ},
+/s,S42,varsi:var{trs}{ieØeØ},
+/s,S42,hirsi:hir{trs}{ieØeØ},
+/s,S42,kirsi:kir{trs}{ieØeØ},
+/s,S42,virsi:vir{trs}{ieØeØ},
+/s,S42,orsi:or{trs}{ieØeØ},
+/s,S42,korsi:kor{trs}{ieØeØ},
+/s,S42,pursi:pur{trs}{ieØeØ},
+/s,S43,jälsi:jäl{tls}{ieØeØ},
+/s,S44,kansi:kan{tns}{ieØeØ},
+/s,S44,onsi:on{tns}{ieØeØ},
+/s,S44,ponsi:pon{tns}{ieØeØ},
+/s,S44,kynsi:kyn{tns}{ieØeØ},
+/s,S44,länsi:län{tns}{ieØeØ},
+!/s,S45,kypsi:ky{pØp}s{ieØeØØ},
+/s,S45,lapsi:la{pØp}s{ieØeØØ},
+/s,S46,hapsi:ha{pØp}s{ieØeØØ},
+/s,S47,veitsi:vei{tØt}s{ieØeØ},
+/s,S48,peitsi:pei{tØt}s{ieØeØ},
+/s,S48,joutsi:jou{tØt}s{ieØeØ},
+/s,S49,suksi:su{kØk}s{ieeØeØ},
+/s,S50,uksi:u{kØk}s{ieeØeØ},
+/s,S50,hiuksi:hiu{kØk}s{ieeØeØ},
+/s,S51,haaksi:haa{kØk}s{ieeØeØ},
+/s,S51,vaaksi:vaa{kØk}s{ieeØeØ},
+!!,S52,sankari:sankar{iiiØiee},sankaria sankarten
+!!,S53,jumala,jumalaa jumalata jumalten
+/s,S54,kimmel:kimmel{ØeØeØ},
+/s,S54,äänel:äänel{ØeØeØ},
+/s,S54,sävel:sävel{ØeØeØ},
+/s,S54,sisar:sisar{ØeØeØ},
+/s,S54,tatar:tat{tØ}r{ØeØeØ},
+/s,S54*,vaahder:vaah{td}er{ØeØeØ},
+/s,S54,somer:somer{ØeØeØ},
+/s,S54*,tytär:tyt{tØ}är{ØeØeØ},
+/s,S54*,<Co* Vo+ [Co+ Vo+]+  t 0:{tØ} [a r|ä r] {ØeØeØ}>,KAUNOTAR MYYJÄTÄR
+/s,S55*,ien:i{kØ}en{ØeØØØ},
+/s,S55,<Co* Vo+ CCns 0:{ØeØØØ}>,AHVEN
+/s,S56,<Co* [Vo+ Co+]* Vo+ (CCns) i n:{mn} 0:{ØeØeØ}>,UISTIN
+/s,S56,<Co* [Vo+ Co+]* Vo+ (CCns) i n:{mn} 0:{ØeØeØ} t:0>,KUOLAIMET
+/s,S56,sydän:sydä{mn}{ØeØeØ},
+/s,S56,syän:syä{mn}{ØeØeØ},
+/s,S56*,<Co* [Vo+ Co+]* Vo+ (CCns) i n:{mn} 0:{ØeØeØ}>,POLJIN
+/s,S56*,<Co* [Vo+ Co+]* Vo+ Gs i n:{mn} 0:{ØeØeØ} t:0>,HOHTIMET
+!!/s,S57,ONNETON (-> adj),
+/s,S58,lämmin:läm{pm}i{mn}{ØäØØØ},
+/s,S59,vanhin:vanhi{mn}{ØpmØ}{ØaØØØ},
+/s,S59,lähin:lähi{mn}{ØpmØ}{ØäØØØ},
+/s,S59,enin:eni{mn}{ØpmØ}{ØaØØØ},
+/s,S59,sisin:sisi{mn}{ØpmØ}{ØaØØØ},
+/s,S60,vasen:vase{mn}{ØpmØ}{ØaØØØ},
+!!,R61,,MUUAN MUUDAN
+!!,N62,,SEITSEN SEITSEMÄN
+/s,S63,<Co* [Vo+ Co+]+ Vo+ n:{ns} e:{eeØØ} n:{nØØØ}>,HEVONEN
+/s,S63,<Co* [Vo+ Co+]+ Vo+ s:{ns} 0:{eeØØ} 0:{nØØØ} l:0 l:0 [a:0|ä:0]>,KILPASILLA
+/s,S63,<Co* [Vo+ Co+]+ Vo+ s:{ns} e:{eeØØ} 0:{nØØØ} t:0>,AVAJAISET
+/s,S64,<Co* [Vo+ Co+]+ Vo+ 0:{ØkØkk} s 0:{ØeØeØ}>,VASTAUS KANNAS OHJAUS
+/s,S64,<Co* VbV 0:{ØkØkk} s 0:{ØeØeØ}>,JAOS SEOS
+/s,S64,<Co* [Vo+ Co+]+ Vo+ k:{ØkØkk} s e:{ØeØeØ} t:0>,TULUKSET
+/s,S65,<Co* [Vo+ Co+]+ [a|e|i|o|u] u 0:{ØØØØk} s:{tds} 0:{ØeØeØ}>,KALLEUS
+/s,S65,<Co* [Vo+ Co+]+ [e|i|o|y|ä|ö] y 0:{ØØØØk} s:{tds} 0:{ØeØeØ}>,SITKEYS
+/s,S66,<Co* [Vo+ Co+]+ Vo+ CCns [a 0:{aØ}|ä 0:{äØ}] s:{sØh} 0:{ØaØØØ}>,VIERAS
+/s,S66*,<Co* [Vo+ Co+]+ Vo+ Gw [a 0:{aØ}|ä 0:{äØ}] s:{sØh} 0:{ØaØØØ}>,TEHDAS RENGAS VAHAKAS LAMMAS MÄTÄS
+/s,S67,<Co* Vo+ CCns e s:{sØh} 0:{ØeØØØ}>,KIRVES
+/s,S67*,<Co* Vo+ Gw e s:{sØh} 0:{ØeØØØ}>,IES ÄES SEES
+/s,S68,saalis:saali{sØh}{ØiØiØ},
+/s,S68,ruumis:ruumi{sØh}{ØiØiØ},
+/s,S68,kauris:kauri{sØh}{ØiØiØ},
+/s,S68,nauris:nauri{sØh}{ØiØiØ},
+/s,S68*,ruis:ru{kØ}i{sØh}{ØiØiØ},
+/s,S70,kallas:kal{tl}a{sØh}{ØaØØØ},
+/s,S70,naaras:naara{sØh}{ØaØØØ},
+/s,S70,koiras:koira{sØh}{ØaØØØ},
+/s,S71,uros:uro{sØh}{ØoØoØ},
+/s,S71,kollos:kollo{sØh}{ØoØoØ},
+/s,S72,mies:mie{shs}{ØeØØØ},
+/s,S73,<Co* Vo+ CCns [u|y] t:{tØthn} 0:{ØeØØØ}>,AIRUT OLUT TIEHYT
+/s,S73,<Co* Vo+ Gw [u|y] t:{tØthn} 0:{ØeØØØ}>,POIUT ÄIDYT IMMYT
+/s,S74,lounat:louna{tØthn}{ØaØØØ},
+/s,S74,tienot:tieno{tØthn}{ØoØoØ},
+/s,S74,venät:venä{tØthn}{ØäØØØ},
+/s,S74,kevät:kevä{tØthn}{ØäØØØ},
+/s,S77,<Co* [Vo+ Co+]+ [u:{ue}|y:{ye}] t:{tØthn} 0:{ØeØØØ}>,KUOLLUT MENNYT HERÄNNYT PÄIHTYNYT
+/s,S78,<Co* [Vo+ Co+]+ e 0:{Øth} 0:{ØeØeØ}>,HAME 
+/s,S78*,<Co* [Vo+ Co+]* Vo+ Gw e 0:{Øth} 0:{ØeØeØ}>,VAATE
+/s,S79,terve:terve{ØØthn}{ØeØØØ},
+/s,S79,päre:päre{ØØthn}{ØeØØØ},
+/s,S80,ori:ori{Øth}{ØiØiØ},
+/s,S81,kiiru:kiiru{Øth}{ØuØuØ},
+/s,S82,<Co* [Vo+ Co+]+ Vo+ [n|l|r] 0:{ØeØeØ}>,ASKEL KYYNEL
+/s,S82*,<Co* Vo+ Gw Vo+ [n|l|r] 0:{ØeØeØ}>,OMMEL TAIVAL PIENNAR
+/s,S82,<Co* [Vo+ Co+]+ Vo [n|l|r] e 0:{ØhØtØØ} 0:{ØeØeØ}>,ASKARE PENKERE

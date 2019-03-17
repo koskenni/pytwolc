@@ -1,22 +1,16 @@
 
+ofi-conv-lex.fst: ofi-conv-n.lexc
+	hfst-lexc -o $@ $<
 
-ksk-renam-examp.fst: ksk-renam-examp.pstr
-	python3 ../twexamp.py $< $@
+ofi-conv-n.lexc: ofi-pat-n.csv
+	python3 ../pat-proc.py ofi-pat-n.csv -c classes.txt -m c -n Root > ofi-conv-n.lexc
 
-ksk-renam-examp.pstr: ksk-raw-examp.csv ksk-raw2named.csv ../raw2named.py
-	python3 ../raw2named.py $< $@ ksk-raw2named.csv
+ofi-analy-aff.lexc: ofi-affixes.csv
+	python3 ../affixes2analysis.py -n Root $< $@
 
-ksk-raw-examp.csv: ksk-zerofilled.csv ../zerofilled2rawmphon.py
-	python3 ../zerofilled2rawmphon.py $< $@
+clean:
+	rm ofi-*.lexc ofi-*.fst
 
-ksk-zerofilled.csv: ksk-seg-examp.csv ../segm2zerofilled.py
-	python3 ../segm2zerofilled.py $< $@
-
-ksk-seg-examp.csv: ksk-paradigms.csv ../paratab2segcsv.py
-	python3 ../paratab2segcsv.py $< $@
-
-#ksk-examp.pstr: ksk-raw-examp.csv
-#	cat $< | cut -d ',' -f 5 | egrep ' ' > $@
 
 features: ksk-zerofilled.csv
 	cat $< | cut -d ',' -f 1 | cut -d ' ' -s -f 2,3 | tr ' ' '\n' | sort | uniq

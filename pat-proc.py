@@ -50,7 +50,7 @@ def proj_down_regex(str):
     res = re.sub(r"\s+$", r"", res)
     return res
 
-def ksk2entrylex():
+def ksk2entrylex(root_lex_name):
     global multichs
     for cont in cont_set:
         multichs.add(cont)
@@ -60,7 +60,7 @@ def ksk2entrylex():
     print("Definitions")
     for dn in definitions.keys():
         print(" ", dn, "=", add_perc(definitions[dn]), ";")
-    print("LEXICON Root")
+    print("LEXICON", root_lex_name)
     for cont, iclass, input, output, weight, comment in singleton_lst:
         w = ' "weight: ' + weight + '"' if weight else ""
         i_class = re.sub(r"([*])", r"%\1", iclass)
@@ -78,7 +78,7 @@ def ksk2entrylex():
         print(":% " + cont, "# ;")
     return
 
-def ksk2guesserlex():
+def ksk2guesserlex(root_lex_name):
     import affixmultich
     print("Multichar_Symbols")
     print(" ", " ".join(sorted(multichs |
@@ -88,7 +88,7 @@ def ksk2guesserlex():
     for dn in definitions.keys():
         downde = proj_down_regex(definitions[dn])
         print(" ", dn, "=", add_perc(downde), ";")
-    print("LEXICON Root")
+    print("LEXICON", root_lex_name)
     for cont, iclass, input, output, weight, comment in singleton_lst:
         w = ' "weight: ' + weight + '"' if weight else ""
         print(output, cont, w, '; !', comment)
@@ -98,22 +98,31 @@ def ksk2guesserlex():
         print("<", add_perc(downpat), ">", cont, w, ";")
     return
 
-argparser = argparse.ArgumentParser("python3 di2mi-to-di2mi.py",
-                                    description="Writes either a converter or a guesser")
-argparser.add_argument("-p", "--patterns",
-                           help="A csv input file containing the patterns")
-argparser.add_argument("-c", "--classes",
-                           default="infl-codes.text",
-                           help="output file containing inflectional classes found in the patterns")
-argparser.add_argument("-m", "--mode", choices = ['c', 'g'],
-                           help="'g' for guesser, 'c' for converter",
-                           default="c")
-argparser.add_argument("-v", "--verbosity", default=0, type=int,
-                           help="level of diagnostic output")
+argparser = argparse.ArgumentParser(
+    "python3 di2mi-to-di2mi.py",
+    description="Writes either a converter or a guesser")
+argparser.add_argument(
+    "patterns",
+    help="A csv input file containing the patterns")
+argparser.add_argument(
+    "-c", "--classes",
+    default="infl-codes.text",
+    help="output file containing inflectional classes found in the patterns")
+argparser.add_argument(
+    "-n", "--root-lexicon-name",
+    default="words",
+    help="name of the initial lexicon to be written")
+argparser.add_argument(
+    "-m", "--mode", choices = ['c', 'g'],
+    help="'g' for guesser, 'c' for converter",
+    default="c")
+argparser.add_argument(
+    "-v", "--verbosity", default=0, type=int,
+    help="level of diagnostic output")
 args = argparser.parse_args()
 
 patfile = open(args.patterns, "r")
-pat_rdr = csv.DictReader(patfile, delimiter=';')
+pat_rdr = csv.DictReader(patfile, delimiter=',')
 prevID = ";;;"
 for r in pat_rdr:
     if args.verbosity >= 10:
@@ -158,9 +167,9 @@ for dn,pe in definitions.items():
     extract_multichs(pe)
 
 if args.mode == 'c':
-    ksk2entrylex()
+    ksk2entrylex(args.root_lexicon_name)
 elif args.mode == 'g':
-    ksk2guesserlex()
+    ksk2guesserlex(args.root_lexicon_name)
 else:
     print("value of --mode must be either 'g' or 'c'")
     exit()
