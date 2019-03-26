@@ -79,11 +79,8 @@ def ksk2entrylex(root_lex_name):
     return
 
 def ksk2guesserlex(root_lex_name):
-    import affixmultich
     print("Multichar_Symbols")
-    print(" ", " ".join(sorted(multichs |
-                                   affixmultich.nexts |
-                                   affixmultich.multichars)))
+    print(" ", " ".join(sorted(multichs | cont_set)))
     print("Definitions")
     for dn in definitions.keys():
         downde = proj_down_regex(definitions[dn])
@@ -155,6 +152,9 @@ for r in pat_rdr:
             singleton_lst.append((cont, i_class,
                                       m.group(1), m.group(2), m.group(3),
                                       comment))
+            mch_lst = re.findall(r"{[^}]+}", m.group(2))
+            for mch in mch_lst:
+                multichs.add(mch)
         else:                             # not valid at all
             print("***", r, "***")
 

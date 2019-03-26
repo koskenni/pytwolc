@@ -22,12 +22,12 @@ import re, csv, sys
 import argparse
 import argparse
 argparser = argparse.ArgumentParser(
-    "python3 affixcsv2analylexc.py",
+    "python3 affies2analysis.py",
     description="Converts an affix CSV file into an analyzing affix LEXC file")
 argparser.add_argument(
-    "infile", help="A input CSV file containing the affix data")
+    "infile", help="input CSV file containing the affix data")
 argparser.add_argument(
-    "outfile", help="A output LEXC file of the affix data")
+    "outfile", help="output LEXC file of the affix data")
 argparser.add_argument("-d", "--delimiter", default=",",
     help="CSV field delimiter (default is ',')")
 argparser.add_argument("-v", "--verbosity", default=0, type=int,
@@ -39,7 +39,7 @@ multichars = set()
 
 def collect_multichars(str):
     if len(str) < 2: return
-    lst = re.findall(r"[{][a-zåäöVCØ]+[}]", str)
+    lst = re.findall(r"[{][^}]+[}]", str)
     for mch in lst:
         multichars.add(mch)
     return
@@ -81,7 +81,8 @@ for r in rdr:
 outfile = open(args.outfile, "w")
 print("Multichar_Symbols", file=outfile)
 multichar_lst = sorted(list(multichars))
-print(" ".join(multichar_lst), file=outfile)
+multichar_str = " ".join(multichar_lst)
+print(multichar_str, file=outfile)
 features_lst = sorted(list(features))
 print(" ".join(features_lst), file=outfile)
 for line in out_lst:

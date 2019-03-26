@@ -1,4 +1,4 @@
-"""affixcsv2guesslexc.py:
+"""affixes2guessing.py:
 
 builds a lexc file for guessing out of a csv file of affixes
 """
@@ -32,7 +32,7 @@ def collect_multichars(str):
 
 import argparse
 argparser = argparse.ArgumentParser(
-    "python3 affixcsv2guesslexc.py",
+    "python3 affixes2guessing.py",
     description="Converts an affix CSV file into a guesser affix LEXC file")
 argparser.add_argument(
     "infile", help="A input CSV file containing the affix data")

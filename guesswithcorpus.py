@@ -1,6 +1,6 @@
 # entryharvester.py
 
-copyright = """Copyright © 2017, Kimmo Koskenniemi
+copyright = """Copyright (C) 2017, Kimmo Koskenniemi
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

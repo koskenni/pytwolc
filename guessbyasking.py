@@ -73,7 +73,7 @@ while True:
             remain = remaining - entries
         else:
             remain = remaining & entries
-        best_weight = min([weight[e] for e in remain])
+        best_weight = min([weight[e] for e in remain], default=0)
         rema = set()
         for e in remain:
             if weight[e] <= best_weight + args.reject:

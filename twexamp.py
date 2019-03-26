@@ -50,7 +50,8 @@ def read_examples(filename="test.pstr", build_fsts=True):
     """Reads the examples from the file whose name is 'filename'.
     
     The file must contain one example per line and each line consists of
-    a space separated sequence of pair-symbols.  The examples are processed into 
+    a space separated sequence of pair-symbols.
+    The examples are processed to a FST which is a union of all examples.
     """
     if build_fsts:
         import hfst
@@ -61,12 +62,19 @@ def read_examples(filename="test.pstr", build_fsts=True):
         if not line or line.startswith("!"):
             continue
         pairsym_lst = re.split("\s+", line)
-        symbol_pair_lst = [cfg.pairsym2sympair(pairsym) for pairsym in pairsym_lst]
-        # print("symbol_pair_lst:", symbol_pair_lst) ##
+        symbol_pair_lst = [cfg.pairsym2sympair(pairsym)
+                           for pairsym in pairsym_lst]
+        if not all([insym and outsym for insym, outsym in symbol_pair_lst]):
+            print("*** example contains an invalid pair symbol")
+            print(line)
+            continue
+        if cfg.verbosity >= 30:
+            print("symbol_pair_lst:", symbol_pair_lst)
         pair_symbol_str = " ".join([cfg.sympair2pairsym(insym, outsym)
                                     for insym,outsym
                                     in symbol_pair_lst])
-        # print("pair_symbol_lst:", pair_symbol_lst) ##
+        if cfg.verbosity >= 30:
+            print("pair_symbol_str:", pair_symbol_str)
         cfg.example_lst.append(pair_symbol_str)
         cfg.example_set.add(pair_symbol_str) # spaces normalized
         #LINE_FST = hfst.tokenized_fst(symbol_pair_lst)
