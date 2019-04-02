@@ -96,7 +96,7 @@ def ksk2guesserlex(root_lex_name):
     return
 
 argparser = argparse.ArgumentParser(
-    "python3 di2mi-to-di2mi.py",
+    "python3 pat-proc.py",
     description="Writes either a converter or a guesser")
 argparser.add_argument(
     "patterns",
@@ -125,6 +125,8 @@ for r in pat_rdr:
     if args.verbosity >= 10:
         print(r)
     cont, i_class, mfon, comment = r['CONT'], r['ICLASS'], r['MPHON'], r['COMMENT']
+    if (not cont) or (not mfon):
+        continue
     if cont != "" and cont[0] == '!':
         if args.verbosity >= 10:
             print("- it is a comment line")
@@ -144,7 +146,7 @@ for r in pat_rdr:
             weight = m.group(2)
             pattern_lst.append((cont, i_class, regex, weight, comment))
             continue
-        m = re.match(r"^\s*([a-zåäöšž']+):([a-zåäöšžA-ZÅÄÖŠŽ{Ø'}]+)\s*([0-9]*)\s*$", mfon)
+        m = re.match(r"^([^<>:\n{}]+):([^\n<>]+)\s*([0-9]*)\s*$", mfon)
         #print(cont, i_class, mfon)###
         if m:                             # it looks like a direct result for a single entry
             if args.verbosity >= 10:

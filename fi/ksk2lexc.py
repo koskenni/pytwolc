@@ -39,7 +39,7 @@ entrylist = []
 multiharacters = set()
 
 def find_multichars(str):
-    lst = re.findall(r"\{[a-zåäöšžØ']+\}", str)
+    lst = re.findall(r"\{[^{}:\s]+\}", str)
     for sym in lst:
         multiharacters.add(sym)
 

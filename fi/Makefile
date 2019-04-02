@@ -1,35 +1,40 @@
-ofi-n.ofst: ofi-lex-n.fst ofi-rules.fst delete.fst
+POS=v
+
+ofi-$(POS).ofst: ofi-lex-$(POS).fst ofi-rules.fst ofi-examples.pstr delete.fst
 	hfst-compose-intersect -a -1 $< -2 ofi-rules.fst |\
 	hfst-compose -2 delete.fst |\
 	hfst-invert |\
 	hfst-minimize |\
 	hfst-fst2fst -O -o $@
 
-ofi-lex-n.fst: ofi-lex-n.lexc ofi-analy-aff.lexc
+ofi-lex-$(POS).fst: ofi-lex-$(POS).lexc ofi-analy-aff.lexc
 	hfst-lexc -o $@ ofi-analy-aff.lexc $<
 
-ofi-lex-n.lexc: ofi-conv-n.fst ksk2lexc.py Makefile
-	python3 ksk2lexc.py --codes=classes.txt ~/Dropbox/lang/fin/ksk/ksk-n.dic $< Nouns $@ > ofi-lex-n.log
+ofi-lex-$(POS).lexc: ofi-conv-$(POS).fst ksk2lexc.py Makefile
+	python3 ksk2lexc.py --codes=classes.txt ~/Dropbox/lang/fin/ksk/ksk-$(POS).dic $< Nouns $@ > ofi-lex-$(POS).log
 
-ofi-conv-n.fst: ofi-conv-n.lexc
+ofi-conv-$(POS).fst: ofi-conv-$(POS).lexc
 	hfst-lexc -o $@ $<
 
-ofi-conv-n.lexc: ofi-pat-n.csv ../pat-proc.py
+ofi-conv-$(POS).lexc: ofi-pat-$(POS).csv ../pat-proc.py
 	python3 ../pat-proc.py -c classes.txt -m c -n Root $< > $@
 
-ofi-guess-n.fst: ofi-guess-lex-n.fst ofi-rules.fst Makefile
+ofi-guess-$(POS).fst: ofi-guess-lex-$(POS).fst ofi-rules.fst Makefile
 	hfst-compose-intersect -a -1 $< -2 ofi-rules.fst |\
 	hfst-compose -2 delete.fst |\
 	hfst-minimize > $@
 
-ofi-guess-lex-n.fst: ofi-guess-lex-n.lexc ofi-guess-aff.lexc
+ofi-guess-lex-$(POS).fst: ofi-guess-lex-$(POS).lexc ofi-guess-aff.lexc
 	hfst-lexc -o $@ ofi-guess-aff.lexc $<
 
-ofi-guess-lex-n.lexc : ofi-pat-n.csv
+ofi-guess-lex-n.lexc : ofi-pat-$(POS).csv
 	python3 ../pat-proc.py -m g -n Nouns $< > $@
 
+ofi-guess-lex-v.lexc : ofi-pat-$(POS).csv
+	python3 ../pat-proc.py -m g -n Verbs $< > $@
+
 ofi-guess-aff.lexc: ofi-affixes.csv
-	python3 ../affixes2guessing.py -n Root $< $@
+	python3 ../affixes2guessing.py $< $@
 
 ofi-analy-aff.lexc: ofi-affixes.csv ../affixes2analysis.py Makefile
 	python3 ../affixes2analysis.py $< $@

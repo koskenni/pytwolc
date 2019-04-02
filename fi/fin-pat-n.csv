@@ -103,7 +103,24 @@ Define,Coida,[b|d|n d|f|f f|g|h|j|k|l|l l|m|n|n n|p|r|s|š|t|t t|v],For -oida ve
 !,,,
 /s,S14,<Co* [Vo+ Co+]+ [i|i j|j|Vo+ [l|n|r]] [a:{ao}|ä:{äö}]>,KULKIJA 3+syll
 !,,,
-/s,S15,<Co* [Vo+ Co+]* Vo+ [CCns+|Co+ (e|i)] [a:{ao}|ä:{äö}]>,KARAHKA
+/s,S15,<Co* [Vo+ Co+]* Vo+ [CCns+|Co+ (e|i)] [a:{ao}|ä:{äö}]>,KARAHKA MANSIKKA
+/s,S16,<Co* [Vo+ Co+]+ [a+|o+|u] [j] a:{aØo}>,KANTAJA ONGELMA MILJOONA JALAVA
+/s,S16,<Co* [Vo+ Co+]+ [ä+|y] j ä:{äØö}>,VENYJÄ PETÄJÄ HYPPÄÄJÄ VÄÄRENTÄJÄ
+/s,S17,<Co* Vo+ Co+ Vo+ [l|m|n|r] [a:{aØo}|ä:{äØö}]>,PERUNA
+/s,S18,<Co* Vo+ Co+ Vo+ [l|m|n|r] [a:{aØo}|ä:{äØö}]>,PASUUNA KIHARA NYSTYRÄ
+!,S19,,"AINOA (S puiroa, ei muita)"
+/s,S20,<(Co) Vo+ Co+ u a:{aØo}>,HERTTUA PORSTUA
+/s,S21,<(Co) Vo+ Co+ e [a:{aØo}|ä:{äØö}]>,KORKEA HOPEA HÄPEÄ
+/s,S21,<(Co) Vo+ Co+ i [a:{ao}|ä:{äö}]>,KORKIA
+!/s,S22,<>,SUUREMPI VANHEMPI
+/s,S23,<Co* Vo+ Co+ a 0:{ØØh} a:{aØ}>,VAPAA SUKLAA
+/s,S24,<Co* Vo+ Co+ [o 0:{ØØh} o:{oØ}|ö 0:{ØØh} ö:{öØ}]>,TIENOO EHTOO MILJÖÖ
+/s,S25,<Co* Vo+ Co+ [u u:{uØ}|y y:{yØ}]>,LEIKKUU SAHUU PALUU VASTUU LYKKYY
+/s,S26,<Co* Vo+ Co+ e e:{eeØ}>,KAMEE APOKOPEE KLIŠEE TEE
+/s,S27,<Co* Vo+ Co+ [i|a|o] i:{iØ}>,PII SAMURAI HELLUNTAI PROSTOI VOI SI TÄI
+/s,S28,<Co* [a a:{aØ}|ä ä:{äØ}]>,MAA VAINAA ŠVAA SÄÄ
+/s,S29,<Co* [u u:{uØ}|y y:{yØ}]>,PUU KUU LUU KYY SYY
+!,,,
 /s,S30,<Co i:{iØ} e>,TIE
 /s,S30,<Co u:{uØ} o>,SUO
 /s,S30,<(Co) y:{yØ} ö>,TYÖ
@@ -127,22 +144,22 @@ Define,Coida,[b|d|n d|f|f f|g|h|j|k|l|l l|m|n|n n|p|r|s|š|t|t t|v],For -oida ve
 /s,S39,nuori:nuor{ieØeØØ},
 /s,S39,juuri:juur{ieØeØØ},
 /s,S39,suuri:suur{ieØeØØ},
-/s,S41,paasi:paa{tds}{ieØeØ},
-/s,S41,liesi:lie{tds}{ieØeØ},
-/s,S41,kesi:ke{tds}{ieØeØ},
-/s,S41,mesi:me{tds}{ieØeØ},
-/s,S41,vesi:ve{tds}{ieØeØ},
-/s,S41,heisi:hei{tds}{ieØeØ},
-/s,S41,reisi:rei{tds}{ieØeØ},
-/s,S41,hiisi:hii{tds}{ieØeØ},
-/s,S41,riisi:rii{tds}{ieØeØ},
-/s,S41,vuosi:vuo{tds}{ieØeØ},
-/s,S41,kausi:kau{tds}{ieØeØ},
-/s,S41,susi:su{tds}{ieØeØ},
-/s,S41,uusi:uu{tds}{ieØeØ},
-/s,S41,sysi:sy{tds}{ieØeØ},
-/s,S41,köysi:köy{tds}{ieØeØ},
-/s,S41,käsi:kä{tds}{ieØeØ},
+/s,S40,paasi:paa{tds}{ieØeØ},
+/s,S40,liesi:lie{tds}{ieØeØ},
+/s,S40,kesi:ke{tds}{ieØeØ},
+/s,S40,mesi:me{tds}{ieØeØ},
+/s,S40,vesi:ve{tds}{ieØeØ},
+/s,S40,heisi:hei{tds}{ieØeØ},
+/s,S40,reisi:rei{tds}{ieØeØ},
+/s,S40,hiisi:hii{tds}{ieØeØ},
+/s,S40,riisi:rii{tds}{ieØeØ},
+/s,S40,vuosi:vuo{tds}{ieØeØ},
+/s,S40,kausi:kau{tds}{ieØeØ},
+/s,S40,susi:su{tds}{ieØeØ},
+/s,S40,uusi:uu{tds}{ieØeØ},
+/s,S40,sysi:sy{tds}{ieØeØ},
+/s,S40,köysi:köy{tds}{ieØeØ},
+/s,S40,käsi:kä{tds}{ieØeØ},
 /s,S41,niisi:nii{tds}{ieØeØ},
 /s,S41,tosi:to{tds}{ieØeØ},
 /s,S42,karsi:kar{trs}{ieØeØ},
@@ -160,9 +177,9 @@ Define,Coida,[b|d|n d|f|f f|g|h|j|k|l|l l|m|n|n n|p|r|s|š|t|t t|v],For -oida ve
 /s,S44,ponsi:pon{tns}{ieØeØ},
 /s,S44,kynsi:kyn{tns}{ieØeØ},
 /s,S44,länsi:län{tns}{ieØeØ},
-!/s,S45,kypsi:ky{pØp}s{ieØeØ},
-/s,S45,lapsi:la{pØp}s{ieØeØ},
-/s,S46,hapsi:ha{pØp}s{ieØeØ},
+!/s,S45,kypsi:ky{pØp}s{ieØeØØ},
+/s,S45,lapsi:la{pØp}s{ieØeØØ},
+/s,S46,hapsi:ha{pØp}s{ieØeØØ},
 /s,S47,veitsi:vei{tØt}s{ieØeØ},
 /s,S48,peitsi:pei{tØt}s{ieØeØ},
 /s,S48,joutsi:jou{tØt}s{ieØeØ},
@@ -171,7 +188,7 @@ Define,Coida,[b|d|n d|f|f f|g|h|j|k|l|l l|m|n|n n|p|r|s|š|t|t t|v],For -oida ve
 /s,S50,hiuksi:hiu{kØk}s{ieeØeØ},
 /s,S51,haaksi:haa{kØk}s{ieeØeØ},
 /s,S51,vaaksi:vaa{kØk}s{ieeØeØ},
-!!,S52,sankari,sankaria sankarten
+!!,S52,sankari:sankar{iiiØiee},sankaria sankarten
 !!,S53,jumala,jumalaa jumalata jumalten
 /s,S54,kimmel:kimmel{ØeØeØ},
 /s,S54,äänel:äänel{ØeØeØ},
@@ -238,4 +255,3 @@ Define,Coida,[b|d|n d|f|f f|g|h|j|k|l|l l|m|n|n n|p|r|s|š|t|t t|v],For -oida ve
 /s,S82,<Co* [Vo+ Co+]+ Vo+ [n|l|r] 0:{ØeØeØ}>,ASKEL KYYNEL
 /s,S82*,<Co* Vo+ Gw Vo+ [n|l|r] 0:{ØeØeØ}>,OMMEL TAIVAL PIENNAR
 /s,S82,<Co* [Vo+ Co+]+ Vo [n|l|r] e 0:{ØhØtØØ} 0:{ØeØeØ}>,ASKARE PENKERE
-/s,,,

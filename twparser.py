@@ -93,11 +93,11 @@ class TwolRegexSemantics(object):
         string = ast.token.strip()
         failmsg = []
         pat = re.compile(r"""^
-        (?P<up>[a-zšžåäöüõA-ZÅÄÖ0-9]*
+        (?P<up>[^{}:\s]*
          |
-         \{[a-zåäöüõA-ZÅÄÖØ]+\})
+         \{[^{}:\s]+\})
         :
-        (?P<lo>[a-zšžåäöüõA-ZÅÄÖØ]*)
+        (?P<lo>[^{}:\s]*)
         $""", re.X)
         m = re.match(pat, string)
         if m:                       # it is a pair with a colon
@@ -121,7 +121,7 @@ class TwolRegexSemantics(object):
                 return "[PI .o. {}]".format(lo)
             else:
                 return "PI"
-        m = re.fullmatch(r"[a-zåäöüõA-ZÅÄÖØ]+", string)
+        m = re.fullmatch(r"[^{}\s:]+", string)
         if m:                       # its either a defined sym or a surf ch
             if string in cfg.definitions:
                 return "{}".format(string)
@@ -309,7 +309,7 @@ class TwolFstSemantics(object):
         pat = re.compile(r"""^
         (?P<up>[^- \[\]\/<>=_;,.|&*+\\()\{\}]*
          |
-         \{[a-zåäöüõA-ZÅÄÖØ'´`]+\})
+         \{[^{}:\s]+\})
         :
         (?P<lo>[^- \[\]\/<>=_;,.|&*+\\()\{\}]*)
         $""", re.X)
@@ -346,7 +346,7 @@ class TwolFstSemantics(object):
                 result_fst = cfg.all_pairs_fst.copy()
                 result_fst.set_name("PI")
                 return result_fst
-        m = re.fullmatch(r"[a-zåäöšžüõA-ZÅÄÖØ'´`]+", string)
+        m = re.fullmatch(r"[^][|+*{}:\s]+", string)
         if m:                       # its either a defined sym or a surf ch
             if string in cfg.definitions:
                 result_fst = cfg.definitions[string].copy()
