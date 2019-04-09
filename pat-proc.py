@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 import csv, re, argparse
 from collections import OrderedDict
+import cfg
 
 multichs = set()
 
@@ -41,13 +42,35 @@ def add_perc(str):
     return re.sub(r"([{'}])", r"%\1", str)
 
 def proj_down_regex(str):
-    lst = re.split(r"([\]\[\|\-\+\* ]+|\.[iul]|\.o\.)", str)
-    downlst = [re.sub(r"([a-zåäö'øØ0]):({[a-zåäö'øØ]+}|0)", r"\2", el) for el in lst]
-    reslst = [re.sub(r"^0$", r"", el) for el in downlst]
+    lst = re.split(r"([\]\[()\|\-\+\*&\\ ]+|\.[iul]|\.o\.)", str)
+    if cfg.verbosity >= 9:
+        print("**", str, "---", lst)
+    #downlst = [re.sub(r"([a-zåäö'øØ0]):({[a-zåäö'øØ]+}|0)", r"\2", el) for el in lst]
+    down_lst = []
+    for elem in lst:
+        piece_lst = elem.split(":")
+        if len(piece_lst) == 1:            # a (a
+            down_compon = piece_lst[0]
+        elif len(piece_lst) == 2:          # a:{ao}  
+            down_compon = piece_lst[1]
+        elif len(piece_lst) == 3 and not piece_lst[1]:  # a::4 
+            down_compon = piece_lst[0] + "::" + piece_lst[2]
+        elif len(piece_lst) == 4:          # a:{ao}::5
+            down_compon = piece_lst[1] + "::" + piece_lst[3]
+        else:
+            print("*** syntax error:", elem, "--->", str)
+        down_lst.append(down_compon)
+
+    if cfg.verbosity >= 9:
+        print("--", down_lst)
+    reslst = [re.sub(r"^0$", r"", el) for el in down_lst]
     res = "".join(reslst)
     res = re.sub(r"\s+\[\s*\|\s*\]\s*", r" ", res)
+    res = re.sub(r"\s+\(\s*\)\s*", r" ", res)
     res = re.sub(r"\s+", r" ", res)
     res = re.sub(r"\s+$", r"", res)
+    if cfg.verbosity >= 9:
+        print(">>", res)
     return res
 
 def ksk2entrylex(root_lex_name):
@@ -90,9 +113,9 @@ def ksk2guesserlex(root_lex_name):
         w = ' "weight: ' + weight + '"' if weight else ""
         print(output, cont, w, '; !', comment)
     for cont, iclass, pat, weight, comment in pattern_lst:
-        w = '"weight: '+weight+'"' if weight else ""
+        w = " 0::{}".format(weight) if weight else ""
         downpat = proj_down_regex(pat[1:-1])
-        print("<", add_perc(downpat), ">", cont, w, ";")
+        print("<", add_perc(downpat)+w, ">", cont, "; !", comment)
     return
 
 argparser = argparse.ArgumentParser(
@@ -117,22 +140,23 @@ argparser.add_argument(
     "-v", "--verbosity", default=0, type=int,
     help="level of diagnostic output")
 args = argparser.parse_args()
+cfg.verbosity = args.verbosity
 
 patfile = open(args.patterns, "r")
 pat_rdr = csv.DictReader(patfile, delimiter=',')
 prevID = ";;;"
 for r in pat_rdr:
-    if args.verbosity >= 10:
+    if cfg.verbosity >= 10:
         print(r)
     cont, i_class, mfon, comment = r['CONT'], r['ICLASS'], r['MPHON'], r['COMMENT']
     if (not cont) or (not mfon):
         continue
     if cont != "" and cont[0] == '!':
-        if args.verbosity >= 10:
+        if cfg.verbosity >= 10:
             print("- it is a comment line")
         continue
     if cont == "Define":
-        if args.verbosity >= 10:
+        if cfg.verbosity >= 10:
             print("- it is a definition")
         definitions[i_class] = mfon
     else:
@@ -140,7 +164,7 @@ for r in pat_rdr:
         iclass_set.add(i_class)
         m = re.match(r"^\s*(<.*>)\s*([0-9]*)\s*$", mfon)
         if m:                             # it looks like a reg ex pattern
-            if args.verbosity >= 10:
+            if cfg.verbosity >= 10:
                 print("- it is a pattern")
             regex = m.group(1)
             weight = m.group(2)
@@ -149,7 +173,7 @@ for r in pat_rdr:
         m = re.match(r"^([^<>:\n{}]+):([^\n<>]+)\s*([0-9]*)\s*$", mfon)
         #print(cont, i_class, mfon)###
         if m:                             # it looks like a direct result for a single entry
-            if args.verbosity >= 10:
+            if cfg.verbosity >= 10:
                 print("- it is a single entry")
             singleton_lst.append((cont, i_class,
                                       m.group(1), m.group(2), m.group(3),

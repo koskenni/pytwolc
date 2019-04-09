@@ -185,6 +185,9 @@ OPEN = VoM (CoM) [VoS|:i] ;
     ! s<y>ön s<>öi s<y>onee s<>öisi s<y>ököön
     ! <y>ö <>öitä
 
+{öØ}:Ø <=> _ :i ;
+    ! k<ö>ön k<>öitä
+
 {aä}:a|{oö}:o|{uy}:u <=> [:a|:o|:u] :* _ ;
     ! maass<a> piiss<ä> juot<u> syöt<y> tulk<o><o>n syök<ö><ö>n
 
@@ -427,10 +430,11 @@ s e {Øe}:Ø n => [:a :h (:Ø) :a|:e :h (:Ø) :e|:i :h (:Ø) :i|:o :h (:Ø) :o|
     ! ??korke<>e tieno<>o koira<h>an
     ! NOTE: some overgenerated forms remain
 
-{Øth}:h => _ [:e|:i|:u] [:n|:s],
-           _ VoØ {ij}:i [e|s|:t|{Øt}: {aä}:] ;
+{Øth}:h => _ [:e|:i|:u] [:n|:s|:l|:k],
+           _ VoØ {ij}:i [e|s|:l|:k|:t|{Øt}: {aä}:] ;
 {Øth}:t <=> _ VoØ [{Øt}:|:t] ;
     ! vaatte<h>en vaatte<h>esen vaatte<h>ia vaatte<h>isin
+    ! lähte<h>ellä lähte<h>eksi lähte<h>illä lähte<h>iksi
     ! ori<h>in ori<h>isen
     ! kiiru<t>ta kiiru<h>un kiiru<h>isin
     ! vaate<t>ta ori<t>ta
