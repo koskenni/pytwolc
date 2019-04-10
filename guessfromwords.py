@@ -1,13 +1,17 @@
 
 import sys
 
-fil = open("vns-word-guess-test.text", "r")
+#fil = open("vns-word-guess-test.text", "r")
+#fil = open("vns-word-guesses-nv.text", "r")
 
 entries = {}
 words = {}
 
-for line in fil:
-    [entry,word] = line.strip().split(":")
+for line in sys.stdin:
+    [entry,word_weight] = line.strip().split(":")
+    [word, weight] = word_weight.split("\t")
+    if int(weight) >= 10:
+        continue
     if entry not in words:
         words[entry] = set()
     words[entry].add(word)
@@ -23,21 +27,39 @@ def delete_entry(e):
         entries[w].discard(e)
     del words[e]
     
+def delete_all_words(entry, w_lst):
+    #print("deleting:", w_lst)###
+    siz = len(words[entry])
+    for w in w_lst:
+        for e in entries[w]:
+            if e in words and siz > len(words[e]):
+                words[e].discard(w)
+        if not entries[w]:
+            del entries[w]
+
 for entry in sorted(words.keys(), key=kompar, reverse=True):
     for word in words[entry]:
         for e in entries[word]:
-            #print("\nwords[{}] = {}".format(entry, words[entry]))###
-            #print("words[{}] = {}".format(e, words[e]))###
             if words[entry] < words[e]:
                 delete_entry(entry)
-                print("deleting", entry, "which is inferior to", e)###
-                break # nothing more to do with this entry
-            else:
-                continue # to the next word in the middle loop
-        break # nothing else to be done for the words for the deleted entry
+                #print("deleting", entry, "which is inferior to", e)###
+                break # the innermost loop
+        else:
+            continue # the middle loop
+        break # the middle loop
 
-#print("\n\nentries", entries)###
-for e in sorted(words.keys()):
-    if e in words:
-        print(e, "--", " ".join(list(words[e])))
-    
+sz = 60
+#print("largest set of words", sz)
+
+delta = 3
+while sz > 4:
+    del_ent_lst = []
+    for entry in words:
+        #print(sz, entry, words[entry])###
+        if entry in words and len(words[entry]) >= sz - delta:
+            print(entry, "--", " ".join(sorted(list(words[entry]))))
+            delete_all_words(entry, list(words[entry]))
+            del_ent_lst.append(entry)
+    for ent in del_ent_lst:
+        del words[ent]
+    sz = sz - delta

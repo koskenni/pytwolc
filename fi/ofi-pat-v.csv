@@ -1,0 +1,244 @@
+CONT,ICLASS,MPHON,COMMENT
+Define,Vo,[a|e|i|o|u|y|ä|ö],"All vowels"
+Define,Co,[b|c|d|f|g|h|j|k|l|m|n|p|q|r|s|š|t|v|w|x|z|ž],"All consonants"
+Define,Gwk,"[(l|r|n) k 0:{kØ}|(h|l|r) 0:{kØ}|n g:{kg}]","Weak k : morphophoneme"
+Define,Gwp,"[m m:{pm} | (l|r) v:{pv} | (l|r|m) p 0:{pØ}]","Weak p : morphophoneme"
+Define,Gwt,"[(h) d:{td}|l l:{tl}|n n:{tn}|r r:{tr}|(l|r|n) t 0:{tØ}]","Weak t : morphophoneme"
+Define,Gw,[Gwk|Gwp|Gwt],"Gradating weak cons : morphophoneme"
+Define,Gwj,"[(h|l|r) j:{kj}]",tarjeta-tarkenee
+Define,Gsk,"[(l|r|n) k k:{kØ}|(h|l|r) k:{kØ}|n k:{kg}]","Strong k : morphophoneme"
+Define,Gsp,"[m p:{pm}|(l|r) p:{pv}|(l|r|m) p p:{pØ}]","Strong p : morphophoneme"
+Define,Gst,"[(h) t:{td}|l t:{tl}|n t:{tn}|r t:{tr}|(l|r|n) t t:{tØ}]","Strong t : morphophoneme"
+Define,Gs,[Gsk|Gsp|Gst],"Gradating strong cons : morphophoneme"
+Define,CCns,"[[[Co+] - Gs.u]|h k]","Non-gradating cons clusters"
+Define,Gsj,"[[h|l|r] k:{kj}]",sulkea-suljen
+Define,Gtds,"[l t:{tls}|n t:{tns}|r t:{trs}]","Strong t : s and weak"
+Define,V1V1,"[a a|e e|i i|o o|u u|y y|ä ä|ö ö]","Long vowels"
+Define,Vi,"[Vo i]","Diphthongs with i"
+Define,V1V2,"[a u|e u|i e|e u|e y|i e|i u|i y|o u|u o|y ö|ä y|ö y]","Diphthongs in first syll"
+Define,VV,[V1V1|Vi|V1V2],"All diphthongs"
+Define,Cocl,[Co+|'],"Consonant cluster within"
+Define,Syl,"[Vo+ [[Co+|']]]",
+Define,Sy1,"[[Co+|'] Vo+]",
+Define,Forl,[b|c|d|f|g|q|š|w|x|z|ž],"Foreign sounding letter"
+Define,Forb,"[n j|k l|k r|k v|p r|p s|s m|s p|t l|t r]","Foreign bigrams"
+Define,Forg,[$[Forl|Forb]],"Foreign sounding words"
+Define,Coida,"[b|d|n d|f|f f|g|h|j|k|l|l l|m|n|n n|p|r|s|š|t|t t|v]","For -oida verbs"
+/v,V01,"<Co* Syl* Vo+ (CCns) [o|ö|u|y] [a:0|ä:0]>",PUNOA
+/v,V01*,"<Co* Syl* Vo+ Gs [o|ö|u|y] [a:0|ä:0]>",KUTOA
+!!,,,
+/v,V02,"<Co* [i u|o|o i|o u|u|u i|u o] CCns a:{aØaae} a:0>",MUISTAA
+/v,V02,"<Co* [e|e y|i e|i|i i|y|y i|y y|ä|ä i|ä y|ä ä|ö|ö y] CCns ä:{äØääe} ä:0>",ELÄÄ
+/v,V02*,"<(Co) [i u|o|o i|o u|u|u i|u o] Gs a:{aØaae} a:0>",JOHTAA
+/v,V02*,"<(Co) [e|e y|i e|i|i i|y|y i|y y|ä|ä i|ä y|ä ä|ö|ö y] Gs ä:{äØääe} ä:0>",PITÄÄ
+/v,V02*,"<[Co* Vo+]+ Co* [a|e|o|o u|u|u o] h t:{td} a:{aØaae} a:0>",TUHAHTAA
+/v,V02*,"<[Co* Vo+]+ Co* [e|i i|y|ä|ö] h t:{td} ä:{äØääe} ä:0>",PÖLLÄHTÄÄ
+/v,V02,"<Co* Vo+ Co* [a|a i|e|i|o|u] s t a:{aØaae} a:0>","KAJASTAA AHDISTAA"
+/v,V02,"<Co* Vo+ Co* [e|e i|i|i i|y|ä|ä ä|ö] s t ä:{aØaae} ä:0>",VIRKISTÄÄ
+!!/v,V02,"<[Co* Vo+]+ (l|n) l (a) i s t a:{aØaae} a:0>","MATERIAALISTAA MAHDOLLISTAA"
+!!/v,V02,"<[Co* Vo+]+ (l|n) l (ä) i s t ä:{äØääe} ä:0>",VENÄLÄISTÄÄ
+!!/v,V02,"<[Co* Vo+]+ (l|n) n (a|o) i s t a:{aØaae} a:0>","ERIKOISTAA VAKINAISTAA"
+!!/v,V02,"<[Co* Vo+]+ (l|n) n (ä|ö) i s t ä:{äØääe} ä:0>","ITSENÄISTÄÄ SÄHKÖISTÄÄ"
+/v,V02,"<[Co* Vo+]+ (Cocl) (a|e|o|u) i s t a:{aØaae} a:0>","ASEISTAA KONEISTAA"
+/v,V02,"<[Co* Vo+]+ (Cocl) (ä|e|ö|y) i s t ä:{äØääe} ä:0>",SÄHKÖISTÄÄ
+/v,V02*,"<[Co* Vo+]+ (Cocl) [a|a u|e|e u|i|o|o i|u|u i|u o] t t:{tØ} a:{aØaae} a:0>",JOHDATTAA
+/v,V02*,"<[Co* Vo+]+ (Cocl) [e|e i|i|y|y y|ä|ä y|ö|ö i] t t:{tØ} ä:{äØääe} ä:0>",YLETTÄÄ
+!!/v,V02,"<Co* Syl* Vo+ CCns [a:{aØaae} a:0|ä:{äØääe} ä:0]> 1",MUISTAA
+!!/v,V02*,"<Co* Syl* Vo+ Gs [a:{aØaae} a:0|ä:{äØääe} ä:0]> 1",HUUDAHTAA
+!!,,,
+/v,V03,kaataa:kaa{tdst}{aØaae},
+/v,V03,huutaa:huu{tdst}{aØaae},
+/v,V03,pyytää:pyy{tdst}{äØääe},
+/v,V03,löytää:löy{tdst}{äØääe},
+/v,V03,"<Co VV t:{tds} [a:{aØaae} a:0|ä:{äØääe} ä:0]>",HUUTAA
+!!,,,
+/v,V04,hoitaa:hoi{tdst}{aØaae},
+/v,V04,vuotaa:vuo{tdst}{aØaae},
+/v,V04,joutaa:jou{tdst}{aØaae},
+/v,V04,soutaa:sou{tdst}{aØaae},
+/v,V04,kiitää:kii{tdst}{äØääe},
+/v,V04,liitää:lii{tdst}{äØääe},
+/v,V04,hyytää:hyy{tdst}{äØääe},
+/v,V04,häätää:hää{tdst}{äØääe},
+/v,V04,säätää:sää{tdst}{äØääe},
+/v,V04,hyötää:hyö{tdst}{äØääe},
+!!/v,V04,"<Co VV t:{tds} [a:{aØaae} a:0|ä:{äØääe} ä:0]>",SOUTAA
+!!,,,
+/v,V05,"<(Co) [Vo|VV] ((Co (Co)) Vo) l t:{tlst} [a:{aØaae} a:0|ä:{äØääe} ä:0]>",PUOLTAA
+!!,,,
+/v,V06,"<Co* [Vo|VV] (Co (Co) Vo) r t:{trst} [a:{aØaae} a:0|ä:{äØääe} ä:0]>",MURTAA
+/v,V07,"<s o r t:{trst} a:{aØaae} a:0>","SORTAA -- [t:{trst}|t:{tr}]"
+!!,!!,,
+/v,V08,entää:en{tnst}{äØääe},
+/v,V08,lentää:len{tnst}{äØääe},
+/v,V08,kyntää:kyn{tnst}{äØääe},
+/v,V08,"<Co* Vo+ Co* Vo+ Co* [(i) a|i] n t:{tnst} a:{aØaae} a:0>",ITALIANTAA
+/v,V08,"<Co* Vo+ Co* [a|e|i|o|u] n t:{tnst} a:{aØaae} a:0>","PAHENTAA KUSTANTAA"
+/v,V08,"<Co* Vo+ Co* [e|i|y|ä|ö] n t:{tnst} ä:{äØääe} ä:0>",HÖYHENTÄÄ
+/v,V08,"<[Co* Vo+]+ l l i s e n t:{tnst} ä:{äØääe} ä:0>",TÄYDELLISENTÄÄ
+!!/v,V08,"<Co* Vo+ (Co+ Vo+)* n t:{tnst} [a:{aØaae} a:0 | ä:{äØääe} ä:0]>",PAHENTAA
+!!,,,
+/v,V09,"<(Co) [a|a a|a i|a u] CCns a:{aoaae} a:0>",KAIVAA
+/v,V09*,"<(Co) [a|a a|a i|a u] Gs a:{aoaae} a:0>",KATTAA
+/v,V09,"<(Co) [e i|i] CCns a:{aoaae} a:0> 5",NIKSAA
+!!,,,
+/v,V10*,auttaa:aut{tØ}{aoØaae},
+/v,V10,haastaa:haast{aoØaae},HAASTAA
+/v,V10,haistaa:haist{aoØaae},
+/v,V10*,kaihtaa:kaih{td}{aoØaae},
+/v,V10*,karttaa:kart{tØ}{aoØaae},
+/v,V10,kastaa:kast{aoØaae},
+/v,V10*,kilkkaa:kilk{kØ}{aoØaae},
+/v,V10,laistaa:laist{aoØaae},
+/v,V10*,laittaa:lait{tØ}{aoØaae},
+/v,V10,lipsaa:lips{aoØaae},
+/v,V10,maiskaa:maisk{aoØaae},
+/v,V10,maistaa:maist{aoØaae},
+/v,V10*,maittaa:mait{tØ}{aoØaae},
+/v,V10*,malttaa:malt{yØ}{aoØaae},
+/v,V10*,naittaa:nait{tØ}{aoØaae},
+/v,V10,nauskaa:nausk{aoØaae},
+/v,V10*,paukkaa:pauk{kØ}{aoØaae},
+/v,V10,raastaa:raast{aoØaae},
+/v,V10,rauskaa:rausk{aoØaae},
+/v,V10,ripsaa:rips{aoØaae},
+/v,V10,tirskaa:tirsk{aoØaae},
+!!/v,V10,"<Co VV [s k|s t] a:{aoØaae} a:0>",HAASTAA
+!!/v,V10*,"<(Co) VV [k {kØ}:k|t {tØ}] a:{aoØaae} a:0>",LAITTAA
+!!,,,
+/v,V11*,vilkkaa:vilkk{aoØaae},
+/v,V11*,virkkaa:virkk{aoØaae},
+/v,V11*,paahtaa:paah{td}{aoØaae},
+/v,V11,paistaa:paist{aoØaae},PAISTAA
+/v,V11,raistaa:raist{aoØaae},
+/v,V11*,saattaa:saat{tØ}{aoØaae},
+/v,V11*,taittaa:tait{tØ}{aoØaae},
+/v,V11*,palttaa:palt{tØ}{aoØaae},
+/v,V11*,varttaa:vart{tØ}{aoØaae},
+!!/v,V11,"<Co a i s t a:{aoØaae} a:0 >",PAISTAA
+!!/v,V11*,"<Co [a|i|a a|a i] [Gsk|Gst] a:{aoØaae} a:0 >",VIRKKAA
+!!,,,
+/v,V12,"<[k|p|s|v] a a r t:{trs} a:{aoØaae} a:0>",SAARTAA
+!!,,,
+/v,V13,imeä:im{eØØee},"*** {eØØee} -- lask<i>essa"
+/v,V13,itkeä:itk{eØØee},
+/v,V13,iskeä:isk{eØØee},
+/v,V13,kaitsea:kaits{eØØee},
+/v,V13,loitsea:loits{eØØee},
+/v,V13,suitsea:suits{eØØee},
+/v,V13,"<Co Vo CCns e:{eØØee} [a:0|ä:0]>",LASKEA
+/v,V13*,"<Co Vo Gs e:{eØØee} [a:0|ä:0]>",KYLPEÄ
+/v,V13*,"<Co Vo Gsj e:{eØØee} [a:0|ä:0]>",SULKEA
+/v,V14,tuntea:tun{tns}{eØØee},TUNTEA
+/v,V15,potea:po{tdst}{eØØee},POTEA
+lä-hte/v,V16,lähteä:lä{kh}{tdst}{eØØee},LÄHTEÄ
+!!,,,
+/v,V17,"<Co* Vo+ CCns i:{iØ} [a:0|ä:0]>","SALLIA *** {iØ} - {iØiØii}"
+/v,V17*,"<Co* Vo+ Gs i:{iØ} [a:0|ä:0]>",LEMPIÄ
+/v,V17,"<Co* Syl* Vo+ [k s|p s] i:{iØ} [a:0|ä:0]>",KÄVELEKSIÄ
+/v,V17*,"<Co* Syl*Vo+ [h t:{td}] i:{iØ} [a:0|ä:0]>",PUIKKELEHTIA
+/v,V18,"<n a i:{iØ} d:0 a:0>",NAIDA
+/v,V18,"<Co o i:{iØ} d:0 a:0>",VOIDA
+/v,V18,"<(p) u i:{iØ} d:0 a:0>","UIDA PUIDA"
+/v,V18,"<Co* [Vo+ Cocl]* Vo+ (Co* Coida) (i) [o|ö] i:{iØ} d:0 [a:0|ä:0]>","ABSORBOIDA EMALJOIDA SMIRGELÖIDÄ"
+!!/v,V18,"<Co* Vo+ Cocl Vo (Coida) i [o|ö] i:{iØ} d:0 [a:0|ä:0]>",VERIFIOIDA
+!!,,,
+/v,V19,saada:sa{aØØaa},SAADA
+/v,V19,jäädä:jä{äØØää},JÄÄDÄ
+/v,V20,myydä:my{yØ},MYYDÄ
+/v,V21,"<Co [u:{uØ} o d:0 a:0|y:{yØ} ö d:0 ä:0] >","JUODA SYÖDÄ"
+/v,V22,viedä:v{iØ}e,VIEDÄ
+/v,V23,käydä:kä{ØvØvØØ}{yØ},KÄYDÄ
+/v,V24,"<Co* [Vo|VV] Co* (a|ä) i s 0:{eØØØØ} t:0 [a:0|ä:0]>",NUOLAISTA
+/v,V24,"<Co* [Vo|VV] (Sy1) Co*  s 0:{eØØØØ} t:0 [a:0|ä:0]>","NOUSTA SEISTÄ"
+/v,V24*,rangaista:ran{kg}ais{eØØØØ},
+/v,V24*,vilaista:vil{kØ}ais{eØØØØ},
+/v,V24*,temmaista:tem{pØ}ais{eØØØØ},
+/v,V24*,soaista:so{kØ}ais{eØØØØ},
+/v,V24*,lauaista:lai{kØ}ais{eØØØØ},
+/v,V24*,sivaista:si{pv}ais{eØØØØ},
+/v,V24*,ravista:ra{pv}is{eØØØØ},
+/v,V24*,läväistä:lä{pv}äis{eØØØØ},
+!!/v,V24*,"<Co* [Vo|VV] Gw (a|ä) i s 0:{eØØØØ} t:0 [a:0|ä:0]>",LAUAISTA
+/v,V25,tulla:tul{eØØØØ},
+/v,V25,"<Co VV l 0:{eØØØØ} l:0 [a:0|ä:0]>","TUULLA NIELLÄ"
+/v,V26,"<Co [u|i e] r 0:{eØØØØ} r:0 [a:0|ä:0]>","PURRA PIERRÄ"
+/v,V27,"<[p a|m e|m ä] n 0:{eØØØØ} n:0 [a:0|ä:0]>","PANNA MENNÄ"
+/v,V28,"<Co* Syl* Vo+ Co+ [e|i e|e i] l l:0 [a:{eØØØeØØ}|ä:{eØØØeØØ}]>","KATSELLA HORJAHDELLA PARVEILLA"
+/v,V28*,"<Co* Syl* Vo+ Gw e l l:0 [a:{eØØØeØØ}|ä:{eØØØeØØ}]>","HUUDELLA POKSAHDELLA"
+/v,V28,"<Co* Syl* Vo+ Co+ [a|ä|o|ö|u|y] i:0 l:0 l:0 [a:{eØØØeØØ}|ä:{eØØØeØØ}]> 5",HERMOILLA
+/v,V29,"<Co* Syl* Vo+ Co+ [a|ä|o|ö|u|y] i:0 l:0 l:0 [a:{eØØØeØØ}|ä:{eØØØeØØ}]>","ARVAILLA PAKOILLA KIUKKUILLA"
+/v,V29,"<Co* i i [a|ä|o|ö|u|y] i:0 l:0 l:0 [a:{eØØØeØØ}|ä:{eØØØeØØ}]>",NIIAILLA
+/v,V30,"<(Co) [Vo+ [Co+ - Forg]]* Vo (j|(s) k|l|(l) m|(n) n|r|(s)t|v) [o|ö] i:{iØiØii} d:0 [a:0|ä:0]> 5",HARAVOIDA
+/v,V31,"<Co* ((Syl) Syl) Vo+ Co* i t:{tnt} 0:{sØ} [a:{eØØØeØØ} | ä:{eØØØeØØ}]>",VALITA
+/v,V32,"<[j u o | p i e | s y ö] 0:{kkkØØ} s t:{eØØØØ} [a:0|ä:0]>","JUOSTA juo-kse/v"
+/v,V33,"<[n ä | t e] h:{Økhkhh} d:{eØØØØ} [a:0|ä:0]>","NÄHDÄ nä-ke/v"
+/v,V34,"<Co* (Syl) Vo+ Co+ [a|ä|o|ö|u|y|e] t:{nt} [a:{eØØØeØØ} | ä:{eØØØeØØ}]>","ALETA ale-ne/v"
+/v,V34*,"<Co* (Syl) Vo+ Gw [a|ä|o|ö|u|y|e] t:{nt} [a:{eØØØeØØ} | ä:{eØØØeØØ}]>","KYETÄ ale-ne/v"
+/v,V34*,"<Co* (Syl) Vo+ Gwj e t:{nt} [a:{eØØØeØØ}|ä:{eØØØeØØ}]>","KYETÄ ale-ne/v"
+/v,V35,"<Co* Syl* Vo+ Co* [a|ä] t:{ØsnØtt} [a:{aØØØØ}|ä:{äØØØØ}]>","SALATA sala-V/v"
+/v,V35*,"<Co* Syl* Vo+ Gw [a|ä] t:{ØsnØtt} [a:{aØØØØ}|ä:{äØØØØ}]>","AIDATA sala-V/v"
+/v,V35*,"<Co* Syl* Vo+ Gwj ä t:{ØsnØtt} ä:{äØØØØ}>","PELJÄTÄ sala-V/v"
+/v,V36,"<Co* [Vo|VV] Co+ e t:{ØsnØtt} [a:{aØaØØ}|ä:{äØäØØ}]>","KATKETA katke-A/v"
+/v,V36*,"<Co* [Vo|VV] [Gw|h j:{kj}|l j:{kj}|r j:{kj}] e t:{ØsnØtt} [a:{aØaØØ}|ä:{äØäØØ}]>","NOETA katke-A/v"
+/v,V37,"<Co* [Vo|VV] Co+ i t:{ØsnØtt} [ä:{äØäØØ}|a:{aØaØØ}]>","SELVITÄ selvi-A/v"
+/v,V37*,"<Co [Vo|VV] Gw i t:{ØsnØtt} [ä:{äØäØØ}|a:{aØaØØ}]>","SIITÄ selvi-A/v"
+/v,V38,"<Co* [Vo|VV] Co+ [o t:{ØsnØtt} a:{aØaØØ} | ö t:{ØsnØtt} ä:{äØäØØ}]>","KOHOTA JYMYTÄ koho-A/v"
+/v,V38*,"<Co* [Vo|VV] Gw [o t:{ØsnØtt} a:{aØaØØ} | ö t:{ØsnØtt} ä:{äØäØØ}]>","TAUOTA koho-A/v"
+/v,V39,"<Co* [Vo|VV] Co+ [u t:{ØsnØtt} a:{aØaØØ} | y t:{ØsnØtt} ä:{äØäØØ}]>","HALUTA halu-A/v"
+/v,V39*,"<Co* [Vo|VV] Gw [u t:{ØsnØtt} a:{aØaØØ} | y t:{ØsnØtt} ä:{äØäØØ}]>","RYÖPYTÄ halu-A/v"
+/v,V40,avata:ava{ØsnØtt}{aØØØØ},"AVATA-AVAJAN pala-V/v V40*"
+v02,V40,avata:avaj{aØaØØ},
+/v,V40,herätä:herä{ØsnØtt}{äØØØØ},"PERÄTÄ-HERÄJÄN pala-V/v V40*"
+v02,V40,herätä:heräj{äØäØØ},
+/v,V40*,hyljätä:hyl{kj}ä{ØsnØtt}{äØØØØ},HYLJÄTÄ
+/v,V40*,hylätä:hyl{kØ}ä{ØsnØtt}{äØØØØ},HYLÄTÄ
+v02,V40*,hylätä:hyl{kØ}äj{äØäØØ},
+/v,V40*,palata:pala{ØsnØtt}{aØØØØ},PALATA
+v02,V40*,palata:palaj{aØaØØ},PALAJAN
+/v,V40,halata:hala{ØsnØtt}{aØØØØ},HALATA
+v02,V40,halata:halaj{aØaØØ},HALAJAN
+/v,V40*,kaivata:kai{pv}a{ØsnØtt}{aØØØØ},KAIVATA-KAIPAJAN
+v02,V40*,kaivata:kai{pv}aj{aØaØØ},KAIVATA-KAIPAJAN
+/v,V40*,konkata:konk{kØ}a{ØsnØtt}{aØØØØ},"KONKATA-KONKKAJAN pala-V/v V40*"
+v02,V40*,konkata:konk{kØ}aj{aØaØØ},
+/v,V40*,kääpätä:kääp{pØ}ä{ØsnØtt}{äØØØØ},"KÄÄPÄTÄ-KÄÄPPÄJÄN pala-V/v V40*"
+v02,V40*,kääpätä:kääp{pØ}äj{äØäØØ},
+/v,V40*,levätä:le{pv}ä{ØsnØtt}{äØØØØ},"LEVÄTÄ-LEPÄJÄN pala-V/v V40*"
+v02,V40*,levätä:le{pv}äj{äØäØØ},
+/v,V40,palata:palaa{ØsnØtt}{aØØØØ},"PALATA-PALAJAN pala-V/v V40*"
+v02,V40,palata:palaj{aØaØØ},
+/v,V40,pahuata:pauha{ØsnØtt}{aØØØØ},"PAUHATA-PAUHAJAN pala-V/v V40*"
+v02,V40,pauhata:pauhaj{aØaØØ},
+/v,V40,varata:vara{ØsnØtt}{aØØØØ},"VARATA-VARAJAN pala-V/v V40*"
+v02,V40,varata:varaj{aØaØØ},
+/v,V41,"<Co* Vo CCns i s t:{eØØØØ} [a:0|ä:0]> 5",KIHISTÄ-KIHISEN
+v012,V41,"<Co* Vo CCns [i:a s:j t:0 a:{aØaae} | i:ä s:j ä:{äØääe}]> 5",KIHISTÄ-KIHAJAN
+/v,V41*,"<Co* Vo Gw i s t:{eØØØØ} [a:0|ä:0]> 5","RAVISTA-RAPAJAN kih-ise/v"
+v012,V41,"<Co* Vo Gw i:a s:j t:{eØØØØ} [a:0|ä:0]> 5",
+/v,V42,parantaa:paran{tnst}{aØaae},
+v3,V42,parata:para{nt},
+/v,V42,ojentaa:oje{tnst}{aØaae},
+v3,V42,ojeta:oje{nt},
+/v,V42,rakentaa:raken{tnst}{aØaae},
+v3,V42,raketa:rake{nt},
+/v,V42,lyhentää:lyhen{tnst}{äØääe},
+v3,V42,lyhetä:lyhe{nt},
+/v,V42,rietä:rien{tnst}{äØääe},
+v3,V42,rietä:rie{nt},
+/v,V42,kääntää:kään{tnst}{äØääe},
+v3,V42,käätä:kää{nt},
+/v,V42,vääntää:vään{tnst}{äØääe},
+v3,V42,väätä:vää{nt},
+/v,V43,taitaa:tai{tds}{aØaae},TAITAA
+/v,V43,tietää:tie{tds}{äØääe},TIETAA
+/v,V44,"<Co* [Vo|Syl+] Vo u t:{td} u a:0>","ANTAUTUA HIOUTUA"
+/v,V44,"<Co* [Vo|Syl+] Vo y t:{td} y ä:0>",KÄYTTÄYTYÄ
+/v,V44,"<Co* [Vo|Syl+] Vo [u t:{ØsØØØ} a:0|y t:{ØsØØØ} ä:0]>",PYSÄYTÄ-PYSÄYSIN
+/v,V45,kaata:kaa{dsnttt}{aØaØØ},KAATA-KAANNUT
+/v,V45,taita:tai{dsnttt}{aØaØØ},
+/v,V45,tuta:tu{dsnttt}{aØaØØ},
+/v,V45,tietä:tie{dsnttt}{äØäØØ},
+/v,V45,löytä:löy{dsnttt}{äØäØØ},
+/v,V45,säätä:sää{dsnttt}{äØäØØ},
+/v,V45,pyytä:pyy{dsnttt}{äØäØØ},
