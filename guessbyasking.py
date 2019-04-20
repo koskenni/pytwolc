@@ -1,4 +1,4 @@
-# lookuptest.py
+# guessbyasking.py
 
 copyright = """Copyright © 2017, Kimmo Koskenniemi
 
@@ -34,9 +34,9 @@ args = argparser.parse_args()
 guesser_fil = hfst.HfstInputStream(args.guesser)
 guesser_fst = guesser_fil.read()
 guesser_fil.close()
-guesser_fst.invert()
-guesser_fst.minimize()
-guesser_fst.lookup_optimize()
+#guesser_fst.invert()
+#guesser_fst.minimize()
+#guesser_fst.lookup_optimize()
 
 print("\nENTER FORMS OF A WORD:\n")
 while True:

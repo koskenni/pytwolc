@@ -56,11 +56,9 @@ Define,Coida,"[b|d|n d|f|f f|g|h|j|k|l|l l|m|n|n n|p|r|s|š|t|t t|v]","For -oida
 !,,,
 /s,S02,"<[Co|Vo]+ [o|ö|u|y] (t:0)> 50","**conversion only**"
 /s,S02,"<Co* SylVo CCns [o|ö|u|y]>","ARVELU RUOISTO - trisyll"
-!!!/s,S02,"<Co* VbV CCns [o|ö|u|y]>","RUOISTO - trisyll"
 /s,S02,"<Co* Syl+ Vo+ CCns [o|ö|u|y]> 5","TASSUTTELU - 3+syll"
-/s,S02*,"<Co* (Syl) SylVo [k k:{kØ}|(n) t t:{tØ}|n t:{tn}] [o|ö|u|y]>","SAMMAKKO RUOIKKO - trisyll"
+/s,S02*,"<Co* (Syl) SylVo [k k:{kØØ}|(n|r) t t:{tØØ}|n t:{tn}] [o|ö|u|y]>","SAMMAKKO RUOIKKO - trisyll"
 /s,S02*,"<Co* Vo+ Co+ Vo n k:{kg} [o|ö]>","AURINKO YLÄNKÖ - trisyll"
-!!!/s,S02*,"<Co* Syl+ Vo+ Gs [o|ö|u|y]> 5","YHDEKSIKKÖ - 3+syll"
 !,,,
 /s,S03,"<[Co|Vo]+ [o|ö|u|y] (t:0)> 50","**conversion only**"
 /s,S03,"<Co* Syl+ [[a|e|i] o|i ö]>","AUTIO AITIO"
@@ -68,7 +66,6 @@ Define,Coida,"[b|d|n d|f|f f|g|h|j|k|l|l l|m|n|n n|p|r|s|š|t|t t|v]","For -oida
 /s,S04,"<[Co|Vo]+ i:{iieØ} (t:0)> 50","**conversion only**"
 /s,S04,"<Co* Vo+ CCns i:{iieØ}>","RISTI bisyll"
 /s,S04,"<Co* Syl Syl* i:{iieØ} (t:0)> 10","SENTRIFUGI KIESIT - 2+syll"
-!!!/s,S04,"<Co* Syl* Vo+ Co+ i:{iieØ} t:0> 5",KIESIT
 /s,S04*,"<Co* Vo+ Gs i:{iieØ}>","LAKKI - bisyll"
 /s,S04*,"<Co* [Syl]+ Vo+ Gs i:{iieØ}> 10","MOSAIIKKI other"
 /s,S04*,"<Co* Syl* Vo+ Gw i:{iieØ} t:0> 5",TONGIT
@@ -139,10 +136,10 @@ Define,Coida,"[b|d|n d|f|f f|g|h|j|k|l|l l|m|n|n n|p|r|s|š|t|t t|v]","For -oida
 /s,S13,"<Co* Syl+ Vo+ [(l|r) m|i s|v] ä:{äØ}>","NÄKYMÄ NYSTERMÄ KÄRTTYISÄ - 3+syll"
 /s,S13*,syylinkä:syylin{kg}{äØ},
 /s,S13*,emäntä:emän{tn}{äØ},
-!,,,
+!,,KULKIJA,
 /s,S14,"<[Co|Vo]+ a:{ao} (t:0)> 50","**conversion only**"
 /s,S14,"<Co* Syl+ [i|i j|j|Vo+ [l|n|r]] [a:{ao}|ä:{äö}]>","KULKIJA - 3+syll"
-!,,,
+!,,KARAHKA,
 /s,S15,"<[Co|Vo]+ a:{ao} (t:0)> 50","**conversion only**"
 /s,S15*,"<[Co|Vo]* Vo Gs [a:{ao}|ä:{äö}]> 50","**conversion only**"
 /s,S15*,"<[Co|Vo]* Vo Gw [a:{ao}|ä:{äö}] t:0> 50","**conversion only**"
@@ -150,13 +147,14 @@ Define,Coida,"[b|d|n d|f|f f|g|h|j|k|l|l l|m|n|n n|p|r|s|š|t|t t|v]","For -oida
 /s,S15,"<Co* Syl* Vo+ [Co+ (e|i)] [a:{ao}|ä:{äö}]>","MATINEA MELODIA - 3+syll"
 /s,S15*,"<(Co) [SylVo|y i] n t:{tn} [a:{ao}|ä:{äö}]>","HAENTA RAAUUNTA JOIUNTA - 3syll"
 /s,S15*,"<Co* Syl+ Vo+ [(l|n|r) k k:{kØØ}] [a:{ao}|ä:{äö}]>","MANSIKKA MASURKKA - 3+syll"
+/s,S15*,"<Co* Syl+ Vo+ [t t:{tØØ}] [a:{ao}|ä:{äö}]>","SAVOTTA - 3+syll"
 /s,S15*,"<Co* SylVo [(l|n|r) k k:{kØØ}] [a:{ao}|ä:{äö}]>","PIAKKA - 3+syll"
 /s,S15*,"<Co* Syl+ Vo+ [n t:{tn}|t t:{tØ}] [a:{ao}|ä:{äö}]>","MERKINTÄ - 3+syll"
 /s,S15,"<Co* Syl+ Vo+ [CCns+|Co+ (e|i)] [a:{ao}|ä:{äö}] t:0>",KAKKULAT
 /s,S15*,ulappa:ulap{pØ}{ao},
 /s,S15,suurima:suurim{ao},
 /s,S15,sialma:sialm{ao},
-!,,,
+!,,KANTAJA,
 /s,S16,"<Co* Syl [Co|Vo]+ [a:{aØo}|ä:{äØö}] (t:0)> 50","**conversion only**"
 /s,S16,"<Co* Syl+ [a+|o (a|i|o)|u (a|u)] [j|v] a:{aØo}> 5","KANTAJA JALAVA - 3+syll"
 /s,S16,"<Co* Syl+ [ä+|y] j ä:{äØö}> 5","VENYJÄ PETÄJÄ HYPPÄÄJÄ VÄÄRENTÄJÄ - 3+syll"
@@ -178,17 +176,16 @@ Define,Coida,"[b|d|n d|f|f f|g|h|j|k|l|l l|m|n|n n|p|r|s|š|t|t t|v]","For -oida
 /s,S16,jalava:jalav{aØo},
 /s,S16,silava:silav{aØo},
 /s,S16,kanava:kanav{aØo},
-!,,,
+!,,PERUNA,
 /s,S17,"<Co* Syl Vo+ [l|m|n|r] [a:{aØo}|ä:{äØö}]> 10","PERUNA - trisyll"
 /s,S17,salama:salam{aØo},
 /s,S17,salava:salav{aØo},
-!,,,
+!,,PASUUNA,
 /s,S18,"<[Co|Vo]+ [a:{aØo}|ä:{äØö}]> 50","**conversion only**"
 /s,S18,"<Co* Syl Vo+ [n|r] [a:{aØo}|ä:{äØö}]>","PASUUNA KIHARA NYSTYRÄ - trisyll"
 /s,S18,ödeema:odeem{aØo},
 !,S19,,"AINOA (S puiroa, ei muita)"
-!,,,
-!!!/s,S20,"<(Co) Syl u a:{aØo}> 10","HERTTUA PORSTUA - trisyll"
+!,,HERTTUA,
 /s,S20,tanhua:tanhu{aØo},
 /s,S20,juolua:juolu{aØo},
 /s,S20,saarua:saaru{aØo},
@@ -214,8 +211,9 @@ Define,Coida,"[b|d|n d|f|f f|g|h|j|k|l|l l|m|n|n n|p|r|s|š|t|t t|v]","For -oida
 /s,S27,"<Co* [Vo+ Co+]* [i|a|ä|o] i:{iØ}>","PII SAMURAI HELLUNTAI PROSTOI VOI SI TÄI"
 /s,S28,"<Co* (Syl) [a a:{aØ}|ä ä:{äØ}]>","MAA VAINAA ŠVAA SÄÄ"
 /s,S28,"<Co* [a a:{aØ}|ä ä:{äØ}] t:0>","HÄÄT - monosyll"
-/s,S29,"<Co* [[u|i] u:{uØ}|y y:{yØ}]>","PUU KUU LUU KYY SYY TIU - monosyll"
-/s,S29,"<Co* Syl* (Vo) 0:{§} Co [[u|i] u:{uØ}|y y:{yØ}]> 20","PUU KUU LUU KYY SYY TIU - 1+syll"
+/s,S29,"<Co* [u u:{uØ}|y y:{yØ}]>","PUU KUU LUU KYY SYY - monosyll"
+s01,S29,tiu:tiu,
+/s,S29,"<Co* Syl* (Vo) 0:{§} Co [u u:{uØ}|y y:{yØ}]> 20","PUU KUU LUU KYY SYY - 1+syll"
 !,,,
 /s,S30,"<Co i:{iØ} e>","TIE - monosyll"
 /s,S30,"<Co u:{uØ} o>","SUO - monosyll"
@@ -303,11 +301,11 @@ Define,Coida,"[b|d|n d|f|f f|g|h|j|k|l|l l|m|n|n n|p|r|s|š|t|t t|v]","For -oida
 !,,,
 /s,S51,haaksi:haa{kØk}s{ieeØeØ},
 /s,S51,vaaksi:vaa{kØk}s{ieeØeØ},
-!,,,
+!,,SANKARI,
 /s,S52,sankari:sankar{iieØ},"sankaria sankarten"
 s3,S52,sankari:sankar{ØeØØØ},"sankar sankarta sankarten"
 !!,S53,jumala,"jumalaa jumalata jumalten"
-!,,,
+!,,SISAR,
 /s,S54,kimmel:kimmel{ØeØeØ},
 /s,S54,äänel:äänel{ØeØeØ},
 /s,S54,sävel:sävel{ØeØeØ},
@@ -319,7 +317,7 @@ s3,S52,sankari:sankar{ØeØØØ},"sankar sankarta sankarten"
 /s,S54*,tatar:tat{tØ}ar{ØeØeØ},
 /s,S54*,tytär:tyt{tØ}är{ØeØeØ},
 /s,S54*,"<Co* Syl+ Vo+  t 0:{tØ} [a r|ä r] 0:{ØeØeØ}>","KAUNOTAR MYYJÄTÄR - 3+syll"
-!,,,
+!,,AHVEN,
 !!!/s,S55,"<Co* Vo+ CCns Vo+ n 0:{ØeØØØ}>","AHVEN - bisyll"
 /s,S55,terhen:terhen{ØeØØØ},
 /s,S55,höyhen:höyhen{ØeØØØ},
@@ -343,7 +341,7 @@ s3,S52,sankari:sankar{ØeØØØ},"sankar sankarta sankarten"
 /s,S55,tyven:tyven{ØeØØØ},
 /s,S55,uumen:uumen{ØeØØØ},
 /s,S55,ahven:ahven{ØeØØØ},
-!,,,
+!,,UISTIN,
 /s,S56,"<[Co|Vo]* n:{mn} 0:{ØeØeØ}> 50","**conversion only**"
 /s,S56,"<[Co|Vo]* m:{mn} e:{ØeØeØ} t:0> 50","**conversion only**"
 /s,S56*,"<[Co|Vo]* Vo Gw Vo+ n:{mn} 0:{ØeØeØ}> 50","**conversion only**"
@@ -355,39 +353,39 @@ s3,S52,sankari:sankar{ØeØØØ},"sankar sankarta sankarten"
 /s,S56*,"<Co* Syl* Vo+ [Gw|Gwj] i n:{mn} 0:{ØeØeØ}>","POLJIN - 2+syll"
 /s,S56*,"<Co* Syl* Vo+ [Gs|Gsj] i m:{mn} e:{ØeØeØ} t:0>",HOHTIMET
 !!/s,S57,"ONNETON (-> adj)",
-!,,,
+!,,LÄMMIN,
 /s,S58,lämmin:läm{pm}i{mn}{ØäØØØ},
-!,,,
+!,,PAHIN,
 /s,S59,vanhin:vanhi{nm}{ØpmØ}{ØaØØØ},
 /s,S59,lähin:lähi{nm}{ØpmØ}{ØäØØØ},
 /s,S59,enin:eni{nm}{ØpmØ}{ØäØØØ},
 /s,S59,sisin:sisi{nm}{ØpmØ}{ØäØØØ},
-!,,,
+!,,VASEN,
 /s,S60,vasen:vase{nm}{ØpmØ}{ØaØØØ},
 !!,R61,,"MUUAN MUUDAN"
 !!,N62,,"SEITSEN SEITSEMÄN"
-!,,,
+!,,HEVONEN,
 /s,S63,"<Co* Syl* SylVo n:{ns} e:{eeØØ} n:{nØØØ}>","HEVONEN - 3+syll"
 /s,S63,"<Co* Syl* SylVo s:{ns} 0:{eeØØ} 0:{nØØØ} i:0 l:0 l:0 [a:0|ä:0]>",KILPASILLA
 /s,S63,"<Co* Syl* SylVo s:{ns} e:{eeØØ} 0:{nØØØ} t:0>",AVAJAISET
 /s,S63,nainen:nai{ns}{eeØØ}{nØØØ},
 /s,S63,loinen:loi{ns}{eeØØ}{nØØØ},
 /s,S63,yönen:yö{ns}{eeØØ}{nØØØ},
-!,,,
+!,,VASTAUS,
 /s,S64,"<Co* Syl+ Vo+ 0:{ØkØkk} s 0:{ØeØeØ}>","VASTAUS KANNAS OHJAUS - 2+syll"
 /s,S64,"<Co* [VbV|i u|ä y] 0:{ØkØkk} s 0:{ØeØeØ}>","JAOS SEOS - bisyll"
 /s,S64,"<Co* Syl+ Vo+ k:{ØkØkk} s e:{ØeØeØ} t:0>",TULUKSET
-!,,,
+!,,KALLEUS,
 /s,S65,"<Co* Syl+ [a|e|i|o|u] u 0:{ØØØØk} s:{stds} 0:{ØeØeØ}>","KALLEUS - 3+syll"
 /s,S65,"<Co* Syl+ [e|i|o|y|ä|ö] y 0:{ØØØØk} s:{stds} 0:{ØeØeØ}>","SITKEYS - 3+syll"
-!,,,
+!,,VIERAS,
 /s,S66,"<Co* Syl+ (i) a s:{sØh} 0:{ØaØØØ}>","VIERAS KUNNAS RAHVAS - 2+syll"
 /s,S66,"<Co* Syl+ (i) a 0:{sØh} a:{ØaØØØ} (t:0)>","VALJAAT - 2+syll"
 /s,S66,"<Co* Syl+ (i) ä s:{sØh} 0:{ØäØØØ}>","KÖRILÄS - 2+syll"
 /s,S66*,"<Co* Syl* Vo+ Gw [a s:{sØh} 0:{ØaØØØ}|ä s:{sØh} 0:{ØäØØØ}]>","TEHDAS RENGAS VAHAKAS LAMMAS MÄTÄS - 2+syll"
 /s,S66*,"<Co* Syl* Vo+ Gs [a 0:{sØh} a:{ØaØØØ}|ä 0:{sØh} ä:{ØäØØØ}] t:0>","RATTAAT - 2+syll"
 /s,S66,autuas:autua{sØh}{ØäØØØ},
-!,,,
+!,,KIRVES,
 /s,S67,"<Co* Vo+ CCns e s:{sØh} 0:{ØeØØØ}> 10","KIRVES - bisyll"
 /s,S67*,"<Co* Vo+ Gw e s:{sØh} 0:{ØeØØØ}> 10","IES ÄES SEES - bisyll"
 /s,S67*,laes:la{kØ}e{sØh}{ØeØØØ},
@@ -456,31 +454,28 @@ s2,S69,kallis:kalle{sØh}{ØiØiØ},
 /s,S73,päivyt:paivy{tØthn}{ØeØØØ},
 /s,S73,pilvyt:pilvy{tØthn}{ØeØØØ},
 /s,S73,kätkyt:kätky{tØthn}{ØeØØØ},
-!,,,
+!,,KEVÄT,
 /s,S74,lounat:louna{tØthn}{ØaØØØ},
 /s,S74,tienot:tieno{tØthn}{ØoØoØ},
 /s,S74,venät:venä{tØthn}{ØäØØØ},
 /s,S74,kevät:kevä{tØthn}{ØäØØØ},
 /s,S75,kahdeksas:kahdeksa{ØnØnn}{snt}{ØeØØØ},
 /s,N76,tuhat:tuha{nØnØnn}{ttns}{ØeØeØ},
+!,,KUOLLUT,
 /s,S77,"<Co* [Vo+ Co+]+ [u:{ue}|y:{ye}] t:{tØthn} 0:{ØeØØØ}>","KUOLLUT MENNYT HERÄNNYT PÄIHTYNYT - 2+syll"
-!,,,
-/s,S78,"<[Vo|Co]+ e 0:{Øth} 0:{ØeØeØ} (t:0)> 50","**conversion only**"
+!,,HAME,
+/s,S78,"<[Vo|Co]+ e 0:{Øth} [0:{ØeØeØ}|e:{ØeØeØ} t:0]> 50","**conversion only**"
 /s,S78*,"<[Vo|Co]* Vo [Gw|Gwj] e 0:{Øth} e:{ØeØeØ}> 50","**conversion only**"
 /s,S78*,"<[Vo|Co]* Vo [Gs|Gsj] e 0:{Øth} e:{ØeØeØ} t:0> 50","**conversion only**"
-/s,S78,"<Co* Syl+ (u|y) e 0:{Øth} 0:{ØeØeØ}>","HAME - 2+syll"
+/s,S78,"<Co* Syl+ [u|y] e 0:{Øth} 0:{ØeØeØ}>","HAME - 2+syll"
+/s,S78,"<Co* Syl* Vo+ [CCns|h j|h k|v] e 0:{Øth} 0:{ØeØeØ}>","OHJE PURJE SUIHKE AMME TOIVE - 2+syll"
 /s,S78*,"<Co* Syl* Vo+ [Gw|Gwj] e 0:{Øth} 0:{ØeØeØ}>","VAATE - 2+syll"
-/s,S78,"<Co* Syl+ (u|y) e 0:{Øth} e:{ØeØeØ} t:0>",LESEET
-/s,S78*,"<Co* Syl* Vo+ [Gs|Gsj] e 0:{Øth} e:{ØeØeØ} t:0>",TAMINEET
-!,,,
+!,,TERVE,
 /s,S79,terve:terve{ØØthn}{ØeØØØ},
 /s,S79,päre:päre{ØØthn}{ØeØØØ},
 /s,S80,ori:ori{Øth}{ØiØiØ},
 /s,S81,kiiru:kiiru{Øth}{ØuØuØ},
-!!!/s,S82,"<Co* [Vo+ Co+]+ Vo+ [n|l|r] 0:{ØeØeØ}>","ASKEL KYYNEL - 2+syll"
-!!!/s,S82*,"<Co* Vo+ Gw Vo+ [n|l|r] 0:{ØeØeØ}>","OMMEL TAIVAL PIENNAR - bisyll"
-!!!/s,S82,"<Co* [Vo+ Co+]+ Vo [n|l|r] e 0:{ØhØtØØ} 0:{ØeØeØ}>","ASKELE ASKARE PENKERE - 3+syll"
-!!!/s,S82,"<Co* [Vo+ Co+]+ Vo [n|l|r] 0:{ØeØeØ}>","ASKEL ASKAR PENGER - 2+syll"
+!,,,
 /s,S82,sammale:sammale{ØhØtØØ}{ØeØeØ},
 /s,S82,taipale:taipale{ØhØtØØ}{ØeØeØ},
 /s,S82,askele:askele{ØhØtØØ}{ØeØeØ},

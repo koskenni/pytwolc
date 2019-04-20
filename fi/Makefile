@@ -7,8 +7,8 @@ ofi-$(POS).ofst: ofi-lex-$(POS).fst ofi-rules.fst ofi-examples.pstr delete.fst
 	hfst-minimize |\
 	hfst-fst2fst -O -o $@
 
-ofi-lex-$(POS).fst: ofi-lex-$(POS).lexc ofi-analy-aff.lexc
-	hfst-lexc -f openfst-tropical -o $@ ofi-analy-aff.lexc $<
+ofi-lex-$(POS).fst: ofi-lex-$(POS).lexc ofi-analy-aff.lexc Makefile
+	hfst-lexc -f openfst-tropical -o $@ ofi-analy-aff.lexc $< ofi-pref-nom.lexc ofi-pref-gen.lexc
 
 ofi-lex-$(POS).lexc: ofi-conv-$(POS).fst ksk2lexc.py Makefile
 	python3 ksk2lexc.py --codes=classes.txt ~/Dropbox/lang/fin/ksk/ksk-$(POS).dic $< Nouns $@ > ofi-lex-$(POS).log

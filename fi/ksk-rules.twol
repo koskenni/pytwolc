@@ -267,7 +267,7 @@ OPEN = VoM (CoM) [VoS|:i] ;
 {iiiieii}:e <=> _ l :e i s i ;
     ! arva<i>len arva<i>li arva<i>lisi arva<e>lisi arva<i>llut
 
-{iØiØii}:Ø <=> _ (e) :i ;
+!!!{iØiØii}:Ø <=> _ (e) :i ;
     ! sall<i>n sall<>i sall<>isi sall<i>nee sall<i>ttu
     ! na<i> na<>i na<>isi na<i>nee na<i>tu
 
@@ -359,8 +359,6 @@ OPEN = VoM (CoM) [VoS|:i] ;
     ! ahveni<>a
     ! maid<>en
 
-!!!{Øt}:Ø /<= [{ieØeØ}:Ø|{ieØeØ}:Ø|
-!!!            {ØeØeØ}:|{ØaØØØ}:Ø|{ØäØØØ}:Ø] ({ØnØ}:Ø) _ ;
 {Øt}:Ø /<= [VV |VVØ {ij}:| VoS VoS {ij}:] _ ;
     ! *maa<>a maa<t>a *ainoo<>a ainoo<t>a
     ! *autioj<>a autioi<t>a
@@ -376,11 +374,9 @@ OPEN = VoM (CoM) [VoS|:i] ;
     ! (kantaji<t>a) *valoi<t>a valoj<>a 
 {Øt}:t /<= CoS VoØ ({nØØØ}:Ø) {ij}: _ ;
     ! *hevosi<t>a hevosi<>a
-    ! vapaa<t>a ainoo<t>a
+    ! *käsi<t>ä käsi<>ä vapaa<t>a ainoo<t>a
     ! arvelui<t>a loh<t>a autio<t>a, hevos<t>a sisar<t>a,
     ! autio<t>a leveä<t>ä, kulkija<t>a seitsemä<t>ä
-
-! STOP
 
 {ij}: e n /<= VVØ _ ;
     ! valo<jen> *tie<jen> *maa<jen> käs<ien> arvelu<jen>

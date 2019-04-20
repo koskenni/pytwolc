@@ -169,7 +169,7 @@ lä-hte/v,V16,lähteä:lä{kh}{tdst}{eØØee},LÄHTEÄ
 /v,V28,"<Co* Syl* Vo+ Co+ [a|ä|o|ö|u|y] i:0 l:0 l:0 [a:{eØØØeØØ}|ä:{eØØØeØØ}]> 5",HERMOILLA
 /v,V29,"<Co* Syl* Vo+ Co+ [a|ä|o|ö|u|y] i:0 l:0 l:0 [a:{eØØØeØØ}|ä:{eØØØeØØ}]>","ARVAILLA PAKOILLA KIUKKUILLA"
 /v,V29,"<Co* i i [a|ä|o|ö|u|y] i:0 l:0 l:0 [a:{eØØØeØØ}|ä:{eØØØeØØ}]>",NIIAILLA
-/v,V30,"<(Co) [Vo+ [Co+ - Forg]]* Vo (j|(s) k|l|(l) m|(n) n|r|(s)t|v) [o|ö] i:{iØiØii} d:0 [a:0|ä:0]> 5",HARAVOIDA
+/v,V30,"<(Co) [Vo+ [Co+ - Forg]]* Vo (j|(s) k|l|(l) m|(n) n|r|(s)t|v) [o|ö] i:{iØ} d:0 [a:0|ä:0]> 5",HARAVOIDA
 /v,V31,"<Co* ((Syl) Syl) Vo+ Co* i t:{tnt} 0:{sØ} [a:{eØØØeØØ} | ä:{eØØØeØØ}]>",VALITA
 /v,V32,"<[j u o | p i e | s y ö] 0:{kkkØØ} s t:{eØØØØ} [a:0|ä:0]>","JUOSTA juo-kse/v"
 /v,V33,"<[n ä | t e] h:{Økhkhh} d:{eØØØØ} [a:0|ä:0]>","NÄHDÄ nä-ke/v"

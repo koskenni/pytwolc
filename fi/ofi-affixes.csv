@@ -1,12 +1,13 @@
 ID,NEXT,MPHON,FEAT,BASEF,FLAG
-Root,"Nouns Verbs",,,,
-Compd,"! #",-,CMPD,,"D.CPD.Y P.CPD.Y"
+Root,"Nouns Verbs NounPrefNom NounPrefGen",,,,
+Compounds,Nouns,{§},,,
 ,"! KSK S01 - S82",,,,
 /s,"SgNom SgCase SgPtv SgIll PlNom PlCase PlGen PlPtv PlIll",,N,,
 s0,SgNom,,,,
-s1,"SgCase SgPtv SgIll",,,,
+s1,"SgCase SgPtv SgIll PlNom",,,,
 s2,"PlCase PlGen PlPtv PlIll",,,,
 s3,"SgPtv PlGenTen PlPtv",,,,
+s01,"s0 s1",,,,
 ,!,,,,
 SgCase,"SgGen SgEss SgTra SgIne SgEla SgAde SgAbl SgAll SgAbe",,,,
 SgNom,Clit,,"SG NOM",,
