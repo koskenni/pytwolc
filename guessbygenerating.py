@@ -43,16 +43,22 @@ import generate
 
 suf = {"/s": ["", "n", "{nrs}{aä}", "{ij}{Øt}{aä}"]}
 
+print()
 for line_nl in sys.stdin:
     line = line_nl.strip()
     res = guesser_fst.lookup(line, output="tuple")
     if args.verbosity >= 10:
         print("lookup result =", res)
-    entry_lst = [entry for entry, weight in res]
-    stem_next_lst = [ent.split(" ") for ent in entry_lst]
+    best_w = min([w for e,w in res])
+    entry_weight_lst = [(e, w) for e, w in res if w < best_w + 10]
+    stem_next_weight_lst = []
+    for e, w in entry_weight_lst:
+        [stem, next] = e.split(" ")
+        stem_next_weight_lst.append((stem, next, w))
     i = 0
-    for [stem, next] in stem_next_lst:
-        print(stem, next)
+    for [stem, next, weight] in stem_next_weight_lst:
+        i += 1
+        print("({}) {} {} ; {:.2}".format(i, stem, next, weight))
         suffix_lst = suf.get(next, "")
         word_lst = []
         for suffix in suffix_lst:
@@ -61,6 +67,5 @@ for line_nl in sys.stdin:
                 #print("r =", r)###
                 word = "".join(r).replace("Ø", "")
                 word_lst.append(word)
-        i += 1
-        print("  ({})".format(i), " ".join(word_lst))
+        print("  ", " ".join(word_lst))
     print()
