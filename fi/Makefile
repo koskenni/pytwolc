@@ -1,17 +1,25 @@
 POS=v
 
-ofi-$(POS).ofst: ofi-lex-$(POS).fst ofi-rules.fst ofi-examples.pstr delete.fst
+LEX=ofi-lexic-n.lexc ofi-lexic-v.lexc
+
+ofi-analy.ofst: ofi-lex.fst ofi-rules.fst ofi-examples.pstr delete.fst
 	hfst-compose-intersect -a -1 $< -2 ofi-rules.fst |\
 	hfst-compose -2 delete.fst |\
 	hfst-invert |\
-	hfst-minimize |\
-	hfst-fst2fst -O -o $@
+	hfst-minimize -o ofi-analy.fst
+	hfst-fst2fst -i ofi-analy.fst -O -o $@
 
-ofi-lex-$(POS).fst: ofi-lex-$(POS).lexc ofi-analy-aff.lexc Makefile
-	hfst-lexc -f openfst-tropical -o $@ ofi-analy-aff.lexc $< ofi-pref-nom.lexc ofi-pref-gen.lexc
+ofi-lex.fst: ofi-analy-aff.lexc $(LEX) Makefile
+	hfst-lexc -f openfst-tropical -o $@ ofi-analy-aff.lexc $(LEX)
 
-ofi-lex-$(POS).lexc: ofi-conv-$(POS).fst ksk2lexc.py Makefile
-	python3 ksk2lexc.py --codes=classes.txt ~/Dropbox/lang/fin/ksk/ksk-$(POS).dic $< Nouns $@ > ofi-lex-$(POS).log
+ofi-lexic-n.lexc: ofi-lexic-n.text
+	python3 entries2lexc.py Nouns < ofi-lexic-n.text > ofi-lexic-n.lexc
+
+ofi-lexic-v.lexc: ofi-lexic-v.text
+	python3 entries2lexc.py Verbs < ofi-lexic-v.text > ofi-lexic-v.lexc
+
+#ofi-lex-$(POS).lexc: ofi-conv-$(POS).fst ksk2lexc.py Makefile
+#	python3 ksk2lexc.py --codes=classes.txt ~/Dropbox/lang/fin/ksk/ksk-$(POS).dic $< Nouns $@ > ofi-lex-$(POS).log
 
 ofi-conv-$(POS).fst: ofi-conv-$(POS).lexc
 	hfst-lexc -f openfst-tropical -o $@ $<
@@ -51,7 +59,7 @@ delete.fst:
 	echo "Ø -> 0" | hfst-regexp2fst -o $@
 
 clean:
-	rm ofi-*.lexc ofi-*.fst
+	rm ofi-*.fst
 
 
 features: ksk-zerofilled.csv

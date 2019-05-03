@@ -188,48 +188,48 @@ lä-hte/v,V16,lähteä:lä{kh}{tdst}{eØØee},LÄHTEÄ
 /v,V39,"<Co* [Vo|VV] Co+ [u t:{ØsnØtt} a:{aØaØØ} | y t:{ØsnØtt} ä:{äØäØØ}]>","HALUTA halu-A/v"
 /v,V39*,"<Co* [Vo|VV] Gw [u t:{ØsnØtt} a:{aØaØØ} | y t:{ØsnØtt} ä:{äØäØØ}]>","RYÖPYTÄ halu-A/v"
 /v,V40,avata:ava{ØsnØtt}{aØØØØ},"AVATA-AVAJAN pala-V/v V40*"
-v02,V40,avata:avaj{aØaØØ},
+/v02,V40,avata:avaj{aØaØØ},
 /v,V40,herätä:herä{ØsnØtt}{äØØØØ},"PERÄTÄ-HERÄJÄN pala-V/v V40*"
-v02,V40,herätä:heräj{äØäØØ},
+/v02,V40,herätä:heräj{äØäØØ},
 /v,V40*,hyljätä:hyl{kj}ä{ØsnØtt}{äØØØØ},HYLJÄTÄ
 /v,V40*,hylätä:hyl{kØ}ä{ØsnØtt}{äØØØØ},HYLÄTÄ
-v02,V40*,hylätä:hyl{kØ}äj{äØäØØ},
+/v02,V40*,hylätä:hyl{kØ}äj{äØäØØ},
 /v,V40*,palata:pala{ØsnØtt}{aØØØØ},PALATA
-v02,V40*,palata:palaj{aØaØØ},PALAJAN
+/v02,V40*,palata:palaj{aØaØØ},PALAJAN
 /v,V40,halata:hala{ØsnØtt}{aØØØØ},HALATA
-v02,V40,halata:halaj{aØaØØ},HALAJAN
+/v02,V40,halata:halaj{aØaØØ},HALAJAN
 /v,V40*,kaivata:kai{pv}a{ØsnØtt}{aØØØØ},KAIVATA-KAIPAJAN
-v02,V40*,kaivata:kai{pv}aj{aØaØØ},KAIVATA-KAIPAJAN
+/v02,V40*,kaivata:kai{pv}aj{aØaØØ},KAIVATA-KAIPAJAN
 /v,V40*,konkata:konk{kØ}a{ØsnØtt}{aØØØØ},"KONKATA-KONKKAJAN pala-V/v V40*"
-v02,V40*,konkata:konk{kØ}aj{aØaØØ},
+/v02,V40*,konkata:konk{kØ}aj{aØaØØ},
 /v,V40*,kääpätä:kääp{pØ}ä{ØsnØtt}{äØØØØ},"KÄÄPÄTÄ-KÄÄPPÄJÄN pala-V/v V40*"
-v02,V40*,kääpätä:kääp{pØ}äj{äØäØØ},
+/v02,V40*,kääpätä:kääp{pØ}äj{äØäØØ},
 /v,V40*,levätä:le{pv}ä{ØsnØtt}{äØØØØ},"LEVÄTÄ-LEPÄJÄN pala-V/v V40*"
-v02,V40*,levätä:le{pv}äj{äØäØØ},
+/v02,V40*,levätä:le{pv}äj{äØäØØ},
 /v,V40,palata:palaa{ØsnØtt}{aØØØØ},"PALATA-PALAJAN pala-V/v V40*"
-v02,V40,palata:palaj{aØaØØ},
+/v02,V40,palata:palaj{aØaØØ},
 /v,V40,pahuata:pauha{ØsnØtt}{aØØØØ},"PAUHATA-PAUHAJAN pala-V/v V40*"
-v02,V40,pauhata:pauhaj{aØaØØ},
+/v02,V40,pauhata:pauhaj{aØaØØ},
 /v,V40,varata:vara{ØsnØtt}{aØØØØ},"VARATA-VARAJAN pala-V/v V40*"
-v02,V40,varata:varaj{aØaØØ},
+/v02,V40,varata:varaj{aØaØØ},
 /v,V41,"<Co* Vo CCns i s t:{eØØØØ} [a:0|ä:0]> 5",KIHISTÄ-KIHISEN
-v012,V41,"<Co* Vo CCns [i:a s:j t:0 a:{aØaae} | i:ä s:j ä:{äØääe}]> 5",KIHISTÄ-KIHAJAN
+/v012,V41,"<Co* Vo CCns [i:a s:j t:0 a:{aØaae} | i:ä s:j ä:{äØääe}]> 5",KIHISTÄ-KIHAJAN
 /v,V41*,"<Co* Vo Gw i s t:{eØØØØ} [a:0|ä:0]> 5","RAVISTA-RAPAJAN kih-ise/v"
-v012,V41,"<Co* Vo Gw i:a s:j t:{eØØØØ} [a:0|ä:0]> 5",
+/v012,V41,"<Co* Vo Gw i:a s:j t:{eØØØØ} [a:0|ä:0]> 5",
 /v,V42,parantaa:paran{tnst}{aØaae},
-v3,V42,parata:para{nt},
+/v3,V42,parata:para{nt},
 /v,V42,ojentaa:oje{tnst}{aØaae},
-v3,V42,ojeta:oje{nt},
+/v3,V42,ojeta:oje{nt},
 /v,V42,rakentaa:raken{tnst}{aØaae},
-v3,V42,raketa:rake{nt},
+/v3,V42,raketa:rake{nt},
 /v,V42,lyhentää:lyhen{tnst}{äØääe},
-v3,V42,lyhetä:lyhe{nt},
+/v3,V42,lyhetä:lyhe{nt},
 /v,V42,rietä:rien{tnst}{äØääe},
-v3,V42,rietä:rie{nt},
+/v3,V42,rietä:rie{nt},
 /v,V42,kääntää:kään{tnst}{äØääe},
-v3,V42,käätä:kää{nt},
+/v3,V42,käätä:kää{nt},
 /v,V42,vääntää:vään{tnst}{äØääe},
-v3,V42,väätä:vää{nt},
+/v3,V42,väätä:vää{nt},
 /v,V43,taitaa:tai{tds}{aØaae},TAITAA
 /v,V43,tietää:tie{tds}{äØääe},TIETAA
 /v,V44,"<Co* [Vo|Syl+] Vo u t:{td} u a:0>","ANTAUTUA HIOUTUA"

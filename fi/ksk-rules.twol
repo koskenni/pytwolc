@@ -188,7 +188,7 @@ OPEN = VoM (CoM) [VoS|:i] ;
 {öØ}:Ø <=> _ :i ;
     ! k<ö>ön k<>öitä
 
-{aä}:a|{oö}:o|{uy}:u <=> [:a|:o|:u] :* _ ;
+{aä}:a|{oö}:o|{uy}:u <=> [:a|:o|:u] [\{§}]* _ ;
     ! maass<a> piiss<ä> juot<u> syöt<y> tulk<o><o>n syök<ö><ö>n
 
 ! VERB SUFFIX ALTERNATIONS

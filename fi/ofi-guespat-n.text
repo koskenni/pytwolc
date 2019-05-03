@@ -41,8 +41,10 @@ Definitions
   Forg = [$[Forl|Forb]] ;
 
 LEXICON Nouns
-! S01:        VALO
-< Co* VoB CCns [o|u] > /s ; ! VALO PURU - bisyll
+!
+!         === o |u | y | ö ===
+!
+< Co* VoB CCns [o|u] > /s ; ! S01: VALO PURU - bisyll
 < Co* VoF CCns [ö|y] > /s ; ! HÄLY SÄILÖ - bisyll
 < Co* VoB [k|p|t] [o|u] 0::10 > /s ; ! AUTO
 < Co* VoF [k|p|t] [ö|y] 0::10 > /s ; ! TÖPÖ LÖPÖ
@@ -58,12 +60,12 @@ LEXICON Nouns
 < Co* VoF {kØ} [ö|y] > /s ; ! NÄKY-NÄYN (*SUKU) - bisyll
 < Co [a i|a u|e i|e u|i e|i u|o i|o u|u i|u o] {kØ} [o|u] > /s ; ! HAIKU-HAIUN - bisyll
 < Co [ä i|ä y|e i|e y|i e|i y|ö i|ö y|y i|y ö] {kØ} [ö|y] > /s ; ! HYÖKY-HYÖYN - bisyll
-< Co [u o] {kØ'} [o] > /s ; ! RUOKO-RUO'ON - bisyll
+< Co [u o] {kØ'} [o] > /s ; ! S01: RUOKO-RUO'ON - bisyll
 < Co [a u|e u|i u] {kØ'} [u] > /s ; ! LIUKU-LIU'UN - bisyll
-< Co u {kv} u > /s ; ! SUKU-SUVUN - bisyll
-< Co y {kv} y > /s ; ! KYKY-KYVYN - bisyll
-! S02:        ARVELU
-< Co* SylVoB CCns [o|u] > /s ; ! ARVELU RUOISTO - trisyll
+< Co u {kv} u > /s ; ! S01: SUKU-SUVUN - bisyll
+< Co y {kv} y > /s ; ! S01: KYKY-KYVYN - bisyll
+!
+< Co* SylVoB CCns [o|u] > /s ; ! S02: ARVELU RUOISTO - trisyll
 < Co* SylVoF CCns [ö|y] > /s ; ! VILJELY PÖKKELÖ - trisyll
 < Co* Syl+ Vo+ CCns [o|ö|u|y] 0::5 > /s ; ! TASSUTTELU - 3+syll
 < Co* SylSylVoB [k {kØØ}|(n|r) t {tØØ}|n {tn}] [o|u] > /s ; ! SAMMAKKO RUOIKKO - trisyll
@@ -71,68 +73,62 @@ LEXICON Nouns
 < Co* VoPB Co+ VoBN n {kg} o > /s ; ! AURINKO - trisyll
 iljan{kg}o /s ;
 < Co* VoPF Co+ VoF n {kg} ö > /s ; ! YLÄNKÖ - trisyll
-! S03:        AUTIO
-< Co* [SylB|SylSylB] i o > /s ; ! AUTIO AKVAARIO - 3/4-syll
+!
+< Co* [SylB|SylSylB] i o > /s ; ! S03: AUTIO AKVAARIO - 3/4-syll
 < Co* [SylF|SylSylF] i ö > /s ; ! HÄIRIÖ VIHERIÖ - trisyll
-< Co* Syl Vo+ {§} Co* SylB i o > ; ! compound - trisyll
+< Co* Syl Vo+ {§} Co* SylB i o > /s ; ! compound - trisyll
 kaakao /s ;
 faarao /s ;
 rodeo /s ;
 museo /s ;
 lyseo /s ;
 embryo /s ;
-! S04:        RISTI
-< Co* Vo+ CCns {iieØ} > /s ; ! RISTI - bisyll
+!
+!         === i-i-e ===
+!
+< Co* Vo+ CCns {iieØ} > /s ; ! S04: RISTI - bisyll
 < Co* Vo+ [k|p|t] {iieØ} > /s ; ! LAAKI PIPI PETI - bisyll
 < Co* Syl Vo+ {§} Co* Vo+ CCns {iieØ} 0::10 > /s ; ! SENTRI_FUGI - bisyll
 < Co* Vo+ Gs {iieØ} > /s ; ! LAKKI HAUKI - bisyll
 < Co* Syl Vo+ {§} Co* Vo+ Gs {iieØ} > /s ; ! LIPPA_LAKKI - bisyll
-! S05:        PAPERI
-< Co* Syl* SylVo Co+ {iieØ} 0::50 > /s ; ! **conversion only**
-< Co* SylVo CCns {iieØ} > /s ; ! PAPERI trisyll
+!
+< Co* SylVo CCns {iieØ} > /s ; ! S06: PAPERI trisyll
 < Co* Syl Syl+ {iieØ} 0::3 > /s ; ! ARTIKKELI 3+syll
 < Co* SylVo Gs {iieØ} > /s ; ! PYSÄKKI - trisyll
-! S06:        BANAALI
-< Co* SylVo CCns {iieØ} > /s ; ! BANAANI - trisyll
+!
+< Co* SylVo CCns {iieØ} > /s ; ! BANAALI - trisyll
 < Co* Syl+ Syl {iieØ} > /s ; ! MULTIPPELI - 3+syll
 < Co* SylVo Gs {iieØ} > /s ; ! ASUKKI - trisyll
 < Co* SylVo Gw {iieØ} > /s ; ! TELLINGIT
 < Co* Syl+ SylVo Gs {iieØ} > /s ; ! ANNULOINTI - 3+syll
-! S07:        KALSIUM
-< Co* Syl* Vo+ Co+ {ØieØ} 0::4 > /s ; ! KALSIUM - 2+syll
+!
+!         === Ø-i-e ===
+!
+< Co* Syl* Vo+ Co+ {ØieØ} 0::4 > /s ; ! S07: KALSIUM - 2+syll
 < Co* Syl* (i) u m {ØieØ} > /s ; ! KALSIUM - 2+syll
-! S08:        LOVI
-< Co* Vo+ CCns {ieeeØ} > /s ; ! LOVI - bisyll
+!
+!         === i-e-Ø ===
+!
+< Co* Vo+ CCns {ieeeØ} > /s ; ! S08: LOVI - bisyll
 < Co* Vo+ Co+ {ieeeØ} > /s ; ! SAKSET
 < Co* Vo+ Gs {ieeeØ} > /s ; ! JOKI - bisyll
-! S09:        NALLE
-< Co* Syl e > /s ; ! NALLE - bisyll
+!
+!        === e ===
+!
+< Co* Syl e > /s ; ! S09: NALLE - bisyll
 < Co* Syl+ (o) e 0::10 > /s ; ! MANGROVE OBOE - 2+syll
-! S19:        KALA
-< Co* [Vo+ - [Vo* [o|u|ö|y] Vo*]] CCns {ao} > /s ; ! KALA - bisyll
-< Co* Syl+ {ao} 0::10 > /s ; ! EVANKELISTA - 2+syll
-< Co* [Vo+ - [Vo* [o|u|ö|y] Vo*]] Gs {ao} > /s ; ! KITA - bisyll
-< Co* SylVo Gs {ao} 0::10 > /s ; !  - 2+syll
-! S11:        KOIRA
-< Co* [Vo* [o|u] Vo*] CCns {aØ} > /s ; ! KOIRA - bisyll
-< Co* Vo+ CCns {äØ} > /s ; ! ÄIJÄ - bisyll
-< Co* Syl+ [o i j {aØ}|ö i j {äØ}] > /s ; ! LUENNOIJA METELÖIJÄ
-< Co Syl+ (CCns) [{aØ}|{äØ}] 0::20 > /s ; ! PARANOIA HALLELUJA
-< Co* [Vo* [o|u] Vo*] Gs {aØ} > /s ; ! KOTA - bisyll
-< Co* Syl+ Vo+ Gs {aØ} 0::20 > /s ; ! 
-< Co* [e|i|ö|y|ä|ö]+ Gs {äØ} > /s ; ! REIKÄ - bisyll
-< Co* Syl+ Vo+ Gs {äØ} 0::20 > /s ; ! ISÄNTÄ
-< Co* Syl Syl [{aØo}::10|{aØö}::10] > /s ; ! MATALA KÄPÄLÄ - trisyll
-< Co* Syl Vo+ Gs [{aØo}|{äØö}] 0::10 > /s ; ! VIHANTA trisyll
-< Co* Syl* Vo+ CCns [{aØ}|{äØ}] 0::5 > /s ; ! ASEMA NÄKYMÄ - 3+syll
-< Co* Syl+ Vo [(l) m|o o n|i s|v] {aØ} > /s ; ! ASEMA UNTUVA MILJOONA - 3+syll
-< Co* Syl+ Vo+ [(l|r) m|i s|v] {äØ} > /s ; ! NÄKYMÄ NYSTERMÄ KÄRTTYISÄ - 3+syll
-< [Co|Vo]+ {ao} 0::50 > /s ; ! **conversion only**
+!
+!         === a-o | ä-ö ===
+!
+< Co* [VoPB - $[o|u]] CCns {ao} > /s ; ! S10: KALA - bisyll
+< Co* [VoPB - $[o|u]] Gs {ao} > /s ; ! S10: KITA - bisyll
+< Co* Syl* Vo+ {§} Co* [VoPB - $[o|u]] CCns {ao} 0::10 > /s ; ! EVANKE_LISTA - 2+syll
+< Co* Syl* Vo+ {§} Co* [VoPB - $[o|u]] Gs {ao} 0::10 > /s ; ! MEKA_NIIKKA - 2+syll
+
+< Co* [SylB|SylSylB] (e l|o i t s) i j {ao} > /s ; ! S14: KULKIJA - 3+syll
 < Co* Syl+ [i|i j|j|Vo+ [l|n|r]] [{ao}|{äö}] > /s ; ! KULKIJA - 3+syll
-< [Co|Vo]+ {ao} 0::50 > /s ; ! **conversion only**
-< [Co|Vo]* Vo Gs [{ao}|{äö}] 0::50 > /s ; ! **conversion only**
-< [Co|Vo]* Vo Gw [{ao}|{äö}] 0::50 > /s ; ! **conversion only**
-< Co* Syl+ Vo+ [CCns|h k] [{ao}|{äö}] > /s ; ! KARAHKA - 3+syll
+!
+< Co* Syl+ Vo+ [CCns|h k] [{ao}|{äö}] > /s ; ! S15: KARAHKA - 3/4/5-syll
 < Co* Syl* Vo+ [Co+ (e|i)] [{ao}|{äö}] > /s ; ! MATINEA MELODIA - 3+syll
 < (Co) [SylVo|y i] n {tn} [{ao}|{äö}] > /s ; ! HAENTA RAAUUNTA JOIUNTA - 3syll
 < Co* Syl+ Vo+ [(l|n|r) k {kØØ}] [{ao}|{äö}] > /s ; ! MANSIKKA MASURKKA - 3+syll
@@ -140,8 +136,122 @@ embryo /s ;
 < Co* SylVo [(l|n|r) k {kØØ}] [{ao}|{äö}] > /s ; ! PIAKKA - 3+syll
 < Co* Syl+ Vo+ [n {tn}|t {tØ}] [{ao}|{äö}] > /s ; ! MERKINTÄ - 3+syll
 < Co* Syl+ Vo+ [CCns+|Co+ (e|i)] [{ao}|{äö}] > /s ; ! KAKKULAT
-< Co* Syl [Co|Vo]+ [{aØo}|{äØö}] 0::50 > /s ; ! **conversion only**
-< Co* Syl+ [a+|o (a|i|o)|u (a|u)] [j|v] {aØo} 0::5 > /s ; ! KANTAJA JALAVA - 3+syll
+aki{§}leij{ao} /s  ; !
+armeij{ao} /s  ; !
+antiikv{ao} /s  ; !
+lakeij{ao} /s  ; !
+moskeij{ao} /s  ; !
+papu{§}kaij{ao} /s  ; !
+pasteij{ao} /s  ; !
+sialm{ao} /s  ; ! 
+suurim{ao} /s  ; ! 
+ulap{pØ}{ao} /s  ; !
+!
+!         === a-Ø ===
+!
+< Co* [VoPB & $[o|u]] CCns {aØ} > /s ; ! S11: KOIRA - bisyll
+< Co* [VoPB & $[o|u]] Gs {aØ} > /s ; ! KOTA - bisyll
+< Co* VoPF CCns {äØ} > /s ; ! ÄIJÄ - bisyll
+< Co* VoPF Gs {äØ} > /s ; ! REIKÄ - bisyll
+< Co* Syl* (Vo) {§} Co o i j {aØ} > /s ; ! LUENNOIJA
+< Co* Syl* (Vo) {§} Co ö i j {äØ} > /s ; ! METELÖIJÄ
+!
+arti{§}sok{kØ}{aØ} /s ; !
+emän{tn}{äØ} /s ; ! - trisyll
+halle{§}luj{aØ} /s ; !
+hyper{§}bol{aØ} /s ; !
+isän{tn}{äØ} /s ; ! - trisyll
+lymf{aØ} /s  ; ! 
+myrh{aØ} /s  ; ! 
+paranoi{aØ} /s ; ! - trisyll
+prima{§}donn{aØ} /s ; !
+proto{§}koll{aØ} /s ; !
+raas{§}tup{aØ} /s ; ! 
+res{§}kontr{aØ} /s ; ! - trisyll
+saaj{aØ} /s  ; ! 
+saam{aØ} /s  ; ! 
+super{§}nov{aØ} /s ; !
+syndroom{aØ} /s ; ! - trisyll
+syylin{kg}{äØ} /s  ; ! 
+terra{§}kot{tØ}{aØ} /s ; !
+!
+! S13:        ASEMA
+< Co* Syl* Vo+ CCns [{aØ}|{äØ}] 0::5 > /s ; ! ASEMA NÄKYMÄ - 3+syll
+< Co* Syl+ Vo [(l) m|o o n|i s|v] {aØ} > /s ; ! ASEMA UNTUVA MILJOONA - 3+syll
+< Co* Syl+ Vo+ [(l|r) m|i s|v] {äØ} > /s ; ! NÄKYMÄ NYSTERMÄ KÄRTTYISÄ - 3+syll
+!
+!         === a-Ø-o | ä-Ø-ö ===
+!
+< Co* Syl Syl {aØo}::10 > /s ; ! S12: MATALA - trisyll
+< Co* SylF SylF {aØö}::10 > /s ; ! KÄPÄLÄ - trisyll
+ahav{aØo} /s  ; ! 
+ajattar{aØo} /s  ; !
+akan{aØo} /s  ; !
+algebr{aØo} /s  ; ! 
+aurtu{aØo} /s  ; !
+etel{äØö} /s  ; ! 
+halav{aØo} /s  ; ! 
+harav{aØo} /s  ; ! 
+hekum{aØo} /s  ; ! 
+herttu{aØo} /s  ; !
+hämär{äØö} /s  ; ! 
+hieru{aØo} /s  ; ! 
+jalav{aØo} /s  ; ! 
+juolu{aØo} /s  ; ! 
+kajav{aØo} /s  ; ! 
+kaljam{aØo} /s  ; !
+kanalj{aØo} /s  ; ! 
+kanav{aØo} /s  ; ! 
+karism{aØo} /s  ; ! 
+kuusam{aØo} /s  ; !
+kypär{äØö} /s  ; !
+kyynär{äØö} /s  ; !
+kähär{äØö} /s  ; !
+käpäl{äØö} /s  ; !
+kärhäm{äØö} /s  ; ! 
+lastu{aØo} /s  ; ! 
+liettu{aØo} /s  ; ! 
+luusu{aØo} /s  ; ! 
+madonn{aØo} /s  ; ! 
+mahatm{aØo} /s  ; !
+mahork{kØ}{aØo} /s  ; !
+matal{aØo} /s  ; !
+mikstuur{aØo} /s  ; ! 
+miljoon{aØo} /s  ; !
+mäkär{äØö} /s  ; !
+nappul{aØo} /s  ; !
+nukul{aØo} /s  ; ! 
+nikam{aØo} /s  ; ! 
+odeem{aØo} /s  ; ! 
+odelm{aØo} /s  ; ! 
+odelm{aØo} /s  ; !
+omen{aØo} /s  ; ! 
+ongelm{aØo} /s  ; ! 
+ongelm{aØo} /s  ; ! 
+paatsam{aØo} /s  ; ! 
+panam{aØo} /s  ; !
+patruun{aØo} /s  ; ! 
+plutoon{aØo} /s  ; ! 
+postru{aØo} /s  ; ! 
+probleem{aØo} /s  ; ! 
+pyjam{aØo} /s  ; ! 
+pykäl{äØö} /s  ; !
+revohk{aØo} /s  ; ! 
+saaru{aØo} /s  ; ! 
+salam{aØo} /s  ; ! 
+salav{aØo} /s  ; !
+saluun{aØo} /s  ; ! 
+silav{aØo} /s  ; !
+sitruun{aØo} /s  ; ! 
+tanhu{aØo} /s  ; !
+tinktuur{aØo} /s  ; ! 
+valkam{aØo} /s  ; ! 
+vasam{aØo} /s  ; !
+vetel{äØö} /s  ; ! 
+vihan{tn}{aØo} /s ; !
+äpär{äØö} /s  ; ! 
+!
+< Co* Syl+ [a+|o (a|i|o)|u (a|u)] [j|v] {aØo} 0::5 > /s ; ! S16: KANTAJA JALAVA - 3+syll
 < Co* Syl+ [ä+|y] j {äØö} 0::5 > /s ; ! VENYJÄ PETÄJÄ HYPPÄÄJÄ VÄÄRENTÄJÄ - 3+syll
 < Co* Syl Vo+ [l|m|n|r] [{aØo}|{äØö}] 0::10 > /s ; ! PERUNA - trisyll
 < [Co|Vo]+ [{aØo}|{äØö}] 0::50 > /s ; ! **conversion only**
@@ -196,59 +306,6 @@ embryo /s ;
 < Co* Syl* Vo+ [CCns|h j|h k|v] e {Øth} {ØeØeØ} > /s ; ! OHJE PURJE SUIHKE AMME TOIVE - 2+syll
 < Co* Syl* Vo+ [Gw|Gwj] e {Øth} {ØeØeØ} > /s ; ! VAATE - 2+syll
 !
-ahav{aØo} /s  ; ! 
-antiikv{ao} /s  ; ! 
-saaj{aØ} /s  ; ! 
-saam{aØ} /s  ; ! 
-super{§}nov{aØ} /s  ; ! 
-lymf{aØ} /s  ; ! 
-myrh{aØ} /s  ; ! 
-saaj{aØ} /s  ; ! 
-kalkam{aØo} /s  ; ! 
-pyjam{aØo} /s  ; ! 
-paatsam{aØo} /s  ; ! 
-kuusam{aØo} /s  ; ! 
-probleem{aØo} /s  ; ! 
-karism{aØo} /s  ; ! 
-mahatm{aØo} /s  ; ! 
-hekum{aØo} /s  ; ! 
-harav{aØo} /s  ; ! 
-syylin{kg}{äØ} /s  ; ! 
-emän{tn}{äØ} /s  ; ! 
-ulap{pØ}{ao} /s  ; ! 
-suurim{ao} /s  ; ! 
-sialm{ao} /s  ; ! 
-odelm{aØo} /s  ; ! 
-ongelm{aØo} /s  ; ! 
-nikam{aØo} /s  ; ! 
-valkam{aØo} /s  ; ! 
-panam{aØo} /s  ; ! 
-vasam{aØo} /s  ; ! 
-odelm{aØo} /s  ; ! 
-ongelm{aØo} /s  ; ! 
-madonn{aØo} /s  ; ! 
-miljoon{aØo} /s  ; ! 
-plutoon{aØo} /s  ; ! 
-ajattar{aØo} /s  ; ! 
-pykäl{äØö} /s  ; ! 
-kajav{aØo} /s  ; ! 
-halav{aØo} /s  ; ! 
-jalav{aØo} /s  ; ! 
-silav{aØo} /s  ; ! 
-kanav{aØo} /s  ; ! 
-salam{aØo} /s  ; ! 
-salav{aØo} /s  ; ! 
-odeem{aØo} /s  ; ! 
-tanhu{aØo} /s  ; ! 
-juolu{aØo} /s  ; ! 
-saaru{aØo} /s  ; ! 
-hieru{aØo} /s  ; ! 
-luusu{aØo} /s  ; ! 
-aurtu{aØo} /s  ; ! 
-lastu{aØo} /s  ; ! 
-postru{aØo} /s  ; ! 
-liettu{aØo} /s  ; ! 
-herttu{aØo} /s  ; ! 
 le{eeØ} /s  ; ! 
 te{eeØ} /s  ; ! 
 triko{oØ} /s  ; ! 
