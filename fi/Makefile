@@ -2,14 +2,16 @@ POS=v
 
 LEX=ofi-lexic-n.lexc ofi-lexic-v.lexc
 
-ofi-analy.ofst: ofi-lex.fst ofi-rules.fst ofi-examples.pstr delete.fst
+all: ofi-analy.ofst ofi-guess-n.ofst ofi-guess-v.ofst
+
+ofi-analy.ofst: ofi-lexic.fst ofi-rules.fst delete.fst
 	hfst-compose-intersect -a -1 $< -2 ofi-rules.fst |\
 	hfst-compose -2 delete.fst |\
 	hfst-invert |\
 	hfst-minimize -o ofi-analy.fst
 	hfst-fst2fst -i ofi-analy.fst -O -o $@
 
-ofi-lex.fst: ofi-analy-aff.lexc $(LEX) Makefile
+ofi-lexic.fst: ofi-analy-aff.lexc $(LEX) Makefile
 	hfst-lexc -f openfst-tropical -o $@ ofi-analy-aff.lexc $(LEX)
 
 ofi-lexic-n.lexc: ofi-lexic-n.text
@@ -17,15 +19,6 @@ ofi-lexic-n.lexc: ofi-lexic-n.text
 
 ofi-lexic-v.lexc: ofi-lexic-v.text
 	python3 entries2lexc.py Verbs < ofi-lexic-v.text > ofi-lexic-v.lexc
-
-#ofi-lex-$(POS).lexc: ofi-conv-$(POS).fst ksk2lexc.py Makefile
-#	python3 ksk2lexc.py --codes=classes.txt ~/Dropbox/lang/fin/ksk/ksk-$(POS).dic $< Nouns $@ > ofi-lex-$(POS).log
-
-ofi-conv-$(POS).fst: ofi-conv-$(POS).lexc
-	hfst-lexc -f openfst-tropical -o $@ $<
-
-ofi-conv-$(POS).lexc: ofi-pat-$(POS).csv ../pat-proc.py
-	python3 ../pat-proc.py -c classes.txt -m c -n Root $< > $@
 
 ofi-guess-$(POS).ofst: ofi-guess-lex-$(POS).fst ofi-rules.fst Makefile
 	hfst-compose-intersect -e -a -1 $< -2 ofi-rules.fst |\
@@ -59,7 +52,9 @@ delete.fst:
 	echo "Ø -> 0" | hfst-regexp2fst -o $@
 
 clean:
-	rm ofi-*.fst
+	rm ofi-*.fst ofi-*.ofst
+	rm ofi-lexic-*.lexc
+	rm ofi-guess*.lexc
 
 
 features: ksk-zerofilled.csv

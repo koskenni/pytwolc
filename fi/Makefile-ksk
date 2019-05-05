@@ -1,0 +1,36 @@
+# converting KSK into a (perhaps proprietary) lexicon using patterns
+#
+
+LEX=ksk-lex-n.lexc ksk-lex-v.lexc
+
+ksk-analy.ofst: ksk-lex.fst ofi-rules.fst ofi-examples.pstr delete.fst
+	hfst-compose-intersect -a -1 $< -2 ofi-rules.fst |\
+	hfst-compose -2 delete.fst |\
+	hfst-invert |\
+	hfst-minimize -o ksk-analy.fst
+	hfst-fst2fst -i ksk-analy.fst -O -o $@
+
+ksk-lex.fst: ofi-analy-aff.lexc $(LEX) Makefile
+	hfst-lexc -f openfst-tropical -o $@ ofi-analy-aff.lexc $(LEX)
+
+ksk-lex-n.lexc: ksk-conv-n.fst classes-n.txt
+	python3 ksk2lexc.py --codes=classes-n.txt ~/Dropbox/lang/fin/ksk/ksk-n.dic $< Nouns $@ > ksk-lex-n.log
+
+ksk-lex-v.lexc: ksk-conv-v.fst classes-v.txt
+	python3 ksk2lexc.py --codes=classes-v.txt ~/Dropbox/lang/fin/ksk/ksk-v.dic $< Verbs $@ > ksk-lex-v.log
+
+ksk-conv-n.fst: ksk-conv-n.lexc
+	hfst-lexc -f openfst-tropical -o $@ $<
+
+ksk-conv-v.fst: ksk-conv-v.lexc
+	hfst-lexc -f openfst-tropical -o $@ $<
+
+ksk-conv-n.lexc classes-n.txt: ofi-pat-n.csv ../pat-proc.py
+	python3 ../pat-proc.py -c classes-n.txt --mode c -n Root $< > $@
+
+ksk-conv-v.lexc classes-v.txt: ofi-pat-v.csv ../pat-proc.py
+	python3 ../pat-proc.py -c classes-v.txt --mode c -n Root $< > $@
+
+clean:
+	rm -f ksk-*.ofst ksk-*.fst
+	rm -f ksk-conv-*.lexc
