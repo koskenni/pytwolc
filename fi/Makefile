@@ -1,5 +1,3 @@
-POS=v
-
 LEX=ofi-lexic-n.lexc ofi-lexic-v.lexc
 
 all: ofi-analy.ofst ofi-guess-n.ofst ofi-guess-v.ofst
@@ -20,20 +18,33 @@ ofi-lexic-n.lexc: ofi-lexic-n.text
 ofi-lexic-v.lexc: ofi-lexic-v.text
 	python3 entries2lexc.py Verbs < ofi-lexic-v.text > ofi-lexic-v.lexc
 
-ofi-guess-$(POS).ofst: ofi-guess-lex-$(POS).fst ofi-rules.fst Makefile
+ofi-guess-n.ofst: ofi-guess-lex-n.fst ofi-rules.fst Makefile
 	hfst-compose-intersect -e -a -1 $< -2 ofi-rules.fst |\
 	hfst-compose -2 delete.fst |\
 	hfst-invert |\
-	hfst-minimize -o ofi-guess-$(POS).fst
-	hfst-fst2fst -w -i ofi-guess-$(POS).fst -o $@
+	hfst-minimize -o ofi-guess-n.fst
+	hfst-fst2fst -w -i ofi-guess-n.fst -o $@
 
-ofi-guess-lex-$(POS).fst: ofi-guess-lex-$(POS).lexc ofi-guess-aff.lexc
+ofi-guess-v.ofst: ofi-guess-lex-v.fst ofi-rules.fst Makefile
+	hfst-compose-intersect -e -a -1 $< -2 ofi-rules.fst |\
+	hfst-compose -2 delete.fst |\
+	hfst-invert |\
+	hfst-minimize -o ofi-guess-v.fst
+	hfst-fst2fst -w -i ofi-guess-v.fst -o $@
+
+ofi-guess-lex-n.fst: ofi-guess-lex-n.lexc ofi-guess-aff.lexc
 	hfst-lexc -E -f openfst-tropical -o $@ ofi-guess-aff.lexc $<
 
-ofi-guess-lex-n.lexc : ofi-pat-$(POS).csv ../pat-proc.py
-	python3 ../pat-proc.py -m g -n Nouns $< > $@
+ofi-guess-lex-v.fst: ofi-guess-lex-v.lexc ofi-guess-aff.lexc
+	hfst-lexc -E -f openfst-tropical -o $@ ofi-guess-aff.lexc $<
 
-ofi-guess-lex-v.lexc : ofi-pat-$(POS).csv ../pat-proc.py
+ofi-guess-lex-n.lexc : ofi-guespat-n.text
+	python3 guespat2lexc.py < $< > $@
+
+#ofi-guess-lex-n.lexc : ofi-pat-n.csv ../pat-proc.py
+#	python3 ../pat-proc.py -m g -n Verbs $< > $@
+
+ofi-guess-lex-v.lexc : ofi-pat-v.csv ../pat-proc.py
 	python3 ../pat-proc.py -m g -n Verbs $< > $@
 
 ofi-guess-aff.lexc: ofi-affixes.csv ../affixes2guessing.py
@@ -52,9 +63,9 @@ delete.fst:
 	echo "Ø -> 0" | hfst-regexp2fst -o $@
 
 clean:
-	rm ofi-*.fst ofi-*.ofst
-	rm ofi-lexic-*.lexc
-	rm ofi-guess*.lexc
+	rm -f ofi-*.fst ofi-*.ofst
+	rm -f ofi-lexic-*.lexc
+	rm -f ofi-guess*.lexc
 
 
 features: ksk-zerofilled.csv

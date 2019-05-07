@@ -5,35 +5,38 @@ Definitions
   Gwt = [(h) {td}|l {tl}|n {tn}|r {tr}|(l|r|n) t {tØ}] ;
   Gw = [Gwk|Gwp|Gwt] ;
   Gwj = [(h|l|r) {kj}] ;
-  Gsk = [(l|r|n) k {kØ}|(h|l|r) {kØ}|n {kg}] ;
-  Gsk2 = [(l|r|n) k {kØ}|[h|l|r] {kØ}|n {kg}] ;
-  Gsp = [m {pm}|(l|r) {pv}|(l|r|m) p {pØ}] ;
-  Gst = [(h) {td}|l {tl}|n {tn}|r {tr}|(l|r|n) t {tØ}] ;
+  Gsk = (l|r|n) k {kØ} | (h|l|r) {kØ}|n {kg} ;
+  Gsk2 = [(l|r|n) k {kØ}|[h|l|r] {kØ}|n {kg}] ; ! excluding {kØ} between vowels
+  Gsp = m {pm} | (l|r) {pv} | (l|r|m) p {pØ} ;
+  Gst = (h) {td} | l {tl} | n {tn} | r {tr} | (l|r|n) t {tØ} ;
   Gs = [Gsk|Gsp|Gst] ;
-  Gs2 = [Gsk2|Gsp|Gst] ;
-  CCns = [[[Co+] - Gs.u]|h k] ;
+  Gs2 = [Gsk2|Gsp|Gst] ; ! excluding {kØ} between vowels
+  GsU = (l|r|n) k k | (h|l|r) k | n k | m p | (l|r) p | (l|r|m) p p | (h) t | l t | n t | r t| (l|r|n) t t ;
+  CCns = [[[Co+] - GsU]|h k] ; ! non-gradating consonant clusters
   Gsj = [[h|l|r] {kj}] ;
   Gtds = [l {tls}|n {tns}|r {trs}] ;
   Cocl = [Co+|'] ;
   Vo = [a|e|i|o|u|y|ä|ö] ;
-  VoB = [a|o|u] ; ! Front vowels
-  VoF = [ä|ö|y] ; ! Back vowels
-  VoN = [e|i] ; ! Neutral vowels
-  VoBN = VoB|VoN ; ! Back harmony compatible vowels
-  VoFN = VoF|VoN ; ! Front harmony compatible vowels
-  V1V1 = [a a|e e|i i|o o|u u|y y|ä ä|ö ö] ; ! Long vowels
+  VoB = [a|o|u] ; ! Front vowel
+  VoF = [ä|ö|y] ; ! Back vowel
+  VoN = [e|i] ; ! Neutral vowel
+  VoBN = VoB|VoN ; ! Back harmony compatible vowel
+  VoFN = VoF|VoN ; ! Front harmony compatible vowel
+  V1V1 = [a a|e e|i i|o o|u u|y y|ä ä|ö ö] ; ! Long vowel
   Vi = [Vo i] ;
   V1V2 = [a u|e u|i e|e u|e y|i e|i u|i y|o u|u o|y ö|ä y|ö y] ;
-  Syl = [Vo+ [[Co+|']]] ; ! Makes one syllable
+  Syl = [Vo+ [[Co+|']]] ; ! Counts as one syllable
   VV = [V1V1|Vi|V1V2] ; ! Long vowel or diphthong
   VbV = [[Vo Vo+] - VV] ; ! Vowel sequence in two separate syllables
-  SylVo = [VbV|VV Vo|Vo VV|Syl Vo+] ; ! Makes two syllables
+  SylVo = [VbV|VV Vo|Vo VV|Syl Vo+] ; ! Counts as two syllables
   VoPF = VoFN+ ; ! Front harmony vowel sequence
-  VoPB = VoBN* VoB VoBN* ; ! Back harmony vowel sequence
+  VoPB = Vo+ & $[VoB] ; ! Back harmony vowel sequence
   SylF = Syl - $[VoB] ; ! Front harmony syllable
   SylB = Syl & $[VoB] ; ! Back harmony syllable
-  SylVoF = SylVo - $[VoB] ; ! Makes two front harmony syllables
-  SylVoB = [SylVo - VoF] & $[VoB] ; ! Makes two back harmony syllables
+  SylVoF = SylVo - $[VoB] ; ! Counts as two front harmony syllables
+  SylVoB = SylVo & $[VoB] ; ! Counts as two back harmony syllables
+  SylSylF = [Syl Syl] - $[VoB] ;
+  SylSylB = [Syl Syl] & $[VoB] ;
   SylSylVoF = [Syl SylVo] - $[VoB] ;
   SylSylVoB = [Syl SylVo] & $[VoB] ;
   Forl = [b|c|d|f|g|q|š|w|x|z|ž] ;
@@ -44,39 +47,72 @@ LEXICON Nouns
 !
 !         === o |u | y | ö ===
 !
-< Co* VoB CCns [o|u] > /s ; ! S01: VALO PURU - bisyll
-< Co* VoF CCns [ö|y] > /s ; ! HÄLY SÄILÖ - bisyll
-< Co* VoB [k|p|t] [o|u] 0::10 > /s ; ! AUTO
-< Co* VoF [k|p|t] [ö|y] 0::10 > /s ; ! TÖPÖ LÖPÖ
-< Co VoBN o {k'} o > /s ; ! RUOKO ruo'on
-< Co VoBN u {k'} u > /s ; ! LIUKU liu'un
-< Co* VoPB Gs2 [o|u] > /s ; ! HAPPO PATO ARKKU - bisyll
-< Co* VoPF Gs2 [ö|y] > /s ; ! PÄÄTY LÄMPÖ  - bisyll
-< Co* VoB Gsk2 [o|u] > /s ; ! VAKO MAKU - bisyll
-< Co* VoF Gsk2 [ö|y] > /s ; ! TÄKY NÄKÖ - bisyll
-< Co VoBN [Vo - o] {kØ} o > /s ; ! LIEKO lieon - bisyll
-< Co VoBN [Vo - u] {kØ} u > /s ; ! KAIKU kaiun - bisyll
-< Co* VoB {kØ} [o|u] > /s ; ! MAKU-MAUN (*SUKU) - bisyll
-< Co* VoF {kØ} [ö|y] > /s ; ! NÄKY-NÄYN (*SUKU) - bisyll
-< Co [a i|a u|e i|e u|i e|i u|o i|o u|u i|u o] {kØ} [o|u] > /s ; ! HAIKU-HAIUN - bisyll
-< Co [ä i|ä y|e i|e y|i e|i y|ö i|ö y|y i|y ö] {kØ} [ö|y] > /s ; ! HYÖKY-HYÖYN - bisyll
-< Co [u o] {kØ'} [o] > /s ; ! S01: RUOKO-RUO'ON - bisyll
-< Co [a u|e u|i u] {kØ'} [u] > /s ; ! LIUKU-LIU'UN - bisyll
-< Co u {kv} u > /s ; ! S01: SUKU-SUVUN - bisyll
-< Co y {kv} y > /s ; ! S01: KYKY-KYVYN - bisyll
+< Co* VoBN+ CCns [o|u] > /s ; ! S01: VALO PURU - bisyll
+< Co* VoFN+ CCns [ö|y] > /s ; ! HÄLY SÄILÖ - bisyll
+< Co* VoBN+ [k|p|t]::10 [o|u] > /s ; ! AUTO
+< Co* VoFN+ [k|p|t]::10 [ö|y] > /s ; ! TÖPÖ LÖPÖ
+< Co* VoBN+ Gs2 [o|u] > /s ; ! HAPPO PATO ARKKU SALKKU SANKO - bisyll
+< Co* VoFN+ Gs2 [ö|y] > /s ; ! PÄÄTY LÄMPÖ SÄNKY YÖKKÖ - bisyll
+!
+kou{k'}u /s ;
+leu{k'}u /s ;
+liu{k'}u /s ;
+luo{k'}o /s ;
+nau{k'}u /s ;
+riu{k'}u /s ;
+rou{k'}u /s ;
+ruo{k'}o /s ;
+tiu{k'}u /s ;
+tou{k'}u /s ;
+!
+hai{kØ}u /s ;
+huo{kØ}u /s ;
+hyö{kØ}y /s ;
+joi{kØ}u /s ;
+kai{kØ}u /s ;
+lie{kØ}u /s ;
+lui{kØ}u /s ;
+pau{kØ}u /s ;
+rai{kØ}u /s ;
+tau{kØ}u /s ;
+!
+ha{kØ}o /s ;
+ha{kØ}u /s ;
+ho{kØ}u /s ;
+ju{kØ}o /s ;
+ke{kØ}o /s ;
+kä{kØ}ö /s ;
+la{kØ}o /s ;
+li{kØ}o /s ;
+ma{kØ}u /s ;
+nä{kØ}y /s ;
+nä{kØ}ö /s ;
+pa{kØ}o /s ;
+ra{kØ}o /s ;
+ru{kØ}o /s ;
+sa{kØ}o /s ;
+te{kØ}o /s ;
+tä{kØ}y /s ;
+va{kØ}o /s ;
+va{kØ}u /s ;
+lu{kv}u /s ;
+pu{kv}u /s ;
+su{kv}u /s ;
+ky{kv}y /s ;
+my{kv}y /s ;
 !
 < Co* SylVoB CCns [o|u] > /s ; ! S02: ARVELU RUOISTO - trisyll
 < Co* SylVoF CCns [ö|y] > /s ; ! VILJELY PÖKKELÖ - trisyll
 < Co* Syl+ Vo+ CCns [o|ö|u|y] 0::5 > /s ; ! TASSUTTELU - 3+syll
-< Co* SylSylVoB [k {kØØ}|(n|r) t {tØØ}|n {tn}] [o|u] > /s ; ! SAMMAKKO RUOIKKO - trisyll
-< Co* SylSylVoF [k {kØØ}|(n|r) t {tØØ}|n {tn}] [ö|y] > /s ; ! HÄIRIKKÖ RYTEIKKÖ - trisyll
+< Co* SylVoB [k {kØØ}|(n|r) t {tØØ}|n {tn}] [o|u] > /s ; ! SAMMAKKO RUOIKKO - trisyll
+< Co* SylVoF [k {kØØ}|(n|r) t {tØØ}|n {tn}] [ö|y] > /s ; ! HÄIRIKKÖ RYTEIKKÖ - trisyll
 < Co* VoPB Co+ VoBN n {kg} o > /s ; ! AURINKO - trisyll
 iljan{kg}o /s ;
 < Co* VoPF Co+ VoF n {kg} ö > /s ; ! YLÄNKÖ - trisyll
 !
 < Co* [SylB|SylSylB] i o > /s ; ! S03: AUTIO AKVAARIO - 3/4-syll
 < Co* [SylF|SylSylF] i ö > /s ; ! HÄIRIÖ VIHERIÖ - trisyll
-< Co* Syl Vo+ {§} Co* SylB i o > /s ; ! compound - trisyll
+!!!< Co* Syl Vo+ {§} Co* SylB i o > /s ; ! compound - trisyll
 kaakao /s ;
 faarao /s ;
 rodeo /s ;
@@ -87,10 +123,8 @@ embryo /s ;
 !         === i-i-e ===
 !
 < Co* Vo+ CCns {iieØ} > /s ; ! S04: RISTI - bisyll
-< Co* Vo+ [k|p|t] {iieØ} > /s ; ! LAAKI PIPI PETI - bisyll
-< Co* Syl Vo+ {§} Co* Vo+ CCns {iieØ} 0::10 > /s ; ! SENTRI_FUGI - bisyll
+< Co* Vo+ [k|p|t] {iieØ} 0::10 > /s ; ! LAAKI PIPI PETI - bisyll
 < Co* Vo+ Gs {iieØ} > /s ; ! LAKKI HAUKI - bisyll
-< Co* Syl Vo+ {§} Co* Vo+ Gs {iieØ} > /s ; ! LIPPA_LAKKI - bisyll
 !
 < Co* SylVo CCns {iieØ} > /s ; ! S06: PAPERI trisyll
 < Co* Syl Syl+ {iieØ} 0::3 > /s ; ! ARTIKKELI 3+syll
@@ -110,7 +144,6 @@ embryo /s ;
 !         === i-e-Ø ===
 !
 < Co* Vo+ CCns {ieeeØ} > /s ; ! S08: LOVI - bisyll
-< Co* Vo+ Co+ {ieeeØ} > /s ; ! SAKSET
 < Co* Vo+ Gs {ieeeØ} > /s ; ! JOKI - bisyll
 !
 !        === e ===
@@ -120,11 +153,15 @@ embryo /s ;
 !
 !         === a-o | ä-ö ===
 !
-< Co* [VoPB - $[o|u]] CCns {ao} > /s ; ! S10: KALA - bisyll
-< Co* [VoPB - $[o|u]] Gs {ao} > /s ; ! S10: KITA - bisyll
-< Co* Syl* Vo+ {§} Co* [VoPB - $[o|u]] CCns {ao} 0::10 > /s ; ! EVANKE_LISTA - 2+syll
-< Co* Syl* Vo+ {§} Co* [VoPB - $[o|u]] Gs {ao} 0::10 > /s ; ! MEKA_NIIKKA - 2+syll
-
+< Co* [VoBN+ - $[o|u]] CCns {ao} > /s ; ! S10: KALA - bisyll
+< Co* [VoBN+ - $[o|u]] Gs {ao} > /s ; ! S10: KITA - bisyll
+< Co* (Syl) Syl i i k {kØ} {ao} > /s ; ! S10: MEKANIIKKA
+< Co* (Syl) Syl i n n {ao} > /s ; ! S10: KEISARINNA
+< Co* (Syl) SylVo n t {ao} > /s ; ! S10: OTAKSUNTA
+< Co* (Syl) Syl [a a|e e|i i] t {tØ} {ao} > /s ; ! S10: JOHANNIITTA
+!!< Co* Syl* Vo+ {§} Co* [VoBN+ - $[o|u]] CCns {ao} 0::10 > /s ; ! EVANKE_LISTA - 2+syll
+!!< Co* Syl* Vo+ {§} Co* [VoBN+ - $[o|u]] Gs {ao} 0::10 > /s ; ! MEKA_NIIKKA - 2+syll
+!!
 < Co* [SylB|SylSylB] (e l|o i t s) i j {ao} > /s ; ! S14: KULKIJA - 3+syll
 < Co* Syl+ [i|i j|j|Vo+ [l|n|r]] [{ao}|{äö}] > /s ; ! KULKIJA - 3+syll
 !
@@ -136,16 +173,33 @@ embryo /s ;
 < Co* SylVo [(l|n|r) k {kØØ}] [{ao}|{äö}] > /s ; ! PIAKKA - 3+syll
 < Co* Syl+ Vo+ [n {tn}|t {tØ}] [{ao}|{äö}] > /s ; ! MERKINTÄ - 3+syll
 < Co* Syl+ Vo+ [CCns+|Co+ (e|i)] [{ao}|{äö}] > /s ; ! KAKKULAT
-aki{§}leij{ao} /s  ; !
-armeij{ao} /s  ; !
-antiikv{ao} /s  ; !
-lakeij{ao} /s  ; !
-moskeij{ao} /s  ; !
-papu{§}kaij{ao} /s  ; !
-pasteij{ao} /s  ; !
-sialm{ao} /s  ; ! 
-suurim{ao} /s  ; ! 
-ulap{pØ}{ao} /s  ; !
+aki{§}leij{ao} /s  ;
+armeij{ao} /s  ;
+antiikv{ao} /s  ;
+apo{§}teem{ao} /s ;
+bala{§}laik{kØ}{ao} /s ;
+dia{§}fragm{ao} /s ;
+gutta{§}perk{kØ}{ao} /s ;
+hepsan{§}keik{kØ}{ao} /s ;
+karakter{§}istik{ao} /s ;
+kuper{§}keik{kØ}{ao} /s ;
+kutta{§}perk{kØ}{ao} /s ;
+lakeij{ao} /s  ;
+marha{§}min{tn}{ao} /s  ;
+melo{§}draam{ao} /s ;
+moskeij{ao} /s  ;
+palster{§}nak{kØ}{ao} /s ;
+pano{§}raam{ao} /s ;
+papu{§}kaij{ao} /s  ;
+para{§}digm{ao} /s ;
+pasteij{ao} /s  ;
+patri{§}ark{kØ}{ao} /s ;
+praas{§}niek{kØ}{ao} /s ;
+proto{§}plasm{ao} /s ;
+rans{§}tak{kØ}{ao} /s ;
+sialm{ao} /s  ; 
+suurim{ao} /s  ;
+ulap{pØ}{ao} /s  ;
 !
 !         === a-Ø ===
 !
@@ -277,7 +331,7 @@ vihan{tn}{aØo} /s ; !
 < [Co|Vo]* {mn} {ØeØeØ} 0::50 > /s ; ! **conversion only**
 < [Co|Vo]* Vo Gw Vo+ {mn} {ØeØeØ} 0::50 > /s ; ! **conversion only**
 < [Co|Vo]* Vo Gs Vo+ {mn} {ØeØeØ} 0::50 > /s ; ! **conversion only**
-< Co* Syl* Vo+ Co* (a|ä|o|ö|u|y) i {mn} {ØeØeØ} > /s ; ! UISTIN - 2+syll
+< Co* Syl* Vo+ Co* (a|ä|o|ö|u|y) i {mn} {ØeØeØ} > /s ; ! S56: UISTIN - 2+syll
 < Co* Syl* Vo+ Co* (a|ä|o|ö|u|y) i {mn} {ØeØeØ} > /s ; ! KUOLAIMET
 < Co* Syl* Vo+ [Gw|Gwj] i {mn} {ØeØeØ} > /s ; ! POLJIN - 2+syll
 < Co* Syl* Vo+ [Gs|Gsj] i {mn} {ØeØeØ} > /s ; ! HOHTIMET
