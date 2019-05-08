@@ -211,15 +211,17 @@ OPEN = VoM (CoM) [VoS|:i] ;
 
 {dlnrtØ}:d <=> VVo _ ,
                VoS :h VoØ _ ;
-    ! saa<d>aan juo<d>aan näh<d>ään
+    ! saa<d>aan juo<d>aan näh<d>ään juo<d>aksemme näh<d>äkseni
 {dlnrtØ}:l <=> :l VoØ _ ;
-    ! tul<l>aan katsel<l>aan arvail<l>aan
+    ! tul<l>aan katsel<l>aan arvail<l>aan tul<l>aksemme katsel<l>akseen
 {dlnrtØ}:n <=> :n VoØ _ ;
-    ! men<n>ään
+    ! men<n>ään men<n>äksemme
 {dlnrtØ}:r <=> :r VoØ _ ;
-    ! pur<r>aan
-{dlnrtØ}:Ø <=> :t :Ø* _ ;
+    ! pur<r>aan pur<r>aksesi
+{dlnrtØ}:Ø <=> :t :Ø* _ ,
+               CoS VoS _ {aä}: k s e ;
     ! alet<>aan aidat<>aan selvit<>ään hylät<>ään
+    ! aja<>akseni puno<>akseen aja<>akseni salli<>akseni koke<>akseen
 
 !START
 
@@ -240,7 +242,7 @@ OPEN = VoM (CoM) [VoS|:i] ;
     ! kaiv<e>taan haast<e>ttu saarr<e>taan
 
 {aØaae}:Ø|{äØääe}:Ø <=> _ {i}: ;
-{aØaae}:e|{äØääe}:e <=> _ [{dlnrtØ}:|{tttØ}:] ;
+{aØaae}:e|{äØääe}:e <=> _ [{dlnrtØ}: [{tØ}:|{C}:]|{tttØ}:] ;
     ! muist<a>vat muist<>i muist<a>isi muist<a>nee muist<e>ttu
     ! sout<a>vat sout<>i sout<a>isi sout<a>nee sout<a>koon soud<a>ttiin
     ! hätkähd<ä>n hätkäht<>i hätkäht<ä>isi hätkäht<ä>nee hätkähd<e>ttiin
