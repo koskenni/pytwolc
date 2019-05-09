@@ -933,6 +933,26 @@ SAAPAS PL PTV,saappah.i.a,saappahØ.i.Øa,s a a p {ØppØpØØppp} a {sØhsØssh
 SAAPAS PL ILL,saappa.i.hin,saappaØØ.i.hin,s a a p {ØppØpØØppp} a {sØhsØsshØh} {ØaaØaØØaØØ} {ij} {Øh} {V} n
 SAAPAS PL ILLsiin,saappa.i.siin,saappaØØ.i.siin,s a a p {ØppØpØØppp} a {sØhsØsshØh} {ØaaØaØØaØØ} {ij} s i {iØ} n
 SAAPAS PL ILLsiin,saappah.i.sin,saappahØ.i.siØn,s a a p {ØppØpØØppp} a {sØhsØsshØh} {ØaaØaØØaØØ} {ij} s i {iØ} n
+KIRVES,kirves,kirvesØ,k i r v e {sØhsØsshØh} {ØeeØeØØeØØ} 
+KIRVES GEN,kirvee.n,kirveØe.n,k i r v e {sØhsØsshØh} {ØeeØeØØeØØ} n
+KIRVES GEN,kirvehe.n,kirvehe.n,k i r v e {sØhsØsshØh} {ØeeØeØØeØØ} n
+KIRVES PTV,kirves.tä,kirvesØ.tä,k i r v e {sØhsØsshØh} {ØeeØeØØeØØ} {Øt} {aä}
+KIRVES ESS,kirvee.nä,kirveØe.nä,k i r v e {sØhsØsshØh} {ØeeØeØØeØØ} {nrs} {aä}
+KIRVES ESS,kirves.nä,kirvesØ.nä,k i r v e {sØhsØsshØh} {ØeeØeØØeØØ} {nrs} {aä}
+KIRVES ESS,kirves.sä,kirvesØ.sä,k i r v e {sØhsØsshØh} {ØeeØeØØeØØ} {nrs} {aä}
+KIRVES ESS,kirvehe.nä,kirvehe.nä,k i r v e {sØhsØsshØh} {ØeeØeØØeØØ} {nrs} {aä}
+KIRVES ILLseen,kirvee.seen,kirveØe.seen,k i r v e {sØhsØsshØh} {ØeeØeØØeØØ} s e {Øe} n
+KIRVES ILLseen,kirvehe.sen,kirvehe.seØn,k i r v e {sØhsØsshØh} {ØeeØeØØeØØ} s e {Øe} n
+KIRVES PL INE,kirve.i.ssä,kirveØØ.i.ssä,k i r v e {sØhsØsshØh} {ØeeØeØØeØØ} {ij} s s {aä}
+KIRVES PL INE,kirveh.i.ssä,kirvehØ.i.ssä,k i r v e {sØhsØsshØh} {ØeeØeØØeØØ} {ij} s s {aä}
+KIRVES PL GENiden,kirve.i.den,kirveØØ.i.dØen,k i r v e {sØhsØsshØh} {ØeeØeØØeØØ} {ij} {dt} {Øt} e n
+KIRVES PL GENiden,kirve.i.tten,kirveØØ.i.tten,k i r v e {sØhsØsshØh} {ØeeØeØØeØØ} {ij} {dt} {Øt} e n
+KIRVES PL GENien,kirveh.i.en,kirvehØ.i.en,k i r v e {sØhsØsshØh} {ØeeØeØØeØØ} {ij} e n
+KIRVES PLGENten,kirves.ten,kirvesØ.ten,k i r v e {sØhsØsshØh} {ØeeØeØØeØØ} t e n
+KIRVES PL PTV,kirve.i.tä,kirveØØ.i.tä,k i r v e {sØhsØsshØh} {ØeeØeØØeØØ} {ij} {Øt} {aä}
+KIRVES PL PTV,kirveh.i.ä,kirvehØ.i.Øä,k i r v e {sØhsØsshØh} {ØeeØeØØeØØ} {ij} {Øt} {aä}
+KIRVES PL ILL,kirve.i.hin,kirveØØ.i.hin,k i r v e {sØhsØsshØh} {ØeeØeØØeØØ} {ij} {Øh} {V} n
+KIRVES PL ILLsiin,kirveh.i.sin,kirvehØ.i.siØn,k i r v e {sØhsØsshØh} {ØeeØeØØeØØ} {ij} s i {iØ} n
 KAURIS,kauris,kaurisØ,k a u r i {sØhsØsshØh} {ØiiØiØØiØØ} 
 KAURIS GEN,kaurii.n,kauriØi.n,k a u r i {sØhsØsshØh} {ØiiØiØØiØØ} n
 KAURIS GEN,kaurihi.n,kaurihi.n,k a u r i {sØhsØsshØh} {ØiiØiØØiØØ} n

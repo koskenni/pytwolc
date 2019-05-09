@@ -219,7 +219,7 @@ OPEN = VoM (CoM) [VoS|:i] ;
 {dlnrtØ}:r <=> :r VoØ _ ;
     ! pur<r>aan pur<r>aksesi
 {dlnrtØ}:Ø <=> :t :Ø* _ ,
-               CoS VoS _ {aä}: k s e ;
+               CoS VoS _ [{aä}: | e] ;
     ! alet<>aan aidat<>aan selvit<>ään hylät<>ään
     ! aja<>akseni puno<>akseen aja<>akseni salli<>akseni koke<>akseen
 
@@ -288,7 +288,7 @@ OPEN = VoM (CoM) [VoS|:i] ;
 ! STEM INTERNAL CONSONANTS IN VERBS
 ! =================================
 
-{nt}:t <=> _ VoØ [k | {dlnrtØ}: | {tttØ}:] ;
+{nt}:t <=> _ (VoØ) [k | {dlnrtØ}: | {tttØ}:] ;
     ! ale<n>en ale<n>i ale<n>ne ale<n>isi ale<t>koon ale<t>aan ale<n>nut 
 
 {sØ}:Ø <=> _ VoØ [{nlrs}: | k | {dlnrtØ}: | {tttØ}:] ;
