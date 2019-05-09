@@ -13,6 +13,9 @@ ksk-analy.ofst: ksk-lex.fst ofi-rules.fst ofi-examples.pstr delete.fst
 ksk-lex.fst: ofi-analy-aff.lexc $(LEX) Makefile
 	hfst-lexc -f openfst-tropical -o $@ ofi-analy-aff.lexc $(LEX)
 
+ofi-analy-aff.lexc: ofi-affixes.csv
+	python3 ../affixes2analysis.py $< $@
+
 ksk-lex-n.lexc: ksk-conv-n.fst classes-n.txt
 	python3 ksk2lexc.py --codes=classes-n.txt ~/Dropbox/lang/fin/ksk/ksk-n.dic $< Nouns $@ > ksk-lex-n.log
 
