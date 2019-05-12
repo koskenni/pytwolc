@@ -51,10 +51,10 @@ ofi-guess-aff.lexc: ofi-affixes.csv ../affixes2guessing.py
 	python3 ../affixes2guessing.py $< $@
 
 ofi-analy-aff.lexc: ofi-affixes.csv ../affixes2analysis.py Makefile
-	python3 ../affixes2analysis.py $< $@
+	python3 ../affixes2analysis.py -e $< $@
 
 ofi-rules.fst: ksk-rules.twol ofi-examples.pstr
-	python3 ../twol.py -w ofi-wrong.fst -l ofi-lost.fst -o $@ ofi-examples.pstr $< > ofi-rules.log
+	python3 ../twol.py -t 2 -v 1 -w ofi-wrong.fst -l ofi-lost.fst -o $@ ofi-examples.pstr $< > ofi-rules.log
 
 ofi-examples.pstr: ofi-examples-n.pstr ofi-examples-v.pstr ofi-tests.pstr
 	cat ofi-examples-n.pstr ofi-examples-v.pstr ofi-tests.pstr > $@

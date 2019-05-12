@@ -37,9 +37,8 @@ OPEN = VoM (CoM) [VoS|:i] ;
     ! juo<k>sen juo<k>sisi juo<>ssee juo<>staan
 
 {kØ}:Ø | {k'}:' <=> _ CLOSED ;
-    ! ark<k>u ark<>un ark<>ussa
-    ! ra<k>o ra<>ossa
-    ! riu<k>u riu<'>un
+    ! ark<k>u ark<>un ark<>ussa ra<k>o ra<>ossa riu<k>u riu<'>un
+    ! vaa<'>ata vaa<k>aat
 
 {kg}:g <=> _ CLOSED ;
 
@@ -48,9 +47,14 @@ OPEN = VoM (CoM) [VoS|:i] ;
 {kv}:v <=> _ CLOSED ;
     ! lu<k>u lu<v>un ky<k>y ky<v>yn
 
-{k'}:' => VoS :o _ :o , VoS :u _ :u , VoS :y _ :y , VoS :ö _ :ö ;
-{kØ}:Ø /<= VoS :o _ :o , VoS :u _ :u , VoS :y _ :y , VoS :ö _ :ö ;
+{k'}:' => VoS :a _ :a , VoS :e _ :e , VoS :i _ :i ,
+          VoS :o _ :o , VoS :u _ :u , VoS :y _ :y ,
+          VoS :ä _ :ä , VoS :ö _ :ö ;
+{kØ}:Ø /<= VoS :a _ :a , VoS :e _ :e , VoS :i _ :i ,
+           VoS :o _ :o , VoS :u _ :u , VoS :y _ :y ,
+           VoS :ä _ :ä , VoS :ö _ :ö ;
     ! ruo<k>o ruo<'>on liu<k>u liu<'>un
+    ! vaa<'>ata rei<'>ittää
 
 {kØØ}:Ø | {tØØ}:Ø => _ CLOSED ,
                      _ [:e|:o|:u|:y|:ö] {ij}:i [:t|:h] ;
@@ -122,6 +126,14 @@ OPEN = VoM (CoM) [VoS|:i] ;
 {tdsØ}:Ø <=> _ VoØ [:t {aä}: | :t e] ;
 {tdsØ}:s <=> _ (VoØ) :i ; 
     ! kak<s>i kah<d>en kah<>ta kah<t>ena kak<s>issa
+
+{tdst}:s | {tnst}:s => _ VoØ :i ;
+    ! huu<s>i sou<s>i po<s>i läk<s>i läk<s>isi
+{tdst}:d | {tnst}:n => _ CLOSED ;
+    ! sou<d>an po<d>en läh<d>et
+{tdst}:t | {tnst}:t => _ OPEN ;
+    ! huu<t>aa sou<t>i sou<t>avat läh<t>evät läh<t>isi
+
 {stds}:s <=> _ VoØ [EOW | {ij}:] ;
     ! kalleu<s> kalleu<t>ta kalleu<d>en kalleuk<s>ia
 
@@ -219,7 +231,7 @@ OPEN = VoM (CoM) [VoS|:i] ;
 {dlnrtØ}:r <=> :r VoØ _ ;
     ! pur<r>aan pur<r>aksesi
 {dlnrtØ}:Ø <=> :t :Ø* _ ,
-               CoS VoS _ [{aä}: | e] ;
+               [CoS VoS|VbV] _ [{aä}: | e] ;
     ! alet<>aan aidat<>aan selvit<>ään hylät<>ään
     ! aja<>akseni puno<>akseen aja<>akseni salli<>akseni koke<>akseen
 
@@ -301,11 +313,11 @@ OPEN = VoM (CoM) [VoS|:i] ;
 {ØsØØØØ}:s <=> _ {i}: ;
     ! antau<>n antau<s>i antau<>isi antau<>ttu
 
-{ØsnØtt}:s <=> _ VoØ {i}: ;
+{ØsnØtt}:s <=> _ (VoØ) {i}: ;
     ! sala<s>i
-{ØsnØtt}:n <=> _ VoØ {nlrs}:n ;
+{ØsnØtt}:n <=> _ (VoØ) {nlrs}:n ;
     ! sala<n>nee
-{ØsnØtt}:t <=> _ VoØ [k | {dlnrtØ}: | {tttØ}:] ;
+{ØsnØtt}:t <=> _ (VoØ) [k | {dlnrtØ}: | {tttØ}:] ;
     ! sala<t>koon sala<t>aan sala<t>tu
 
 {tnt}:n <=> _ :Ø VoØ {nlrs}: ;
@@ -461,8 +473,10 @@ s e {Øe}:Ø n => [:a :h (:Ø) :a|:e :h (:Ø) :e|:i :h (:Ø) :i|:o :h (:Ø) :o|
 ! STEM FINAL VOWELS IN NOUNS
 ! ==========================
 
-{aØ}:Ø | {äØ}:Ø <=> _ [{ij}: | t e] ;
+!!!{aØ}:Ø | {äØ}:Ø <=> _ [{ij}: | t e] ;
+{aØ}:Ø | {äØ}:Ø <=> _ {ij}: ;
     ! ma<a> ma<>issa, koir<>ia, jumal<>ten
+    ! *koirten *ikten 
 {ao}:o | {äö}:ö <=> _ {ij}: ;
     ! kair<a> kair<o>ja 
 {aØo}:o => _ [{ij}:j | {ij}:i :Ø* CoS] ;

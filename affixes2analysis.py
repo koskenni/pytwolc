@@ -30,6 +30,8 @@ argparser.add_argument(
     "outfile", help="output LEXC file of the affix data")
 argparser.add_argument("-d", "--delimiter", default=",",
     help="CSV field delimiter (default is ',')")
+argparser.add_argument("-e", "--entry-mode", action="store_true",
+    help="include the continuation lexicon in the analysis")
 argparser.add_argument("-v", "--verbosity", default=0, type=int,
     help="level of diagnostic output")
 args = argparser.parse_args()
@@ -71,6 +73,9 @@ for r in rdr:
             features.add("+" + feat)
     else:
         feat_str = ''
+    if "/" in ide and args.entry_mode:
+        feat_str = "% " + ide + "%;" + feat_str
+        features.add("% " + ide + "%;")
     for next in re.split(" +", r["NEXT"]):
         if next:
             if r['BASEF'] + feat_str == r['MPHON']:
