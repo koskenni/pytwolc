@@ -104,36 +104,38 @@ OPEN = VoM [(CoM) [VoS|:i] | EOW | {PS}:] ;
     ! lä<h>den lä<k>si 
 
 {tds}:d|{tls}:l|{trs}:r|{tns}:n|
-    {tdst}:d|{tlst}:l|{trst}:r|{tnst}:n => _ CLOSED ;
+        {tdst}:d|{tlst}:l|{trst}:r|{tnst}:n => _ CLOSED ;
+    ! kä<d>en jäl<l>en kan<n>en kan<n>essa
+    ! sou<d>an po<d>en läh<d>et huu<d>an huu<d>etaan
+    ! saar<r>an saar<r>etaan
 {tds}:t|{tls}:t|{trs}:t|{tns}:t|
-    {tdst}:t|{tlst}:t|{trst}:t|{tnst}:t => _ OPEN ;
+        {tdst}:t|{tlst}:t|{trst}:t|{tnst}:t => _ OPEN ;
+    ! kan<t>ta kan<t>ten
+    ! huu<t>aa huu<t>avat huu<t>i huu<t>aisi
+    ! sou<t>i sou<t>avat läh<t>evät läh<t>isi
+    ! läh<t>i läh<t>enee läh<t>isi läh<t>eköön
+    ! sou<t>aa sou<t>i sou<t>aisi
+    ! saar<t>avat saar<t>aa saar<t>oi
 {tds}:s|{tls}:s|{trs}:s|{tns}:s <=> _ [VoØ {ij}: | :i | VoØ {i}:] ;
-    {tdst}:s|{tlst}:s|{trst}:s|{tnst}:s => _ [VoØ {ij}: | :i | VoØ {i}:] ;
-    ! kä<s>i kä<d>en kä<t>enä kä<t>tä kä<s>iä
+    ! kä<s>i kä<t>enä kä<t>tä kä<s>iä
     ! to<s>i kä<s>i kä<s>iä kak<s>i jäl<s>i kan<s>i kahdeksa<s>
-    ! jäl<l>en kan<n>essa
-    ! kan<s>i kan<s>ia kan<n>en kan<t>ta kan<t>ten kan<s>ia
+    ! kan<s>i kan<s>ia kan<s>ia
     ! hir<s>i hir<t>enä hir<r>essä hir<s>iä
-    ! saar<r>an saar<t>avat saar<r>etaan saar<s>i
     ! hir<s>i hir<r>en hir<t>tä hir<s>iä
-    ! saar<r>an saar<t>aa saar<t>oi saar<s>i
-    ! sou<d>an sou<t>aa sou<t>i sou<s>i sou<t>aisi
-    ! huu<d>an huu<t>avat huu<s>i huu<t>i huu<t>aisi huu<d>etaan
+{tlst}:s|{trst}:s|{tnst}:s => _ VoØ {i}: ;
+    ! huu<s>i sou<s>i po<s>i läk<s>i läk<s>isi saar<s>i
+    ! sou<s>i
+    ! huu<t>avat huu<s>i huu<t>i huu<t>aisi huu<d>etaan
+{tdst}:s => _ VoØ {i}: ,
+            :k _ VoØ i s i ;
+    ! läk<s>i läk<s>isi läh<t>eköön
     
-    ! läh<d>en läh<t>i läk<s>i läh<t>enee läh<t>isi läk<s>isi!! läh<t>eköön
 
 {tdsØ}:t|{stds}:t => _ OPEN ;
 {tdsØ}:d|{stds}:d => _ CLOSED ;
 {tdsØ}:Ø <=> _ VoØ [:t {aä}: | :t e] ;
 {tdsØ}:s <=> _ (VoØ) :i ; 
     ! kak<s>i kah<d>en kah<>ta kah<t>ena kak<s>issa
-
-{tdst}:s | {tnst}:s => _ VoØ :i ;
-    ! huu<s>i sou<s>i po<s>i läk<s>i läk<s>isi
-{tdst}:d | {tnst}:n => _ CLOSED ;
-    ! sou<d>an po<d>en läh<d>et
-{tdst}:t | {tnst}:t => _ OPEN ;
-    ! huu<t>aa sou<t>i sou<t>avat läh<t>evät läh<t>isi
 
 {stds}:s <=> _ VoØ [EOW | {ij}:] ;
     ! kalleu<s> kalleu<t>ta kalleu<d>en kalleuk<s>ia
@@ -423,18 +425,20 @@ i n | i n {PS}: /<= [VV] _ :Ø* EOW ;
 {Øe}:Ø <=> :h (:Ø) VoS s e _ ;
     ! kaunihise<>n vaatteese<e>n vaattehese<>n vaattehisi<>n 
 
-s e {Øe}:e n | s e {eØ}:e {PS}: => VV _ :Ø* EOW ;
-s e {Øe}:Ø n | s e {eØ}:Ø {PS}: =>
+s e {Øe}:e => VV _ [n :Ø* EOW | {PS}:] ;
+    ! ainee<seen> ainee<see>si vapaa<seen> koiraa<seen>
+
+s e {Øe}:Ø =>
         [:a :h (:Ø) :a|:e :h (:Ø) :e|:i :h (:Ø) :i|:o :h (:Ø) :o|
         :u :h (:Ø) :u|:y :h (:Ø) :y|:ä :h (:Ø) :ä|:ö :h (:Ø) :ö]
-	 _ :Ø* EOW ;
+	 _ [n :Ø* EOW | {PS}:] ;
     ! ainoo<seen> vapaa<seen> korkee<seen>
-    ! (vapaha<sen>) (koiraha<sen>)
+    ! vapaha<sen> koiraha<sen>
 
-{ij}:i s i {iØ}:i n => [VoS (:Ø) (:Ø) VoØ] _ ;
-{ij}:i s i {iØ}:Ø n => [VoS :h (:Ø) VoØ] _ ;
-    ! vapa<isiin> aino<isiin> (ainoh<isin>)
-    ! saappa<isiin> (saappah<isin>) koira<isiin> (koirah<isin>
+{ij}:i s i {iØ}:i => [VoS (:Ø) (:Ø) VoØ] _ n | {PS}: ;
+    ! vapa<isiin> aino<isiin> saappa<isiin> koira<isiin>
+{ij}:i s i {iØ}:Ø => [VoS :h (:Ø) VoØ] _ n | {PS}: ;
+    ! ainoh<isin> saappah<isin> koirah<isin>
 
 ! +VAPA<H>AN VAATTE<H>IA
 
