@@ -20,13 +20,14 @@ VVo = VV | VoS :Ø* :i | :a :Ø* :u | :e :Ø* :u | :e :Ø* y: | :i :Ø* e: |
       :u :Ø* :o | :y :Ø* :ö | :ä :Ø* :y ;
 VbV = [:e :a|:e :ä|:i :a|:i :o|:i :ö|:o :a|:u :a|:u (:Ø) :e|:y (:Ø) :e] ;
 
-EOW = .#. | {`}:Ø ;
+EOW = .#. | {`}:Ø  ;
     ! End of stem and inflection (poss suffixes and clitics may follow)
 BOW = .#. | {§}:Ø ;
     ! beginning of stem (first parts of compounds may precede)
 
-CLOSED = VoM ({ij}:i|{ØiØ}:) CoM (VoØ) [CoM|EOW] ;
-OPEN = VoM (CoM) [VoS|:i] ;
+CLOSED = VoM ({ij}:i|{ØiØ}:) CoM (VoØ) [CoM|EOW|{PS}:] ;
+!!!OPEN = VoM (CoM) [VoS|:i] ;
+OPEN = VoM [(CoM) [VoS|:i] | EOW | {PS}:] ;
 
 ! STOP
 
@@ -412,20 +413,21 @@ OPEN = VoM (CoM) [VoS|:i] ;
 {dt}:t <=> _ [:t {aä}: | :t e] ;
     ! mai<d>en mai<t>ten
 
-t e n /<= VoS :Ø* _ :Ø* EOW ;
+t e n | t e {PS}: /<= VoS :Ø* _ :Ø* EOW ;
     ! *arvelu<ten> risti<ten> *ma<ten> *tie<ten>
 
-i n /<= [VV] _ :Ø* EOW ;
+i n | i n {PS}: /<= [VV] _ :Ø* EOW ;
     ! (valo<in>) (autio<in>) (vate<in>)
     ! *maa<in> *tie<in> *suo<in>
 
 {Øe}:Ø <=> :h (:Ø) VoS s e _ ;
     ! kaunihise<>n vaatteese<e>n vaattehese<>n vaattehisi<>n 
 
-s e {Øe}:e n => VV _ :Ø* EOW ;
-s e {Øe}:Ø n => [:a :h (:Ø) :a|:e :h (:Ø) :e|:i :h (:Ø) :i|:o :h (:Ø) :o|
-                 :u :h (:Ø) :u|:y :h (:Ø) :y|:ä :h (:Ø) :ä|:ö :h (:Ø) :ö]
-	        _ :Ø* EOW ;
+s e {Øe}:e n | s e {eØ}:e {PS}: => VV _ :Ø* EOW ;
+s e {Øe}:Ø n | s e {eØ}:Ø {PS}: =>
+        [:a :h (:Ø) :a|:e :h (:Ø) :e|:i :h (:Ø) :i|:o :h (:Ø) :o|
+        :u :h (:Ø) :u|:y :h (:Ø) :y|:ä :h (:Ø) :ä|:ö :h (:Ø) :ö]
+	 _ :Ø* EOW ;
     ! ainoo<seen> vapaa<seen> korkee<seen>
     ! (vapaha<sen>) (koiraha<sen>)
 
@@ -446,6 +448,7 @@ s e {Øe}:Ø n => [:a :h (:Ø) :a|:e :h (:Ø) :e|:i :h (:Ø) :i|:o :h (:Ø) :o|
     ! NOTE: some overgenerated forms remain
 
 {Øth}:h => _ [:e|:i|:u] [:n|:s|:l|:k],
+           _ [:e|:i|:u] {PS}: [:m|:n|:s] ,
            _ VoØ {ij}:i [e|s|:l|:k|:t|{Øt}: {aä}:] ;
 {Øth}:t <=> _ VoØ [{Øt}:|:t] ;
     ! vaatte<h>en vaatte<h>esen vaatte<h>ia vaatte<h>isin
@@ -459,7 +462,7 @@ s e {Øe}:Ø n => [:a :h (:Ø) :a|:e :h (:Ø) :e|:i :h (:Ø) :i|:o :h (:Ø) :o|
     ! askele<h>en
 {ØhØtØØ}:t => _ {ØeØeØ}:Ø {Øt}:t {aä}: ;
     ! askele<t>ta
-{ØhØtØØ}:Ø => _ {ØeØeØ}:Ø [EOW|{ØeØeØ}:e|{ØeØeØ}:Ø {ij}:] ;
+!!!{ØhØtØØ}:Ø => _ [{ØeØeØ}:Ø |EOW|{ØeØeØ}:e|{ØeØeØ}:Ø {ij}:] ;
     ! askele<> askele<t>ta askele<>na askele<>ita
 
 {ØiØ}:i => _ :n VoØ [{nrs}: | :t | EOW] ;
@@ -508,8 +511,8 @@ s e {Øe}:Ø n => [:a :h (:Ø) :a|:e :h (:Ø) :e|:i :h (:Ø) :i|:o :h (:Ø) :o|
 
 ! STOP
 
-{ØeØØØ}:e /<= _ :Ø* [:t e | {Øt}: | {ij}: | EOW] ;
-{ØeØØØ}:Ø =>  _ [:t e | {Øt}: | {ij}: | EOW] ,
+{ØeØØØ}:e /<= _ :Ø* [:t e | {Øt}: | {ij}: | .#.|{§}:|{`}:] ;
+{ØeØØØ}:Ø =>  _ [:t e | {Øt}: | {ij}: | .#.|{§}:|{`}:] ,
               VoS (CoØ) [:s|:n] _ {nrs}: ;
     ! ahven<> ahven<e>n ahven<>ta ahven<e>na ahven<>na
     ! airut<> airu<e>n airut<>ta airu<e>na
@@ -519,7 +522,7 @@ s e {Øe}:Ø n => [:a :h (:Ø) :a|:e :h (:Ø) :e|:i :h (:Ø) :i|:o :h (:Ø) :o|
 {eeØØ}:e /<= _ {nØØØ}:Ø [{ij}: | :t e | {Øt}:] ;
     ! hevon<e>n hevos<e>n hevos<>ta hevos<e>na hevos<>sa hevos<>ia
 
-{ØeØeØ}:Ø <=> _ EOW|{ij}:|t e|{Øt}:t ;
+{ØeØeØ}:Ø <=> _ .#.|{§}:|{`}:|{ij}:|t e|{Øt}:t ;
     ! vastaus<> vastauks<e>n vastaus<>ta vastauks<e>na vastauks<>ia
     ! uistin<> uistim<e>n uistin<>ta uistim<>ia
     ! askel<> askel<e>n askel<>ta askel<e>na askel<>ia
@@ -609,7 +612,7 @@ s e {Øe}:Ø n => [:a :h (:Ø) :a|:e :h (:Ø) :e|:i :h (:Ø) :i|:o :h (:Ø) :o|
 {ns}:n <=> _ :e :n ;
     ! hevo<n>en hevo<s>en hevo<s>ta hevo<s>ena hevo<s>na hevo<s>ia
 
-{nØØØ}:n <=> _ EOW ;
+{nØØØ}:n <=> _ .#.|{§}:|{`}: ;
     ! hevone<n> hevose<>n hevos<>ta hevos<>ia
 
 ! START
