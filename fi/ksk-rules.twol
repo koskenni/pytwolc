@@ -11,8 +11,9 @@ VoM = Vok.m ;
 VoØ = [VoM - VoS] ;
 MeSØ = :e.m & :Ø ;
     ! all X:Ø where X:e in :
-VV = [:a  :Ø* :a|:e :Ø* :e|:i :Ø* :i|:o :Ø* :o|:u :Ø* :u|
-      :y :Ø* :y|:ä :Ø* :ä|:ö :Ø* :ö] ;
+Z = [:Ø* |:'] ;
+VV = [:a Z :a|:e Z :e|:i Z :i|:o Z :o|:u Z :u|
+      :y Z :y|:ä Z :ä|:ö Z :ö] ;
 VVØ = [:a :Ø* [:a.m & :Ø]] | [:e :Ø* [:e.m & :Ø]] | [:i  :Ø* [:i.m & :Ø]] |
       [:o  :Ø* [:o.m & :Ø]] | [:u :Ø* [:u.m & :Ø]] | [:y :Ø* [:y.m & :Ø]] |
       [:ä :Ø* [:ä.m & :Ø]] | [:ö :Ø* [:ö.m & :Ø]] ;
@@ -224,27 +225,30 @@ OPEN = VoM [(CoM) [VoS|:i] | EOW | {PS}:] ;
     ! juos<n>ee juos<n>nut
     ! antautu<n>ee
 
-{dlnrtØ}:d <=> VVo _ ,
-               VoS :h VoØ _ ;
+{dlnrtØ}:d <=> VVo ({tttØ}:Ø) _ [{aä}: | {C}: | CLOSED] ,
+               VoS :h :Ø* _ [{aä}: | {C}: | CLOSED] ;
     ! saa<d>aan juo<d>aan näh<d>ään juo<d>aksemme näh<d>äkseni
-{dlnrtØ}:l <=> :l VoØ _ ;
+{dlnrtØ}:l <=> :l :Ø* _ [{aä}: | {C}: | CLOSED] ;
     ! tul<l>aan katsel<l>aan arvail<l>aan tul<l>aksemme katsel<l>akseen
-{dlnrtØ}:n <=> :n VoØ _ ;
+{dlnrtØ}:n <=> :n :Ø* _ [{aä}: | {C}: | CLOSED] ;
     ! men<n>ään men<n>äksemme
-{dlnrtØ}:r <=> :r VoØ _ ;
+{dlnrtØ}:r <=> :r :Ø* _ [{aä}: | {C}: | CLOSED] ;
     ! pur<r>aan pur<r>aksesi
-{dlnrtØ}:Ø <=> :t :Ø* _ ,
+{dlnrtØ}:Ø <=> :t :Ø* _ [{aä}: | {C}: | CLOSED] ,
                [CoS VoS|VbV] _ [{aä}: | e] ;
     ! alet<>aan aidat<>aan selvit<>ään hylät<>ään
     ! aja<>akseni puno<>akseen aja<>akseni salli<>akseni koke<>akseen
+    ! puno<>a punot<>un onki<>a ongit<>un
+    ! hio<>a hiot<>un laske<>a lasket<>un
 
 !START
 
 !STOP
 
-{tttØ}:Ø <=> CoS :Ø* _ t ,
-             VVo (VoØ) _ t ;
-    ! juot<>iin nait<>iin 
+{tttØ}:Ø <=> CoS :Ø* _ ,
+             VVo (VoØ) _ ;
+    ! juot<>iin nait<>iin
+    ! huomat<>tiin huomat<>tu hakat<>tiin hakat<>tu
 
 ! STEM FINAL VOWELS IN VERBS
 ! ==========================
