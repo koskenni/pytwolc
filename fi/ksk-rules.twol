@@ -12,13 +12,16 @@ VoØ = [VoM - VoS] ;
 MeSØ = :e.m & :Ø ;
     ! all X:Ø where X:e in :
 Z = [:Ø* |:'] ;
-VV = [:a Z :a|:e Z :e|:i Z :i|:o Z :o|:u Z :u|
-      :y Z :y|:ä Z :ä|:ö Z :ö] ;
+VzV = [:a Z :a|:e Z :e|:i Z :i|:o Z :o|:u Z :u|
+       :y Z :y|:ä Z :ä|:ö Z :ö] ;
+VV = [:a :a|:e :e|:i :i|:o :o|:u :u| :y :y|:ä :ä|:ö :ö] ;
 VVØ = [:a :Ø* [:a.m & :Ø]] | [:e :Ø* [:e.m & :Ø]] | [:i  :Ø* [:i.m & :Ø]] |
       [:o  :Ø* [:o.m & :Ø]] | [:u :Ø* [:u.m & :Ø]] | [:y :Ø* [:y.m & :Ø]] |
       [:ä :Ø* [:ä.m & :Ø]] | [:ö :Ø* [:ö.m & :Ø]] ;
-VVo = VV | VoS :Ø* :i | :a :Ø* :u | :e :Ø* :u | :e :Ø* y: | :i :Ø* e: |
-      :u :Ø* :o | :y :Ø* :ö | :ä :Ø* :y ;
+!!!VVo = VV | VoS :Ø* :i | :a :Ø* :u | :e :Ø* :u | :e :Ø* y: | :i :Ø* e: |
+!!!      :u :Ø* :o | :y :Ø* :ö | :ä :Ø* :y ;
+VVo = VV | VoS :i | :a :u | :e :u | :e :y | :i :e | :u :o |
+      :y :ö | :ä ({ØvØvØØ}:Ø) :y ;
 VbV = [:e :a|:e :ä|:i :a|:i :o|:i :ö|:o :a|:u :a|:u (:Ø) :e|:y (:Ø) :e] ;
 
 EOW = .#. | {`}:Ø  ;
@@ -166,10 +169,10 @@ OPEN = VoM [(CoM) [VoS|:i] | EOW | {PS}:] ;
 {V}:ö <=> :ö :Ø* ({Øh}:) _ ; ! yöh<ö>n
 
 {VØ}:Ø <=> [{i}: | i s i] _ ,
-        VVo _  ;
+           VVo _  ;
     ! nai<> haravoi<>
     ! muisti<> muistaisi<>
-    ! saa<> 
+    ! saa<> juo<>
 
 {VØ}:a => :a _ ;
 {VØ}:e => :e _ ;
@@ -216,18 +219,25 @@ OPEN = VoM [(CoM) [VoS|:i] | EOW | {PS}:] ;
 ! ========================
 
 {nlrs}:l <=> :l VoØ _ ;
+    ! kuol<l>ee
 {nlrs}:r <=> :r VoØ _ ;
+    ! pur<r>ee
 {nlrs}:s => :s VoØ _ ;
+    ! juos<s>ee
 {nlrs}:n => VoS _ ,
             [:n|:h] :Ø* _ ,
 	    VVo :Ø* (:s) (VoØ) _ ;
-    ! kuto<n>ee men<n>nee pur<r>ee juos<s>ee kuol<l>ee
-    ! juos<n>ee juos<n>nut
-    ! antautu<n>ee
+    ! kuto<n>ee men<n>nee antautu<n>ee huuta<n>ut
+    ! saa<n>ee saa<n>ut vie<n>ee vie<n>yt käØy<n>ee
+    ! aidan<n>ee kaan<n>ee kaan<n>ut näh<n>ee näh<n>yt
+    ! juos<n>ee juos<n>nut myy<n>ee myy<n>yt nai<n>ee nai<n>ut
 
 {dlnrtØ}:d <=> VVo ({tttØ}:Ø) _ [{aä}: | {C}: | CLOSED] ,
+    ! atrioi<d>a haravoi<d>aan juo<d>akseni
+    ! saa<d>aan juo<d>aan näh<d>ään juo<d>aksemme
+    ! käØy<d>ään käØy<d>yn
                VoS :h :Ø* _ [{aä}: | {C}: | CLOSED] ;
-    ! saa<d>aan juo<d>aan näh<d>ään juo<d>aksemme näh<d>äkseni
+    ! näh<d>äkseni
 {dlnrtØ}:l <=> :l :Ø* _ [{aä}: | {C}: | CLOSED] ;
     ! tul<l>aan katsel<l>aan arvail<l>aan tul<l>aksemme katsel<l>akseen
 {dlnrtØ}:n <=> :n :Ø* _ [{aä}: | {C}: | CLOSED] ;
@@ -235,8 +245,8 @@ OPEN = VoM [(CoM) [VoS|:i] | EOW | {PS}:] ;
 {dlnrtØ}:r <=> :r :Ø* _ [{aä}: | {C}: | CLOSED] ;
     ! pur<r>aan pur<r>aksesi
 {dlnrtØ}:Ø <=> :t :Ø* _ [{aä}: | {C}: | CLOSED] ,
-               [CoS VoS|VbV] _ [{aä}: | e] ;
     ! alet<>aan aidat<>aan selvit<>ään hylät<>ään
+               [CoS VoS|VbV] _ [{aä}: | e] ;
     ! aja<>akseni puno<>akseen aja<>akseni salli<>akseni koke<>akseen
     ! puno<>a punot<>un onki<>a ongit<>un
     ! hio<>a hiot<>un laske<>a lasket<>un
@@ -246,9 +256,12 @@ OPEN = VoM [(CoM) [VoS|:i] | EOW | {PS}:] ;
 !STOP
 
 {tttØ}:Ø <=> CoS :Ø* _ ,
-             VVo (VoØ) _ ;
-    ! juot<>iin nait<>iin
+             VVo _ ;
     ! huomat<>tiin huomat<>tu hakat<>tiin hakat<>tu
+    ! raket<>tiin raket<>tu raket<>un
+    ! juo<>tiin nai<>tiin myy<>tiin
+    ! käØy<>tiin käØy<>ty näh<>tiin
+    ! au*o<t>tiin
 
 ! STEM FINAL VOWELS IN VERBS
 ! ==========================
@@ -293,7 +306,7 @@ OPEN = VoM [(CoM) [VoS|:i] | EOW | {PS}:] ;
 {iiiieii}:e <=> _ l :e i s i ;
     ! arva<i>len arva<i>li arva<i>lisi arva<e>lisi arva<i>llut
 
-!!!{iØiØii}:Ø <=> _ (e) :i ;
+{iØiØii}:Ø <=> _ (e) [{i}: | i s i] ;
     ! sall<i>n sall<>i sall<>isi sall<i>nee sall<i>ttu
     ! na<i> na<>i na<>isi na<i>nee na<i>tu
 
@@ -429,7 +442,7 @@ i n | i n {PS}: /<= [VV] _ :Ø* EOW ;
 {Øe}:Ø <=> :h (:Ø) VoS s e _ ;
     ! kaunihise<>n vaatteese<e>n vaattehese<>n vaattehisi<>n 
 
-s e {Øe}:e => VV _ [n :Ø* EOW | {PS}:] ;
+s e {Øe}:e => VzV _ [n :Ø* EOW | {PS}:] ;
     ! ainee<seen> ainee<see>si vapaa<seen> koiraa<seen>
 
 s e {Øe}:Ø =>

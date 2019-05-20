@@ -1,7 +1,7 @@
 # converting KSK into a (perhaps proprietary) lexicon using patterns
 #
 
-LEX=ksk-lex-n.lexc ksk-lex-v.lexc
+LEX=ksk-lex-n.lexc ksk-lex-v.lexc ksk-lex-p.lexc
 
 all : ksk-analy.ofst
 
@@ -23,6 +23,9 @@ ksk-lex-n.lexc: ksk-conv-n.fst classes-n.txt Makefile-ksk
 
 ksk-lex-v.lexc: ksk-conv-v.fst classes-v.txt
 	python3 ksk2lexc.py --codes=classes-v.txt ~/Dropbox/lang/fin/ksk/ksk-v.dic $< Verbs $@ > ksk-lex-v.log
+
+ksk-lex-p.lexc : kskp2lexc.py
+	cat ~/Dropbox/lang/fin/ksk/ksk-p.dic | python3 kskp2lexc.py > $@
 
 ksk-conv-n.fst: ksk-conv-n.lexc
 	hfst-lexc -f openfst-tropical -o $@ $<

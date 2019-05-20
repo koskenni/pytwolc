@@ -4,6 +4,7 @@ import re, sys
 multichars = set()
 single_words = set()
 compound_forms = {}
+particles = set()
 
 nouns = {}
 verbs = {}
@@ -16,7 +17,6 @@ for linenl in sys.stdin:
         continue
     [entry, feat_str] = rest.split(sep= ";", maxsplit=1)
     [mphon, cont] = entry.split(sep=" ", maxsplit=1)
-    entry = entry
     if "+INS" in feat_str:
         continue
     mch_lst = re.findall(r"{[^}]+}", mphon)
@@ -44,6 +44,8 @@ for linenl in sys.stdin:
                 first_part_nouns.add(word[0:-3] + 's SecondNoun "weight: 10"')
             else:
                 first_part_nouns.add(word + ' SecondNoun "weight: 10"')
+    elif "/p" in entry:
+        particles.add(entry)
 
 print("Multichar_Symbols")
 print(" ".join(list(multichars)))
@@ -53,6 +55,9 @@ for entry, count in sorted(nouns.items()):
 print("LEXICON Verbs")
 for entry, count in sorted(verbs.items()):
     print(entry, "; !", count)
+print("LEXICON Particles")
+for entry in sorted(list(particles)):
+    print(entry, "; !")
 print("LEXICON FirstPartNouns")
 for entry in sorted(list(first_part_nouns)):
     print(entry, ";")
