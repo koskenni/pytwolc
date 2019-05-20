@@ -40,7 +40,7 @@ for linenl in sys.stdin:
         if feat_str == "+N+SG+GEN":
             first_part_nouns.add(word + ' SecondNoun "weight: 10"')
         elif feat_str == "+N+SG+NOM":
-            if feat_str.endswith("{ns}{eeØØ}{nØØØ} /s;"):
+            if mphon.endswith("{ns}{eeØØ}{nØØØ}"):
                 first_part_nouns.add(word[0:-3] + 's SecondNoun "weight: 10"')
             else:
                 first_part_nouns.add(word + ' SecondNoun "weight: 10"')

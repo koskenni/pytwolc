@@ -33,7 +33,7 @@ ksk-conv-n.fst: ksk-conv-n.lexc
 ksk-conv-v.fst: ksk-conv-v.lexc
 	hfst-lexc -f openfst-tropical -o $@ $<
 
-ksk-conv-n.lexc classes-n.txt: ofi-pat-n.csv ../pat-proc.py
+ksk-conv-n.lexc classes-n.txt: ofi-pat-na.csv ../pat-proc.py
 	python3 ../pat-proc.py -c classes-n.txt --mode c -n Root $< > $@
 
 ksk-conv-v.lexc classes-v.txt: ofi-pat-v.csv ../pat-proc.py

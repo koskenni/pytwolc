@@ -29,7 +29,7 @@ EOW = .#. | {`}:Ø  ;
 BOW = .#. | {§}:Ø ;
     ! beginning of stem (first parts of compounds may precede)
 
-CLOSED = VoM ({ij}:i|{ØiØ}:) CoM (VoØ) [CoM|EOW|{PS}:] ;
+CLOSED = VoM ({ij}:i|{ØiØ}:|{i}:) CoM (VoØ) [CoM|EOW|{PS}:] ;
 !!!OPEN = VoM (CoM) [VoS|:i] ;
 OPEN = VoM [(CoM) [VoS|:i] | EOW | {PS}:] ;
 
@@ -270,7 +270,7 @@ OPEN = VoM [(CoM) [VoS|:i] | EOW | {PS}:] ;
     ! kaiv<a>n kaiv<o>i
 {aoØaae}:o|{aoØaae}:Ø <=> _ {i}: ;
     ! haast<o>i haast<>i saart<o>i saars<i>
-{aoaae}:e|{aoØaae}:e <=> _ :t ;
+{aoaae}:e|{aoØaae}:e <=> _ [{dlnrtØ}:t | {tttØ}:t] ;
     ! kaiv<e>taan haast<e>ttu saarr<e>taan
 
 {aØaae}:Ø|{äØääe}:Ø <=> _ {i}: ;
