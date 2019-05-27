@@ -1,4 +1,5 @@
-CoS = :b|:c|:d|:f|:g|:h|:k|:l|:m|:n|:p|:q|:r|:s|:š|:t|:v|:w|:x|:z|:ž| j ;
+CoS = [:b|:c|:d|:f|:g|:h|:k|:l|:m|:n|:p|:q|:r|:s|:š|:t|
+       :v|:w|:x|:z|:ž|:j] - {ij}: ;
     ! all surface consonants (does not contain {ij}:j) 
 CoM = CoS.m|{C}: ;
     ! all morphophonemic consonants
@@ -31,7 +32,7 @@ BOW = .#. | {§}:Ø ;
 
 CLOSED = VoM ({ij}:i|{ØiØ}:|{i}:) CoM (VoØ) [CoM|EOW|{PS}:] ;
 !!!OPEN = VoM (CoM) [VoS|:i] ;
-OPEN = VoM [(CoM) [VoS|:i] | EOW | {PS}:] ;
+OPEN = VoM [(CoM) [VoS|(VoØ) :i] | EOW | {PS}:] ;
 
 ! STOP
 
@@ -290,9 +291,12 @@ OPEN = VoM [(CoM) [VoS|:i] | EOW | {PS}:] ;
 {aØØØØ}:Ø <=> _ {i}: | i s i | {nlrs}: | k | {dlnrtØ}: | {tttØ}: ;
     ! sala<a>n salas<>i sala<>isi salat<>koon salat<>tu
 
-{eØØee}:Ø <=> _ {i}: | i s i ;
+{eØØeei}:Ø <=> _ {i}: | i s i ;
     ! lask<e>n lask<>i lask<>isi lask<e>nee lask<e>ttu
     ! lähd<e>n läht<>i läht<>isi läht<e>nee läht<e>köön läht<e>nyt
+
+{eØØeei}:i <=> _ [{dlnrtØ}: e s s | {dlnrtØ}: e n] ;
+    ! luk<i>essa luk<i>en pot<i>essa pot<i>en läht<i>en tunt<i>essa
 
 {eØØØØ}:Ø <=> _ {i}: | i s i | {nlrs}: | k | {dlnrtØ}: | {tttØ}: ;
     ! katsel<e>n katsel<>in katsel<>isi katsel<>lee katsel<>lut
@@ -365,11 +369,13 @@ OPEN = VoM [(CoM) [VoS|:i] | EOW | {PS}:] ;
 {Øh}:Ø => CoS VoS ({nØØØ}:Ø) _ ,
           VbV _ ,
 	  CoS VoØ ({nØØØ}:Ø) {ij}:i _ ;
-    ! talo<>on valtio<>on hevose<>en hevosi<>in
+    ! talo<>on valtio<>on hevose<>en hevosi<>in velje<>en
 
 {ij}:i => CoS :Ø* _ , _ :Ø* CoS ;
+    ! a<i>ka a<i>koina po<i>ka po<i>kien
 {ij}:j => VoS _ :Ø* VoS ;
     ! talo<i>ssa talo<j>a
+    ! a<j>an a<j>oissa po<j>an po<j>ille
 
 {Øt}:t => Vok CoØ* VoØ {ij}:i _ ,
           Vok CoØ* Vok ({ij}:i) _ ,
@@ -389,12 +395,13 @@ OPEN = VoM [(CoM) [VoS|:i] | EOW | {PS}:] ;
     ! arvelui<t>a ilmetyi<t>ä kantaja<t>a pasuuna<t>a
 
 {Øt}:Ø => CoS VoS (CoØ) ({ij}:j) _ ,
-        CoS (CoØ) VoØ (CoØ) {ij}:i _ ,
-	:e :a|:e :ä|:i :o|:i :ö|:o :a|:u :a _ ,
-        {dt}:d _ ;
-    ! arkku<>a arkkuj<>a pato<>a patoj<>a seitsem<>ä
-    ! arvelu<>a arveluj<>a ilmetty<>ä ilmettyj<>ä
     ! sisäkkö<>ä sisäkköj<>ä
+    ! arkku<>a arkkuj<>a pato<>a patoj<>a seitsemä<>ä
+          CoS (CoØ) VoØ (CoØ) {ij}:i _ ,
+	:e :a|:e :ä|:i :a|:i :o|:i :ö|:o :a|:u :a _ ,
+    ! historia<>a makea<>a
+        {dt}:d _ ;
+    ! arvelu<>a arveluj<>a ilmetty<>ä ilmettyj<>ä
     ! ahveni<>a
     ! maid<>en
 
@@ -421,7 +428,8 @@ OPEN = VoM [(CoM) [VoS|:i] | EOW | {PS}:] ;
     ! valo<jen> *tie<jen> *maa<jen> käs<ien> arvelu<jen>
 
 {ij}: e n /<= VoS :Ø* VoØ _ ;
-    ! valo<jen> käs<ien> *te<jen> ma<jen> 
+    ! valo<jen> käs<ien> *te<jen> ma<jen>
+    ! velj<ien>
 
 {ij}: {dt}: /<= [CoS - :h] :Ø* _ ;
     ! *käs<iden> *koir<iden>

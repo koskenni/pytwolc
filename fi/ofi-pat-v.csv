@@ -126,18 +126,18 @@ Define,Coida,"[b|d|n d|f|f f|g|h|j|k|l|l l|m|n|n n|p|r|s|š|t|t t|v]","For -oida
 !!,,,
 /v,V12,"<[k|p|s|v] a a r t:{trs} a:{aoØaae} a:0>",SAARTAA
 !!,,,
-/v,V13,imeä:im{eØØee},"*** {eØØee} -- lask<i>essa"
-/v,V13,itkeä:itk{eØØee},
-/v,V13,iskeä:isk{eØØee},
-/v,V13,kaitsea:kaits{eØØee},
-/v,V13,loitsea:loits{eØØee},
+/v,V13,imeä:im{eØØeei},"*** {eØØee} -- lask<i>essa"
+/v,V13,itkeä:itk{eØØeei},
+/v,V13,iskeä:isk{eØØeei},
+/v,V13,kaitsea:kaits{eØØeei},
+/v,V13,loitsea:loits{eØØeei},
 /v,V13,suitsea:suits{eØØee},
-/v,V13,"<Co Vo CCns e:{eØØee} [a:0|ä:0]>",LASKEA
-/v,V13*,"<Co Vo Gs e:{eØØee} [a:0|ä:0]>",KYLPEÄ
-/v,V13*,"<Co Vo Gsj e:{eØØee} [a:0|ä:0]>",SULKEA
-/v,V14,tuntea:tun{tns}{eØØee},TUNTEA
-/v,V15,potea:po{tdst}{eØØee},POTEA
-/v,V16,lähteä:lä{kh}{tdst}{eØØee},LÄHTEÄ
+/v,V13,"<Co Vo CCns e:{eØØeei} [a:0|ä:0]>",LASKEA
+/v,V13*,"<Co Vo Gs e:{eØØeei} [a:0|ä:0]>",KYLPEÄ
+/v,V13*,"<Co Vo Gsj e:{eØØeei} [a:0|ä:0]>",SULKEA
+/v,V14,tuntea:tun{tns}{eØØeei},TUNTEA
+/v,V15,potea:po{tdst}{eØØeei},POTEA
+/v,V16,lähteä:lä{kh}{tdst}{eØØeei},LÄHTEÄ
 !!,,,
 /v,V17,"<Co* Vo+ CCns i:{iØ} [a:0|ä:0]>","SALLIA *** {iØ} - {iØiØii}"
 /v,V17*,"<Co* Vo+ Gs i:{iØ} [a:0|ä:0]>",LEMPIÄ
