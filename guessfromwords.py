@@ -8,9 +8,6 @@ entries = {}
 words = {}
 
 for line in sys.stdin:
-    if not ":" in line:
-        print(">>>" + line)
-        continue
     [entry,word_weight] = line.strip().split(":")
     [word, weight] = word_weight.split("\t")
     if int(weight) >= 10:
@@ -51,10 +48,10 @@ for entry in sorted(words.keys(), key=kompar, reverse=True):
             continue # the middle loop
         break # the middle loop
 
-sz = 200
+sz = 60
 #print("largest set of words", sz)
 
-delta = 1
+delta = 3
 while sz > 4:
     del_ent_lst = []
     for entry in words:
