@@ -2,21 +2,33 @@ import re, sys, argparse
 
 argparser = argparse.ArgumentParser(
     "python3 entries2lexc.py",
-    description="List of mphonemic entries and continuations into a lexc lexicon")
+    description="Mphonemic entries into a lexc lexicon")
 argparser.add_argument(
-    "lexname", help="name of the lexicon to be made out of the input entries")
+    "lexname",
+    help="name of the lexicon to be made out of the input entries")
+argparser.add_argument(
+    "-x", "--examples",
+    help="example file from which morphophomemes can be collected")
 args = argparser.parse_args()
 
 
 mch_set = set()
 line_lst = []
 
-for line_nl in sys.stdin:
-    line = line_nl.strip()
-    line_lst.append(line)
-    mch_lst = re.findall(r"{[^}]+}", line)
-    for mch in mch_lst:
-        mch_set.add(mch)
+if args.examples:
+    exfile = open(args.examples, "r")
+    for line_nl in exfile:
+        line = line_nl.strip()
+        mch_lst = re.findall(r"{[^}]+}", line)
+        for mch in mch_lst:
+            mch_set.add(mch)
+else:
+    for line_nl in sys.stdin:
+        line = line_nl.strip()
+        line_lst.append(line)
+        mch_lst = re.findall(r"{[^}]+}", line)
+        for mch in mch_lst:
+            mch_set.add(mch)
 
 print("Multichar_Symbols")
 mch_lst = sorted(list(mch_set))

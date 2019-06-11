@@ -14,8 +14,8 @@ Definitions
   GsU = (l|r|n) k k | (h|l|r) k | n k | m p | (l|r) p | (l|r|m) p p | (h) t | l t | n t | r t| (l|r|n) t t ;
   CCns = [[[Co+] - GsU]|h k] ; ! non-gradating consonant clusters
   Gsj = [[h|l|r] {kj}] ;
-  Gtds = [l {tls}|n {tns}|r {trs}] ;
-  Cocl = [Co+|'] ;
+  Gtds = [l {tls}|n {tns}|r {trs}] ; ! ??
+  Cocl = [Co+|'] ; ! ??
   Vo = [a|e|i|o|u|y|ä|ö] ;
   VoB = [a|o|u] ; ! Front vowel
   VoF = [ä|ö|y] ; ! Back vowel
@@ -39,9 +39,9 @@ Definitions
   SylSylB = [Syl Syl] & $[VoB] ;
   SylSylVoF = [Syl SylVo] - $[VoB] ;
   SylSylVoB = [Syl SylVo] & $[VoB] ;
-  Forl = [b|c|d|f|g|q|š|w|x|z|ž] ;
-  Forb = [n j|k l|k r|k v|p r|p s|s m|s p|t l|t r] ;
-  Forg = [$[Forl|Forb]] ;
+!  Forl = [b|c|d|f|g|q|š|w|x|z|ž] ; ! ??
+!  Forb = [n j|k l|k r|k v|p r|p s|s m|s p|t l|t r] ; ! ??
+!  Forg = [$[Forl|Forb]] ; ! ??
 
 LEXICON Nouns
 !

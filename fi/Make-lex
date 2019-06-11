@@ -1,0 +1,39 @@
+
+klk-compounds.ofst : klk-lexi-compounds.fst ofi-rules.fst delete.fst Make-lex
+	hfst-compose-intersect -e -1 $< -2 ofi-rules.fst |\
+	hfst-compose -2 delete.fst |\
+	hfst-invert |\
+	hfst-minimize -o klk-compounds.fst
+	hfst-fst2fst -i klk-compounds.fst -w -o $@
+
+klk-lexi-compounds.fst : klk-lexi-compounds.lexc ofi-analy-aff.lexc
+	hfst-lexc -o $@ -E ofi-analy-aff.lexc $<
+
+klk-lexi-compounds.lexc : klk-analysed-comp.words analy2lexc.py
+	cat $< | python3 analy2lexc.py > $@
+
+klk-analysed-comp.words : klk-analy.ofst
+	cat ~/temp/klk-fi-1grams-lc.words | hfst-lookup klk-analy.ofst 2>/dev/null | egrep "[A-Z]" | cut -f 1,2 | sort > $@
+
+klk-analy.ofst : klk-lexi-comp.fst ofi-rules.fst delete.fst
+	hfst-compose-intersect -a -1 $< -2 ofi-rules.fst |\
+	hfst-compose -2 delete.fst |\
+	hfst-invert |\
+	hfst-minimize -o klk-analy.fst
+	hfst-fst2fst -i klk-analy.fst -O -o $@
+
+klk-lexi-comp.fst : klk-lexi-comp.lexc ofi-analy-aff.lexc
+	hfst-lexc -o $@ -E ofi-analy-aff.lexc klk-lexi-comp.lexc
+
+klk-lexi-comp.lexc : klk-analysed-lfs.words
+	python3 analy2lexc.py < $< > $@
+
+klk-formsofentries-lfs.csv : klk-analysed-lfs.words analy2formsofentry.py analy2formsofentry.py
+	python3 analy2formsofentry.py < $< > $@
+
+klk-analysed-lfs.words : ksk-analy.ofst ~/temp/klk-fi-1grams-lc.words
+	cat ~/temp/klk-fi-1grams-lc.words  | hfst-lookup ksk-analy.ofst 2>/dev/null | egrep "[A-Z]" | cut -f 1,2 | sort > $@
+
+move:
+	rm -f klk-analysed-bak.words
+	cp -p klk-analysed-lfs.words klk-analysed-bak.words
