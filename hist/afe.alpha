@@ -1,0 +1,12 @@
+GROUPS
+    A  a o u õ            # back vowels
+    E  e i                # neutral vowels
+    Ä  ä ö ü y            # front vowels
+    V  A E Ä              # vowels
+    N  m n                # nasals
+    L  l r                # liquids
+    K  p b t d k k g      # stops
+    F  v s h              # fricatives 
+    C  N L K F            # consonants
+
+END

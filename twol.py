@@ -29,8 +29,13 @@ arpar.add_argument(
     default="")
 arpar.add_argument(
     "-t", "--thorough",
-    help="test each rule separately: 1 only against positive, 2 against both positive and negative examples",
+    help="test each rule separately: 1 only against positive,"
+    " 2 against both positive and negative examples",
     type=int, choices=[0, 1, 2], default=0)
+arpar.add_argument(
+    "-r", "--recursion",
+    help="set the limit for recursion depth",
+    type=int)
 arpar.add_argument(
     "-v", "--verbosity",
     help="level of  diagnostic output",
@@ -45,6 +50,8 @@ arpar.add_argument(
 args = arpar.parse_args()
 
 cfg.verbosity = args.verbosity
+if args.recursion:
+    sys.setrecursionlimit(args.recursion)
 
 if args.examples.endswith(".fst"):
     twexamp.read_fst(args.examples)

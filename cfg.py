@@ -17,6 +17,9 @@ all_zero_weight = 100.0
 not preferred but sometimes is needed, eg. when using Øs in
 the input words"""
 
+final = False
+"""In multialign: preferring of the deletion of final phonemes"""
+
 definitions = {}
 
 error_message = ""
@@ -76,4 +79,4 @@ def sympair2pairsym(insym, outsym):
         return(insym + ':' + outsym)
 
 if __name__ == "__main__":
-    print("cgf module is noe meant to be used as a script")
+    print("cgf module is not meant to be used as a script")

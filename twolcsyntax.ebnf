@@ -9,7 +9,8 @@ def_start = define $ ;
 
 define = left:identifier op:'=' ~ right:expression ';' ;
 
-identifier = token:/[a-zA-Z0-1Ø]+/ ;
+###identifier = token:/[a-záéíóúəüűőåäöčšťA-ZÜØÅÄÖ0-9]+/ ;
+identifier = token:/[^- \[\]\/<>=_;,.|&*+\\()]+/ ;
 
 rule = double_arrow_rule | right_arrow_rule | exclusion_rule | left_arrow_rule ;
 

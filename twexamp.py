@@ -61,6 +61,8 @@ def read_examples(filename="test.pstr", build_fsts=True):
         line = line_nl.strip()
         if not line or line.startswith("!"):
             continue
+        lst = line.split("!", maxsplit=1)
+        line = lst[0].strip()
         pairsym_lst = re.split("\s+", line)
         symbol_pair_lst = [cfg.pairsym2sympair(pairsym)
                            for pairsym in pairsym_lst]
