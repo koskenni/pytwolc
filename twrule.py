@@ -214,7 +214,7 @@ def contexts_to_condition(*contexts):
         #twbt.ppfst(result_fst, title="result") ##
     return(result_fst)
 
-def mix(x_fst):
+def mix_output(x_fst):
     """Computes an FSA that is used when creating negative examples
     
     First, it computes an expression Y which represent all possible
@@ -234,6 +234,27 @@ def mix(x_fst):
     # twbt.ppfst(result_fsa, True) ##
     return result_encod_fsa
 
+def mix_input(x_fst):
+    """Computes an FSA that is used when creating negative examples
+    
+    First, it computes an expression Y which represent all possible
+    (correct and incorrect) inputs for the output side of X.  Then,
+    Y is transformed into an encoded FSA which can be a component of the
+    transformation of correct examples into incorrect ones.
+    
+    x_fst -- the center FST (X part) of a rule Returns [PI* .o. X.l]
+    encoded as an FSA (i.e. maps pairs to themselves)
+    """
+    global pistar_fst
+    result_fst = pistar_fst.copy()
+    temp_fst = x_fst.copy()
+    temp_fst.output_project()
+    result_fst.compose(temp_fst)
+    result_fst.minimize()
+    result_encod_fsa = hfst.fst_to_fsa(result_fst, separator="^")
+    # twbt.ppfst(result_fsa, True) ##
+    return result_encod_fsa
+
 def selector_from_x(x_fst):
     """Compute and return [PI* X PI*]"""
     selector_fst = pistar_fst.copy() # starting to build it
@@ -246,7 +267,7 @@ def correct_to_incorrect(x_fst):
     """used for creating negative examples for <= rules
     
     In order to make negative examples for <= rules we need to transform
-    the examples so that correct some correct input:output pairs are
+    the examples so that some correct input:output pairs are
     changed so that the output part becomes different.  The computed
     encoded FST maps correct inputs to any possible outputs (correct or
     incorrect).
@@ -257,7 +278,7 @@ def correct_to_incorrect(x_fst):
     incorrect exs
     """
     global pistar_fst, pistar_fsa
-    mixed_fsa = mix(x_fst)
+    mixed_fsa = mix_output(x_fst)
     temp_encod_fsa = hfst.fst_to_fsa(x_fst, separator="^")
     temp_encod_fsa.cross_product(mixed_fsa) # now maps corr X to all variations
     # twbt.ppfst(temp_encod_fsa, True) ##
@@ -285,7 +306,7 @@ def incorrect_to_correct(x_fst):
     """
     global pistar_fst, pistar_fsa
     x_encod_fsa = hfst.fst_to_fsa(x_fst, separator="^")
-    mix_fst = mix(x_fst) # still an encoded fsa
+    mix_fst = mix_output(x_fst) # still an encoded fsa
     mix_fst.cross_product(x_encod_fsa) # now fst
     scrambler_fst = pistar_fsa.copy()
     scrambler_fst.concatenate(mix_fst)
@@ -321,8 +342,8 @@ def rightarrow(name, x_fst, *contexts):
     # twbt.ppfst(scrambler_fst, True) ##
     return rule_fst, selector_fst, scrambler_fst
 
-def leftarrow(name, x_fst, *contexts):
-    """Compiles rules like X <= [LC1,RC1),...(LCk,RCk)]
+def output_coercion(name, x_fst, *contexts):
+    """Compiles rules like X <= LC1 _ RC1, ..., LCk _ RCk
     
     name -- name to be given to the rule FST
     
@@ -348,12 +369,47 @@ def leftarrow(name, x_fst, *contexts):
     precondition_fst.intersect(context_condition_fst)
     rule_fst = generalized_restriction(precondition_fst, postcondition_fst)
     rule_fst.set_name(name)
-    # twbt.ppfst(rule_fst, True) ##
+    if cfg.verbosity >= 20:
+        twbt.ppfst(rule_fst, True)
     x_any_fst = x_fst.copy()
     x_any_fst.input_project()
     x_any_fst.compose(pistar_fst)
     ###x_any_fst.minus(x_fst)
     selector_fst = selector_from_x(x_any_fst)
+    scrambler_fst = correct_to_incorrect(x_fst)
+    return rule_fst, selector_fst, scrambler_fst
+
+def input_coercion(name, x_fst, *contexts):
+    """Compiles rules like X <- LC1 _ RC1, ..., LCk _ RCk
+    
+    name -- name to be given to the rule FST
+    
+    x_fst -- the center (X) of the rule
+    
+    \*contexts -- list of contexts, i.e. pairs of left and right context
+    
+    Returns a triple:
+    rule_fst -- the compiled rule
+    
+    selector_fst -- FST which selects examples which are relevant for
+    this rule
+    
+    scrambler_fst -- an encoded FST which produces negative examples
+    """
+    global pistar_fst
+    postcondition_fst = x_to_condition(x_fst)
+    x_all_fst = pistar_fst.copy()
+    temp_fst = x_fst.copy()
+    temp_fst.output_project()
+    x_all_fst.compose(temp_fst) # PI* .o. X.l
+    precondition_fst = x_to_condition(x_all_fst)
+    context_condition_fst = contexts_to_condition(*contexts)
+    precondition_fst.intersect(context_condition_fst)
+    rule_fst = generalized_restriction(precondition_fst, postcondition_fst)
+    rule_fst.set_name(name)
+    if cfg.verbosity >= 20:
+        twbt.ppfst(rule_fst, True)
+    selector_fst = selector_from_x(x_all_fst)
     scrambler_fst = correct_to_incorrect(x_fst)
     return rule_fst, selector_fst, scrambler_fst
 
@@ -376,7 +432,7 @@ def doublearrow(name, x_fst, *contexts):
     scrambler_fst -- an encoded FST which produces negative examples
     """
     rule_fst, selector_fst, scrambler_fst = rightarrow(name, x_fst, *contexts)
-    rule2_fst, selector2_fst, scrambler2_fst = leftarrow(name, x_fst, *contexts)
+    rule2_fst, selector2_fst, scrambler2_fst = output_coercion(name, x_fst, *contexts)
     rule_fst.intersect(rule2_fst)
     rule_fst.minimize()
     rule_fst.set_name(name)

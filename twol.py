@@ -110,7 +110,9 @@ for line_nl in rule_file:
     if op == "=>":
         R, selector_fst, MIXe = twrule.rightarrow(title, x_expr, *ctx_expr_list)
     elif op == "<=":
-        R, selector_fst, MIXe = twrule.leftarrow(title, x_expr, *ctx_expr_list)
+        R, selector_fst, MIXe = twrule.output_coercion(title, x_expr, *ctx_expr_list)
+    elif op == "<--":
+        R, selector_fst, MIXe = twrule.input_coercion(title, x_expr, *ctx_expr_list)
     elif op == "<=>":
         R, selector_fst, MIXe = twrule.doublearrow(title, x_expr, *ctx_expr_list)
     elif op == "/<=":

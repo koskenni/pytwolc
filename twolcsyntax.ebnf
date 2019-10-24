@@ -12,7 +12,7 @@ define = left:identifier op:'=' ~ right:expression ';' ;
 ###identifier = token:/[a-záéíóúəüűőåäöčšťA-ZÜØÅÄÖ0-9]+/ ;
 identifier = token:/[^- \[\]\/<>=_;,.|&*+\\()]+/ ;
 
-rule = double_arrow_rule | right_arrow_rule | exclusion_rule | left_arrow_rule ;
+rule = double_arrow_rule | right_arrow_rule | exclusion_rule | output_coercion_rule | input_coercion_rule ;
 
 double_arrow_rule = left:expression op:'<=>' ~ right:contexts ';' ;
 
@@ -20,7 +20,9 @@ right_arrow_rule = left:expression op:'=>' ~ right:contexts ';' ;
 
 exclusion_rule = left:expression op:'/<=' ~ right:contexts ';' ;
 
-left_arrow_rule = left:expression op:'<=' ~ right:contexts ';' ;
+output_coercion_rule = left:expression op:'<=' ~ right:contexts ';' ;
+
+input_coercion_rule = left:expression op:'<--' ~ right:contexts ';' ;
 
 contexts = context_lst | context ;
 

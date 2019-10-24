@@ -161,10 +161,16 @@ def cons_set_weight(subset):
     pmin, pmax = 100.0, 0.0
     vmin, vmax = 100.0, 0.0
     mm= set()
+    if subset == {"'"}:
+        return 0
+    elif subset == {"'", "Ø"}:
+        return 1.5
     for x in subset:
         if x in {"Ø", "`"}:
             #w += 2.6
             w += 1.5
+        elif x == "'":
+            w += 10
         else:
             p, v, m = consonant_features[x]
             pval = pos[p]

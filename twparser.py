@@ -148,8 +148,12 @@ class TwolFstSemantics(object):
         result = ("=>", ast.left, ast.right)
         return result
 
-    def left_arrow_rule(self, ast):
+    def output_coercion_rule(self, ast):
         result = ("<=", ast.left, ast.right)
+        return result
+
+    def input_coercion_rule(self, ast):
+        result = ("<--", ast.left, ast.right)
         return result
 
     def double_arrow_rule(self, ast):
@@ -390,7 +394,7 @@ def parse_rule(parser, line_nl, start="expr_start"):
     line = line_nl.strip()
     if (not line) or line[0] == '!':
         return "!", None, None, line  # it was a comment or an empty line
-    rulepat = r"^.* +(=|<=|=>|<=>|/<=) +.*$"
+    rulepat = r"^.* +(=|<=|=>|<=>|/<=|<--) +.*$"
     try:
         m = re.match(rulepat, line)
         if m:
@@ -399,7 +403,7 @@ def parse_rule(parser, line_nl, start="expr_start"):
                 op, name, expr_fst = parser.parse(line, start='def_start',
                                                       semantics=TwolFstSemantics())
                 return op, name, expr_fst, line
-            elif m.group(1) in {'=>', '<=', '<=>', '/<='}:
+            elif m.group(1) in {'=>', '<=', '<=>', '/<=', '<--'}:
                 op, x_fst, contexts = parser.parse(line, start='rul_start',
                                                        semantics=TwolFstSemantics())
                 return op, x_fst, contexts, line
@@ -423,7 +427,7 @@ if __name__ == '__main__':
     import hfst, argparse, twbt, cfg, twexamp
     arpar = argparse.ArgumentParser(description="A compiler and tester for two-level rules")
     arpar.add_argument("start",
-                        help="start parseing from",
+                        help="start parsing from",
                         default="expr_start")
     args = arpar.parse_args()
     twexamp.read_fst(filename="nounex.fst")

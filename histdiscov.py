@@ -271,8 +271,11 @@ if __name__ == "__main__":
 
         # Reduce according to a list of phoneme groups
         succeeded_groups = set()
+        all_group_set = set(group_sets.keys())
         for sym_str, set_sym in group_lst:
-            if not group_sets[set_sym] <= succeeded_groups:
+            gs = group_sets[set_sym]
+            gsg = gs & all_group_set
+            if (gsg) and (not gsg <= succeeded_groups):
                 continue
             new_positives = reduce_context_set(positives, sym_str, set_sym)
             new_negatives = reduce_context_set(negatives, sym_str, set_sym)
