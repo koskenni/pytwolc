@@ -117,14 +117,31 @@ Two-level rules
 There are four types of two-level rules:
 
 **=>**
-    Context requirement rule says that the expressions matching the center or X part of the rule may only occur if surrounded by one of the contexts given in the rule.
-
-**/<=**
-    Exclusion rules says that any expression matching the center of the rule may not occur in any of the contexts given by the rule.
+    A **context requirement rule** (or a right arrow rule) says that the expressions matching the center or X part of the rule may only occur if surrounded by one of the contexts given in the rule.
 
 **<=**
-    Surface coercion rule says that the input side of *X* must correspond to one of the possibilities given in *X* in the contexts given by the rule.  In other words, *X.m - X* may not occur in any of the contexts given by the rule.  Thus *X <= LC _ RC* is equivalent to *X.m - X /<= LC _ RC*
+    An **output coercion rule** (or a surface coercion rule or a left arrow rule) says that the input side of *X* must correspond to one of the possibilities given in *X* in the contexts given by the rule.  In other words, *X.m - X* may not occur in any of the contexts given by the rule.  Thus *X <= LC _ RC* is equivalent to *X.m - X /<= LC _ RC*
+
+**<--**
+    An **input coercion rule** says that the output side of *X* must correspond to one of the possibilities given in *X* in the contexts listed in the rule.  In other words, *X.s - X* may not occur in any of the contexts given by the rule.  Thus *X <= LC _ RC* is equivalent to *X.s - X /<= LC _ RC*
 
 **<=>**
     Combination of the => and <= rules.
 
+**/<=**
+    An **exclusion rule** says that any expression matching the center of the rule may not occur in any of the contexts given by the rule.
+
+
+--------------------
+Testing of the rules
+--------------------
+
+For all types of the rules, there is a straight-forward way to check whether the rules apply to the set of examples given to the compiler:  each rule must accept all examples.  Rules only affect examples where the centre of the rule (or the X part) is present.  The author must write (and tune) the rules so that all such examples are accepted.
+
+The compiler can also test rules against so called negative examples as is discussed in :doc:`twdiscov`.  The negative examples are derived from the given set of examples by distorting them a bit.
+
+For a context requirement rule, this means that one must find contexts other than the ones whre X actually occurs in the set of examples.  Here we choose to seach occurrences where something like X occurs.  The program considers all examples where an Y in X.m occurs.  In these contexts, one replaces that center Y with the center of the rule, X.  From this collection of distorted examples, one still removes any examples that happen to be in the original set of examples.  If the compiled rule accepts any examples in this difference, the compiler reports them as a warning.  If a rule has a too permissive context, then all positive examples are still accepted.  But then, some negative examples are also accepted.  A listing of such negative examples is usually quite useful information for improving the rule.
+
+For an output coercion rule (<=), we create the set of negative examples by first finding all examples where X occurs, and replace them with all strings Y in X.m.  From the set of distorted examples we, again, subtract any examples which are in the original set of examples.  This difference is the set of negative examples for an output coercion rule.  The rule is expected to discard all such examples, and the compiler can list any negative example which the rule accepts.
+
+For an input coercion rule (<--) the building of negative examples is similar, but instead of using X.m one uses X.s.
