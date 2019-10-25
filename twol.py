@@ -143,7 +143,7 @@ for line_nl in rule_file:
                 print("** Some positive examples were rejected:")
                 lost_paths = lost_examples_fst.extract_paths(output='raw')
                 print_raw_paths(lost_paths[0:20])
-    if args.thorough > 1 and op in {"=>", "<=", "<=>"}:
+    if args.thorough > 1 and op in {"=>", "<=", "<=>", "<--"}:
         neg_examples_fsa = examples_fsa.copy()
         neg_examples_fsa.compose(MIXe)
         neg_examples_fsa.output_project()

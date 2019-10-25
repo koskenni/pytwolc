@@ -263,7 +263,7 @@ def selector_from_x(x_fst):
     selector_fst.set_name("Selector " + x_fst.get_name())
     return selector_fst
 
-def correct_to_incorrect(x_fst):
+def correct_to_incorrect(x_fst, side):
     """used for creating negative examples for <= rules
     
     In order to make negative examples for <= rules we need to transform
@@ -274,11 +274,16 @@ def correct_to_incorrect(x_fst):
 
     x_fst -- the FST for the X part of the rule
 
+    side -- either "input" or "output"
+
     returns: an fst (encoded as a fsa) which maps correct examples into
     incorrect exs
     """
     global pistar_fst, pistar_fsa
-    mixed_fsa = mix_output(x_fst)
+    if side == "input":
+        mixed_fsa = mix_input(x_fst)
+    else:
+        mixed_fsa = mix_output(x_fst)
     temp_encod_fsa = hfst.fst_to_fsa(x_fst, separator="^")
     temp_encod_fsa.cross_product(mixed_fsa) # now maps corr X to all variations
     # twbt.ppfst(temp_encod_fsa, True) ##
@@ -376,11 +381,11 @@ def output_coercion(name, x_fst, *contexts):
     x_any_fst.compose(pistar_fst)
     ###x_any_fst.minus(x_fst)
     selector_fst = selector_from_x(x_any_fst)
-    scrambler_fst = correct_to_incorrect(x_fst)
+    scrambler_fst = correct_to_incorrect(x_fst, "output")
     return rule_fst, selector_fst, scrambler_fst
 
 def input_coercion(name, x_fst, *contexts):
-    """Compiles rules like X <- LC1 _ RC1, ..., LCk _ RCk
+    """Compiles rules like X <-- LC1 _ RC1, ..., LCk _ RCk
     
     name -- name to be given to the rule FST
     
@@ -410,7 +415,7 @@ def input_coercion(name, x_fst, *contexts):
     if cfg.verbosity >= 20:
         twbt.ppfst(rule_fst, True)
     selector_fst = selector_from_x(x_all_fst)
-    scrambler_fst = correct_to_incorrect(x_fst)
+    scrambler_fst = correct_to_incorrect(x_fst, "input")
     return rule_fst, selector_fst, scrambler_fst
 
 def doublearrow(name, x_fst, *contexts):
